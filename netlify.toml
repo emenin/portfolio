@@ -1,0 +1,6 @@
+# Netlify config for static portfolio
+[build]
+  publish = "."
+  # No build command = static site, just publish
+[build.environment]
+  NODE_VERSION = "22"
