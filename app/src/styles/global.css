@@ -708,13 +708,21 @@ img {
 }
 .imagewrap {
   width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
 }
 .thumbnail {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   border: 2px solid #fafafa;
   border-radius: 4px;
 }
+.card .label,
+.card p {
+  color: #0b0b35;
+}
+
 .card .label {
   font-family: 'Syne', sans-serif;
 }
@@ -943,8 +951,9 @@ img {
   user-select: none;
 }
 .section.footer .footer-tooltip {
-  width: 240px;
+  width: max-content;
   max-width: 90vw;
+  white-space: nowrap;
   opacity: 0;
   visibility: hidden;
   color: #0b0b35;
@@ -962,7 +971,6 @@ img {
   margin-bottom: 8px;
   z-index: 100;
   transition: opacity 0.2s ease, visibility 0.2s ease;
-  white-space: normal;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   will-change: transform;

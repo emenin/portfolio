@@ -22,7 +22,7 @@ export const projects = [
   {
     title: '24 days of Design System Experiments',
     description: 'A collection of tiny prompts and experiments for design-system people — advent calendar style.',
-    image: '/images/thumbnail-ds.png',
+    image: '/images/thumbnail-24days-advent.png',
     imageAlt: '24 days of Design System Experiments: advent calendar of prompts and experiments.',
     href: 'https://designsystemsunfiltered.substack.com/p/24-days-of-design-system-experiments',
     tags: ['Design System'],

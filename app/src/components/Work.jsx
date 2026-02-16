@@ -59,14 +59,14 @@ export function Work() {
         </div>
         <div className="w-layout-hflex containermedium spacelarge">
           <div className="w-layout-vflex column spacelarge">
-            {[visibleProjects[0], visibleProjects[2]].map((p) => (
+            {[visibleProjects[0], visibleProjects[1]].map((p) => (
               <ProjectCard key={p.title} project={p} />
             ))}
           </div>
           <div className="w-layout-vflex column spacelarge paddingtop">
-            {visibleProjects[1] && (
-              <ProjectCard key={visibleProjects[1].title} project={visibleProjects[1]} />
-            )}
+            {[visibleProjects[2], visibleProjects[3]].map((p) => (
+              <ProjectCard key={p.title} project={p} />
+            ))}
           </div>
         </div>
       </div>
