@@ -1,6 +1,6 @@
 
 /*!
- * Webflow: Front-end site library
+ * Site core: front-end site library
  * @license MIT
  * Inline scripts may access the api using an async handler:
  *   var Webflow = Webflow || [];

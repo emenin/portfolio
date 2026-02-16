@@ -1,0 +1,300 @@
+/**
+ * Component library styles
+ * – Demo blocks and code snippets on the component-library page
+ * – Optional overrides for custom elements (e.g. project-card, section-heading)
+ */
+
+/* ----- Component library page ----- */
+.library-demo {
+  background: rgba(11, 11, 53, 0.03);
+  border: 1px solid rgba(11, 11, 53, 0.08);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 16px 0;
+}
+
+.library-code {
+  background: #0b0b35;
+  color: #e8e8ed;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.library-code code {
+  font-family:
+    ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+  white-space: pre;
+}
+
+/* Article template: optional date (e.g. for blog posts) */
+.article-date {
+  color: #595858;
+  font-size: 14px;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+/* Blog post body: comfortable reading width */
+.article-body {
+  max-width: 720px;
+}
+
+.article-body h3 {
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+.article-body h3:first-child {
+  margin-top: 0;
+}
+
+/* Article end: prev/next + footer as one block, no gap, no bottom margin */
+.article-end {
+  margin-bottom: 0;
+}
+
+.article-end-nav {
+  padding: 0;
+}
+
+/* Prev/next tiles: hover effect (purple cover slides up), same as Soniq Design System page */
+.article-end-nav .linkblock {
+  position: relative;
+  overflow: hidden;
+}
+
+.article-end-nav .linkblock .hovercover.backgroundinvert {
+  transition: top 0.35s ease;
+}
+
+.article-end-nav .linkblock:hover .hovercover.backgroundinvert {
+  top: 0;
+}
+
+.article-end .article-end-footer {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+@media (max-width: 991px) {
+  .article-end .article-end-footer {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .article-end .article-end-footer {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+/* No space below the footer – remove section padding under article-end */
+.section.project:has(.article-end) {
+  padding-bottom: 0;
+}
+
+/* Optional: footer block at bottom of viewport when content is short */
+body.has-article-end {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body.has-article-end .section.project {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+body.has-article-end .section.project .article-end {
+  margin-top: auto;
+}
+
+/* Ensure custom elements don't break layout */
+site-nav,
+site-footer,
+project-card,
+section-heading,
+highlight-block,
+contact-link,
+article-nav,
+article-header,
+article-end {
+  display: block;
+}
+
+/* Article cursor – match homepage/emenin exactly: resting = dot + ring, same sizes and transitions. */
+#article-cursor {
+  right: auto;
+  bottom: auto;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* 1. Resting state: same as homepage – inner dot 10px + outer ring 40px (emenin .innerdot and .outercircle) */
+#article-cursor .innerdot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #e6f646;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transition:
+    width 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    height 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Outer circle: visible at rest (40px ring), same as homepage. Hidden on regular hover; used for tile hover. */
+#article-cursor .outercircle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(230, 246, 70, 0.5);
+  background-color: transparent;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  opacity: 1;
+  pointer-events: none;
+  transition:
+    width 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+    height 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background-color 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 2. Regular hover (links): inner dot grows to 50px; hide ring so one circle grows (like homepage link hover) */
+#article-cursor.cursor-hover .innerdot {
+  width: 50px;
+  height: 50px;
+  transition:
+    width 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+    height 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#article-cursor.cursor-hover .outercircle {
+  opacity: 0;
+}
+
+#article-cursor.cursor-hover .tooltiplabel {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* 3. Footer tiles: same effect as article page “View Project” – solid circle 200px, text centered, 0.3s ease */
+#article-cursor.cursor-hover-tile .outercircle {
+  width: 160px !important;
+  height: 160px !important;
+  min-width: 160px;
+  min-height: 160px;
+  background-color: #e6f646 !important;
+  border: 1px solid rgba(230, 246, 70, 0.5);
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: flex !important;
+  z-index: 1;
+  transition:
+    width 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+    height 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background-color 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#article-cursor.cursor-hover-tile .innerdot {
+  opacity: 0;
+}
+
+#article-cursor.cursor-hover-tile .tooltiplabel {
+  opacity: 1;
+  visibility: visible;
+  font-size: 16px;
+  z-index: 2;
+  transition:
+    opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    visibility 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Tooltip label – same as emenin .tooltiplabel */
+#article-cursor .tooltiplabel {
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Syne, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #222020;
+  pointer-events: none;
+  transition:
+    opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    visibility 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+body.custom-cursor-active #article-cursor {
+  cursor: none;
+}
+
+body.custom-cursor-active a[href],
+body.custom-cursor-active button,
+body.custom-cursor-active [role='button'] {
+  cursor: none;
+}
+
+/* Override main stylesheet: cursor is hidden in media queries (display: none, z-index: -1000, .outercircle 0 size). Force article cursor to show. */
+@media screen and (max-width: 991px) {
+  #article-cursor {
+    display: flex !important;
+    z-index: 9999 !important;
+    opacity: 1 !important;
+    position: fixed !important;
+  }
+  #article-cursor.cursor-hover-tile .outercircle {
+    width: 160px !important;
+    height: 160px !important;
+    min-width: 160px !important;
+    min-height: 160px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #article-cursor {
+    display: flex !important;
+    z-index: 9999 !important;
+    position: fixed !important;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  #article-cursor {
+    display: flex !important;
+    z-index: 9999 !important;
+    position: fixed !important;
+  }
+}
