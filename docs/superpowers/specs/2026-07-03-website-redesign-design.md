@@ -35,6 +35,22 @@ Mechanics:
 - URL param `?filter=on` forces filtered mode (shareable with conservative recruiters)
 - The toggle animates the transformation; it is the site's signature moment
 
+## 2b. Quality bar — awarded portfolios as reference
+
+The refinement target is the current Awwwards / Godly register of dark, typographic,
+atmospheric portfolios — not "nice personal site" but "site of the day" craft:
+
+- **Obys Agency** (des.obys.agency) — experimental motion + refined typography;
+  the benchmark for type-led elegance and pacing
+- **Phantom** (phantom.land) — kinetic, shape-shifting interfaces that stay legible
+- Dark atmospheric portfolios curated on **godly.website** and
+  **awwwards.com/websites/portfolio** — gradient glows, grain, cinematic scroll
+
+What we borrow from them is the *smoothness*: nothing snaps, everything eases;
+scroll feels weighted (lenis-style smooth scroll); transitions are choreographed,
+not instant; typography is treated as the primary material. Every screen should
+survive the test: "could this frame be a poster?"
+
 ## 3. Visual language (unfiltered mode)
 
 - **Canvas**: near-black indigo `#0D0916`, film grain overlay
@@ -82,10 +98,17 @@ Filtered mode renders the same content as the Notion-style document (single page
 
 ## 6. Motion and play
 
-- Cursor-following aura (desktop); gentle autonomous drift on mobile/touch
-- Headline mask-reveal on load; type settles slowly
-- Work rows: glow + gradient on hover, slight type swell
+Smoothness is a first-class requirement (see §2b): the elegance lives in the easing.
+
+- Weighted smooth scroll (lenis or equivalent), 60fps budget
+- Cursor-following aura (desktop) with soft lag/inertia; gentle autonomous drift
+  on mobile/touch
+- Headline mask-reveal on load; type settles slowly; custom easing curves
+  (long ease-out, nothing linear, nothing snapping)
+- Work rows: glow + gradient on hover, slight type swell, eased both in and out
 - Ghost numerals drift on scroll (parallax)
+- Filter toggle transition is choreographed (the dark drains out / the document
+  assembles), not an instant swap
 - Grain is constant and subtle
 - Easter eggs: konami code (payload TBD), fun 404, console message for devs
 - Everything slow and subtle: atmosphere, not carnival
