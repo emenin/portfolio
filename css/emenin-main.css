@@ -362,7 +362,7 @@ img {
   width: auto;
   height: 100%;
   color: #222020;
-  background-color: #e6f646;
+  background-color: var(--accent, #fce3ff);
   border: 2px solid #222020;
   border-radius: 8px;
   flex: none;
@@ -428,8 +428,45 @@ img {
 
 .section.light {
   z-index: 1;
-  background-color: #fafafa;
+  background-color: #fce3ff;
   position: relative;
+}
+
+/* Two-tone accent that flips with the section background. #fce3ff is reserved
+   for section backgrounds only; objects/hover states use the more saturated
+   #F6B0FF / #270F52 pair (matching the icon fills in images/*.svg). */
+.hero,
+.section {
+  --accent: #f6b0ff;
+}
+
+.section.light {
+  --accent: #270f52;
+}
+
+/* The fixed nav overlaps both section types, so it can't inherit --accent.
+   nav-accent.js toggles .nav-on-light when a pink section sits behind the nav;
+   the wordmark and links use pink on the dark sections, purple on the pink ones.
+   !important overrides the lime colour Webflow sets on the wordmark inline. */
+.navbar {
+  --nav-accent: #f6b0ff;
+  --nav-link-accent: #fce3ff;
+}
+
+.navbar.nav-on-light {
+  --nav-accent: #270f52;
+  --nav-link-accent: #270f52;
+}
+
+.navbar .logo,
+.navbar .logointeraction {
+  color: var(--nav-accent) !important;
+  -webkit-text-fill-color: var(--nav-accent) !important;
+}
+
+.navbar .navlink,
+.navbar .navbutton {
+  color: var(--nav-link-accent) !important;
 }
 
 .section.project {
@@ -543,7 +580,7 @@ img {
 }
 
 .tag.primary {
-  background-color: #e6f646;
+  background-color: var(--accent, #fce3ff);
 }
 
 .thumbnail {
@@ -607,6 +644,40 @@ img {
 
 .work-intro:hover .icon {
   transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(180deg) skew(0deg, 0deg);
+}
+
+/* Unfiltered section intro carries a longer line than the work intro, so let
+   it wrap on all widths instead of inheriting the global nowrap. */
+#unfiltered .work-intro {
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+#unfiltered .work-intro .horizontal__text {
+  white-space: normal;
+}
+
+/* Unfiltered runs on the purple canvas (no .light), so its text and cards
+   go light for contrast. */
+#unfiltered .horizontal__text,
+#unfiltered .label,
+#unfiltered .link {
+  color: #fafafa;
+}
+
+#unfiltered .card p {
+  color: rgba(250, 250, 250, 0.72);
+}
+
+#unfiltered .tag {
+  color: #fafafa;
+  border-color: rgba(250, 250, 250, 0.5);
+}
+
+/* Keep the earlier-work links quiet and let them wrap. */
+#work .earlier-work .horizontal__text {
+  white-space: normal;
+  opacity: 0.75;
 }
 
 .textcontainer.aligncenter {
@@ -679,7 +750,7 @@ img {
 }
 
 .textspan {
-  color: #e6f646;
+  color: var(--accent, #fce3ff);
   font-weight: 400;
 }
 
@@ -758,7 +829,7 @@ img {
 }
 
 .linkblock:hover {
-  color: #e6f646;
+  color: var(--accent, #fce3ff);
 }
 
 .linkblock.aligncenter {
@@ -768,7 +839,7 @@ img {
 }
 
 .linkblock.aligncenter:hover {
-  color: #e6f646;
+  color: var(--accent, #fce3ff);
 }
 
 .footer {
@@ -803,7 +874,7 @@ img {
   visibility: hidden;
   color: #0b0b35;
   letter-spacing: 0.05em;
-  background-color: #e6f646;
+  background-color: var(--accent, #fce3ff);
   border: 1px solid #222020;
   border-radius: 8px;
   padding: 10px 16px 8px;
@@ -832,7 +903,7 @@ img {
   z-index: -10;
   width: 100%;
   height: 100%;
-  background-color: #222020;
+  background-color: #24104f;
   position: absolute;
   top: 100%;
   bottom: auto;
@@ -904,7 +975,7 @@ img {
   outline-offset: 0px;
   color: #fafafa;
   border-radius: 4px;
-  outline: 2px solid #e6f646;
+  outline: 2px solid var(--accent, #fce3ff);
   text-decoration: underline;
 }
 
@@ -912,12 +983,12 @@ img {
   outline-offset: 0px;
   color: #fafafa;
   border-radius: 4px;
-  outline: 2px solid #e6f646;
+  outline: 2px solid var(--accent, #fce3ff);
   text-decoration: underline;
 }
 
 .logo {
-  color: #e6f646;
+  color: var(--accent, #fce3ff);
   font-family: Syne, sans-serif;
   font-size: 40px;
   font-weight: 700;
@@ -929,7 +1000,7 @@ img {
 }
 
 .h3_hoverhidden {
-  color: #e6f646;
+  color: var(--accent, #fce3ff);
   position: absolute;
   top: 56px;
 }
@@ -951,7 +1022,7 @@ img {
 }
 
 .arrow_hidden {
-  color: #e6f646;
+  color: var(--accent, #fce3ff);
   position: absolute;
   top: -64px;
 }
@@ -1281,7 +1352,7 @@ img {
   outline-offset: 0px;
   color: #0b0b35;
   -webkit-text-stroke-color: #0b0b35;
-  background-color: #e6f646;
+  background-color: var(--accent, #fce3ff);
   border-radius: 4px;
   outline: 2px solid #0b0b35;
 }
@@ -1290,7 +1361,7 @@ img {
   outline-offset: 0px;
   color: #0b0b35;
   -webkit-text-stroke-color: #0b0b35;
-  background-color: #e6f646;
+  background-color: var(--accent, #fce3ff);
   border-radius: 4px;
   outline: 2px solid #0b0b35;
 }
@@ -1306,7 +1377,7 @@ img {
   width: 100vw;
   height: 4px;
   max-width: 100vw;
-  background-color: #e6f646;
+  background-color: var(--accent, #fce3ff);
   align-self: flex-start;
   display: flex;
   position: fixed;
@@ -1357,7 +1428,7 @@ img {
 .innerdot {
   width: 10px;
   height: 10px;
-  background-color: #e6f646;
+  background-color: var(--accent, #fce3ff);
   border-radius: 50%;
   justify-content: center;
   align-items: center;
@@ -1367,7 +1438,7 @@ img {
 .outercircle {
   width: 40px;
   height: 40px;
-  border: 1px solid rgba(230, 246, 70, .5);
+  border: 1px solid rgba(246, 176, 255, .5);
   border-radius: 50%;
   justify-content: center;
   align-items: center;
@@ -1449,7 +1520,7 @@ img {
   opacity: 0;
   color: #0b0b35;
   letter-spacing: .05em;
-  background-color: #e6f646;
+  background-color: var(--accent, #fce3ff);
   border: 1px solid #222020;
   border-radius: 8px;
   flex: none;
@@ -1847,7 +1918,7 @@ img {
   }
 
   .h3_hover {
-    color: #e6f646;
+    color: var(--accent, #fce3ff);
   }
 
   .menuicon {

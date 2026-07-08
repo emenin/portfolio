@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-portfolio",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "/private/tmp/claude-501/-Users-ericamenin-Documents-Engineering-Personal-portfolio/276cf3e9-5283-49ab-9d20-80f25ea3e91b/scratchpad/static-server.mjs"
+      ],
+      "port": 4321
+    }
+  ]
+}
