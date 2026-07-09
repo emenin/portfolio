@@ -52,45 +52,32 @@
     return d.innerHTML;
   }
 
-  function cardHtml(post) {
+  function rowHtml(post) {
     var img = post.image
-      ? '<div class="imagewrap"><img loading="lazy" src="' +
+      ? '<div class="article-row-thumb"><img loading="lazy" src="' +
         esc(post.image) +
         '" alt="' +
         esc(post.title) +
         '" class="thumbnail" /></div>'
       : '';
     return (
-      '<aside class="cardwrapper">' +
-      '<div class="taggroup"><div class="tag"><div>Article</div></div></div>' +
       '<a href="' +
       esc(post.link) +
-      '" target="_blank" rel="noopener noreferrer" class="card w-inline-block">' +
+      '" target="_blank" rel="noopener noreferrer" class="article-row w-inline-block">' +
       img +
-      '<div class="textcontainer spacesmall alignleft">' +
+      '<div class="article-row-body">' +
       '<h3 class="label">' +
       esc(post.title) +
       '</h3>' +
       (post.blurb ? '<p>' + esc(post.blurb) + '</p>' : '') +
-      '</div></a></aside>'
+      '</div></a>'
     );
   }
 
-  // Render posts into the same two-column staggered layout as the
-  // hardcoded fallback: even-indexed cards left, odd-indexed cards right.
+  // Render posts into the same stacked magazine-row list as the
+  // hardcoded fallback.
   function render(posts) {
-    var left = [];
-    var right = [];
-    posts.forEach(function (p, i) {
-      (i % 2 === 0 ? left : right).push(cardHtml(p));
-    });
-    grid.innerHTML =
-      '<div class="w-layout-vflex column spacelarge">' +
-      left.join('') +
-      '</div>' +
-      '<div class="w-layout-vflex column spacelarge paddingtop">' +
-      right.join('') +
-      '</div>';
+    grid.innerHTML = posts.map(rowHtml).join('');
   }
 
   function parse(xmlString) {

@@ -1304,7 +1304,7 @@ img {
 }
 
 .tooltiplabel {
-  opacity: 0;
+  opacity: 1;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   justify-content: center;

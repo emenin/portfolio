@@ -93,6 +93,16 @@ p {
   line-height: 175%;
 }
 
+/* Darkest-purple body text on index.html's light/pink sections only.
+   Scoped to specific containers (not a blanket "p" rule) so it never
+   outranks .text_light, which dark sections rely on for contrast. */
+.is-home .about-bio p,
+.is-home #work .card p,
+.is-home #how-i-can-help p {
+  color: #24104f;
+  -webkit-text-stroke-color: #24104f;
+}
+
 a {
   color: #0b0b35;
   letter-spacing: .03em;
@@ -362,7 +372,7 @@ img {
   width: auto;
   height: 100%;
   color: #222020;
-  background-color: var(--accent, #fce3ff);
+  background-color: var(--accent, #e6f646);
   border: 2px solid #222020;
   border-radius: 8px;
   flex: none;
@@ -434,13 +444,17 @@ img {
 
 /* Two-tone accent that flips with the section background. #fce3ff is reserved
    for section backgrounds only; objects/hover states use the more saturated
-   #F6B0FF / #270F52 pair (matching the icon fills in images/*.svg). */
-.hero,
-.section {
+   #F6B0FF / #270F52 pair (matching the icon fills in images/*.svg).
+   Scoped to .is-home (index.html only, see <body>) — the case-study pages
+   share this stylesheet and keep their original neutral/lime styling.
+   Defined on .is-home itself (not just .hero/.section) so fixed-position
+   elements outside any section — the cursor and the scroll progress bar —
+   still inherit it; .section.light locally overrides the flip. */
+.is-home {
   --accent: #f6b0ff;
 }
 
-.section.light {
+.is-home .section.light {
   --accent: #270f52;
 }
 
@@ -448,25 +462,38 @@ img {
    nav-accent.js toggles .nav-on-light when a pink section sits behind the nav;
    the wordmark and links use pink on the dark sections, purple on the pink ones.
    !important overrides the lime colour Webflow sets on the wordmark inline. */
-.navbar {
+.is-home .navbar {
   --nav-accent: #f6b0ff;
   --nav-link-accent: #fce3ff;
 }
 
-.navbar.nav-on-light {
+.is-home .navbar.nav-on-light {
   --nav-accent: #270f52;
   --nav-link-accent: #270f52;
 }
 
-.navbar .logo,
-.navbar .logointeraction {
+.navbar .logo {
   color: var(--nav-accent) !important;
   -webkit-text-fill-color: var(--nav-accent) !important;
 }
 
-.navbar .navlink,
-.navbar .navbutton {
+/* .logointeraction is a hover callout with its own light pink background
+   (always, regardless of section), so its text stays a fixed dark purple
+   for contrast instead of following --nav-accent like the wordmark. Scoped
+   to index.html; other pages keep the original navy tooltip text. */
+.is-home .navbar .logointeraction {
+  color: #24104f !important;
+  -webkit-text-fill-color: #24104f !important;
+}
+
+.navbar .navlink {
   color: var(--nav-link-accent) !important;
+}
+
+/* "Let's talk!" uses the same accent as the wordmark (darker/more
+   saturated pink), not the lighter nav-link tone. */
+.navbar .navbutton {
+  color: var(--nav-accent) !important;
 }
 
 .section.project {
@@ -580,7 +607,7 @@ img {
 }
 
 .tag.primary {
-  background-color: var(--accent, #fce3ff);
+  background-color: var(--accent, #e6f646);
 }
 
 .thumbnail {
@@ -665,13 +692,116 @@ img {
   color: #fafafa;
 }
 
-#unfiltered .card p {
+#unfiltered .article-row p {
   color: rgba(250, 250, 250, 0.72);
 }
 
 #unfiltered .tag {
   color: #fafafa;
   border-color: rgba(250, 250, 250, 0.5);
+}
+
+/* Magazine-style stacked article list: small thumbnail, text-forward row,
+   hairline dividers instead of a card grid (the kawaii thumbnails are all
+   similarly styled, so a big grid of them reads repetitive). */
+.article-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border-top: 1px solid rgba(250, 250, 250, 0.14);
+}
+
+.article-row {
+  width: calc(100% + 24px);
+  max-width: none;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 12px;
+  margin: 0 -12px;
+  border-radius: 8px;
+  border-bottom: 1px solid rgba(250, 250, 250, 0.14);
+  text-decoration: none;
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    padding-left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.article-row:hover {
+  background-color: rgba(250, 250, 250, 0.05);
+  padding-left: 20px;
+}
+
+.article-row-thumb {
+  flex: none;
+  width: 72px;
+  height: 72px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.article-row-thumb .thumbnail {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.article-row:hover .article-row-thumb .thumbnail {
+  transform: scale(1.08);
+}
+
+#unfiltered .article-row:hover .label {
+  color: #f6b0ff;
+  transition: color 0.2s ease-out;
+}
+
+.article-row-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.article-row-body .label {
+  padding-bottom: 0;
+}
+
+.article-row-body p {
+  margin-bottom: 0;
+}
+
+/* Pen-stroke crossout over "carefully" in the Unfiltered intro. The path's
+   stroke-dasharray/dashoffset are set at runtime by js/crossout.js (using
+   the real measured path length), then animated to 0 via a CSS transition
+   when the line scrolls into view — see that file for the trigger logic. */
+.crossout-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.crossout-svg {
+  position: absolute;
+  left: -4%;
+  top: -10%;
+  width: 108%;
+  height: 120%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.crossout-path {
+  fill: none;
+  stroke: #f6b0ff;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.crossout-replacement {
+  color: #f6b0ff;
+  font-style: italic;
 }
 
 /* Keep the earlier-work links quiet and let them wrap. */
@@ -743,14 +873,21 @@ img {
   max-width: 380px;
   grid-column-gap: 12px;
   grid-row-gap: 12px;
-  perspective: 2000px;
   flex-direction: column;
   align-items: stretch;
   display: flex;
 }
 
+/* perspective must live on the parent of the 3D-transformed element (the
+   tilt IX2 rotates .cardwrapper itself), not on .cardwrapper directly —
+   having it on the transformed element breaks elementFromPoint hit-testing
+   in Chromium, making the image/link unclickable during the tilt. */
+#work .w-layout-vflex.column.spacelarge {
+  perspective: 2000px;
+}
+
 .textspan {
-  color: var(--accent, #fce3ff);
+  color: var(--accent, #e6f646);
   font-weight: 400;
 }
 
@@ -829,7 +966,7 @@ img {
 }
 
 .linkblock:hover {
-  color: var(--accent, #fce3ff);
+  color: var(--accent, #e6f646);
 }
 
 .linkblock.aligncenter {
@@ -839,7 +976,7 @@ img {
 }
 
 .linkblock.aligncenter:hover {
-  color: var(--accent, #fce3ff);
+  color: var(--accent, #e6f646);
 }
 
 .footer {
@@ -874,7 +1011,7 @@ img {
   visibility: hidden;
   color: #0b0b35;
   letter-spacing: 0.05em;
-  background-color: var(--accent, #fce3ff);
+  background-color: var(--accent, #e6f646);
   border: 1px solid #222020;
   border-radius: 8px;
   padding: 10px 16px 8px;
@@ -903,12 +1040,18 @@ img {
   z-index: -10;
   width: 100%;
   height: 100%;
-  background-color: #24104f;
+  background-color: #222020;
   position: absolute;
   top: 100%;
   bottom: auto;
   left: 0%;
   right: auto;
+}
+
+/* Darkest-purple hover reveal on the homepage contact links (LinkedIn/
+   Email); case-study page footers keep the original dark grey. */
+.is-home #contact .hovercover {
+  background-color: #24104f;
 }
 
 .hovercover.backgroundinvert {
@@ -937,7 +1080,7 @@ img {
   width: 200px;
   height: 200px;
   transition: all .2s;
-  top: -7%;
+  top: 5%;
   transform: rotate(10deg);
 }
 
@@ -975,7 +1118,7 @@ img {
   outline-offset: 0px;
   color: #fafafa;
   border-radius: 4px;
-  outline: 2px solid var(--accent, #fce3ff);
+  outline: 2px solid var(--accent, #e6f646);
   text-decoration: underline;
 }
 
@@ -983,12 +1126,12 @@ img {
   outline-offset: 0px;
   color: #fafafa;
   border-radius: 4px;
-  outline: 2px solid var(--accent, #fce3ff);
+  outline: 2px solid var(--accent, #e6f646);
   text-decoration: underline;
 }
 
 .logo {
-  color: var(--accent, #fce3ff);
+  color: var(--accent, #e6f646);
   font-family: Syne, sans-serif;
   font-size: 40px;
   font-weight: 700;
@@ -1000,7 +1143,7 @@ img {
 }
 
 .h3_hoverhidden {
-  color: var(--accent, #fce3ff);
+  color: var(--accent, #e6f646);
   position: absolute;
   top: 56px;
 }
@@ -1022,7 +1165,7 @@ img {
 }
 
 .arrow_hidden {
-  color: var(--accent, #fce3ff);
+  color: var(--accent, #e6f646);
   position: absolute;
   top: -64px;
 }
@@ -1035,6 +1178,10 @@ img {
   color: #595858;
   background-image: url('../images/check-dark.svg');
   line-height: 170%;
+}
+
+.is-home .item_dark {
+  color: #24104f;
 }
 
 .item_dark.bulletnone {
@@ -1352,7 +1499,7 @@ img {
   outline-offset: 0px;
   color: #0b0b35;
   -webkit-text-stroke-color: #0b0b35;
-  background-color: var(--accent, #fce3ff);
+  background-color: var(--accent, #e6f646);
   border-radius: 4px;
   outline: 2px solid #0b0b35;
 }
@@ -1361,7 +1508,7 @@ img {
   outline-offset: 0px;
   color: #0b0b35;
   -webkit-text-stroke-color: #0b0b35;
-  background-color: var(--accent, #fce3ff);
+  background-color: var(--accent, #e6f646);
   border-radius: 4px;
   outline: 2px solid #0b0b35;
 }
@@ -1377,7 +1524,7 @@ img {
   width: 100vw;
   height: 4px;
   max-width: 100vw;
-  background-color: var(--accent, #fce3ff);
+  background-color: var(--accent, #e6f646);
   align-self: flex-start;
   display: flex;
   position: fixed;
@@ -1428,7 +1575,7 @@ img {
 .innerdot {
   width: 10px;
   height: 10px;
-  background-color: var(--accent, #fce3ff);
+  background-color: var(--accent, #e6f646);
   border-radius: 50%;
   justify-content: center;
   align-items: center;
@@ -1438,12 +1585,17 @@ img {
 .outercircle {
   width: 40px;
   height: 40px;
-  border: 1px solid rgba(246, 176, 255, .5);
+  border: 1px solid rgba(230, 246, 70, .5);
   border-radius: 50%;
   justify-content: center;
   align-items: center;
   display: flex;
   position: absolute;
+}
+
+/* Pink cursor ring on index.html only; case-study pages keep the original. */
+.is-home .outercircle {
+  border-color: rgba(246, 176, 255, .5);
 }
 
 /* Cursor hover state (e.g. hero link, work intro) */
@@ -1458,6 +1610,29 @@ img {
   width: 50px;
   height: 50px;
   transition: width 0.2s ease-out, height 0.2s ease-out;
+}
+
+/* Cursor "tile" hover state (article rows): the dot grows into a pill
+   showing a generic "View" label, ring fades out. */
+.cursor-wrapper.cursor-hover-tile .innerdot {
+  width: 96px;
+  height: 96px;
+  opacity: 1;
+  transition: width 0.25s ease-out, height 0.25s ease-out, opacity 0.2s ease-out;
+}
+
+.cursor-wrapper.cursor-hover-tile .outercircle {
+  width: 96px;
+  height: 96px;
+  opacity: 0;
+  transition: width 0.25s ease-out, height 0.25s ease-out, opacity 0.2s ease-out;
+}
+
+.cursor-wrapper.cursor-hover-tile .tooltiplabel {
+  display: flex;
+  opacity: 1;
+  color: #24104f;
+  font-size: 11px;
 }
 
 .cardwrapper_unpublished {
@@ -1520,7 +1695,7 @@ img {
   opacity: 0;
   color: #0b0b35;
   letter-spacing: .05em;
-  background-color: var(--accent, #fce3ff);
+  background-color: var(--accent, #e6f646);
   border: 1px solid #222020;
   border-radius: 8px;
   flex: none;
@@ -1918,7 +2093,7 @@ img {
   }
 
   .h3_hover {
-    color: var(--accent, #fce3ff);
+    color: var(--accent, #e6f646);
   }
 
   .menuicon {
@@ -2039,7 +2214,7 @@ img {
   }
 
   .body.vertical {
-    background-color: #5c59ed;
+    background-color: #24104f;
     background-image: none;
     background-position: 0 0;
     background-size: auto;
