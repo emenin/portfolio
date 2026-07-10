@@ -14,7 +14,7 @@
 }
 
 .library-code {
-  background: #0b0b35;
+  background: #170636;
   color: #e8e8ed;
   padding: 20px;
   border-radius: 8px;
@@ -55,10 +55,13 @@
 /* Article end: prev/next + footer as one block, no gap, no bottom margin */
 .article-end {
   margin-bottom: 0;
+  width: 100%;
+  background-color: #170636;
 }
 
 .article-end-nav {
   padding: 0;
+  border-bottom: none;
 }
 
 /* Prev/next tiles: hover effect (purple cover slides up), same as Soniq Design System page */
@@ -68,11 +71,11 @@
 }
 
 .article-end-nav .linkblock .hovercover.backgroundinvert {
-  transition: top 0.35s ease;
+  transition: transform 0.35s ease;
 }
 
 .article-end-nav .linkblock:hover .hovercover.backgroundinvert {
-  top: 0;
+  transform: translateY(0);
 }
 
 .article-end .article-end-footer {
@@ -94,6 +97,49 @@
     padding-top: 24px;
     padding-bottom: 24px;
   }
+}
+
+/* Footer tagline easter egg (mouse-follow tooltip), shared by <site-footer>
+   and <article-end> across every page that loads this stylesheet. */
+.footer .footer-tagline-wrap {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+  user-select: none;
+}
+
+.footer .footer-tooltip {
+  width: max-content;
+  max-width: 90vw;
+  opacity: 0;
+  visibility: hidden;
+  color: #0b0b35;
+  letter-spacing: 0.05em;
+  background-color: #f6b0ff;
+  border: 1px solid #170636;
+  border-radius: 8px;
+  padding: 10px 16px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 160%;
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  margin-bottom: 8px;
+  z-index: 100;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+  white-space: nowrap;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.footer .footer-tagline-wrap:hover .footer-tooltip {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* No space below the footer – remove section padding under article-end */
@@ -149,7 +195,7 @@ article-end {
   top: 0;
   width: 10px;
   height: 10px;
-  background-color: #e6f646;
+  background-color: #f6b0ff;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   justify-content: center;
@@ -169,7 +215,7 @@ article-end {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid rgba(230, 246, 70, 0.5);
+  border: 1px solid rgba(246, 176, 255, 0.5);
   background-color: transparent;
   transform: translate(-50%, -50%);
   justify-content: center;
@@ -209,8 +255,8 @@ article-end {
   height: 160px !important;
   min-width: 160px;
   min-height: 160px;
-  background-color: #e6f646 !important;
-  border: 1px solid rgba(230, 246, 70, 0.5);
+  background-color: #f6b0ff !important;
+  border: 1px solid rgba(246, 176, 255, 0.5);
   opacity: 1 !important;
   visibility: visible !important;
   display: flex !important;

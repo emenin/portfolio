@@ -54,21 +54,29 @@
   // ----- Site Footer -----
   const FOOTER_COPYRIGHT = '©2023 Érica Menin. All Rights Reserved.';
   const FOOTER_TAGLINE = 'Designed and built by me <3';
-  const FOOTER_TOOLTIP = '2023: No-code / 2026: Cursor';
+  const FOOTER_TOOLTIP = '2023: Webflow | 2026: Cursor 😎';
+
+  // Shared markup for the copyright + tagline/tooltip pair, used by both
+  // SiteFooter (standalone) and ArticleEnd (prev/next + footer combo).
+  function footerBodyHtml() {
+    const year = new Date().getFullYear();
+    const copyright = FOOTER_COPYRIGHT.replace('2023', String(year));
+
+    return `
+      <div>${escapeHtml(copyright)}<br></div>
+      <div class="footer-tagline-wrap">
+        <span>${escapeHtml(FOOTER_TAGLINE)}</span>
+        <span class="footer-tooltip">${escapeHtml(FOOTER_TOOLTIP)}</span>
+      </div>
+    `;
+  }
 
   class SiteFooter extends HTMLElement {
     connectedCallback() {
-      const year = new Date().getFullYear();
-      const copyright = FOOTER_COPYRIGHT.replace('2023', String(year));
-
       this.innerHTML = `
         <section class="section footer">
           <div class="container _100 vertical_mobile">
-            <div>${escapeHtml(copyright)}<br></div>
-            <div class="footer-tagline-wrap">
-              <span>${escapeHtml(FOOTER_TAGLINE)}</span>
-              <span class="footer-tooltip">${escapeHtml(FOOTER_TOOLTIP)}</span>
-            </div>
+            ${footerBodyHtml()}
           </div>
         </section>
       `;
@@ -287,9 +295,6 @@
            </a>`
         : '';
 
-      const year = new Date().getFullYear();
-      const copyright = FOOTER_COPYRIGHT.replace('2023', String(year));
-
       const navBlock =
         prevBlock || nextBlock
           ? `<div class="article-end-nav w-layout-hflex containerfull background_dark">
@@ -303,8 +308,7 @@
           ${navBlock}
           <div class="footer dark article-end-footer">
             <div class="container _100 vertical_mobile">
-              <div>${escapeHtml(copyright)}<br></div>
-              <div>${escapeHtml(FOOTER_TAGLINE)}</div>
+              ${footerBodyHtml()}
             </div>
           </div>
         </div>
