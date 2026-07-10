@@ -54,21 +54,29 @@
   // ----- Site Footer -----
   const FOOTER_COPYRIGHT = '©2023 Érica Menin. All Rights Reserved.';
   const FOOTER_TAGLINE = 'Designed and built by me <3';
-  const FOOTER_TOOLTIP = '2023: No-code / 2026: Cursor';
+  const FOOTER_TOOLTIP = '2023: Webflow | 2026: Cursor 😎';
+
+  // Shared markup for the copyright + tagline/tooltip pair, used by both
+  // SiteFooter (standalone) and ArticleEnd (prev/next + footer combo).
+  function footerBodyHtml() {
+    const year = new Date().getFullYear();
+    const copyright = FOOTER_COPYRIGHT.replace('2023', String(year));
+
+    return `
+      <div>${escapeHtml(copyright)}<br></div>
+      <div class="footer-tagline-wrap">
+        <span>${escapeHtml(FOOTER_TAGLINE)}</span>
+        <span class="footer-tooltip">${escapeHtml(FOOTER_TOOLTIP)}</span>
+      </div>
+    `;
+  }
 
   class SiteFooter extends HTMLElement {
     connectedCallback() {
-      const year = new Date().getFullYear();
-      const copyright = FOOTER_COPYRIGHT.replace('2023', String(year));
-
       this.innerHTML = `
-        <section class="section footer">
+        <section class="section footer footer-home">
           <div class="container _100 vertical_mobile">
-            <div>${escapeHtml(copyright)}<br></div>
-            <div class="footer-tagline-wrap">
-              <span>${escapeHtml(FOOTER_TAGLINE)}</span>
-              <span class="footer-tooltip">${escapeHtml(FOOTER_TOOLTIP)}</span>
-            </div>
+            ${footerBodyHtml()}
           </div>
         </section>
       `;
@@ -221,6 +229,8 @@
   // Inner HTML = subtitle/description (can include links)
   class ArticleHeader extends HTMLElement {
     connectedCallback() {
+      if (this.dataset.rendered === 'true') return;
+
       const title = this.getAttribute('title') || '';
       const image = this.getAttribute('image') || '';
       const imageAlt = this.getAttribute('image-alt') || title;
@@ -259,6 +269,8 @@
             : ''
         }
       `;
+
+      this.dataset.rendered = 'true';
     }
   }
 
@@ -287,9 +299,6 @@
            </a>`
         : '';
 
-      const year = new Date().getFullYear();
-      const copyright = FOOTER_COPYRIGHT.replace('2023', String(year));
-
       const navBlock =
         prevBlock || nextBlock
           ? `<div class="article-end-nav w-layout-hflex containerfull background_dark">
@@ -303,12 +312,69 @@
           ${navBlock}
           <div class="footer dark article-end-footer">
             <div class="container _100 vertical_mobile">
-              <div>${escapeHtml(copyright)}<br></div>
-              <div>${escapeHtml(FOOTER_TAGLINE)}</div>
+              ${footerBodyHtml()}
             </div>
           </div>
         </div>
       `;
+    }
+  }
+
+  // ----- Article Layout (single live wrapper for article pages) -----
+  // Wrap page-specific content and centralize shared chrome (nav, end, cursor).
+  // Attributes: prev-href, prev-title, next-href, next-title, cursor-label,
+  // no-end (optional), no-cursor (optional)
+  class ArticleLayout extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.rendered === 'true') return;
+
+      const prevHref = this.getAttribute('prev-href') || '';
+      const prevTitle = this.getAttribute('prev-title') || 'Previous';
+      const nextHref = this.getAttribute('next-href') || '';
+      const nextTitle = this.getAttribute('next-title') || 'Next';
+      const cursorLabel = this.getAttribute('cursor-label') || 'View';
+      const noEnd = this.hasAttribute('no-end');
+      const noCursor = this.hasAttribute('no-cursor');
+      const contentHtml = this.innerHTML;
+
+      // Keep layout neutral in the DOM flow; inner structure defines spacing.
+      this.style.display = 'contents';
+
+      this.innerHTML = `
+        <article-nav></article-nav>
+        <section class="section project">
+          ${contentHtml}
+          ${
+            noEnd
+              ? ''
+              : `<article-end
+                   prev-href="${escapeHtml(prevHref)}"
+                   prev-title="${escapeHtml(prevTitle)}"
+                   next-href="${escapeHtml(nextHref)}"
+                   next-title="${escapeHtml(nextTitle)}"
+                 ></article-end>`
+          }
+        </section>
+        ${
+          noCursor
+            ? ''
+            : `<div class="cursor-wrapper" id="article-cursor">
+                 <div class="w-embed">
+                   <style>
+                     #article-cursor {
+                       pointer-events: none;
+                     }
+                   </style>
+                 </div>
+                 <div class="innerdot"></div>
+                 <div class="outercircle">
+                   <div class="tooltiplabel">${escapeHtml(cursorLabel)}</div>
+                 </div>
+               </div>`
+        }
+      `;
+
+      this.dataset.rendered = 'true';
     }
   }
 
@@ -338,4 +404,6 @@
     customElements.define('article-header', ArticleHeader);
   if (!customElements.get('article-end'))
     customElements.define('article-end', ArticleEnd);
+  if (!customElements.get('article-layout'))
+    customElements.define('article-layout', ArticleLayout);
 })();
