@@ -61,7 +61,7 @@
 
 .article-end-nav {
   padding: 0;
-  border-bottom: none;
+  border-bottom: 0.5px solid #fce3ff;
 }
 
 /* Prev/next tiles: hover effect (purple cover slides up), same as Soniq Design System page */
@@ -70,12 +70,37 @@
   overflow: hidden;
 }
 
+.article-end-nav .linkblock > *:not(.hovercover) {
+  position: relative;
+  z-index: 1;
+}
+
+@media screen and (min-width: 992px) {
+  .article-end-nav .linkblock:first-child {
+    align-items: flex-start;
+    text-align: left;
+    padding-left: max(var(--page-gutter), calc((100vw - 1140px) / 2));
+    padding-right: 48px;
+  }
+
+  .article-end-nav .linkblock:last-child {
+    align-items: flex-end;
+    text-align: right;
+    padding-left: 48px;
+    padding-right: max(var(--page-gutter), calc((100vw - 1140px) / 2));
+  }
+}
+
 .article-end-nav .linkblock .hovercover.backgroundinvert {
-  transition: transform 0.35s ease;
+  top: 100%;
+  transform: none;
+  background-color: #270f52;
+  z-index: 0;
+  transition: top 0.35s ease;
 }
 
 .article-end-nav .linkblock:hover .hovercover.backgroundinvert {
-  transform: translateY(0);
+  top: 0;
 }
 
 .article-end .article-end-footer {
@@ -145,6 +170,46 @@
   visibility: visible;
 }
 
+/* Homepage contact cards should align to the same content width as the nav. */
+.is-home #contact .container.full.borderbottom.margintop {
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(-1 * var(--page-gutter));
+  margin-right: calc(-1 * var(--page-gutter));
+  justify-content: space-between;
+}
+
+.is-home #contact .linkblock {
+  flex: 1 1 0;
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+}
+
+.is-home #contact .linkblock:first-child {
+  padding-left: max(var(--page-gutter), calc((100vw - 1140px) / 2));
+}
+
+.is-home #contact .linkblock:last-child {
+  padding-right: max(var(--page-gutter), calc((100vw - 1140px) / 2));
+}
+
+/* Shared horizontal gutters for nav and footer bars. */
+:root {
+  --page-gutter: 80px;
+}
+
+@media screen and (max-width: 991px) {
+  :root {
+    --page-gutter: 40px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --page-gutter: 24px;
+  }
+}
+
 /* No space below the footer – remove section padding under article-end */
 .section.project:has(.article-end) {
   padding-bottom: 0;
@@ -157,6 +222,17 @@ body.has-article-end {
   min-height: 100vh;
 }
 
+/* Normalize legacy 100vw behavior and keep both nav edges symmetric. */
+.navbar {
+  width: 100%;
+  max-width: 100%;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+}
+
 body.has-article-end .section.project {
   flex: 1;
   display: flex;
@@ -164,7 +240,164 @@ body.has-article-end .section.project {
 }
 
 body.has-article-end .section.project .article-end {
-  margin-top: auto;
+  margin-top: 56px;
+}
+
+/* Footer bars should align to same gutters as navbar on all pages. */
+.footer {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+}
+
+.article-end .footer.dark.article-end-footer {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.article-end .footer.dark.article-end-footer .container._100.vertical_mobile {
+  width: 100%;
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 24px;
+  color: #fafafa;
+}
+
+.footer-home {
+  background-color: transparent;
+  width: 100vw;
+  max-width: 100vw;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.footer-home .container._100.vertical_mobile {
+  width: calc(100vw - (2 * var(--page-gutter)));
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 24px;
+  color: #fafafa;
+}
+
+/* Footer copy uses white, while keeping tooltip styling independent. */
+.article-end
+  .footer.dark.article-end-footer
+  .container._100.vertical_mobile
+  > div:first-child,
+.footer-home .container._100.vertical_mobile > div:first-child,
+.footer .footer-tagline-wrap > span:first-child {
+  color: #fafafa;
+}
+
+@media screen and (min-width: 992px) {
+  .article-end
+    .footer.dark.article-end-footer
+    .container._100.vertical_mobile
+    > div:last-child,
+  .footer-home .container._100.vertical_mobile > div:last-child {
+    text-align: right;
+    justify-self: end;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .article-end .footer.dark.article-end-footer,
+  .footer-home {
+    padding-left: var(--page-gutter);
+    padding-right: var(--page-gutter);
+  }
+
+  .article-end .footer.dark.article-end-footer .container._100.vertical_mobile,
+  .footer-home .container._100.vertical_mobile {
+    width: 100%;
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Legacy article pages still use a separate footer section after .section.project.
+   Add breathing room exactly between content end and footer start. */
+.section.project + .section.padding_none {
+  margin-top: 56px;
+}
+
+/* Keep article nav CTA snapped to right edge. */
+body.has-article-end .navbar .navmenu {
+  margin-left: auto;
+}
+
+/* Align the CTA text edge with the shared content frame. */
+@media screen and (min-width: 992px) {
+  .navbar .navbutton,
+  .navbar .navbutton.light {
+    padding-right: 0;
+  }
+}
+
+body.has-article-end .section.project > .container.vertical.spacemedium {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  margin-bottom: 12px;
+}
+
+body.has-article-end
+  .section.project
+  > .container.vertical.spacemedium
+  > .w-layout-vflex {
+  width: 100%;
+}
+
+body.has-article-end
+  .section.project
+  > .container.vertical.spacemedium
+  > .imagewrap,
+body.has-article-end
+  .section.project
+  > .container.vertical.spacemedium
+  > .w-layout-vflex
+  > .imagewrap {
+  aspect-ratio: auto;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 16px;
+}
+
+/* Newest article pages render image inside <article-header>; tighten that block. */
+body.has-article-end article-header {
+  display: block;
+}
+
+body.has-article-end article-header .projectheader {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+}
+
+body.has-article-end article-header .w-layout-vflex {
+  width: 100%;
+}
+
+body.has-article-end article-header .imagewrap {
+  aspect-ratio: auto;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 16px;
+}
+
+/* Article tags should use the lighter pink treatment. */
+body.has-article-end .tag.primary {
+  background-color: #fce3ff;
+  border: 0.5px solid rgba(246, 176, 255, 0.55);
 }
 
 /* Ensure custom elements don't break layout */

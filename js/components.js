@@ -74,7 +74,7 @@
   class SiteFooter extends HTMLElement {
     connectedCallback() {
       this.innerHTML = `
-        <section class="section footer">
+        <section class="section footer footer-home">
           <div class="container _100 vertical_mobile">
             ${footerBodyHtml()}
           </div>
@@ -229,6 +229,8 @@
   // Inner HTML = subtitle/description (can include links)
   class ArticleHeader extends HTMLElement {
     connectedCallback() {
+      if (this.dataset.rendered === 'true') return;
+
       const title = this.getAttribute('title') || '';
       const image = this.getAttribute('image') || '';
       const imageAlt = this.getAttribute('image-alt') || title;
@@ -267,6 +269,8 @@
             : ''
         }
       `;
+
+      this.dataset.rendered = 'true';
     }
   }
 
@@ -322,6 +326,8 @@
   // no-end (optional), no-cursor (optional)
   class ArticleLayout extends HTMLElement {
     connectedCallback() {
+      if (this.dataset.rendered === 'true') return;
+
       const prevHref = this.getAttribute('prev-href') || '';
       const prevTitle = this.getAttribute('prev-title') || 'Previous';
       const nextHref = this.getAttribute('next-href') || '';
@@ -367,6 +373,8 @@
                </div>`
         }
       `;
+
+      this.dataset.rendered = 'true';
     }
   }
 
