@@ -61,7 +61,7 @@
 
 .article-end-nav {
   padding: 0;
-  border-bottom: 0.5px solid #fce3ff;
+  border-bottom: 0.5px solid #fafafa;
 }
 
 /* Prev/next tiles: hover effect (purple cover slides up), same as Soniq Design System page */
@@ -279,7 +279,7 @@ body.has-article-end .section.project .article-end {
 
 .footer-home .container._100.vertical_mobile {
   width: calc(100vw - (2 * var(--page-gutter)));
-  max-width: none;
+  max-width: 1140px;
   margin-left: auto;
   margin-right: auto;
   display: grid;

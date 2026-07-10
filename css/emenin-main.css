@@ -842,13 +842,30 @@ img {
   padding-right: 64px;
 }
 
-/* The 4-tile grid's own tracks are narrower than its container, and the
-   base .w-layout-layout centers narrower grids by default — pulling the
-   whole tile block out of alignment with the heading above it. */
-#why-me .w-layout-layout {
-  justify-content: start;
-  align-self: stretch;
-  width: 100%;
+/* Mirror the Work card row: two 340px tiles with a 180px gap form an 860px
+   block that sits centred in the section (same width and centre line as the
+   Work cards' .containermedium). The section container already centres its
+   children (align-items:center), so the grid just needs the fixed 340px
+   tracks, the 180px gap, and its natural 860px width — no padding gutter, no
+   1fr stretching. Scoped to >=1200px; below that the base responsive tracks
+   (1fr / single column) take over so the tiles never overflow narrow screens. */
+@media screen and (min-width: 1200px) {
+  #why-me .w-layout-layout {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 120px;
+    width: 860px;
+    padding: 0;
+    align-self: center;
+  }
+}
+
+/* The tile heading swaps to its hover copy (H4.h3_hoverhidden) on hover; that
+   copy doesn't inherit .label's size, so it renders 24px/36px against the
+   visible heading's 20px and the text visibly jumps size mid-hover. Match it
+   to the resting .label heading so the swap is seamless. */
+#why-me .h3_hoverhidden {
+  font-size: 20px;
+  line-height: 100%;
 }
 
 /* .tabsmenu (the "Product teams" / "Collaboration" labels) sits 36px right
@@ -859,6 +876,25 @@ img {
 #how-i-can-help .tabsmenu {
   position: relative;
   left: -36px;
+}
+
+/* By default the label and content columns are both width:100% and shrink to
+   equal halves, so the bullet column stops well short of the heading's right
+   edge. On wide screens (where the tabs sit side by side) pin each column so
+   the labels keep their left edge under the heading start and the bullets
+   reach the heading's right edge — the two fixed widths plus the 72px gap and
+   the -36px menu shift sum to the heading's own width, so the alignment holds
+   as the container recentres. Below 1200px the tabs stack, and these fixed
+   widths would overflow, so the base width:100% is left to apply there. */
+@media screen and (min-width: 1200px) {
+  #how-i-can-help .tabsmenu {
+    width: 398px;
+    flex-shrink: 0;
+  }
+  #how-i-can-help .tabcontent {
+    width: 478px;
+    flex-shrink: 0;
+  }
 }
 
 /* Load-in reveal for the Unfiltered section, triggered by
@@ -1309,6 +1345,17 @@ img {
   align-self: center;
   align-items: baseline;
   display: flex;
+}
+
+/* Webflow's clearfix adds ::before/::after (content:" "; display:table) to the
+   nav menu. In this flex row they count as flex items, so the row's 24px gap
+   falls between the last link ("Let's talk!") and the trailing ::after — the
+   button ends 24px shy of the content's right edge while the brand sits flush
+   on the left. The clearfix is a float-era relic with no job in a flex row, so
+   dropping both pseudos lets the last item line up with the page content. */
+.navmenu::before,
+.navmenu::after {
+  display: none;
 }
 
 .text_allcaps {
