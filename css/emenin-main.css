@@ -496,6 +496,10 @@ img {
   max-width: 100%;
 }
 
+.section.footer .container {
+  max-width: none;
+}
+
 .section.padding_none {
   padding: 0;
   overflow: hidden;
@@ -1005,8 +1009,8 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-left: 12vw;
-  padding-right: 12vw;
+  padding-left: 80px;
+  padding-right: 80px;
   text-decoration: none;
   display: flex;
   position: relative;
@@ -1831,8 +1835,8 @@ img {
   }
 
   .linkblock {
-    padding-left: 9vw;
-    padding-right: 9vw;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   .float.image {
@@ -2083,8 +2087,8 @@ img {
 
   .linkblock {
     height: 180px;
-    padding-left: 10vw;
-    padding-right: 10vw;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .linkblock.aligncenter {

@@ -81,6 +81,9 @@
 .article-end .article-end-footer {
   margin-top: 0;
   margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
   padding-top: 40px;
   padding-bottom: 40px;
 }
