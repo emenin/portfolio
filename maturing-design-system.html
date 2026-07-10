@@ -84,8 +84,6 @@
       <div class="container vertical spacemedium">
         <article-header
           title="Maturing a design system beyond components"
-          image="images/01_ds-cover.png"
-          image-alt="Design system cover showing the evolution from component library to operational system"
           tags="Design System, Retrospective"
           date=""
         >
@@ -156,9 +154,11 @@
             <h3>Year at a glance</h3>
 
             <p>
-              The focus was clear: mature the system beyond components, make it
-              easier to adopt, and align it with both design and code.
+              My focus throughout the year was on maturing our Design System
+              beyond components and into something more operational, measurable,
+              and sustainable.
             </p>
+            <p>Some of the highlights (TL; DR):</p>
 
             <ul role="list">
               <li class="item_dark">
@@ -180,24 +180,56 @@
                 Kept the system reliable by doing the many small, invisible
                 decisions that help product designers ship faster.
               </li>
+
+              <li class="item_dark">
+                Learned (and also failed) different AI approaches along the way
+                (a topic worth exploring another time).
+              </li>
             </ul>
           </div>
 
           <div id="libraries" class="w-layout-vflex flexblock">
             <h3>Figma Design System Libraries 2.0</h3>
+            <h4>The work</h4>
 
             <p>
               I reworked the style-based tokens library into a variables-first
               system, aligned it with code behavior, and consolidated two “core”
               Figma libraries into one themeable library.
             </p>
-
-            <p>
-              This included migration guides, a sandbox playground file, and
-              video tutorials to help designers and engineers move to the new
-              model.
-            </p>
-
+            <h4>What I did</h4>
+            <ul role="list">
+              <li class="item_dark">
+                Refined the Design Tokens library structure by upgrading it to
+                variables and aligning it with code behaviour, making it
+                future-proof for upcoming projects.
+              </li>
+              <li class="item_dark">
+                Used that foundation to unify our previous two core libraries
+                into a single, themeable component library in Figma.
+              </li>
+              <li class="item_dark">
+                Documented the migration with guides, a playground file, and
+                video tutorials.
+              </li>
+              <li class="item_dark">
+                Bridged design and engineering through token refinements using
+                Tokens Studio and PR reviews.
+              </li>
+            </ul>
+            <div class="w-layout-vflex projectimage">
+              <img
+                loading="lazy"
+                sizes="(max-width: 479px) 90vw, (max-width: 767px) 87vw, (max-width: 991px) 52vw, 46vw"
+                srcset="images/articles-mds-2-01.png"
+                src="images/articles-mds-2-01.png"
+                alt="Illustrative image displaying three Figma file covers, representing different design projects."
+              />
+              <div class="caption">
+                Video tutorial: how to run a smooth migration
+              </div>
+            </div>
+            <h4>Outcomes</h4>
             <p>
               Outcome: designers can use themes in Figma without hacks, tokens
               are more consistent across design and code, and the system is
@@ -299,7 +331,6 @@
           </div>
         </div>
       </div>
-
     </article-layout>
 
     <script
