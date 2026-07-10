@@ -143,8 +143,8 @@
   visibility: hidden;
   color: #0b0b35;
   letter-spacing: 0.05em;
-  background-color: #f6b0ff;
-  border: 1px solid #170636;
+  background-color: #fce3ff;
+  border: 1px solid rgba(246, 176, 255, 0.55);
   border-radius: 8px;
   padding: 10px 16px 8px;
   font-size: 13px;
