@@ -193,13 +193,31 @@
         <h2 class="text_light">Article / project page template</h2>
         <p>
           For each item under “My work” (and for blog posts), use the same page
-          structure. Copy <strong>article-template.html</strong> and fill in the
-          components below.
+          structure. Copy <strong>article-template.html</strong> and wrap page
+          content with <code>article-layout</code>.
         </p>
+        <h3 style="margin-top: 24px">article-layout</h3>
+        <p>
+          Single live wrapper for article pages: inserts inner nav, main project
+          section, end block, and cursor from one component. Put page-specific
+          content inside it, then set navigation attributes.
+        </p>
+        <pre class="library-code"><code>&lt;article-layout
+  prev-href="index.html#work"
+  prev-title="Back to work"
+  next-href="next-project.html"
+  next-title="Next Project"
+&gt;
+  &lt;div class="w-layout-vflex container"&gt;&lt;/div&gt;
+  &lt;div class="container vertical spacemedium"&gt;
+    &lt;article-header ...&gt;...&lt;/article-header&gt;
+  &lt;/div&gt;
+  &lt;!-- page content --&gt;
+&lt;/article-layout&gt;</code></pre>
         <h3 style="margin-top: 24px">article-nav</h3>
         <p>
-          Simplified nav for inner pages (logo + “Let’s talk!”). Use on every
-          project and blog page.
+          Simplified nav for inner pages (logo + “Let’s talk!”). Inserted
+          automatically by <code>article-layout</code>.
         </p>
         <pre
           class="library-code"
@@ -225,8 +243,8 @@
           Previous + Next tiles and footer (rights + credits) in one block. No
           space between them, no bottom margin. Attributes:
           <code>prev-href</code>, <code>prev-title</code>,
-          <code>next-href</code>, <code>next-title</code> (omit any you don’t
-          need; if all omitted, only the footer is shown).
+          <code>next-href</code>, <code>next-title</code>. Usually inserted by
+          <code>article-layout</code>.
         </p>
         <pre class="library-code"><code>&lt;article-end
   prev-href="index.html#work"
@@ -250,7 +268,7 @@
             case studies and blog posts. Copy and rename for each new page.
           </li>
           <li class="item_dark">
-            <strong>css/emenin.css</strong> – Existing styles (layout,
+            <strong>css/emenin-main.css</strong> – Existing styles (layout,
             typography, colours). Components use these classes.
           </li>
           <li class="item_dark">

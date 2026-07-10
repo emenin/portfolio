@@ -316,6 +316,60 @@
     }
   }
 
+  // ----- Article Layout (single live wrapper for article pages) -----
+  // Wrap page-specific content and centralize shared chrome (nav, end, cursor).
+  // Attributes: prev-href, prev-title, next-href, next-title, cursor-label,
+  // no-end (optional), no-cursor (optional)
+  class ArticleLayout extends HTMLElement {
+    connectedCallback() {
+      const prevHref = this.getAttribute('prev-href') || '';
+      const prevTitle = this.getAttribute('prev-title') || 'Previous';
+      const nextHref = this.getAttribute('next-href') || '';
+      const nextTitle = this.getAttribute('next-title') || 'Next';
+      const cursorLabel = this.getAttribute('cursor-label') || 'View';
+      const noEnd = this.hasAttribute('no-end');
+      const noCursor = this.hasAttribute('no-cursor');
+      const contentHtml = this.innerHTML;
+
+      // Keep layout neutral in the DOM flow; inner structure defines spacing.
+      this.style.display = 'contents';
+
+      this.innerHTML = `
+        <article-nav></article-nav>
+        <section class="section project">
+          ${contentHtml}
+          ${
+            noEnd
+              ? ''
+              : `<article-end
+                   prev-href="${escapeHtml(prevHref)}"
+                   prev-title="${escapeHtml(prevTitle)}"
+                   next-href="${escapeHtml(nextHref)}"
+                   next-title="${escapeHtml(nextTitle)}"
+                 ></article-end>`
+          }
+        </section>
+        ${
+          noCursor
+            ? ''
+            : `<div class="cursor-wrapper" id="article-cursor">
+                 <div class="w-embed">
+                   <style>
+                     #article-cursor {
+                       pointer-events: none;
+                     }
+                   </style>
+                 </div>
+                 <div class="innerdot"></div>
+                 <div class="outercircle">
+                   <div class="tooltiplabel">${escapeHtml(cursorLabel)}</div>
+                 </div>
+               </div>`
+        }
+      `;
+    }
+  }
+
   function escapeHtml(str) {
     if (!str) return '';
     const div = document.createElement('div');
@@ -342,4 +396,6 @@
     customElements.define('article-header', ArticleHeader);
   if (!customElements.get('article-end'))
     customElements.define('article-end', ArticleEnd);
+  if (!customElements.get('article-layout'))
+    customElements.define('article-layout', ArticleLayout);
 })();
