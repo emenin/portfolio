@@ -10,7 +10,7 @@
     { href: '#what-i-do', label: 'What I do' },
     { href: '#work', label: 'My work' },
     { href: '#how-i-can-help', label: 'How I can help' },
-    { href: '#why-me', label: 'Why me' },
+    { href: '#beliefs', label: 'Beliefs' },
     { href: '#about', label: 'About' },
   ];
 

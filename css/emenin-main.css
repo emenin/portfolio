@@ -850,7 +850,7 @@ img {
    1fr stretching. Scoped to >=1200px; below that the base responsive tracks
    (1fr / single column) take over so the tiles never overflow narrow screens. */
 @media screen and (min-width: 1200px) {
-  #why-me .w-layout-layout {
+  #beliefs .w-layout-layout {
     grid-template-columns: 1fr 1fr;
     column-gap: 120px;
     width: 860px;
@@ -863,7 +863,7 @@ img {
    copy doesn't inherit .label's size, so it renders 24px/36px against the
    visible heading's 20px and the text visibly jumps size mid-hover. Match it
    to the resting .label heading so the swap is seamless. */
-#why-me .h3_hoverhidden {
+#beliefs .h3_hoverhidden {
   font-size: 20px;
   line-height: 100%;
 }
