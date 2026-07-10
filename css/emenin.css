@@ -1,2 +1,0 @@
-/* Compatibility shim: keep legacy references working while using one canonical theme stylesheet. */
-@import url('./emenin-main.css');

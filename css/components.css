@@ -8,16 +8,16 @@
 .library-demo {
   background: rgba(11, 11, 53, 0.03);
   border: 1px solid rgba(11, 11, 53, 0.08);
-  border-radius: 8px;
-  padding: 24px;
-  margin: 16px 0;
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  margin: var(--space-4) 0;
 }
 
 .library-code {
-  background: #170636;
-  color: #e8e8ed;
-  padding: 20px;
-  border-radius: 8px;
+  background: var(--purple-800);
+  color: var(--gray-100);
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
   overflow-x: auto;
   margin: 0;
   font-size: 13px;
@@ -32,9 +32,9 @@
 
 /* Article template: optional date (e.g. for blog posts) */
 .article-date {
-  color: #595858;
-  font-size: 14px;
-  margin-top: 4px;
+  color: var(--gray-600);
+  font-size: var(--text-sm);
+  margin-top: var(--space-1);
   margin-bottom: 0;
 }
 
@@ -44,8 +44,8 @@
 }
 
 .article-body h3 {
-  margin-top: 32px;
-  margin-bottom: 12px;
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
 }
 
 .article-body h3:first-child {
@@ -56,12 +56,12 @@
 .article-end {
   margin-bottom: 0;
   width: 100%;
-  background-color: #170636;
+  background-color: var(--purple-800);
 }
 
 .article-end-nav {
   padding: 0;
-  border-bottom: 0.5px solid #fafafa;
+  border-bottom: 0.5px solid var(--white);
 }
 
 /* Prev/next tiles: hover effect (purple cover slides up), same as Soniq Design System page */
@@ -80,13 +80,13 @@
     align-items: flex-start;
     text-align: left;
     padding-left: max(var(--page-gutter), calc((100vw - 1140px) / 2));
-    padding-right: 48px;
+    padding-right: var(--space-12);
   }
 
   .article-end-nav .linkblock:last-child {
     align-items: flex-end;
     text-align: right;
-    padding-left: 48px;
+    padding-left: var(--space-12);
     padding-right: max(var(--page-gutter), calc((100vw - 1140px) / 2));
   }
 }
@@ -94,7 +94,7 @@
 .article-end-nav .linkblock .hovercover.backgroundinvert {
   top: 100%;
   transform: none;
-  background-color: #270f52;
+  background-color: var(--purple-700);
   z-index: 0;
   transition: top 0.35s ease;
 }
@@ -109,21 +109,21 @@
   margin-left: 0;
   margin-right: 0;
   max-width: none;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-10);
 }
 
 @media (max-width: 991px) {
   .article-end .article-end-footer {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-10);
   }
 }
 
 @media (max-width: 767px) {
   .article-end .article-end-footer {
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-6);
   }
 }
 
@@ -141,26 +141,26 @@
   max-width: 90vw;
   opacity: 0;
   visibility: hidden;
-  color: #0b0b35;
+  color: var(--purple-900);
   letter-spacing: 0.05em;
-  background-color: #fce3ff;
+  background-color: var(--pink-100);
   border: 1px solid rgba(246, 176, 255, 0.55);
-  border-radius: 8px;
-  padding: 10px 16px 8px;
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4) var(--space-2);
   font-size: 13px;
   font-weight: 500;
   line-height: 160%;
   position: absolute;
   left: 0;
   bottom: 100%;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
   z-index: 100;
   transition:
     opacity 0.2s ease,
     visibility 0.2s ease;
   white-space: nowrap;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-lg);
   will-change: transform;
   transform-style: preserve-3d;
 }
@@ -240,7 +240,7 @@ body.has-article-end .section.project {
 }
 
 body.has-article-end .section.project .article-end {
-  margin-top: 56px;
+  margin-top: var(--space-14);
 }
 
 /* Footer bars should align to same gutters as navbar on all pages. */
@@ -265,8 +265,8 @@ body.has-article-end .section.project .article-end {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  column-gap: 24px;
-  color: #fafafa;
+  column-gap: var(--space-6);
+  color: var(--white);
 }
 
 .footer-home {
@@ -285,8 +285,8 @@ body.has-article-end .section.project .article-end {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  column-gap: 24px;
-  color: #fafafa;
+  column-gap: var(--space-6);
+  color: var(--white);
 }
 
 /* Footer copy uses white, while keeping tooltip styling independent. */
@@ -296,7 +296,7 @@ body.has-article-end .section.project .article-end {
   > div:first-child,
 .footer-home .container._100.vertical_mobile > div:first-child,
 .footer .footer-tagline-wrap > span:first-child {
-  color: #fafafa;
+  color: var(--white);
 }
 
 @media screen and (min-width: 992px) {
@@ -329,7 +329,7 @@ body.has-article-end .section.project .article-end {
 /* Legacy article pages still use a separate footer section after .section.project.
    Add breathing room exactly between content end and footer start. */
 .section.project + .section.padding_none {
-  margin-top: 56px;
+  margin-top: var(--space-14);
 }
 
 /* Keep article nav CTA snapped to right edge. */
@@ -346,9 +346,9 @@ body.has-article-end .navbar .navmenu {
 }
 
 body.has-article-end .section.project > .container.vertical.spacemedium {
-  grid-column-gap: 16px;
-  grid-row-gap: 16px;
-  margin-bottom: 12px;
+  grid-column-gap: var(--space-4);
+  grid-row-gap: var(--space-4);
+  margin-bottom: var(--space-3);
 }
 
 body.has-article-end
@@ -370,7 +370,7 @@ body.has-article-end
   aspect-ratio: auto;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-top: 16px;
+  margin-top: var(--space-4);
 }
 
 /* Newest article pages render image inside <article-header>; tighten that block. */
@@ -379,8 +379,8 @@ body.has-article-end article-header {
 }
 
 body.has-article-end article-header .projectheader {
-  grid-column-gap: 16px;
-  grid-row-gap: 16px;
+  grid-column-gap: var(--space-4);
+  grid-row-gap: var(--space-4);
 }
 
 body.has-article-end article-header .w-layout-vflex {
@@ -391,12 +391,12 @@ body.has-article-end article-header .imagewrap {
   aspect-ratio: auto;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-top: 16px;
+  margin-top: var(--space-4);
 }
 
 /* Article tags should use the lighter pink treatment. */
 body.has-article-end .tag.primary {
-  background-color: #fce3ff;
+  background-color: var(--pink-100);
   border: 0.5px solid rgba(246, 176, 255, 0.55);
 }
 
@@ -431,8 +431,8 @@ article-end {
   top: 0;
   width: 10px;
   height: 10px;
-  background-color: #f6b0ff;
-  border-radius: 50%;
+  background-color: var(--pink-400);
+  border-radius: var(--radius-round);
   transform: translate(-50%, -50%);
   justify-content: center;
   align-items: center;
@@ -450,7 +450,7 @@ article-end {
   top: 0;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: var(--radius-round);
   border: 1px solid rgba(246, 176, 255, 0.5);
   background-color: transparent;
   transform: translate(-50%, -50%);
@@ -491,7 +491,7 @@ article-end {
   height: 160px !important;
   min-width: 160px;
   min-height: 160px;
-  background-color: #f6b0ff !important;
+  background-color: var(--pink-400) !important;
   border: 1px solid rgba(246, 176, 255, 0.5);
   opacity: 1 !important;
   visibility: visible !important;
@@ -511,7 +511,7 @@ article-end {
 #article-cursor.cursor-hover-tile .tooltiplabel {
   opacity: 1;
   visibility: visible;
-  font-size: 16px;
+  font-size: var(--text-base);
   z-index: 2;
   transition:
     opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -525,11 +525,11 @@ article-end {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Syne, sans-serif;
-  font-size: 16px;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #222020;
+  color: var(--gray-900);
   pointer-events: none;
   transition:
     opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
