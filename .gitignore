@@ -1,1 +1,8 @@
 node_modules/
+
+# Local machine / editor files
+.DS_Store
+.claude/settings.local.json
+
+# Netlify CLI
+.netlify/
