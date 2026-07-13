@@ -1,2 +1,0 @@
-/* Compatibility shim: keep legacy references working while using one canonical base stylesheet. */
-@import url('./base.css');

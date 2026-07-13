@@ -1,0 +1,111 @@
+/**
+ * Design tokens — single source of truth for the portfolio.
+ *
+ * Loaded first in the CSS chain (before base.css) on every page. Two layers:
+ *   1. Palette      — raw brand/neutral values, named by hue + lightness.
+ *   2. Semantic     — role-based aliases that the rest of the CSS references.
+ * Plus scales for spacing, type, radii, shadows, and fonts.
+ *
+ * Every default here equals a value already used in the export, so swapping a
+ * literal for its token is a 1:1 change with no visual effect. To retheme the
+ * site, change a value here rather than hunting through the stylesheets.
+ */
+:root {
+  /* ---- Palette: brand purples ---- */
+  --purple-900: #0b0b35; /* deepest */
+  --purple-800: #170636; /* primary ink */
+  --purple-700: #24104f; /* saturated mid (merged former 750/700) */
+
+  /* ---- Palette: pinks ---- */
+  --pink-400: #f6b0ff; /* accent */
+  --pink-100: #fce3ff; /* light surface */
+  --rose-100: #ffdede; /* warm pink tint */
+
+  /* ---- Palette: whites & near-whites ---- */
+  --white: #fafafa; /* off-white surface */
+  --white-pure: #fff;
+
+  /* ---- Palette: neutrals (code / demo blocks) — one step per lightness ---- */
+  --gray-100: #eeeeee; /* lightest surface (merged f3f3f3 / eeeeee / e8e8ed) */
+  --gray-300: #d3d3d3; /* borders / dividers (merged dddddd / cccccc / c8c8c8) */
+  --gray-500: #999999; /* muted text */
+  --gray-600: #595858; /* dark muted */
+  --gray-800: #333333; /* dark */
+  --gray-900: #222222; /* near-black (merged 222222 / 222020) */
+
+  /* ---- Palette: slates (muted blue-grays) ---- */
+  --slate-300: #a6b1bf; /* light (merged a6b1bf / aaadb0) */
+  --slate-400: #758696;
+  --slate-500: #5d6c7b;
+
+  /* ---- Palette: syntax / utility (component library) ---- */
+  --blue-500: #2895f7;
+  --blue-600: #0082f3;
+  --blue-700: #3b79c3;
+  --red-500: #ea384c;
+  --yellow-400: #ffd43b;
+
+  /* ---- Semantic aliases ---- */
+  --color-ink: var(--purple-800); /* body text */
+  --color-surface: var(--white); /* default page background */
+  --color-surface-pink: var(--pink-100); /* light "pink" sections */
+  --color-accent: var(--pink-400); /* brand accent */
+  --color-on-dark: var(--white); /* text/marks over dark purple */
+  --color-on-accent: var(--purple-800); /* text/marks over pink */
+  --color-border: var(--gray-300);
+  --color-border-muted: var(--gray-100);
+
+  /* ---- Spacing scale (pure 4px scale — value = 4 × N) ---- */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+  --space-18: 72px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-25: 100px;
+  --space-30: 120px;
+  --space-45: 180px;
+
+  /* ---- Type scale ---- */
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-md: 18px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
+  --text-3xl: 40px;
+  --text-4xl: 48px;
+  --text-5xl: 64px;
+  --text-6xl: 80px;
+  --text-7xl: 100px;
+
+  /* ---- Radii ---- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 20px;
+  --radius-pill: 100px;
+  --radius-round: 50%;
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 0 3px rgba(51, 51, 51, 0.4);
+  --shadow-md: 0 2px 5px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-focus: 0px 0px 0px 2px var(--white-pure);
+
+  /* ---- Fonts ---- */
+  --font-display: Syne, sans-serif;
+  --font-body: Epilogue, sans-serif;
+  --font-icons: 'site-icons';
+}
