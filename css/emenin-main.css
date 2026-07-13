@@ -297,7 +297,8 @@ img {
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
 }
-#about .link:hover {
+#about .link:hover,
+#about .link:focus-visible {
   color: inherit;
   text-decoration-style: solid;
 }
@@ -653,7 +654,8 @@ img {
   text-underline-offset: 4px;
 }
 
-.work-intro .link:hover {
+.work-intro .link:hover,
+.work-intro .link:focus-visible {
   color: inherit;
   text-decoration-style: solid;
 }
@@ -663,7 +665,8 @@ img {
   text-decoration: none;
 }
 
-.work-intro .link.link-plain:hover {
+.work-intro .link.link-plain:hover,
+.work-intro .link.link-plain:focus-visible {
   text-decoration: underline;
 }
 
