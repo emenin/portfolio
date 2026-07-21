@@ -1,0 +1,24 @@
+# Érica Menin
+
+> Design Systems Lead with 15+ years in design. I build design systems and workflows that survive contact with real product teams — and I write about the honest parts at Design Systems Unfiltered. Made in Brazil, based in Germany. Remote-first, AI-curious, available for new work.
+
+Érica Menin (ericamenin.com) is the portfolio and writing home of a design systems lead and design-ops practitioner. The focus is practical: design tokens, component libraries, governance, and the workflows that keep systems alive after launch. Contact: erica@menin.me.
+
+## Work (case studies)
+
+- [Reinventing a web & mobile app (Soniq)](https://ericamenin.com/soniq-app-design.html): Product design for Soniq's web and mobile experience.
+- [Soniq Design System](https://ericamenin.com/soniq-design-system.html): Building the design system behind the Soniq product.
+- [Voyager Design System](https://ericamenin.com/voyager-design-system.html): A design system built to keep three travel websites coherent under one brand.
+- [MCS — Website & Brand](https://ericamenin.com/mcs-website.html): Website and brand work for MCS.
+- [Maturing a design system beyond components](https://ericamenin.com/maturing-design-system.html): Growing a design system from variables and tokens to patterns and AI — a year in review.
+- [24 days of Design System Experiments](https://ericamenin.com/24-days-design-system-experiments.html): An advent-calendar series of small design-system prompts and experiments.
+- [The Design System Advent Calendar](https://ericamenin.com/design-system-calendar.html): The interactive advent calendar behind the 24-days series.
+
+## Writing
+
+- [Design Systems Unfiltered](https://designsystemsunfiltered.substack.com/): Érica's Substack — honest writing about design systems and AI, including the "well, that didn't work" parts.
+
+## Elsewhere
+
+- [LinkedIn](https://www.linkedin.com/in/ericamenin/)
+- Email: erica@menin.me

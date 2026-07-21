@@ -31,7 +31,7 @@
     <meta
       prefix="og: http://ogp.me/ns#"
       property="og:image"
-      content="images/emenin-opengraph.jpg"
+      content="https://ericamenin.com/images/emenin-opengraph.jpg"
     />
     <meta
       prefix="og: http://ogp.me/ns#"
@@ -50,15 +50,64 @@
     />
     <meta
       name="twitter:image"
-      content="https://i.ibb.co/N7Kxy79/emenin-open-graph.jpg"
+      content="https://ericamenin.com/images/emenin-opengraph.jpg"
     />
-    <meta property="og:url" content="https://ericamenin.com/" />
+    <link rel="canonical" href="https://ericamenin.com/" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://ericamenin.com/#erica",
+            "name": "Érica Menin",
+            "url": "https://ericamenin.com/",
+            "image": "https://ericamenin.com/images/me.png",
+            "jobTitle": "Design Systems Lead",
+            "description": "Design systems lead with 15+ years in design, building systems and workflows that survive real product teams.",
+            "email": "mailto:erica@menin.me",
+            "knowsAbout": [
+              "Design systems",
+              "Design tokens",
+              "Design operations",
+              "Component libraries",
+              "UX design",
+              "Product design"
+            ],
+            "sameAs": [
+              "https://www.linkedin.com/in/ericamenin/",
+              "https://designsystemsunfiltered.substack.com/"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://ericamenin.com/#website",
+            "url": "https://ericamenin.com/",
+            "name": "Érica Menin",
+            "description": "Portfolio and writing of Érica Menin — design systems lead.",
+            "publisher": { "@id": "https://ericamenin.com/#erica" },
+            "inLanguage": "en"
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://ericamenin.com/#profilepage",
+            "url": "https://ericamenin.com/",
+            "name": "Érica Menin — Design Systems & Smart Workflows",
+            "isPartOf": { "@id": "https://ericamenin.com/#website" },
+            "about": { "@id": "https://ericamenin.com/#erica" },
+            "inLanguage": "en"
+          }
+        ]
+      }
+    </script>
 
     <link href="css/tokens.css" rel="stylesheet" type="text/css" />
     <link href="css/normalize.css" rel="stylesheet" type="text/css" />
     <link href="css/base.css" rel="stylesheet" type="text/css" />
     <link href="css/emenin-main.css" rel="stylesheet" type="text/css" />
     <link href="css/components.css" rel="stylesheet" type="text/css" />
+    <link href="css/terminal.css" rel="stylesheet" type="text/css" />
     <style>
       @media (min-width: 992px) {
         html.w-mod-js:not(.w-mod-ix)
@@ -1196,6 +1245,92 @@
         </div>
       </div>
     </section>
+    <!-- Hidden from the screen (the floating terminal is the human FAQ), but kept
+         in the DOM as machine-readable content for AI crawlers; mirrored in the
+         FAQPage JSON-LD below. The terminal reads its commands/answers from here. -->
+    <section id="faq" class="ft-section" aria-labelledby="faq-heading" hidden>
+      <div class="ft-wrap">
+        <h2 id="faq-heading" class="ft-eyebrow">
+          Frequently asked <span>Run a command&nbsp;↴</span>
+        </h2>
+        <div class="ft-window">
+          <div class="ft-bar" aria-hidden="true">
+            <span class="ft-dot"></span><span class="ft-dot"></span><span class="ft-dot"></span>
+            <span class="ft-bartitle">erica@portfolio: ~/faq</span>
+          </div>
+          <dl class="ft-log">
+            <div class="ft-item" data-cmd="whoami">
+              <dt class="ft-cmdline">
+                <span class="ft-prompt">erica@portfolio:~$</span>
+                <button type="button" class="ft-cmd" data-cmd="whoami">whoami</button>
+                <span class="ft-q"># Who am I?</span>
+              </dt>
+              <dd class="ft-answer">
+                Érica.<br /><br />
+                Born and raised in Brazil 🇧🇷. Based in Germany 🇩🇪.<br /><br />
+                With 15+ years in design, I'm still happiest simplifying complex things.<br /><br />
+                I build design systems and the workflows that keep them alive long after
+                launch.<br /><br />
+                I also write about the messy reality of design systems at
+                <a href="https://designsystemsunfiltered.substack.com/" target="_blank" rel="noopener">Design Systems Unfiltered</a>.
+              </dd>
+            </div>
+            <div class="ft-item" data-cmd="systems">
+              <dt class="ft-cmdline">
+                <span class="ft-prompt">erica@portfolio:~$</span>
+                <button type="button" class="ft-cmd" data-cmd="systems">systems</button>
+                <span class="ft-q"># What do you mean by “design systems that survive real teams”?</span>
+              </dt>
+              <dd class="ft-answer">
+                A lot of design systems look great in Figma and fall apart in production,
+                or never really get adopted. I focus on the unglamorous parts that make
+                them work beyond shiny documentation: governance, tokens, and enablement,
+                so the system survives as products and teams change.
+              </dd>
+            </div>
+            <div class="ft-item" data-cmd="hire">
+              <dt class="ft-cmdline">
+                <span class="ft-prompt">erica@portfolio:~$</span>
+                <button type="button" class="ft-cmd" data-cmd="hire">hire</button>
+                <span class="ft-q"># Are you available for new work, and do you work remotely?</span>
+              </dt>
+              <dd class="ft-answer">
+                Yes! I'm available for full-time roles and contracts, remote. I'm based in
+                Germany and comfortable working across time zones.
+              </dd>
+            </div>
+            <div class="ft-item" data-cmd="unfiltered">
+              <dt class="ft-cmdline">
+                <span class="ft-prompt">erica@portfolio:~$</span>
+                <button type="button" class="ft-cmd" data-cmd="unfiltered">unfiltered</button>
+                <span class="ft-q"># What is Design Systems Unfiltered?</span>
+              </dt>
+              <dd class="ft-answer">
+                It's my Substack, where I write honestly about design systems and AI,
+                including the “well, that didn't work” parts most case studies leave out.
+                <a href="https://designsystemsunfiltered.substack.com/" target="_blank" rel="noopener">Read it here</a>.
+              </dd>
+            </div>
+            <div class="ft-item" data-cmd="contact">
+              <dt class="ft-cmdline">
+                <span class="ft-prompt">erica@portfolio:~$</span>
+                <button type="button" class="ft-cmd" data-cmd="contact">contact</button>
+                <span class="ft-q"># How can I work with you or get in touch?</span>
+              </dt>
+              <dd class="ft-answer">
+                Email me at <a href="mailto:erica@menin.me">erica@menin.me</a> or connect on
+                <a href="https://www.linkedin.com/in/ericamenin/" target="_blank" rel="noopener">LinkedIn</a>.
+              </dd>
+            </div>
+          </dl>
+          <p class="ft-cta">
+            <span class="ft-prompt">erica@portfolio:~$</span>
+            <button type="button" class="ft-open" id="ftOpen">type a command</button
+            ><span class="ft-caret" aria-hidden="true"></span>
+          </p>
+        </div>
+      </div>
+    </section>
     <section id="contact" class="section containerfull bottompadding_none">
       <div class="container vertical alignleft">
         <div
@@ -1316,5 +1451,97 @@
     <script src="js/crossout.js" type="text/javascript"></script>
     <script src="js/about-hover.js" type="text/javascript"></script>
     <script src="js/section-reveal.js" type="text/javascript"></script>
+
+    <!-- FAQ terminal: floating launcher + interactive command palette -->
+    <button
+      class="ft-fab"
+      id="ftFab"
+      type="button"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      aria-controls="ftOverlay"
+      title="Open the FAQ terminal (press / or ⌘K)"
+    >
+      &gt;_
+    </button>
+    <div
+      class="ft-overlay"
+      id="ftOverlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label="FAQ terminal"
+    >
+      <div class="ft-modal">
+        <div class="ft-inputline">
+          <span class="ft-prompt">erica@portfolio:~$</span>
+          <input
+            id="ftInput"
+            class="ft-input"
+            type="text"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="Type a command, or pick one below"
+            aria-label="Terminal command input"
+          />
+        </div>
+        <div class="ft-sug" id="ftSug" role="listbox" aria-label="commands"></div>
+        <div class="ft-out" id="ftOut" aria-live="polite"></div>
+        <p class="ft-hint">
+          <kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>enter</kbd> run · <kbd>esc</kbd> close
+        </p>
+      </div>
+    </div>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who is Érica Menin?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Érica. Born and raised in Brazil. Based in Germany. With 15+ years in design, I'm still happiest simplifying complex things. I build design systems and the workflows that keep them alive long after launch. I also write about the messy reality of design systems at Design Systems Unfiltered."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What do you mean by design systems that survive real teams?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A lot of design systems look great in Figma and fall apart in production, or never really get adopted. I focus on the unglamorous parts that make them work beyond shiny documentation: governance, tokens, and enablement, so the system survives as products and teams change."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are you available for new work, and do you work remotely?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! I'm available for full-time roles and contracts, remote. I'm based in Germany and comfortable working across time zones."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Design Systems Unfiltered?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It's my Substack, where I write honestly about design systems and AI, including the 'well, that didn't work' parts most case studies leave out."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I work with you or get in touch?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Email me at erica@menin.me or connect on LinkedIn."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <script src="js/faq-terminal.js" type="text/javascript"></script>
   </body>
 </html>
