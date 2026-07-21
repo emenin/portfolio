@@ -1,0 +1,32 @@
+# robots.txt for ericamenin.com
+# Everything is open to crawlers — including AI answer engines (that's the point).
+
+User-agent: *
+Allow: /
+
+# AI / answer-engine crawlers — explicitly welcome (AEO/GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://ericamenin.com/sitemap.xml
