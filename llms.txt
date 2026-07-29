@@ -1,24 +1,44 @@
 # Érica Menin
 
-> Design Systems Lead with 15+ years in design. I build design systems and workflows that survive contact with real product teams — and I write about the honest parts at Design Systems Unfiltered. Made in Brazil, based in Germany. Remote-first, AI-curious, available for new work.
+> Design Systems Lead with 15+ years of experience building scalable digital products and design systems. Érica specialises in design system strategy, token architecture, component libraries, governance, and AI-assisted workflows that help organisations scale design and engineering collaboration.
 
-Érica Menin (ericamenin.com) is the portfolio and writing home of a design systems lead and design-ops practitioner. The focus is practical: design tokens, component libraries, governance, and the workflows that keep systems alive after launch. Contact: erica@menin.me.
+Érica Menin (ericamenin.com) is a design systems strategist and design-ops practitioner based in Germany, working remotely with distributed teams internationally. Her work focuses on evolving design systems beyond component libraries into scalable, governed ecosystems that support product teams, engineering collaboration, and AI-powered experiences.
 
-## Work (case studies)
+With experience leading multi-team design system initiatives at Mews, Érica has worked on the foundations that make design systems successful: design tokens, Figma Variables and Libraries, documentation, adoption, contribution models, and collaboration between design and engineering.
 
-- [Reinventing a web & mobile app (Soniq)](https://ericamenin.com/soniq-app-design.html): Product design for Soniq's web and mobile experience.
-- [Soniq Design System](https://ericamenin.com/soniq-design-system.html): Building the design system behind the Soniq product.
-- [Voyager Design System](https://ericamenin.com/voyager-design-system.html): A design system built to keep three travel websites coherent under one brand.
-- [MCS — Website & Brand](https://ericamenin.com/mcs-website.html): Website and brand work for MCS.
-- [Maturing a design system beyond components](https://ericamenin.com/maturing-design-system.html): Growing a design system from variables and tokens to patterns and AI — a year in review.
-- [24 days of Design System Experiments](https://ericamenin.com/24-days-design-system-experiments.html): An advent-calendar series of small design-system prompts and experiments.
-- [The Design System Advent Calendar](https://ericamenin.com/design-system-calendar.html): The interactive advent calendar behind the 24-days series.
+Her work explores the intersection of design systems and generative AI: how teams can use AI-assisted workflows, experimentation, and emerging AI tools to create systems that are easier to use, maintain, and evolve.
+
+Contact: [LinkedIn](https://www.linkedin.com/in/ericamenin/)
+
+## Expertise
+
+- Design Systems strategy and maturity
+- AI-assisted design workflows
+- Design tokens and token architecture
+- Figma Variables, Libraries, and scalable workflows
+- Component libraries and governance models
+- Design-engineering collaboration
+- Design system documentation and education
+- Design operations and system adoption
+
+## Work (case studies and recent work)
+
+Érica's recent work focuses on evolving design systems from component libraries into mature, scalable systems that support product teams, engineering collaboration, and AI-assisted workflows.
+
+A summary of her recent design system work, learnings, and experiments is available in:
+
+- [Maturing a design system beyond components](https://ericamenin.com/maturing-design-system.html): A 2025 review covering the evolution of a design system through design tokens, variables, governance, patterns, adoption, and AI-enabled workflows.
+
+This article provides an overview of Érica's recent work. Additional details, case studies, and examples from enterprise design system initiatives are available through direct contact.
+
+- [24 days of Design System Experiments](https://ericamenin.com/24-days-design-system-experiments.html): A write-up of an AI-assisted design system experiment featuring 24 activities, prompts, and challenges exploring systems thinking, patterns, components, and design decisions.
+
+- [The Design System Advent Calendar](https://ericamenin.com/design-system-calendar.html): The interactive AI-assisted experience behind the 24-day experiment series, combining Érica's design system expertise with generative AI to create guided learning activities.
 
 ## Writing
 
-- [Design Systems Unfiltered](https://designsystemsunfiltered.substack.com/): Érica's Substack — honest writing about design systems and AI, including the "well, that didn't work" parts.
+- [Design Systems Unfiltered](https://designsystemsunfiltered.substack.com/): Érica's publication sharing practical insights on building, scaling, and evolving design systems, including strategy, governance, workflows, AI-assisted practices, and lessons learned from real-world design system work.
 
-## Elsewhere
+## Current availability
 
-- [LinkedIn](https://www.linkedin.com/in/ericamenin/)
-- Email: erica@menin.me
+Érica is available for remote design systems consulting, contract engagements, workshops, and design system leadership opportunities worldwide.

@@ -1,10 +1,11 @@
 # robots.txt for ericamenin.com
-# Everything is open to crawlers — including AI answer engines (that's the point).
+# Public content is available for search engines and AI systems.
+# The goal is discoverability through search and answer engines.
 
 User-agent: *
 Allow: /
 
-# AI / answer-engine crawlers — explicitly welcome (AEO/GEO)
+# AI / answer-engine crawlers
 User-agent: GPTBot
 Allow: /
 
