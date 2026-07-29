@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Design Tokens — Érica Menin</title>
+    <meta
+      name="description"
+      content="The design tokens this page runs on — palette, semantic colours, spacing, type, radii and shadows — published as a machine-readable W3C DTCG file, generated from a single CSS source of truth."
+    />
+    <link rel="canonical" href="https://ericamenin.com/design-tokens.html" />
+
+    <!-- The star of the show: the site's real tokens. This page runs on them. -->
+    <link href="css/tokens.css" rel="stylesheet" type="text/css" />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+      href="https://fonts.gstatic.com"
+      rel="preconnect"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ---------------------------------------------------------------------
+         Everything below is built from the tokens in css/tokens.css.
+         No raw hex, no magic numbers — only var(--token). That's the point:
+         the page is a live proof of its own design system.
+      --------------------------------------------------------------------- */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--color-surface);
+        color: var(--color-ink);
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--font-display);
+        line-height: 1.05;
+        margin: 0;
+        font-weight: 700;
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 var(--space-6);
+      }
+      .eyebrow {
+        font-family: var(--font-display);
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-size: var(--text-xs);
+        font-weight: 600;
+        color: var(--color-accent);
+        margin: 0 0 var(--space-3);
+      }
+
+      /* ---- top bar ---- */
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-5) var(--space-6);
+        border-bottom: 1px solid var(--color-border);
+      }
+      .topbar a.home {
+        font-family: var(--font-display);
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        font-size: var(--text-md);
+      }
+      .topbar .tag {
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        opacity: 0.6;
+      }
+
+      /* ---- hero ---- */
+      .hero {
+        padding: var(--space-24) 0 var(--space-16);
+      }
+      .hero h1 {
+        font-size: clamp(var(--text-4xl), 7vw, var(--text-6xl));
+        max-width: 14ch;
+      }
+      .hero p.lede {
+        font-size: var(--text-lg);
+        max-width: 56ch;
+        margin: var(--space-6) 0 var(--space-8);
+        opacity: 0.85;
+      }
+      .btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-3);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-3) var(--space-5);
+        border-radius: var(--radius-pill);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: var(--text-sm);
+        border: 1.5px solid var(--color-ink);
+        transition:
+          transform 0.15s ease,
+          background 0.15s ease,
+          color 0.15s ease;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+      .btn.primary {
+        background: var(--color-accent);
+        color: var(--color-on-accent);
+        border-color: var(--color-accent);
+      }
+      .btn.ghost {
+        background: transparent;
+      }
+
+      /* ---- section scaffolding ---- */
+      section.block {
+        padding: var(--space-16) 0;
+        border-top: 1px solid var(--color-border-muted);
+      }
+      section.block > .wrap > h2 {
+        font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+        max-width: 20ch;
+        margin-bottom: var(--space-4);
+      }
+      section.block .intro {
+        max-width: 60ch;
+        opacity: 0.82;
+        margin-bottom: var(--space-10);
+      }
+      code,
+      .mono {
+        font-family:
+          "Space Grotesk", ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 0.92em;
+      }
+
+      /* ---- playground ---- */
+      .play {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-8);
+        align-items: start;
+      }
+      @media (max-width: 820px) {
+        .play {
+          grid-template-columns: 1fr;
+        }
+      }
+      .controls {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+      }
+      .control h3 {
+        font-family: var(--font-body);
+        font-weight: 700;
+        font-size: var(--text-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin: 0 0 var(--space-3);
+        opacity: 0.7;
+      }
+      .swatches {
+        display: flex;
+        gap: var(--space-2);
+        flex-wrap: wrap;
+      }
+      .chip {
+        border: 1.5px solid var(--color-border);
+        background: var(--color-surface);
+        border-radius: var(--radius-pill);
+        padding: var(--space-2) var(--space-4);
+        font-size: var(--text-sm);
+        cursor: pointer;
+        font-family: inherit;
+        color: inherit;
+        transition: border-color 0.12s ease;
+      }
+      .chip[aria-pressed="true"] {
+        border-color: var(--color-ink);
+        border-width: 2px;
+      }
+      .chip.color {
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        border-radius: var(--radius-round);
+      }
+      .chip.color[aria-pressed="true"] {
+        outline: 2px solid var(--color-ink);
+        outline-offset: 2px;
+      }
+      .apply-row {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-size: var(--text-sm);
+        margin-top: var(--space-2);
+      }
+
+      /* the live preview canvas — a mini product surface driven by the tokens */
+      .preview {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+        padding: var(--space-8);
+        color: var(--color-ink);
+      }
+      .preview .card-eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: var(--text-xs);
+        color: var(--color-accent);
+        font-weight: 700;
+      }
+      .preview h3.card-title {
+        font-family: var(--font-display);
+        font-size: var(--text-2xl);
+        margin: var(--space-2) 0 var(--space-4);
+      }
+      .preview .stats {
+        display: flex;
+        gap: var(--space-6);
+        margin: var(--space-6) 0;
+      }
+      .preview .stat b {
+        display: block;
+        font-family: var(--font-display);
+        font-size: var(--text-3xl);
+      }
+      .preview .stat span {
+        font-size: var(--text-xs);
+        opacity: 0.7;
+      }
+      .preview .tags {
+        display: flex;
+        gap: var(--space-2);
+        flex-wrap: wrap;
+        margin-bottom: var(--space-6);
+      }
+      .preview .t {
+        font-size: var(--text-xs);
+        padding: var(--space-1) var(--space-3);
+        border-radius: var(--radius-pill);
+        background: var(--color-surface-pink);
+        color: var(--color-on-accent);
+      }
+      .preview .cta {
+        display: inline-block;
+        background: var(--color-accent);
+        color: var(--color-on-accent);
+        border: none;
+        border-radius: var(--radius-md);
+        padding: var(--space-3) var(--space-6);
+        font-weight: 700;
+        font-family: inherit;
+        font-size: var(--text-sm);
+      }
+      .readout {
+        margin-top: var(--space-4);
+        padding: var(--space-3) var(--space-4);
+        border-radius: var(--radius-sm);
+        background: var(--color-border-muted);
+        font-size: var(--text-xs);
+        line-height: 1.9;
+        overflow-x: auto;
+      }
+      .reset {
+        margin-top: var(--space-4);
+        background: none;
+        border: none;
+        color: inherit;
+        opacity: 0.6;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: var(--text-sm);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      /* ---- catalog ---- */
+      .cat-group {
+        margin-bottom: var(--space-12);
+      }
+      .cat-group > h3 {
+        font-family: var(--font-body);
+        font-weight: 700;
+        font-size: var(--text-md);
+        margin-bottom: var(--space-5);
+        display: flex;
+        align-items: baseline;
+        gap: var(--space-3);
+      }
+      .cat-group > h3 .count {
+        font-size: var(--text-xs);
+        opacity: 0.5;
+        font-weight: 400;
+      }
+      .grid {
+        display: grid;
+        gap: var(--space-4);
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+      .swatch {
+        border: 1px solid var(--color-border-muted);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        font-size: var(--text-xs);
+      }
+      .swatch .chip-fill {
+        height: 64px;
+      }
+      .swatch .meta {
+        padding: var(--space-2) var(--space-3);
+      }
+      .swatch .meta .name {
+        font-weight: 700;
+      }
+      .swatch .meta .val {
+        opacity: 0.7;
+      }
+      .swatch .meta .desc {
+        opacity: 0.6;
+        margin-top: 2px;
+      }
+      .alias {
+        color: var(--color-accent);
+      }
+      .scale-row {
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+        padding: var(--space-2) 0;
+        border-bottom: 1px solid var(--color-border-muted);
+      }
+      .scale-row .label {
+        width: 120px;
+        flex: none;
+      }
+      .scale-row .label b {
+        font-weight: 700;
+      }
+      .scale-row .label span {
+        opacity: 0.6;
+      }
+      .scale-row .bar {
+        height: 14px;
+        background: var(--color-accent);
+        border-radius: var(--radius-xs);
+      }
+      .type-row {
+        display: flex;
+        align-items: baseline;
+        gap: var(--space-4);
+        padding: var(--space-2) 0;
+        border-bottom: 1px solid var(--color-border-muted);
+      }
+      .type-row .label {
+        width: 120px;
+        flex: none;
+        opacity: 0.6;
+        font-size: var(--text-xs);
+      }
+      .type-row .sample {
+        font-family: var(--font-display);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .radius-tile {
+        height: 90px;
+        background: var(--color-surface-pink);
+        border: 1.5px solid var(--color-accent);
+      }
+      .shadow-tile {
+        height: 90px;
+        background: var(--color-surface);
+        border-radius: var(--radius-md);
+        margin: var(--space-4);
+      }
+      .font-row {
+        padding: var(--space-4) 0;
+        border-bottom: 1px solid var(--color-border-muted);
+      }
+      .font-row .big {
+        font-size: var(--text-3xl);
+      }
+
+      /* ---- footer ---- */
+      footer.pagefoot {
+        border-top: 1px solid var(--color-border);
+        padding: var(--space-12) 0 var(--space-16);
+        font-size: var(--text-sm);
+      }
+      footer.pagefoot .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-6);
+        justify-content: space-between;
+        align-items: center;
+      }
+      footer.pagefoot .prov {
+        opacity: 0.7;
+        max-width: 46ch;
+      }
+
+      .note {
+        font-size: var(--text-xs);
+        opacity: 0.6;
+        margin-top: var(--space-3);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="topbar">
+      <a class="home" href="/">ÉRICA MENIN</a>
+      <span class="tag">Design tokens</span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <p class="eyebrow">Single source of truth</p>
+          <h1>The tokens this page runs on.</h1>
+          <p class="lede">
+            Every colour, space, radius and typeface you see here is read from
+            one file — <code>css/tokens.css</code> — and published, unchanged,
+            as a machine-readable
+            <strong>W3C Design Tokens (DTCG)</strong> file. Design tools and AI
+            agents can consume it directly. Change a token, and the whole page
+            agrees.
+          </p>
+          <div class="btn-row">
+            <a class="btn primary" href="design-tokens.json"
+              >View design-tokens.json →</a
+            >
+            <a class="btn ghost" href="#playground">Try it live</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PLAYGROUND ---------------------------------------------------- -->
+      <section class="block" id="playground">
+        <div class="wrap">
+          <p class="eyebrow">Try the system</p>
+          <h2>Change one token. Everything agrees.</h2>
+          <p class="intro">
+            This is the whole argument for design systems: decisions live in
+            tokens, not scattered across components. Remap a few below and watch
+            the preview re-render. Nothing here was styled by hand — it all
+            reads the same variables.
+          </p>
+
+          <div class="play">
+            <div class="controls">
+              <div class="control">
+                <h3>Accent</h3>
+                <div class="swatches" id="ctl-accent"></div>
+              </div>
+
+              <div class="control">
+                <h3>Corner radius</h3>
+                <div class="swatches" id="ctl-radius"></div>
+              </div>
+
+              <div class="control">
+                <h3>Density</h3>
+                <div class="swatches" id="ctl-density"></div>
+              </div>
+
+              <div class="control">
+                <h3>Mode</h3>
+                <div class="swatches" id="ctl-mode"></div>
+              </div>
+
+              <label class="apply-row">
+                <input type="checkbox" id="apply-page" />
+                Apply to the whole page (not just the preview)
+              </label>
+
+              <div class="readout mono" id="readout" aria-live="polite"></div>
+              <button class="reset" id="reset">reset to system defaults</button>
+            </div>
+
+            <div class="preview" id="preview">
+              <div class="card-eyebrow">Acme product · dashboard</div>
+              <h3 class="card-title">Design decisions, compounding.</h3>
+              <p style="opacity: 0.8; margin: 0">
+                Every element on this card reads the same handful of tokens.
+                No component was touched.
+              </p>
+              <div class="stats">
+                <div class="stat"><b>214</b><span>components</span></div>
+                <div class="stat"><b>1</b><span>source of truth</span></div>
+                <div class="stat"><b>0</b><span>rogue hex values</span></div>
+              </div>
+              <div class="tags">
+                <span class="t">tokens</span>
+                <span class="t">a11y: AA</span>
+                <span class="t">DTCG-ready</span>
+              </div>
+              <button class="cta" type="button">Ship it</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CATALOG ------------------------------------------------------- -->
+      <section class="block">
+        <div class="wrap">
+          <p class="eyebrow">The catalogue</p>
+          <h2>Every token, rendered from the JSON.</h2>
+          <p class="intro">
+            The cards below are generated in the browser by fetching
+            <code>design-tokens.json</code> and reading each token's
+            <code>$value</code>. The playground above changes the live theme;
+            this catalogue always shows the documented source of truth.
+          </p>
+          <div id="catalog">
+            <p class="note" id="catalog-status">Loading tokens…</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pagefoot">
+      <div class="wrap">
+        <p class="prov">
+          Generated from <code>css/tokens.css</code> · W3C DTCG format · rebuilt
+          with <code>npm run tokens</code>. The CSS stays the single source of
+          truth; the JSON is a faithful mirror.
+        </p>
+        <div class="btn-row">
+          <a class="btn ghost" href="/">← Back to portfolio</a>
+          <a class="btn ghost" href="design-tokens.json">Raw JSON</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Playground: remap semantic tokens on a scope element (preview by
+      // default, :root when "apply to whole page" is on). CSS custom
+      // properties inherit, so setting them on a container overrides for all
+      // descendants — the cleanest way to theme a subtree.
+      // ---------------------------------------------------------------------
+      const preview = document.getElementById("preview");
+      const root = document.documentElement;
+      const applyPage = document.getElementById("apply-page");
+      const readout = document.getElementById("readout");
+
+      const state = {
+        "--color-accent": null,
+        "--radius-lg": null,
+        "--radius-md": null,
+        "--space-8": null,
+        "--color-surface": null,
+        "--color-ink": null,
+      };
+
+      const accents = [
+        { label: "Brand pink", value: "#f6b0ff" },
+        { label: "Deep purple", value: "#24104f" },
+        { label: "Signal blue", value: "#0082f3" },
+        { label: "Alert red", value: "#ea384c" },
+      ];
+      const radii = [
+        { label: "Sharp", lg: "2px", md: "2px" },
+        { label: "System", lg: "20px", md: "8px" },
+        { label: "Soft", lg: "32px", md: "18px" },
+      ];
+      const densities = [
+        { label: "Compact", pad: "16px" },
+        { label: "System", pad: "32px" },
+        { label: "Comfy", pad: "48px" },
+      ];
+      const modes = [
+        { label: "Paper", surface: "#fafafa", ink: "#170636" },
+        { label: "Ink", surface: "#0b0b35", ink: "#fafafa" },
+      ];
+
+      function scope() {
+        return applyPage.checked ? root : preview;
+      }
+
+      function clearScopes() {
+        for (const k of Object.keys(state)) {
+          preview.style.removeProperty(k);
+          root.style.removeProperty(k);
+        }
+      }
+
+      // Re-apply the whole state to the current scope (used when toggling
+      // "apply to whole page", so the theme moves with the checkbox).
+      function reapply() {
+        clearScopes();
+        const el = scope();
+        for (const [k, v] of Object.entries(state)) {
+          if (v !== null) el.style.setProperty(k, v);
+        }
+        renderReadout();
+      }
+
+      function setVar(name, value) {
+        state[name] = value;
+        scope().style.setProperty(name, value);
+        renderReadout();
+      }
+
+      function renderReadout() {
+        const cs = getComputedStyle(preview);
+        const line = (n) => `${n}: ${cs.getPropertyValue(n).trim()};`;
+        readout.textContent = [
+          line("--color-accent"),
+          line("--radius-lg"),
+          line("--color-surface"),
+          line("--color-ink"),
+        ].join("\n");
+      }
+
+      function buildToggle(containerId, items, onPick, isActive) {
+        const box = document.getElementById(containerId);
+        box.innerHTML = "";
+        items.forEach((item, i) => {
+          const b = document.createElement("button");
+          b.className = "chip" + (item.value ? " color" : "");
+          b.type = "button";
+          if (item.value) {
+            b.style.background = item.value;
+            b.setAttribute("aria-label", item.label);
+          } else {
+            b.textContent = item.label;
+          }
+          b.setAttribute("aria-pressed", String(isActive(i)));
+          b.addEventListener("click", () => {
+            onPick(item, i);
+            [...box.children].forEach((c, ci) =>
+              c.setAttribute("aria-pressed", String(ci === i)),
+            );
+          });
+          box.appendChild(b);
+        });
+      }
+
+      buildToggle(
+        "ctl-accent",
+        accents,
+        (it) => setVar("--color-accent", it.value),
+        (i) => i === 0,
+      );
+      buildToggle(
+        "ctl-radius",
+        radii,
+        (it) => {
+          setVar("--radius-lg", it.lg);
+          setVar("--radius-md", it.md);
+        },
+        (i) => i === 1,
+      );
+      buildToggle(
+        "ctl-density",
+        densities,
+        (it) => setVar("--space-8", it.pad),
+        (i) => i === 1,
+      );
+      buildToggle(
+        "ctl-mode",
+        modes,
+        (it) => {
+          setVar("--color-surface", it.surface);
+          setVar("--color-ink", it.ink);
+        },
+        (i) => i === 0,
+      );
+
+      applyPage.addEventListener("change", reapply);
+      document.getElementById("reset").addEventListener("click", () => {
+        for (const k of Object.keys(state)) state[k] = null;
+        clearScopes();
+        // reset pressed states to defaults
+        buildToggle("ctl-accent", accents, (it) => setVar("--color-accent", it.value), (i) => i === 0);
+        buildToggle("ctl-radius", radii, (it) => { setVar("--radius-lg", it.lg); setVar("--radius-md", it.md); }, (i) => i === 1);
+        buildToggle("ctl-density", densities, (it) => setVar("--space-8", it.pad), (i) => i === 1);
+        buildToggle("ctl-mode", modes, (it) => { setVar("--color-surface", it.surface); setVar("--color-ink", it.ink); }, (i) => i === 0);
+        renderReadout();
+      });
+      renderReadout();
+
+      // ---------------------------------------------------------------------
+      // Catalogue: fetch design-tokens.json and render each group.
+      // ---------------------------------------------------------------------
+      const catalog = document.getElementById("catalog");
+      const status = document.getElementById("catalog-status");
+
+      function resolve(tokens, value) {
+        // Follow a DTCG alias like "{palette.purple.800}" to its literal.
+        if (typeof value === "string" && value.startsWith("{")) {
+          const path = value.slice(1, -1).split(".");
+          let node = tokens;
+          for (const p of path) node = node?.[p];
+          return { ref: value, value: node?.$value };
+        }
+        return { value };
+      }
+      const cssVar = (t) =>
+        t?.$extensions?.["com.ericamenin.tokens"]?.cssVar || "";
+      const isToken = (o) => o && typeof o === "object" && "$value" in o;
+
+      function el(tag, cls, html) {
+        const n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (html != null) n.innerHTML = html;
+        return n;
+      }
+
+      function groupShell(title, count) {
+        const g = el("div", "cat-group");
+        g.appendChild(
+          el(
+            "h3",
+            null,
+            `${title} <span class="count">${count} token${count === 1 ? "" : "s"}</span>`,
+          ),
+        );
+        return g;
+      }
+
+      function renderColorSwatches(tokens, obj, title) {
+        const entries = [];
+        (function walk(o) {
+          for (const [k, v] of Object.entries(o)) {
+            if (k.startsWith("$")) continue;
+            if (isToken(v)) entries.push(v);
+            else walk(v);
+          }
+        })(obj);
+        const g = groupShell(title, entries.length);
+        const grid = el("div", "grid");
+        for (const t of entries) {
+          const r = resolve(tokens, t.$value);
+          const sw = el("div", "swatch");
+          sw.appendChild(
+            Object.assign(el("div", "chip-fill"), {
+              style: `background:${r.value}`,
+            }),
+          );
+          const aliasLine = r.ref
+            ? `<div class="val alias">${r.ref}</div>`
+            : "";
+          sw.appendChild(
+            el(
+              "div",
+              "meta",
+              `<div class="name">${cssVar(t)}</div>
+               <div class="val">${r.value ?? ""}</div>
+               ${aliasLine}
+               ${t.$description ? `<div class="desc">${t.$description}</div>` : ""}`,
+            ),
+          );
+          grid.appendChild(sw);
+        }
+        g.appendChild(grid);
+        return g;
+      }
+
+      function renderDimensionScale(obj, title, kind) {
+        const entries = Object.entries(obj).filter(([k]) => !k.startsWith("$"));
+        const g = groupShell(title, entries.length);
+        for (const [, t] of entries) {
+          const px = parseFloat(t.$value) || 0;
+          if (kind === "space") {
+            const row = el("div", "scale-row");
+            row.appendChild(
+              el(
+                "div",
+                "label",
+                `<b>${cssVar(t)}</b> <span>${t.$value}</span>`,
+              ),
+            );
+            const bar = el("div", "bar");
+            bar.style.width = Math.min(px, 400) + "px";
+            row.appendChild(bar);
+            g.appendChild(row);
+          } else {
+            // type scale
+            const row = el("div", "type-row");
+            row.appendChild(
+              el("div", "label", `${cssVar(t)} · ${t.$value}`),
+            );
+            const s = el("div", "sample", "Design systems, alive.");
+            s.style.fontSize = t.$value;
+            row.appendChild(s);
+            g.appendChild(row);
+          }
+        }
+        return g;
+      }
+
+      function renderRadii(obj) {
+        const entries = Object.entries(obj).filter(([k]) => !k.startsWith("$"));
+        const g = groupShell("Radii", entries.length);
+        const grid = el("div", "grid");
+        for (const [, t] of entries) {
+          const sw = el("div", "swatch");
+          const tile = el("div", "radius-tile");
+          tile.style.borderRadius = t.$value;
+          sw.appendChild(tile);
+          sw.appendChild(
+            el(
+              "div",
+              "meta",
+              `<div class="name">${cssVar(t)}</div><div class="val">${t.$value}</div>`,
+            ),
+          );
+          grid.appendChild(sw);
+        }
+        g.appendChild(grid);
+        return g;
+      }
+
+      function renderShadows(obj) {
+        const entries = Object.entries(obj).filter(([k]) => !k.startsWith("$"));
+        const g = groupShell("Shadows", entries.length);
+        const grid = el("div", "grid");
+        for (const [, t] of entries) {
+          const s = t.$value;
+          const css = `${s.offsetX} ${s.offsetY} ${s.blur} ${s.spread} ${s.color}`;
+          const sw = el("div", "swatch");
+          const tile = el("div", "shadow-tile");
+          tile.style.boxShadow = css;
+          sw.appendChild(tile);
+          sw.appendChild(
+            el(
+              "div",
+              "meta",
+              `<div class="name">${cssVar(t)}</div><div class="val mono">${css}</div>`,
+            ),
+          );
+          grid.appendChild(sw);
+        }
+        g.appendChild(grid);
+        return g;
+      }
+
+      function renderFonts(obj) {
+        const entries = Object.entries(obj).filter(([k]) => !k.startsWith("$"));
+        const g = groupShell("Fonts", entries.length);
+        for (const [, t] of entries) {
+          const stack = t.$value.join(", ");
+          const row = el("div", "font-row");
+          const big = el("div", "big", "Aa Bb Cc — 0123");
+          big.style.fontFamily = stack;
+          row.appendChild(big);
+          row.appendChild(
+            el(
+              "div",
+              "val",
+              `<span class="name mono">${cssVar(t)}</span> · ${stack}`,
+            ),
+          );
+          g.appendChild(row);
+        }
+        return g;
+      }
+
+      fetch("design-tokens.json")
+        .then((r) => {
+          if (!r.ok) throw new Error(r.status);
+          return r.json();
+        })
+        .then((tokens) => {
+          status.remove();
+          catalog.appendChild(
+            renderColorSwatches(tokens, tokens.palette, "Palette"),
+          );
+          catalog.appendChild(
+            renderColorSwatches(tokens, tokens.color, "Semantic colours"),
+          );
+          catalog.appendChild(renderDimensionScale(tokens.space, "Spacing", "space"));
+          catalog.appendChild(renderDimensionScale(tokens.text, "Type scale", "type"));
+          catalog.appendChild(renderRadii(tokens.radius));
+          catalog.appendChild(renderShadows(tokens.shadow));
+          catalog.appendChild(renderFonts(tokens.font));
+        })
+        .catch((err) => {
+          status.textContent =
+            "Couldn't load design-tokens.json (" +
+            err.message +
+            "). This page needs to be served over http — try the deployed site or a local server, not file://.";
+        });
+    </script>
+  </body>
+</html>
