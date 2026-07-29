@@ -4,3 +4,12 @@
   # No build command = static site, just publish
 [build.environment]
   NODE_VERSION = "22"
+
+# Machine-readable design tokens: explicit content type + open CORS so design
+# tools and crawlers can fetch it from anywhere. Regenerate with `npm run tokens`.
+[[headers]]
+  for = "/design-tokens.json"
+  [headers.values]
+    Content-Type = "application/json; charset=utf-8"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600"

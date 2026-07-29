@@ -1,0 +1,761 @@
+{
+  "$description": "Design tokens for Érica Menin’s portfolio (ericamenin.com). Generated from css/tokens.css — the single source of truth — in W3C DTCG format. Do not edit by hand; run `npm run tokens` to regenerate.",
+  "palette": {
+    "purple": {
+      "700": {
+        "$type": "color",
+        "$value": "#24104f",
+        "$description": "saturated mid (merged former 750/700)",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--purple-700"
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#170636",
+        "$description": "primary ink",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--purple-800"
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#0b0b35",
+        "$description": "deepest",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--purple-900"
+          }
+        }
+      }
+    },
+    "pink": {
+      "100": {
+        "$type": "color",
+        "$value": "#fce3ff",
+        "$description": "light surface",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--pink-100"
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#f6b0ff",
+        "$description": "accent",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--pink-400"
+          }
+        }
+      }
+    },
+    "rose": {
+      "100": {
+        "$type": "color",
+        "$value": "#ffdede",
+        "$description": "warm pink tint",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--rose-100"
+          }
+        }
+      }
+    },
+    "white": {
+      "default": {
+        "$type": "color",
+        "$value": "#fafafa",
+        "$description": "off-white surface",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--white"
+          }
+        }
+      },
+      "pure": {
+        "$type": "color",
+        "$value": "#fff",
+        "$description": "---- Palette: neutrals (code / demo blocks) — one step per lightness ----",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--white-pure"
+          }
+        }
+      }
+    },
+    "gray": {
+      "100": {
+        "$type": "color",
+        "$value": "#eeeeee",
+        "$description": "lightest surface (merged f3f3f3 / eeeeee / e8e8ed)",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--gray-100"
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#d3d3d3",
+        "$description": "borders / dividers (merged dddddd / cccccc / c8c8c8)",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--gray-300"
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#999999",
+        "$description": "muted text",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--gray-500"
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#595858",
+        "$description": "dark muted",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--gray-600"
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#333333",
+        "$description": "dark",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--gray-800"
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#222222",
+        "$description": "near-black (merged 222222 / 222020)",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--gray-900"
+          }
+        }
+      }
+    },
+    "slate": {
+      "300": {
+        "$type": "color",
+        "$value": "#a6b1bf",
+        "$description": "light (merged a6b1bf / aaadb0)",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--slate-300"
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#758696",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--slate-400"
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#5d6c7b",
+        "$description": "---- Palette: syntax / utility (component library) ----",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--slate-500"
+          }
+        }
+      }
+    },
+    "blue": {
+      "500": {
+        "$type": "color",
+        "$value": "#2895f7",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--blue-500"
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#0082f3",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--blue-600"
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#3b79c3",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--blue-700"
+          }
+        }
+      }
+    },
+    "red": {
+      "500": {
+        "$type": "color",
+        "$value": "#ea384c",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--red-500"
+          }
+        }
+      }
+    },
+    "yellow": {
+      "400": {
+        "$type": "color",
+        "$value": "#ffd43b",
+        "$description": "---- Semantic aliases ----",
+        "$extensions": {
+          "com.ericamenin.tokens": {
+            "cssVar": "--yellow-400"
+          }
+        }
+      }
+    }
+  },
+  "color": {
+    "ink": {
+      "$type": "color",
+      "$value": "{palette.purple.800}",
+      "$description": "body text",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--color-ink"
+        }
+      }
+    },
+    "surface": {
+      "$type": "color",
+      "$value": "{palette.white.default}",
+      "$description": "default page background",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--color-surface"
+        }
+      }
+    },
+    "surface-pink": {
+      "$type": "color",
+      "$value": "{palette.pink.100}",
+      "$description": "light \"pink\" sections",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--color-surface-pink"
+        }
+      }
+    },
+    "accent": {
+      "$type": "color",
+      "$value": "{palette.pink.400}",
+      "$description": "brand accent",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--color-accent"
+        }
+      }
+    },
+    "on-dark": {
+      "$type": "color",
+      "$value": "{palette.white.default}",
+      "$description": "text/marks over dark purple",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--color-on-dark"
+        }
+      }
+    },
+    "on-accent": {
+      "$type": "color",
+      "$value": "{palette.purple.800}",
+      "$description": "text/marks over pink",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--color-on-accent"
+        }
+      }
+    },
+    "border": {
+      "$type": "color",
+      "$value": "{palette.gray.300}",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--color-border"
+        }
+      }
+    },
+    "border-muted": {
+      "$type": "color",
+      "$value": "{palette.gray.100}",
+      "$description": "---- Spacing scale (pure 4px scale — value = 4 × N) ----",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--color-border-muted"
+        }
+      }
+    }
+  },
+  "space": {
+    "0": {
+      "$type": "dimension",
+      "$value": "0",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-0"
+        }
+      }
+    },
+    "1": {
+      "$type": "dimension",
+      "$value": "4px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-1"
+        }
+      }
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "8px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-2"
+        }
+      }
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": "12px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-3"
+        }
+      }
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": "16px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-4"
+        }
+      }
+    },
+    "5": {
+      "$type": "dimension",
+      "$value": "20px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-5"
+        }
+      }
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": "24px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-6"
+        }
+      }
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": "32px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-8"
+        }
+      }
+    },
+    "10": {
+      "$type": "dimension",
+      "$value": "40px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-10"
+        }
+      }
+    },
+    "12": {
+      "$type": "dimension",
+      "$value": "48px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-12"
+        }
+      }
+    },
+    "14": {
+      "$type": "dimension",
+      "$value": "56px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-14"
+        }
+      }
+    },
+    "16": {
+      "$type": "dimension",
+      "$value": "64px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-16"
+        }
+      }
+    },
+    "18": {
+      "$type": "dimension",
+      "$value": "72px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-18"
+        }
+      }
+    },
+    "20": {
+      "$type": "dimension",
+      "$value": "80px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-20"
+        }
+      }
+    },
+    "24": {
+      "$type": "dimension",
+      "$value": "96px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-24"
+        }
+      }
+    },
+    "25": {
+      "$type": "dimension",
+      "$value": "100px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-25"
+        }
+      }
+    },
+    "30": {
+      "$type": "dimension",
+      "$value": "120px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-30"
+        }
+      }
+    },
+    "45": {
+      "$type": "dimension",
+      "$value": "180px",
+      "$description": "---- Type scale ----",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--space-45"
+        }
+      }
+    }
+  },
+  "text": {
+    "2xs": {
+      "$type": "dimension",
+      "$value": "11px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-2xs"
+        }
+      }
+    },
+    "xs": {
+      "$type": "dimension",
+      "$value": "12px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-xs"
+        }
+      }
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "14px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-sm"
+        }
+      }
+    },
+    "base": {
+      "$type": "dimension",
+      "$value": "16px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-base"
+        }
+      }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "18px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-md"
+        }
+      }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "20px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-lg"
+        }
+      }
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "24px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-xl"
+        }
+      }
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "32px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-2xl"
+        }
+      }
+    },
+    "3xl": {
+      "$type": "dimension",
+      "$value": "40px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-3xl"
+        }
+      }
+    },
+    "4xl": {
+      "$type": "dimension",
+      "$value": "48px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-4xl"
+        }
+      }
+    },
+    "5xl": {
+      "$type": "dimension",
+      "$value": "64px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-5xl"
+        }
+      }
+    },
+    "6xl": {
+      "$type": "dimension",
+      "$value": "80px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-6xl"
+        }
+      }
+    },
+    "7xl": {
+      "$type": "dimension",
+      "$value": "100px",
+      "$description": "---- Radii ----",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--text-7xl"
+        }
+      }
+    }
+  },
+  "radius": {
+    "xs": {
+      "$type": "dimension",
+      "$value": "2px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--radius-xs"
+        }
+      }
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "4px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--radius-sm"
+        }
+      }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "8px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--radius-md"
+        }
+      }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "20px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--radius-lg"
+        }
+      }
+    },
+    "pill": {
+      "$type": "dimension",
+      "$value": "100px",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--radius-pill"
+        }
+      }
+    },
+    "round": {
+      "$type": "dimension",
+      "$value": "50%",
+      "$description": "---- Shadows ----",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--radius-round"
+        }
+      }
+    }
+  },
+  "shadow": {
+    "sm": {
+      "$type": "shadow",
+      "$value": {
+        "color": "rgba(51, 51, 51, 0.4)",
+        "offsetX": "0",
+        "offsetY": "0",
+        "blur": "3px",
+        "spread": "0"
+      },
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--shadow-sm"
+        }
+      }
+    },
+    "md": {
+      "$type": "shadow",
+      "$value": {
+        "color": "rgba(0, 0, 0, 0.2)",
+        "offsetX": "0",
+        "offsetY": "2px",
+        "blur": "5px",
+        "spread": "0"
+      },
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--shadow-md"
+        }
+      }
+    },
+    "lg": {
+      "$type": "shadow",
+      "$value": {
+        "color": "rgba(0, 0, 0, 0.15)",
+        "offsetX": "0",
+        "offsetY": "4px",
+        "blur": "12px",
+        "spread": "0"
+      },
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--shadow-lg"
+        }
+      }
+    },
+    "focus": {
+      "$type": "shadow",
+      "$value": {
+        "color": "#fff",
+        "offsetX": "0px",
+        "offsetY": "0px",
+        "blur": "0px",
+        "spread": "2px"
+      },
+      "$description": "---- Fonts ----",
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--shadow-focus"
+        }
+      }
+    }
+  },
+  "font": {
+    "display": {
+      "$type": "fontFamily",
+      "$value": [
+        "Syne",
+        "sans-serif"
+      ],
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--font-display"
+        }
+      }
+    },
+    "body": {
+      "$type": "fontFamily",
+      "$value": [
+        "Epilogue",
+        "sans-serif"
+      ],
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--font-body"
+        }
+      }
+    },
+    "icons": {
+      "$type": "fontFamily",
+      "$value": [
+        "site-icons"
+      ],
+      "$extensions": {
+        "com.ericamenin.tokens": {
+          "cssVar": "--font-icons"
+        }
+      }
+    }
+  }
+}
