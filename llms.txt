@@ -35,10 +35,6 @@ This article provides an overview of Érica's recent work. Additional details, c
 
 - [The Design System Advent Calendar](https://ericamenin.com/design-system-calendar.html): The interactive AI-assisted experience behind the 24-day experiment series, combining Érica's design system expertise with generative AI to create guided learning activities.
 
-## Design tokens
-
-- [design-tokens.json](https://ericamenin.com/design-tokens.json): The portfolio's own design tokens, published as a machine-readable W3C Design Tokens (DTCG) file — palette, semantic colours, spacing, type scale, radii, shadows, and fonts, with palette→semantic aliases preserved. Generated from the site's CSS single source of truth.
-
 ## Writing
 
 - [Design Systems Unfiltered](https://designsystemsunfiltered.substack.com/): Érica's publication sharing practical insights on building, scaling, and evolving design systems, including strategy, governance, workflows, AI-assisted practices, and lessons learned from real-world design system work.
