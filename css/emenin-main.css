@@ -339,7 +339,7 @@ img {
 
 .container.highlight {
   width: auto;
-  max-width: 450px;
+  max-width: 520px;
   grid-column-gap: var(--space-6);
   grid-row-gap: var(--space-6);
   align-items: flex-start;
