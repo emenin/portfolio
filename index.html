@@ -752,7 +752,31 @@
             >.
           </span>
         </div>
-        <div class="article-list" data-unfiltered-grid>
+        <div class="article-list">
+          <!-- unfiltered:start -->
+          <a
+            href="https://designsystemsunfiltered.substack.com/p/ai-is-shipping-ui-faster-than-your"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="article-row w-inline-block"
+          >
+            <div class="article-row-thumb">
+              <img
+                loading="lazy"
+                src="https://substack-post-media.s3.amazonaws.com/public/images/4aaeb772-b455-4175-a10d-b3bc3676d192_1024x559.png"
+                alt="AI is shipping UI faster than your design system can protect it"
+                class="thumbnail"
+              />
+            </div>
+            <div class="article-row-body">
+              <h3 class="label">
+                AI is shipping UI faster than your design system can protect it
+              </h3>
+              <p>
+                AI is not breaking any of your rules, and that’s the problem.
+              </p>
+            </div>
+          </a>
           <a
             href="https://designsystemsunfiltered.substack.com/p/how-a-project-that-haunted-me-led"
             target="_blank"
@@ -788,7 +812,7 @@
               <img
                 loading="lazy"
                 src="https://substack-post-media.s3.amazonaws.com/public/images/44ba06ea-4c4c-4c62-94dc-bff0b310744e_1200x630.png"
-                alt='Why the word "pattern" still haunts me (and how I&#x27;m getting over it)'
+                alt="Why the word “pattern” still haunts me (and how I’m getting over it)"
                 class="thumbnail"
               />
             </div>
@@ -803,31 +827,7 @@
               </p>
             </div>
           </a>
-          <a
-            href="https://designsystemsunfiltered.substack.com/p/the-design-system-team-is-gone-the"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="article-row w-inline-block"
-          >
-            <div class="article-row-thumb">
-              <img
-                loading="lazy"
-                src="https://substack-post-media.s3.amazonaws.com/public/images/97432f95-8b5e-4946-bb58-234b9ea349e6_1200x633.png"
-                alt="Human-friendly now, AI-friendly next: Improving the design system one skill at a time"
-                class="thumbnail"
-              />
-            </div>
-            <div class="article-row-body">
-              <h3 class="label">
-                Human-friendly now, AI-friendly next: Improving the design
-                system one skill at a time
-              </h3>
-              <p>
-                Step one: let AI do the repetitive work, but not blindly. How I
-                turned our documentation checklist into a skill.
-              </p>
-            </div>
-          </a>
+          <!-- unfiltered:end -->
         </div>
         <div class="textcontainer horizontal work-intro">
           <span class="horizontal__text">
@@ -1490,8 +1490,8 @@
               wrapper.classList.remove('cursor-hover');
             });
           }
-          // Article rows are re-rendered by unfiltered.js after the RSS
-          // fetch resolves, so delegate instead of binding to nodes directly.
+          // Article rows are generated at build time, but delegate anyway so
+          // the hover cursor survives any future re-render of the list.
           document.addEventListener('mouseover', function (e) {
             if (e.target.closest('.article-row')) {
               wrapper.classList.add('cursor-hover-tile');
@@ -1516,7 +1516,6 @@
       })();
     </script>
     <script src="js/footer-tagline.js" type="text/javascript"></script>
-    <script src="js/unfiltered.js" type="text/javascript"></script>
     <script src="js/nav-accent.js" type="text/javascript"></script>
     <script src="js/crossout.js" type="text/javascript"></script>
     <script src="js/about-hover.js" type="text/javascript"></script>
@@ -1617,6 +1616,57 @@
         ]
       }
     </script>
+
+    <!-- unfiltered-jsonld:start -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "@id": "https://designsystemsunfiltered.substack.com/#blog",
+        "name": "Design Systems Unfiltered",
+        "url": "https://designsystemsunfiltered.substack.com",
+        "author": {
+          "@id": "https://ericamenin.com/#erica"
+        },
+        "blogPost": [
+          {
+            "@type": "BlogPosting",
+            "headline": "AI is shipping UI faster than your design system can protect it",
+            "url": "https://designsystemsunfiltered.substack.com/p/ai-is-shipping-ui-faster-than-your",
+            "author": {
+              "@id": "https://ericamenin.com/#erica"
+            },
+            "datePublished": "2026-08-20T08:13:06.000Z",
+            "image": "https://substack-post-media.s3.amazonaws.com/public/images/4aaeb772-b455-4175-a10d-b3bc3676d192_1024x559.png",
+            "description": "AI is not breaking any of your rules, and that’s the problem."
+          },
+          {
+            "@type": "BlogPosting",
+            "headline": "I turned my biggest design system headache into my first Cursor command",
+            "url": "https://designsystemsunfiltered.substack.com/p/how-a-project-that-haunted-me-led",
+            "author": {
+              "@id": "https://ericamenin.com/#erica"
+            },
+            "datePublished": "2026-07-08T08:26:43.000Z",
+            "image": "https://substack-post-media.s3.amazonaws.com/public/images/01828cd9-d746-454f-a548-6f8d930a2638_1200x630.png",
+            "description": "Creating my first command and skill, and starting to learn when AI actually helps in my day to day."
+          },
+          {
+            "@type": "BlogPosting",
+            "headline": "Why the word “pattern” still haunts me (and how I’m getting over it)",
+            "url": "https://designsystemsunfiltered.substack.com/p/why-the-word-pattern-still-haunts",
+            "author": {
+              "@id": "https://ericamenin.com/#erica"
+            },
+            "datePublished": "2026-07-06T07:08:05.000Z",
+            "image": "https://substack-post-media.s3.amazonaws.com/public/images/44ba06ea-4c4c-4c62-94dc-bff0b310744e_1200x630.png",
+            "description": "A reflection on a design system experiment, silent feedback, and what I’d do differently today with AI."
+          }
+        ],
+        "description": "The honest reality of building and scaling design systems. No shiny UI kits or perfect documentation that nobody reads. Just raw workflows, strategies, and decisions that keep systems working in production. For the hands-on builders keeping systems alive."
+      }
+    </script>
+    <!-- unfiltered-jsonld:end -->
 
     <script src="js/faq-terminal.js" type="text/javascript"></script>
   </body>

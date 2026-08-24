@@ -1,6 +1,9 @@
 # Netlify config for static portfolio
 [build]
   publish = "."
-  # No build command = static site, just publish
+  # Regenerates the Unfiltered section from the Substack feed, then publishes
+  # the static files as-is. Zero dependencies, and it exits 0 even if the feed
+  # is down, so a deploy can never fail because of it.
+  command = "node scripts/build-unfiltered.mjs"
 [build.environment]
   NODE_VERSION = "22"
