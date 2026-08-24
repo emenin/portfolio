@@ -43,6 +43,548 @@
   max-width: 720px;
 }
 
+/* .column.studycase uses align-items: flex-start, so .flexblock children
+   are sized to fit their content (max-content) rather than stretched to
+   the column's width. A full-resolution screenshot inside can then push
+   that max-content width past the column, overflowing narrow viewports.
+   Force full width so content wraps/scales to the column instead. */
+.flexblock {
+  width: 100%;
+  min-width: 0;
+}
+
+.projectimage img {
+  min-width: 0;
+}
+
+/* Article body: comparison table, wrapped for horizontal scroll on mobile */
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: var(--space-2) 0 var(--space-6);
+}
+
+.table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-scroll th,
+.table-scroll td {
+  text-align: left;
+  vertical-align: top;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border, var(--gray-300));
+  font-size: var(--text-sm);
+  line-height: 150%;
+  color: var(--purple-800);
+}
+
+.table-scroll th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  background: var(--pink-100);
+}
+
+/* ============================================================
+   Case study refinement layer  (body.case-study)
+   ------------------------------------------------------------
+   Long-form reading treatment for native case-study pages.
+   Scoped to an opt-in body class so legacy article pages keep
+   their current look until the template is migrated.
+   ============================================================ */
+
+/* ---- Page ground --------------------------------------------
+   body is --white (#fafafa) while .section.project is --white-pure
+   (#fff). Two near-identical greys competing over the same page
+   shows as faint columns wherever the section does not cover the
+   canvas. One ground colour for the whole page. */
+body.case-study {
+  background-color: var(--white-pure);
+  /* One content frame for the whole page, matching the site header
+     exactly (.navbar's inner .container._100 is also 1140 inside the
+     page gutter). Hero, meta, article and footer sit on it, so the
+     content lines up with the logo and the "Let's talk!" CTA.
+
+     The reading column is fixed at 600px and the sidebar at 240px,
+     so .container's space-between drops the remaining ~280px into
+     the gap between the TOC and the text — the column still ends
+     flush with the right edge of the frame. */
+  --cs-frame: 1140px;
+  /* The page grid: a narrow left rail and the reading column.
+     Shared by the meta block and the TOC/article row so both sit
+     on the same vertical lines. */
+  /* 280 = the widest TOC label (252px) plus the bullet's 24px
+     indent, so no entry wraps to a second line. space-between
+     takes the extra out of the gap, not the reading column. */
+  --cs-rail: 280px;
+  /* rail + gap + col must total the frame, so the gap and the
+     column trade off directly: 280 + 120 + 720 = 1120 at 1280px. */
+  --cs-col: 720px;
+  /* The deck sits on its own width, not the column's: 580 is the
+     widest that still breaks line one on the clause boundary
+     ("…React and Flutter,") rather than on "while". */
+  --cs-deck: 580px;
+
+  /* Two ink levels, one hue. Secondary text used to be muted three
+     unrelated ways — opacity 0.8 / 0.7 / 0.65 on the purple ink,
+     plus --gray-600 (#595858) which is a neutral grey with no
+     purple in it, so labels clashed with everything around them.
+     One muted ink derived from the same purple fixes both the
+     count and the hue mismatch. */
+  --cs-ink: var(--color-ink);
+  --cs-ink-muted: var(--color-ink-muted);
+}
+
+/* ---- Sticky nav scrim ---------------------------------------
+   The navbar was fully transparent with a 1px blur, so article
+   content scrolled underneath it in plain sight (the logo and the
+   title visibly overlapped). A translucent ground plus a real blur
+   separates the bar from whatever passes behind it. */
+body.case-study .navbar {
+  background-color: color-mix(in srgb, var(--white-pure) 80%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+/* ---- Full-bleed shell ---------------------------------------
+   .section.project carried the horizontal gutter as padding, so
+   everything inside it — including the dark article-end block —
+   was inset from the viewport edges. The footer only *looked*
+   full-bleed because .containerfull's `width: 100vw` let it
+   shrink-to-fit past the padding, which resolves differently
+   depending on viewport and scrollbar width.
+
+   Instead: the section spans the full width with no gutter, and
+   the gutter moves onto the content containers. Full-bleed bands
+   are then genuinely edge-to-edge at every width. */
+body.case-study .section.project {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+body.case-study .section.project > .container {
+  width: 100%;
+  max-width: calc(var(--cs-frame) + 2 * var(--page-gutter));
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  box-sizing: border-box;
+}
+
+/* The footer's inner row centres a 1140px box while the content
+   above uses a gutter, leaving the two off by ~10px. Put it on
+   the same frame so every edge lines up down the page.
+   Desktop only — below 992px the site deliberately stacks and
+   centres the footer, and this would double its gutter. */
+@media screen and (min-width: 992px) {
+  body.case-study
+    .article-end
+    .footer.dark.article-end-footer
+    .container._100.vertical_mobile {
+    max-width: calc(var(--cs-frame) + 2 * var(--page-gutter));
+    padding-left: var(--page-gutter);
+    padding-right: var(--page-gutter);
+    box-sizing: border-box;
+  }
+}
+
+/* ---- Column proportions -------------------------------------
+   The legacy grid gives the TOC .column._50 a full 50% (≈560px)
+   to hold ~210px of links, squeezing body copy to a 442px
+   measure. Fix the sidebar and let the text column breathe. */
+/* space-between pushes the reading column onto the right frame
+   edge, so it finishes flush with the meta block and the header
+   CTA, and the leftover width lands in the TOC gap. With the
+   column at 700 that gap settles around 180–200px — a real step up
+   from 120 without the 280 it reached when the column was 600. */
+body.case-study .container.aligntop {
+  justify-content: space-between;
+  grid-column-gap: var(--space-16);
+  column-gap: var(--space-16);
+}
+
+body.case-study .column._50.spacesmall.sticky {
+  flex: 0 0 var(--cs-rail);
+  width: var(--cs-rail);
+  grid-row-gap: var(--space-4);
+  row-gap: var(--space-4);
+}
+
+/* One width for everything in the column — prose and figures
+   share the same left and right edge. A prose-only max-width
+   reads as text being cut off mid-column for no visible reason. */
+body.case-study .column.studycase {
+  flex: 0 1 var(--cs-col);
+  max-width: var(--cs-col);
+  padding-right: 0;
+  /* Section separation. Internal rhythm is handled by margins
+     below, so .flexblock's own gap is zeroed out. */
+  grid-row-gap: var(--space-18);
+  row-gap: var(--space-18);
+}
+
+body.case-study .column.studycase .flexblock {
+  grid-row-gap: 0;
+  row-gap: 0;
+}
+
+/* ---- Reading typography ------------------------------------- */
+body.case-study .column.studycase p,
+body.case-study .column.studycase li {
+  font-size: var(--text-base);
+  line-height: 170%;
+  letter-spacing: 0.015em;
+  text-wrap: pretty;
+}
+
+body.case-study .column.studycase p {
+  margin-bottom: var(--space-5);
+}
+
+body.case-study .column.studycase p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- Intro roadmap ------------------------------------------
+   Each "01 · …" label is its own paragraph followed by a
+   description paragraph; pull the pair together so they read as
+   one item, keeping the larger gap between items.
+
+   Needs an explicit class: `p:has(> strong:only-child)` also
+   matches "I tackled this through <strong>…</strong>", because
+   :only-child counts element children and ignores text nodes. */
+body.case-study .column.studycase .roadmap-label {
+  margin-bottom: var(--space-1);
+}
+
+/* ---- Emphasis ------------------------------------------------
+   Default <strong> is 700, which against 300-weight body copy
+   reads as a shout. Semibold carries the emphasis without it. */
+body.case-study .column.studycase strong {
+  font-weight: 600;
+}
+
+/* ---- Heading rhythm + leading -------------------------------
+   Display type at 32px does not need 150% leading; tightening
+   it reads as more deliberate. Spacing below is what separates
+   a heading from its body copy (was a flat 8px flex gap). */
+body.case-study .column.studycase h3,
+body.case-study .column.studycase h4 {
+  text-wrap: pretty;
+}
+
+body.case-study .column.studycase h3 {
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-5);
+}
+
+/* h4 sat at 24px/600 against h3's 32px/700 — near-identical
+   weight and only one size step apart, so it read as a second
+   section heading. Separate them by weight as well as size:
+   h3 stays the bold display voice, h4 steps down to medium. */
+body.case-study .column.studycase h4 {
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 140%;
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-4);
+}
+
+/* A sub-heading directly under a section heading is a pair,
+   not a new movement — no extra space between them. */
+body.case-study .column.studycase h3 + h4 {
+  margin-top: 0;
+}
+
+/* ...and the section heading sits closer to the sub-heading it
+   introduces than it would to a run of body copy. */
+body.case-study .column.studycase h3:has(+ h4) {
+  margin-bottom: var(--space-3);
+}
+
+/* ---- Section number eyebrow ---------------------------------
+   Stacked above the heading rather than inline: an inline prefix
+   inherits the h3's 32px display weight and reads too heavy. */
+/* line-height 1 rather than the inherited 175%: the phantom
+   leading under the digits was most of the gap, so trimming that
+   tightens it to the heading without cramping the margin. */
+body.case-study .section-number {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  color: var(--cs-ink-muted);
+  margin-bottom: var(--space-2);
+}
+
+/* ---- Figures ------------------------------------------------- */
+body.case-study .column.studycase .projectimage {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+/* --color-border-muted (#eee) is only 4% off the page background
+   (#fafafa), so light screenshots — the theme-switching GIF in
+   particular — dissolve into the page. Use the stronger divider. */
+body.case-study .projectimage img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+body.case-study .caption {
+  font-size: var(--text-xs);
+  line-height: 165%;
+  color: var(--cs-ink-muted);
+  opacity: 1;
+  padding-top: var(--space-3);
+}
+
+/* ---- Standfirst ---------------------------------------------
+   The deck under the title was plain 14px body copy, too thin
+   to sit under a 64px display title. */
+/* 125% is generous leading for a 64px display title — at that size
+   the lines drift apart instead of reading as one block.
+   text-wrap: pretty avoids leaving a single stranded word on the
+   last line. Not `balance`: that minimises the *longest* line, so
+   a title one word too wide breaks far earlier than it needs to
+   ("Getting a design / system back in sync"). */
+body.case-study .projecttitle {
+  line-height: 108%;
+  text-wrap: pretty;
+}
+
+/* .container.vertical centres its flex items, so <article-header>
+   is sized to its content instead of the frame. A long title fills
+   it and hides the problem; a short one leaves the whole header
+   floating centred while the meta below stays full width. */
+body.case-study article-header {
+  width: 100%;
+}
+
+/* No max-width: the standfirst runs to the same frame edge as the
+   title and meta below it. A narrower cap made it stop short of
+   everything around it for no visible reason. */
+/* A 1120px line is far too long for an 18px deck. --cs-deck is
+   tuned to the break point, not to the column. */
+body.case-study article-header .textcontainer > div {
+  font-size: var(--text-md);
+  line-height: 160%;
+  color: var(--cs-ink-muted);
+  max-width: var(--cs-deck);
+  text-wrap: pretty;
+}
+
+/* ---- Metadata block -------------------------------------------
+   Role / Timeline / Scope / My focus as a 2x2 of stacked pairs.
+
+   Rules rather than filled tiles: the values differ wildly in
+   length ("2025" versus a three-line Scope) and boxes would leave
+   visible hollows.
+
+   Stacking the label directly on its value is what keeps each pair
+   reading as a pair — earlier versions put the label in the TOC
+   rail and the value in the article column, which aligned the
+   block to the page grid but left ~180px between a label and the
+   thing it labels.
+
+   DOM order does the balancing for free: the two short fields land
+   on the top row, the two long ones below. */
+body.case-study .case-meta {
+  width: 100%;
+  margin: var(--space-10) 0 0;
+  display: grid;
+  /* Second track is the reading column, so it starts on the same
+     vertical line as the article text below. The first track takes
+     whatever is left, which puts it on the frame's left edge with
+     the header and title. No rules: with only two rows they framed
+     the block without dividing anything, and read as an unfinished
+     table. Spacing carries the separation instead. */
+  grid-template-columns: minmax(0, 1fr) var(--cs-col);
+  column-gap: var(--space-16);
+  row-gap: var(--space-6);
+  /* --color-border-muted, not --color-border: on a white ground the
+     stronger divider reads as a table frame rather than a hairline. */
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--color-border-muted);
+  border-bottom: 1px solid var(--color-border-muted);
+}
+
+body.case-study .case-meta__item {
+  min-width: 0;
+}
+
+body.case-study .case-meta dt {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cs-ink-muted);
+  margin-bottom: var(--space-2);
+}
+
+/* --text-sm to sit level with the TOC links below rather than with
+   body copy — these are supporting credentials, not article text. */
+body.case-study .case-meta dd {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 160%;
+  color: var(--cs-ink);
+}
+
+/* ---- Contents sidebar ---------------------------------------- */
+body.case-study .toc-label {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cs-ink-muted);
+  margin-bottom: var(--space-2);
+}
+
+body.case-study .item_summary {
+  background-size: 16px 16px;
+  background-position: 0 4px;
+  padding-left: 24px;
+}
+
+body.case-study .item_summary .tiletitle {
+  font-size: var(--text-sm);
+  line-height: 150%;
+  color: var(--cs-ink-muted);
+  opacity: 1;
+  transition: color 0.15s ease;
+}
+
+body.case-study .item_summary .tiletitle:hover {
+  color: var(--cs-ink);
+}
+
+/* ---- Inline code --------------------------------------------- */
+body.case-study .column.studycase code {
+  font-family:
+    ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+  font-size: 0.875em;
+  background: var(--color-border-muted);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.35em;
+}
+
+/* ---- Comparison table ---------------------------------------
+   Horizontal rules only; boxed cells read heavier than the rest
+   of the page. */
+body.case-study .table-scroll {
+  margin: var(--space-4) 0 var(--space-6);
+}
+
+body.case-study .table-scroll th,
+body.case-study .table-scroll td {
+  border: 0;
+  border-bottom: 1px solid var(--color-border-muted);
+  padding: var(--space-4) var(--space-5) var(--space-4) 0;
+  font-size: var(--text-sm);
+  line-height: 160%;
+}
+
+body.case-study .table-scroll th {
+  background: transparent;
+  text-transform: uppercase;
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--cs-ink-muted);
+  border-bottom: 1px solid var(--color-border);
+  padding-top: 0;
+}
+
+body.case-study .table-scroll td:first-child {
+  font-family: var(--font-display);
+  font-weight: 600;
+  padding-right: var(--space-6);
+}
+
+body.case-study .table-scroll tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ---- Responsive ---------------------------------------------- */
+@media screen and (max-width: 991px) {
+  /* The sidebar is only hidden at <=767px (emenin-main.css); between
+     768 and 991 the container is still a flex row, so it needs a real
+     width here — stretching it to 100% pushes the article off-screen. */
+  body.case-study {
+    --cs-rail: 200px;
+    --cs-col: 640px;
+  }
+
+  /* Below 992 there is no slack for space-between to distribute —
+     pack left on the gap floor so the column keeps its width. */
+  body.case-study .container.aligntop {
+    justify-content: flex-start;
+  }
+
+  /* The article row packs left here and its column shrinks, so the
+     meta has to mirror that instead of reserving a fixed --cs-col:
+     a fixed track would squeeze the first column to ~116px and land
+     the second one short of the article's edge. Rail-width first
+     track + flexible second reproduces the row exactly. */
+  body.case-study .case-meta {
+    grid-template-columns: var(--cs-rail) minmax(0, 1fr);
+  }
+}
+
+/* With the sidebar gone the column is the only thing in the row,
+   so centre it — left-aligning a 600px column in a wider frame
+   leaves lopsided space that reads as an accidental cut. */
+@media screen and (max-width: 767px) {
+  body.case-study .column.studycase {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* The per-page <br> in the title is tuned to the desktop measure.
+     On a narrow column it forces a break the text would not choose,
+     pushing the title to four lines — drop it and let it wrap. */
+  body.case-study .projecttitle br {
+    display: none;
+  }
+
+  /* Match the article column's width and centring so the meta and
+     the body text still share both edges. Pairs stay side by side —
+     there is still room for the label track at this width. */
+  body.case-study .case-meta {
+    max-width: var(--cs-col);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  /* Two columns would leave ~35 characters per value here. */
+  body.case-study .case-meta {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-5);
+  }
+
+  /* emenin-main.css drops h3 to --text-xl (24px) here, so h4 must
+     step down too — at the desktop 24px they would be identical in
+     size and separated only by weight. */
+  body.case-study .column.studycase h4 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-10);
+  }
+}
+
 .article-body h3 {
   margin-top: var(--space-8);
   margin-bottom: var(--space-3);
@@ -88,6 +630,17 @@
     text-align: right;
     padding-left: var(--space-12);
     padding-right: max(var(--page-gutter), calc((100vw - 1140px) / 2));
+  }
+
+  /* A lone tile matches BOTH :first-child and :last-child, so the
+     right-aligned rule above used to win and stranded it on the
+     right of a full-bleed row. With nothing to pair against, centre
+     it rather than anchoring it to either edge. */
+  .article-end-nav .linkblock:only-child {
+    align-items: center;
+    text-align: center;
+    padding-left: var(--page-gutter);
+    padding-right: var(--page-gutter);
   }
 }
 

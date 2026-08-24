@@ -250,10 +250,15 @@
         ? `<div class="article-date">${escapeHtml(date)}</div>`
         : '';
 
+      // Titles are escaped, but allow a literal <br> through so a
+      // specific line break can be set per page. Only <br> survives
+      // the escape — everything else stays inert text.
+      const titleHtml = escapeHtml(title).replace(/&lt;br\s*\/?&gt;/gi, '<br>');
+
       this.innerHTML = `
         <div class="projectheader">
           ${tagsHtml}
-          <h2 class="projecttitle">${escapeHtml(title)}</h2>
+          <h2 class="projecttitle">${titleHtml}</h2>
           ${dateHtml}
           ${subtitleHtml ? `<div class="textcontainer">${subtitleHtml}</div>` : ''}
         </div>
