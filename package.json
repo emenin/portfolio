@@ -1,0 +1,11 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "devDependencies": {
+    "prettier": "^3.4.2"
+  },
+  "scripts": {
+    "build": "node scripts/build-unfiltered.mjs",
+    "format": "prettier --write ."
+  }
+}
