@@ -2022,8 +2022,11 @@ img {
 }
 
 @media screen and (max-width: 767px) {
+  /* One notch down the scale: at 480px the content column is only 432px, and
+     a 64px heading's longest word ("(UNFILTERED)") is 519px, so it overflowed
+     and was clipped. 48px keeps the longest word inside the column. */
   h2 {
-    font-size: var(--text-5xl);
+    font-size: var(--text-4xl);
   }
 
   .column {
@@ -2311,9 +2314,14 @@ img {
     line-height: 130%;
   }
 
+  /* Same reason as the 767px step, but a flat step to 32px would drop h2 to
+     the same size as h1 and h3 here. Capping against the viewport keeps the
+     40px step on normal phones (375px+, where the longest word is 326px in a
+     327px column) and only shrinks it on very narrow screens: at 320px the
+     column is 272px, so the heading eases down to ~33px to fit. */
   h2 {
     padding-bottom: 0;
-    font-size: var(--text-4xl);
+    font-size: min(var(--text-3xl), 10.2vw);
     line-height: 120%;
   }
 
