@@ -1,15 +1,36 @@
 <!doctype html>
 <!--
-  ARTICLE TEMPLATE – Use for project case studies AND blog posts
+  ARTICLE TEMPLATE – case studies and blog posts
 
   To create a new page:
-  1. Copy this file and rename (e.g. my-new-project.html or my-blog-post.html)
-  2. Update <title> and meta tags in <head>
-  3. Fill in <article-header> attributes and optional inner HTML (subtitle)
-  4. Replace the "ARTICLE BODY" section with your content (see options below)
+  1. Copy this file and rename it (e.g. my-new-project.html)
+  2. REMOVE the `robots: noindex` meta below — it exists so this
+     template itself never gets indexed, and must not be inherited
+  3. Update <title>, the meta tags and the JSON-LD block
+  4. Fill in <article-header> and the <dl class="case-meta"> block
+  5. Replace the ARTICLE BODY with your content (Option A or B)
+  6. Add the page to llms.txt and sitemap.xml
+  7. If it should appear on the homepage, add a card to the #work
+     section of index.html
 
-  PROJECT/CASE STUDY: Use sidebar TOC + column studycase with id="..." and class="flexblock" sections
-  BLOG POST: Use a single column with class="article-body" and your prose (no sidebar needed)
+  IMPORTANT — keep `case-study` on <body>. It switches on the
+  refined article layer in css/components.css: one white page
+  ground, the shared content frame (aligned with the site header),
+  the reading column, the type scale and the two ink levels.
+  Without it the page falls back to the older Webflow defaults.
+
+  LAYOUT — everything sits on one frame that matches the header:
+    ┌─ emenin ───────────────────── Let's talk! ─┐   ← site header
+    │  Title + subtitle + meta (full frame)      │
+    │  Contents (rail)      Article (column)     │
+    └────────────────────────────────────────────┘
+  --cs-rail + the gap + --cs-col always total the frame, so the gap
+  and the reading column trade off against each other directly.
+  --cs-deck sets the standfirst width independently.
+
+  PROJECT/CASE STUDY: Option A — sidebar TOC + `column studycase`
+  with id="…" `flexblock` sections
+  BLOG POST: Option B — single `article-body` column, no sidebar
 -->
 <html
   lang="en"
@@ -18,14 +39,67 @@
 >
   <head>
     <meta charset="utf-8" />
+    <!-- DELETE THIS LINE when you copy the template -->
     <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Title format: "Page title – Érica Menin" (en dash) -->
     <title>Article title – Érica Menin</title>
     <meta
       name="description"
-      content="Short description for SEO and social sharing."
+      content="One sentence describing the page, used for search results and social sharing."
     />
     <meta property="og:title" content="Article title" />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:description"
+      content="One sentence describing the page, used for search results and social sharing."
+    />
+    <meta
+      property="og:image"
+      content="https://ericamenin.com/images/emenin-opengraph.jpg"
+    />
+    <meta property="og:url" content="https://ericamenin.com/your-page.html" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content="Article title" />
+    <meta
+      name="twitter:description"
+      content="One sentence describing the page, used for search results and social sharing."
+    />
+    <meta
+      name="twitter:image"
+      content="https://ericamenin.com/images/emenin-opengraph.jpg"
+    />
+    <link rel="canonical" href="https://ericamenin.com/your-page.html" />
+
+    <!-- Structured data. `about` is the topic list answer engines read. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": "https://ericamenin.com/your-page.html",
+        "url": "https://ericamenin.com/your-page.html",
+        "headline": "Article title",
+        "description": "One sentence describing the page.",
+        "about": ["Design systems", "Add the topics this page covers"],
+        "inLanguage": "en",
+        "image": "https://ericamenin.com/images/emenin-opengraph.jpg",
+        "author": {
+          "@type": "Person",
+          "name": "Érica Menin",
+          "url": "https://ericamenin.com/",
+          "sameAs": [
+            "https://www.linkedin.com/in/ericamenin/",
+            "https://designsystemsunfiltered.substack.com/"
+          ]
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Érica Menin",
+          "url": "https://ericamenin.com/"
+        }
+      }
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="google-site-verification"
@@ -67,36 +141,77 @@
     <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
     <link href="images/webclip.png" rel="apple-touch-icon" />
   </head>
-  <body class="has-article-end">
+  <body class="has-article-end case-study">
+    <!--
+      prev/next render only when the matching -href is set, so a lone
+      tile is fine (it centres itself). cursor-label is the hover
+      tooltip — match it to the destination ("View", not "View
+      Project", when the target isn't a project).
+    -->
     <article-layout
       prev-href="index.html#work"
       prev-title="Back to work"
-      next-href="mcs-website.html"
-      next-title="MCS Website"
+      cursor-label="View"
     >
       <div class="w-layout-vflex container"></div>
+
       <div class="container vertical spacemedium">
+        <!--
+          `image` / `image-alt` are optional — omit them for a page
+          with no cover. `date` is for blog posts.
+        -->
+        <!--
+          A literal <br> in `title` sets an explicit line break —
+          useful when the automatic one lands badly. It is ignored
+          below 768px, where the column is too narrow for a break
+          tuned to desktop. Omit it and the title wraps on its own.
+        -->
         <article-header
           title="Your project or post title"
-          image="images/01_ds-cover.png"
-          image-alt="Describe the cover image for accessibility"
           tags="Design System, Case Study"
           date=""
         >
           <div>
-            Optional subtitle or short description. You can use
-            <a href="#" class="link">links</a> and <em>emphasis</em> here. For
-            blog posts, set the <code>date</code> attribute (e.g. date="March
-            15, 2025").
+            Standfirst — one or two sentences. Runs to the full frame width
+            beneath the title.
           </div>
         </article-header>
+
+        <!--
+          Metadata. 2x2 of stacked label/value pairs, framed by a
+          hairline above and below; the second column lines up with
+          the article text below. Keep the two short fields first so
+          they land on the top row. Delete the whole <dl> for a blog
+          post.
+        -->
+        <dl class="case-meta">
+          <div class="case-meta__item">
+            <dt>Role</dt>
+            <dd>Your role</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Timeline</dt>
+            <dd>Year</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Scope</dt>
+            <dd>What the work covered · separated by middots</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>My focus</dt>
+            <dd>The areas you personally owned</dd>
+          </div>
+        </dl>
       </div>
 
-      <!-- ========== ARTICLE BODY: replace everything below with your content ========== -->
+      <!-- ========== ARTICLE BODY — replace with your content ========== -->
 
-      <!-- OPTION A – PROJECT/CASE STUDY: sidebar TOC + main content -->
+      <!-- OPTION A – CASE STUDY: sticky TOC rail + reading column -->
       <div class="container aligntop">
         <div class="w-layout-vflex column _50 spacesmall sticky">
+          <div class="toc-label">Contents</div>
+          <!-- Link text should match each section heading, minus any
+               number — the numbers live in the body only. -->
           <div class="item_summary">
             <a href="#section-1" class="tiletitle deconone">Section one</a>
           </div>
@@ -104,37 +219,76 @@
             <a href="#section-2" class="tiletitle deconone">Section two</a>
           </div>
         </div>
+
         <div class="column studycase">
+          <!-- One `flexblock` per section, with an id matching its TOC link. -->
           <div id="section-1" class="w-layout-vflex flexblock">
             <h3>Section one</h3>
             <p>
-              Your content here. Use <strong>flexblock</strong> for each major
-              section and give each an <strong>id</strong> that matches the
-              sidebar links.
+              Body copy. Use <strong>strong</strong> for emphasis and
+              <code>code</code> for property or token names.
             </p>
-          </div>
-          <div id="section-2" class="w-layout-vflex flexblock">
-            <h3>Section two</h3>
+
+            <h4>A sub-heading</h4>
             <p>
-              More content. You can add images with
-              <code>class="projectimage"</code> and captions with
-              <code>class="caption"</code>.
+              h4 is a step down in both size and weight, so it reads as a tier
+              below the section heading rather than competing with it.
             </p>
+
+            <!-- Figure: image plus caption, both full column width. -->
+            <div class="w-layout-vflex projectimage">
+              <img
+                loading="lazy"
+                src="images/your-folder/your-image.png"
+                alt="Describe what the image shows, for screen readers and search."
+              />
+              <div class="caption">
+                Caption describing what the reader is looking at.
+              </div>
+            </div>
+          </div>
+
+          <!-- Numbered section: the number is a separate eyebrow above
+               the heading, not part of the heading text. -->
+          <div id="section-2" class="w-layout-vflex flexblock">
+            <div class="section-number">01</div>
+            <h3>Section two</h3>
+            <p>Intro line for the section.</p>
+
+            <!-- Table: always wrap in .table-scroll so it scrolls
+                 inside its own box instead of widening the page. -->
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Column heading</th>
+                    <th>Column heading</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Row label</strong></td>
+                    <td>Cell content.</td>
+                    <td>Cell content.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- OPTION B – BLOG POST: single column, no sidebar (comment out Option A and use this) -->
-      <!--
-      <div class="container containermedium">
+      <!-- OPTION B – BLOG POST: single column, no sidebar.
+           Comment out Option A above and uncomment this.
+      <div class="container">
         <div class="article-body">
-          <p>Your blog post content. Simple paragraphs, headings, lists. Use <code>date="March 15, 2025"</code> on article-header for blog posts.</p>
+          <p>Prose. Set date="March 15, 2025" on article-header for posts.</p>
           <h3>A heading</h3>
           <p>Another paragraph.</p>
         </div>
       </div>
       -->
-
     </article-layout>
 
     <script

@@ -27,6 +27,8 @@ Contact: [LinkedIn](https://www.linkedin.com/in/ericamenin/)
 
 A summary of her recent design system work, learnings, and experiments is available in:
 
+- [Getting a design system back in sync](https://ericamenin.com/design-system-back-in-sync.html): A case study on auditing 62 components across Figma, React, and Flutter, and modernising the Figma foundations of a multi-platform design system through variables, theming, and an incremental migration.
+
 - [Maturing a design system beyond components](https://ericamenin.com/maturing-design-system.html): A 2025 review covering the evolution of a design system through design tokens, variables, governance, patterns, adoption, and AI-enabled workflows.
 
 This article provides an overview of Érica's recent work. Additional details, case studies, and examples from enterprise design system initiatives are available through direct contact.

@@ -47,6 +47,14 @@
 
   /* ---- Semantic aliases ---- */
   --color-ink: var(--purple-800); /* body text */
+  /* Secondary text. Derived from the ink so muted copy keeps the
+     brand hue — the neutral greys below read as a different colour
+     family next to purple ink. ~5.5:1 on white, passes AA. */
+  --color-ink-muted: color-mix(
+    in srgb,
+    var(--purple-800) 62%,
+    var(--white-pure)
+  );
   --color-surface: var(--white); /* default page background */
   --color-surface-pink: var(--pink-100); /* light "pink" sections */
   --color-accent: var(--pink-400); /* brand accent */
