@@ -691,7 +691,10 @@ body.case-study .table-scroll tr:last-child td {
 
 .footer .footer-tooltip {
   width: max-content;
-  max-width: 90vw;
+  /* Never wider than the page content column. `width: max-content` keeps the
+     tooltip on one line while it fits; the clamp lets it wrap rather than
+     overflow, which is why there is no `white-space: nowrap` here. */
+  max-width: min(90vw, calc(100vw - 2 * var(--page-gutter)));
   opacity: 0;
   visibility: hidden;
   color: var(--purple-900);
@@ -704,18 +707,36 @@ body.case-study .table-scroll tr:last-child td {
   font-weight: 500;
   line-height: 160%;
   position: absolute;
-  left: 0;
+  /* Centred on the tagline. Below 992px the footer column is centred, so a
+     centred tooltip keeps an equal margin on both sides; anchoring it with
+     `left: 0` made it hang ~57px past the tagline's right edge and pushed
+     document.body.scrollWidth past the viewport. The centring lives in
+     `translate` rather than `transform` because js/footer-tagline.js owns
+     `transform` for the mouse-follow offset. */
+  left: 50%;
+  right: auto;
+  translate: -50% 0;
   bottom: 100%;
   margin-bottom: var(--space-2);
   z-index: 100;
   transition:
     opacity 0.2s ease,
     visibility 0.2s ease;
-  white-space: nowrap;
   text-align: center;
   box-shadow: var(--shadow-lg);
   will-change: transform;
   transform-style: preserve-3d;
+}
+
+/* From 992px up the footer column is right-aligned against the page gutter,
+   so anchor the tooltip's right edge to the tagline instead of centring it —
+   that keeps the whole box inside the gutter. */
+@media screen and (min-width: 992px) {
+  .footer .footer-tooltip {
+    left: auto;
+    right: 0;
+    translate: none;
+  }
 }
 
 .footer .footer-tagline-wrap:hover .footer-tooltip {
