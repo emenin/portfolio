@@ -56,8 +56,7 @@
   const FOOTER_TAGLINE = 'Designed and built by me <3';
   const FOOTER_TOOLTIP = '2023: Webflow | 2026: Cursor 😎';
 
-  // Shared markup for the copyright + tagline/tooltip pair, used by both
-  // SiteFooter (standalone) and ArticleEnd (prev/next + footer combo).
+  // Copyright + tagline/tooltip pair: the bottom bar of the site footer.
   function footerBodyHtml() {
     const year = new Date().getFullYear();
     const copyright = FOOTER_COPYRIGHT.replace('2023', String(year));
@@ -71,15 +70,105 @@
     `;
   }
 
-  class SiteFooter extends HTMLElement {
-    connectedCallback() {
-      this.innerHTML = `
-        <section class="section footer footer-home">
-          <div class="container _100 vertical_mobile">
+  const CONTACT_EMAIL = 'erica@menin.me';
+  const CONTACT_LINKEDIN_URL = 'https://www.linkedin.com/in/ericamenin/';
+  const CONTACT_LINKEDIN_LABEL = 'in/ericamenin';
+
+  // The one footer for every page: contact (LinkedIn + copy-to-clipboard
+  // email) above the copyright bar. Rendered by <site-footer> on the homepage
+  // and by <article-end> under the prev/next tiles on articles.
+  function siteFooterHtml() {
+    // Only the first footer on a page owns the #contact anchor (the component
+    // library renders more than one).
+    const id = document.getElementById('contact') ? '' : ' id="contact"';
+
+    return `
+      <footer${id} class="site-footer">
+        <div class="site-footer-inner">
+          <p class="site-footer-eyebrow">
+            <span class="site-footer-eyebrow-name">Érica Menin</span>
+            <span>Let&#x27;s talk</span>
+          </p>
+          <h2 class="site-footer-statement">
+            Design systems &amp; workflows <em>for humans and AI</em>.
+          </h2>
+          <p class="site-footer-standfirst">
+            Let&#x27;s have a chat! I&#x27;m available for consulting, contract
+            work, and design systems leadership opportunities.
+          </p>
+          <dl class="site-footer-contacts">
+            <div class="site-footer-contact">
+              <dt>LinkedIn</dt>
+              <dd>
+                <a class="site-footer-link" href="${escapeHtml(CONTACT_LINKEDIN_URL)}" target="_blank" rel="noopener noreferrer">
+                  ${escapeHtml(CONTACT_LINKEDIN_LABEL)}<span class="site-footer-link-icon" aria-hidden="true">↗</span>
+                </a>
+              </dd>
+            </div>
+            <div class="site-footer-contact">
+              <dt>Email</dt>
+              <dd>
+                <button type="button" class="site-footer-copy" data-copy="${escapeHtml(CONTACT_EMAIL)}">
+                  <span class="site-footer-copy-value">${escapeHtml(CONTACT_EMAIL)}</span>
+                  <span class="site-footer-copy-hint">Copy</span>
+                </button>
+                <span class="site-footer-copy-status" role="status"></span>
+              </dd>
+            </div>
+          </dl>
+          <div class="site-footer-bar">
             ${footerBodyHtml()}
           </div>
-        </section>
-      `;
+        </div>
+      </footer>
+    `;
+  }
+
+  const COPY_RESET_MS = 2200;
+
+  document.addEventListener('click', async function (event) {
+    const button = event.target.closest('.site-footer-copy');
+    if (!button) return;
+
+    const value = button.getAttribute('data-copy');
+    const hint = button.querySelector('.site-footer-copy-hint');
+    const status = button.parentElement.querySelector('.site-footer-copy-status');
+
+    let copied = false;
+    try {
+      await navigator.clipboard.writeText(value);
+      copied = true;
+    } catch (err) {
+      // Clipboard API unavailable or denied (embedded frames, older Safari):
+      // select the address and try the legacy command. If that fails too, the
+      // selection is left in place so a keyboard copy still works.
+      const range = document.createRange();
+      range.selectNodeContents(button.querySelector('.site-footer-copy-value'));
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      copied = document.execCommand('copy');
+      if (copied) selection.removeAllRanges();
+    }
+
+    const copyKey = /Mac|iPhone|iPad/.test(navigator.platform) ? '⌘C' : 'Ctrl+C';
+    button.classList.toggle('is-copied', copied);
+    hint.textContent = copied ? 'Copied' : `Press ${copyKey}`;
+    status.textContent = copied
+      ? 'Email address copied to clipboard'
+      : 'Email address selected';
+
+    clearTimeout(button._copyReset);
+    button._copyReset = setTimeout(function () {
+      button.classList.remove('is-copied');
+      hint.textContent = 'Copy';
+      status.textContent = '';
+    }, COPY_RESET_MS);
+  });
+
+  class SiteFooter extends HTMLElement {
+    connectedCallback() {
+      this.innerHTML = siteFooterHtml();
     }
   }
 
@@ -279,9 +368,8 @@
     }
   }
 
-  // ----- Article End (prev/next tiles + footer as one block, no gap, no bottom margin) -----
+  // ----- Article End (prev/next tiles + the shared site footer, no gap) -----
   // Attributes: prev-href, prev-title, next-href, next-title (optional)
-  // Renders: Previous + Next tiles (if any) then footer with rights + credits. One component, no spacing between.
   class ArticleEnd extends HTMLElement {
     connectedCallback() {
       const prevHref = this.getAttribute('prev-href') || '';
@@ -315,11 +403,7 @@
       this.innerHTML = `
         <div class="article-end">
           ${navBlock}
-          <div class="footer dark article-end-footer">
-            <div class="container _100 vertical_mobile">
-              ${footerBodyHtml()}
-            </div>
-          </div>
+          ${siteFooterHtml()}
         </div>
       `;
     }

@@ -169,20 +169,11 @@ body.case-study .section.project > .container {
   box-sizing: border-box;
 }
 
-/* The footer's inner row centres a 1140px box while the content
-   above uses a gutter, leaving the two off by ~10px. Put it on
-   the same frame so every edge lines up down the page.
-   Desktop only — below 992px the site deliberately stacks and
-   centres the footer, and this would double its gutter. */
+/* Put the footer on the case-study content frame so its edges line up
+   with the article above instead of a wider 1140px box. */
 @media screen and (min-width: 992px) {
-  body.case-study
-    .article-end
-    .footer.dark.article-end-footer
-    .container._100.vertical_mobile {
-    max-width: calc(var(--cs-frame) + 2 * var(--page-gutter));
-    padding-left: var(--page-gutter);
-    padding-right: var(--page-gutter);
-    box-sizing: border-box;
+  body.case-study .site-footer-inner {
+    max-width: var(--cs-frame);
   }
 }
 
@@ -594,12 +585,17 @@ body.case-study .table-scroll tr:last-child td {
 .article-end {
   margin-bottom: 0;
   width: 100%;
-  background-color: var(--ink-900);
+  background-color: var(--ink-950);
 }
 
-.article-end-nav {
+.article-end-nav,
+.article-end-nav.containerfull {
   padding: 0;
-  border-bottom: 0.5px solid var(--white);
+  border: 0;
+}
+
+.article-end-nav.background_dark {
+  background-color: var(--ink-950);
 }
 
 /* Prev/next tiles: hover effect (dark cover slides up), same as Soniq Design System page */
@@ -652,40 +648,15 @@ body.case-study .table-scroll tr:last-child td {
   top: 0;
 }
 
-.article-end .article-end-footer {
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-  margin-right: 0;
-  max-width: none;
-  padding-top: var(--space-10);
-  padding-bottom: var(--space-10);
-}
-
-@media (max-width: 991px) {
-  .article-end .article-end-footer {
-    padding-top: var(--space-10);
-    padding-bottom: var(--space-10);
-  }
-}
-
-@media (max-width: 767px) {
-  .article-end .article-end-footer {
-    padding-top: var(--space-6);
-    padding-bottom: var(--space-6);
-  }
-}
-
-/* Footer tagline easter egg (mouse-follow tooltip), shared by <site-footer>
-   and <article-end> across every page that loads this stylesheet. */
-.footer .footer-tagline-wrap {
+/* Footer tagline easter egg (mouse-follow tooltip) in the site footer bar. */
+.site-footer-bar .footer-tagline-wrap {
   position: relative;
   display: inline-block;
   cursor: default;
   user-select: none;
 }
 
-.footer .footer-tooltip {
+.site-footer-bar .footer-tooltip {
   width: max-content;
   /* Never wider than the page content column. `width: max-content` keeps the
      tooltip on one line while it fits; the clamp lets it wrap rather than
@@ -727,46 +698,24 @@ body.case-study .table-scroll tr:last-child td {
 /* From 992px up the footer column is right-aligned against the page gutter,
    so anchor the tooltip's right edge to the tagline instead of centring it —
    that keeps the whole box inside the gutter. */
-@media screen and (min-width: 992px) {
-  .footer .footer-tooltip {
+@media screen and (min-width: 768px) {
+  .site-footer-bar .footer-tooltip {
     left: auto;
     right: 0;
     translate: none;
   }
 }
 
-.footer .footer-tagline-wrap:hover .footer-tooltip {
+@media screen and (max-width: 767px) {
+  .site-footer-bar .footer-tooltip {
+    left: 0;
+    translate: none;
+  }
+}
+
+.site-footer-bar .footer-tagline-wrap:hover .footer-tooltip {
   opacity: 1;
   visibility: visible;
-}
-
-/* No rules above the homepage footer: on the dark ground they read as stray lines. */
-.is-home #contact,
-.is-home #contact .container.full.borderbottom {
-  border-bottom: 0;
-}
-
-/* Homepage contact cards should align to the same content width as the nav. */
-.is-home #contact .container.full.borderbottom.margintop {
-  width: 100vw;
-  max-width: none;
-  margin-left: calc(-1 * var(--page-gutter));
-  margin-right: calc(-1 * var(--page-gutter));
-  justify-content: space-between;
-}
-
-.is-home #contact .linkblock {
-  flex: 1 1 0;
-  padding-left: var(--page-gutter);
-  padding-right: var(--page-gutter);
-}
-
-.is-home #contact .linkblock:first-child {
-  padding-left: max(var(--page-gutter), calc((100vw - 1140px) / 2));
-}
-
-.is-home #contact .linkblock:last-child {
-  padding-right: max(var(--page-gutter), calc((100vw - 1140px) / 2));
 }
 
 /* Shared horizontal gutters for nav and footer bars. */
@@ -817,89 +766,6 @@ body.has-article-end .section.project {
 
 body.has-article-end .section.project .article-end {
   margin-top: var(--space-14);
-}
-
-/* Footer bars should align to same gutters as navbar on all pages. */
-.footer {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  padding-left: var(--page-gutter);
-  padding-right: var(--page-gutter);
-}
-
-.article-end .footer.dark.article-end-footer {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.article-end .footer.dark.article-end-footer .container._100.vertical_mobile {
-  width: 100%;
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  column-gap: var(--space-6);
-  color: var(--white);
-}
-
-.footer-home {
-  background-color: transparent;
-  width: 100vw;
-  max-width: 100vw;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.footer-home .container._100.vertical_mobile {
-  width: calc(100vw - (2 * var(--page-gutter)));
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  column-gap: var(--space-6);
-  color: var(--white);
-}
-
-/* Footer copy uses white, while keeping tooltip styling independent. */
-.article-end
-  .footer.dark.article-end-footer
-  .container._100.vertical_mobile
-  > div:first-child,
-.footer-home .container._100.vertical_mobile > div:first-child,
-.footer .footer-tagline-wrap > span:first-child {
-  color: var(--white);
-}
-
-@media screen and (min-width: 992px) {
-  .article-end
-    .footer.dark.article-end-footer
-    .container._100.vertical_mobile
-    > div:last-child,
-  .footer-home .container._100.vertical_mobile > div:last-child {
-    text-align: right;
-    justify-self: end;
-  }
-}
-
-@media screen and (max-width: 991px) {
-  .article-end .footer.dark.article-end-footer,
-  .footer-home {
-    padding-left: var(--page-gutter);
-    padding-right: var(--page-gutter);
-  }
-
-  .article-end .footer.dark.article-end-footer .container._100.vertical_mobile,
-  .footer-home .container._100.vertical_mobile {
-    width: 100%;
-    max-width: none;
-    display: flex;
-    flex-direction: column;
-  }
 }
 
 /* Legacy article pages still use a separate footer section after .section.project.
@@ -1154,5 +1020,240 @@ body.custom-cursor-active [role='button'] {
     display: flex !important;
     z-index: 9999 !important;
     position: fixed !important;
+  }
+}
+
+/* ---- Site footer ----------------------------------------------------------
+   One footer for every page, echoing the hero: eyebrow, statement, standfirst,
+   then contacts set like a dateline. No rules; spacing does the separating. */
+/* Custom elements are inline by default; as a flex child of body it would
+   shrink to its content and centre instead of spanning the page. */
+site-footer {
+  display: block;
+  width: 100%;
+}
+
+.site-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(var(--space-20), 14vh, 160px) var(--page-gutter)
+    var(--space-8);
+  background-color: var(--ink-950);
+  color: var(--white);
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    90% 85% at 100% 115%,
+    rgba(246, 176, 255, 0.14),
+    transparent 60%
+  );
+}
+
+/* Under the prev/next tiles, which already bring their own height. */
+.article-end-nav + .site-footer {
+  padding-top: var(--space-6);
+}
+
+.site-footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.site-footer-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-6);
+  color: rgba(250, 250, 250, 0.55);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.site-footer-eyebrow-name {
+  color: rgba(250, 250, 250, 0.85);
+  font-weight: 500;
+}
+
+.site-footer-statement {
+  max-width: 21ch;
+  margin: 0;
+  padding: 0;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-transform: none;
+  -webkit-text-stroke-width: 0;
+  text-wrap: balance;
+}
+
+.site-footer-statement em {
+  color: var(--pink-400);
+  font-style: normal;
+}
+
+.site-footer-standfirst {
+  max-width: 52ch;
+  margin: var(--space-6) 0 0;
+  color: rgba(250, 250, 250, 0.72);
+  font-size: clamp(var(--text-base), 1.15vw, var(--text-md));
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.site-footer-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) clamp(var(--space-12), 8vw, var(--space-30));
+  margin: clamp(var(--space-12), 7vh, var(--space-20)) 0 0;
+}
+
+.site-footer-contact dt {
+  margin: 0 0 var(--space-2);
+  color: rgba(250, 250, 250, 0.45);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.site-footer-contact dd {
+  margin: 0;
+}
+
+.site-footer-link,
+.site-footer-copy {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0 0 3px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid rgba(246, 176, 255, 0);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-2xl));
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.site-footer-link:hover,
+.site-footer-link:focus-visible,
+.site-footer-copy:hover,
+.site-footer-copy:focus-visible {
+  color: var(--pink-400);
+  border-bottom-color: rgba(246, 176, 255, 0.6);
+}
+
+.site-footer-link:focus-visible,
+.site-footer-copy:focus-visible {
+  outline: 2px solid var(--pink-400);
+  outline-offset: 6px;
+  border-radius: var(--radius-xs);
+}
+
+.site-footer-link-icon {
+  color: var(--pink-400);
+  font-size: 0.7em;
+}
+
+/* The address stays selectable so the keyboard-copy fallback works. */
+.site-footer-copy-value {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.site-footer-copy-hint {
+  padding: 4px 9px 3px;
+  border: 1px solid rgba(246, 176, 255, 0.45);
+  border-radius: var(--radius-pill);
+  color: var(--pink-400);
+  font-family: var(--font-body);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.site-footer-copy:hover .site-footer-copy-hint,
+.site-footer-copy:focus-visible .site-footer-copy-hint {
+  border-color: var(--pink-400);
+}
+
+.site-footer-copy.is-copied .site-footer-copy-hint {
+  background-color: var(--pink-400);
+  border-color: var(--pink-400);
+  color: var(--ink-950);
+}
+
+.site-footer-copy-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.site-footer-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3) var(--space-6);
+  margin-top: clamp(var(--space-16), 11vh, var(--space-25));
+  color: rgba(250, 250, 250, 0.45);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+}
+
+.site-footer-bar .footer-tagline-wrap > span:first-child {
+  color: rgba(250, 250, 250, 0.45);
+  transition: color 0.2s ease;
+}
+
+.site-footer-bar .footer-tagline-wrap:hover > span:first-child {
+  color: var(--pink-400);
+}
+
+@media screen and (max-width: 767px) {
+  .site-footer-statement {
+    max-width: 100%;
+  }
+
+  .site-footer-contacts {
+    flex-direction: column;
+  }
+
+  .site-footer-bar {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

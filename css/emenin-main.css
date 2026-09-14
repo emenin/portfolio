@@ -1293,12 +1293,6 @@ img {
   right: auto;
 }
 
-/* Darkest-ink hover reveal on the homepage contact links (LinkedIn/
-   Email); case-study page footers keep the original dark grey. */
-.is-home #contact .hovercover {
-  background-color: var(--ink-700);
-}
-
 .hovercover.backgroundinvert {
   height: 340%;
   background-color: var(--ink-900);
