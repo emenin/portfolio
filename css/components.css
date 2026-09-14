@@ -1024,8 +1024,10 @@ body.custom-cursor-active [role='button'] {
 }
 
 /* ---- Site footer ----------------------------------------------------------
-   One footer for every page: an invitation on the left, contacts on the
-   right, colophon underneath. No rules; spacing does the separating. */
+   One footer for every page: a contact note set like an editorial standfirst,
+   with LinkedIn and the email woven into the sentence, then the colophon.
+   No title, no link column, no rules. */
+
 /* Custom elements are inline by default; as a flex child of body it would
    shrink to its content and centre instead of spanning the page. */
 site-footer {
@@ -1064,89 +1066,46 @@ site-footer {
 }
 
 .site-footer-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  grid-template-areas:
-    'lead contacts'
-    'bar bar';
-  align-items: end;
-  column-gap: clamp(var(--space-12), 8vw, var(--space-30));
   max-width: 1140px;
   margin: 0 auto;
 }
 
-.site-footer-lead {
-  grid-area: lead;
-}
-
-
-.site-footer-title {
+.site-footer-note {
+  max-width: 34ch;
   margin: 0;
-  padding: 0;
-  color: var(--white);
+  color: rgba(250, 250, 250, 0.55);
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  text-transform: none;
-  -webkit-text-stroke-width: 0;
+  font-size: clamp(1.5rem, 2.9vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
 }
 
-
-.site-footer-standfirst {
-  max-width: 52ch;
-  margin: var(--space-6) 0 0;
-  color: rgba(250, 250, 250, 0.72);
-  font-size: clamp(var(--text-base), 1.15vw, var(--text-md));
-  font-weight: 300;
-  line-height: 1.6;
-}
-
-.site-footer-contacts {
-  grid-area: contacts;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-  margin: 0;
-}
-
-.site-footer-contact dt {
-  margin: 0 0 var(--space-2);
-  color: rgba(250, 250, 250, 0.45);
-  font-size: var(--text-xs);
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.site-footer-contact dd {
-  margin: 0;
+.site-footer-note-lead {
+  color: var(--white);
 }
 
 .site-footer-link,
 .site-footer-copy {
   -webkit-appearance: none;
   appearance: none;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
+  display: inline;
   margin: 0;
-  padding: 0 0 3px;
+  padding: 0;
   background: none;
   border: 0;
-  border-bottom: 1px solid rgba(246, 176, 255, 0);
   color: var(--white);
-  font-family: var(--font-display);
-  font-size: clamp(var(--text-lg), 1.8vw, var(--text-2xl));
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  text-decoration: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(246, 176, 255, 0.5);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
   cursor: pointer;
   transition:
     color 0.2s ease,
-    border-color 0.2s ease;
+    text-decoration-color 0.2s ease;
 }
 
 .site-footer-link:hover,
@@ -1154,19 +1113,28 @@ site-footer {
 .site-footer-copy:hover,
 .site-footer-copy:focus-visible {
   color: var(--pink-400);
-  border-bottom-color: rgba(246, 176, 255, 0.6);
+  text-decoration-color: var(--pink-400);
 }
 
 .site-footer-link:focus-visible,
 .site-footer-copy:focus-visible {
   outline: 2px solid var(--pink-400);
-  outline-offset: 6px;
+  outline-offset: 4px;
   border-radius: var(--radius-xs);
 }
 
 .site-footer-link-icon {
+  display: inline-block;
+  margin-left: 0.1em;
   color: var(--pink-400);
   font-size: 0.7em;
+  text-decoration: none;
+  vertical-align: 0.35em;
+  transition: transform 0.25s ease;
+}
+
+.site-footer-link:hover .site-footer-link-icon {
+  transform: translate(2px, -2px);
 }
 
 /* The address stays selectable so the keyboard-copy fallback works. */
@@ -1176,7 +1144,9 @@ site-footer {
 }
 
 .site-footer-copy-hint {
-  padding: 4px 9px 3px;
+  display: inline-block;
+  margin-left: 0.5em;
+  padding: 5px 9px 4px;
   border: 1px solid rgba(246, 176, 255, 0.45);
   border-radius: var(--radius-pill);
   color: var(--pink-400);
@@ -1186,6 +1156,7 @@ site-footer {
   line-height: 1;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  vertical-align: 0.4em;
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
@@ -1218,7 +1189,6 @@ site-footer {
   justify-content: space-between;
   align-items: center;
   gap: var(--space-3) var(--space-6);
-  grid-area: bar;
   margin-top: clamp(var(--space-16), 11vh, var(--space-25));
   color: rgba(250, 250, 250, 0.45);
   font-size: var(--text-xs);
@@ -1235,18 +1205,6 @@ site-footer {
 }
 
 @media screen and (max-width: 767px) {
-  .site-footer-inner {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      'lead'
-      'contacts'
-      'bar';
-  }
-
-  .site-footer-contacts {
-    margin-top: var(--space-12);
-  }
-
   .site-footer-bar {
     flex-direction: column;
     align-items: flex-start;
@@ -1254,13 +1212,13 @@ site-footer {
 }
 
 /* ---- Section headings (homepage) -------------------------------------------
-   Syne's wide capitals are the site's voice, so headings stay uppercase, just
-   at about half the old 100px, with a touch of tracking. Webflow's scroll
-   interactions write inline transforms (one scaled a heading to 1.8x);
+   Syne's wide capitals are the site's voice, so headings stay uppercase at
+   about two-thirds of the old 100px, with a touch of tracking. Webflow's
+   scroll interactions write inline transforms (one scaled a heading to 1.8x);
    !important is the only way to beat an inline style from CSS. */
 .is-home .section h2 {
   padding-bottom: var(--space-6);
-  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-size: clamp(2rem, 4.6vw, 4.25rem);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: 0.01em;
@@ -1269,30 +1227,91 @@ site-footer {
   transform: none !important;
 }
 
-/* About photo reveal. Webflow's hover slid the photo up 324px (the height of
-   the old wrapped 100px heading) inside a clipped wrapper; a one-line heading
-   leaves no room for that. The photo now appears beside the heading like a
-   sticker, and only its opacity animates. */
-#about .textcontainer.hideoverflow {
-  overflow: visible;
+/* Heading-to-content spacing. The parents space their children 72px apart
+   (40px in Beliefs), which added to the heading's padding was sized for the
+   old 100px type. Pull every section to the same 48px from the heading's
+   last line to its content. Desktop only: the stacked layouts below 992px
+   use different gaps. */
+@media screen and (min-width: 992px) {
+  .is-home .section h2 {
+    padding-bottom: 0;
+  }
+
+  .is-home #what-i-do .textcontainer.aligncenter,
+  .is-home #work .heading-stretch,
+  .is-home #unfiltered .heading-stretch,
+  .is-home #how-i-can-help .heading-stretch {
+    margin-bottom: calc(var(--space-12) - var(--space-18));
+  }
+
+  .is-home #beliefs .heading-stretch {
+    margin-bottom: calc(var(--space-12) - var(--space-10));
+  }
 }
 
-#about .float.image {
-  z-index: 2;
-  top: 50%;
-  right: auto;
-  left: 100%;
-  margin: -100px 0 0 var(--space-6);
-  transform: rotate(8deg) !important;
-  transition: opacity 0.25s ease;
+/* About photo: the cutout of Érica and Joey pops up from the heading's baseline
+   when the heading is hovered, landing in front of the last word.
+   The wrapper clips vertically only: its bottom edge is the heading's bottom,
+   and its top padding gives the photo headroom inside the section's top
+   padding, cancelled by a matching negative margin so nothing moves.
+   Webflow's hover used to slide the photo 324px (the height of the old
+   wrapped 100px heading) and writes inline transform/opacity; the !important
+   values below take over from it. Desktop only: below 992px the photo stays
+   hidden, as it already was on phones. */
+@media screen and (min-width: 992px) {
+  #about.section {
+    padding-top: var(--space-30);
+  }
+
+  #about .textcontainer.hideoverflow {
+    --about-headroom: var(--space-30);
+
+    position: relative;
+    overflow-x: visible;
+    overflow-y: clip;
+    padding-top: var(--about-headroom);
+    margin-top: calc(-1 * var(--about-headroom));
+    margin-bottom: calc(var(--space-12) - var(--space-18));
+  }
+
+  #about .float.image {
+    z-index: 2;
+    top: auto;
+    right: -64px;
+    bottom: 0;
+    left: auto;
+    width: 210px;
+    height: auto;
+    aspect-ratio: 499 / 448;
+    object-fit: contain;
+    opacity: 1 !important;
+    transform: translateY(102%) rotate(0deg) !important;
+    transform-origin: 50% 100%;
+    transition: transform 0.4s cubic-bezier(0.55, 0, 0.75, 0.2);
+  }
+
+  /* While hidden the photo is outside the clip and can't be hovered; once up,
+     hovering it keeps it up. */
+  #about
+    .textcontainer.hideoverflow:has(h2:hover, .float.image:hover)
+    .float.image {
+    transform: translateY(0) rotate(-3deg) !important;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 }
 
 @media screen and (max-width: 991px) {
   #about .float.image {
-    top: 100%;
-    right: 0;
-    left: auto;
-    margin: var(--space-4) 0 0;
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #about .float.image,
+  #about
+    .textcontainer.hideoverflow:has(h2:hover, .float.image:hover)
+    .float.image {
+    transition: none;
   }
 }
 
@@ -1304,8 +1323,11 @@ site-footer {
   --roll-twin: var(--pink-400);
 }
 
-.section.light [data-roll] {
-  --roll-twin: var(--pink-600);
+/* Pink on pale pink is invisible, and a darker pink reads as purple. On light
+   sections the twin is the same ink, outlined instead of filled. */
+.section.light [data-roll] .roll-char::after {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink-900);
 }
 
 [data-roll] .roll-word {

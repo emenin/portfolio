@@ -107,10 +107,9 @@
 
   const CONTACT_EMAIL = 'erica@menin.me';
   const CONTACT_LINKEDIN_URL = 'https://www.linkedin.com/in/ericamenin/';
-  const CONTACT_LINKEDIN_LABEL = 'in/ericamenin';
 
-  // The one footer for every page: contact (LinkedIn + copy-to-clipboard
-  // email) above the copyright bar. Rendered by <site-footer> on the homepage
+  // The one footer for every page: a contact note with LinkedIn and a
+  // copy-to-clipboard email set inline, above the copyright bar. Rendered by <site-footer> on the homepage
   // and by <article-end> under the prev/next tiles on articles.
   function siteFooterHtml() {
     // Only the first footer on a page owns the #contact anchor (the component
@@ -120,33 +119,14 @@
     return `
       <footer${id} class="site-footer">
         <div class="site-footer-inner">
-          <div class="site-footer-lead">
-            <h2 class="site-footer-title" data-roll>Let&#x27;s have a chat!</h2>
-            <p class="site-footer-standfirst">
-              I&#x27;m available for consulting, contract work, and design
-              systems leadership opportunities.
-            </p>
-          </div>
-          <dl class="site-footer-contacts">
-            <div class="site-footer-contact">
-              <dt>LinkedIn</dt>
-              <dd>
-                <a class="site-footer-link" href="${escapeHtml(CONTACT_LINKEDIN_URL)}" target="_blank" rel="noopener noreferrer">
-                  ${escapeHtml(CONTACT_LINKEDIN_LABEL)}<span class="site-footer-link-icon" aria-hidden="true">↗</span>
-                </a>
-              </dd>
-            </div>
-            <div class="site-footer-contact">
-              <dt>Email</dt>
-              <dd>
-                <button type="button" class="site-footer-copy" data-copy="${escapeHtml(CONTACT_EMAIL)}">
-                  <span class="site-footer-copy-value">${escapeHtml(CONTACT_EMAIL)}</span>
-                  <span class="site-footer-copy-hint">Copy</span>
-                </button>
-                <span class="site-footer-copy-status" role="status"></span>
-              </dd>
-            </div>
-          </dl>
+          <p class="site-footer-note">
+            <span class="site-footer-note-lead">Let&#x27;s have a chat!</span>
+            I&#x27;m available for consulting, contract work, and design
+            systems leadership opportunities. Find me on
+            <a class="site-footer-link" href="${escapeHtml(CONTACT_LINKEDIN_URL)}" target="_blank" rel="noopener noreferrer">LinkedIn<span class="site-footer-link-icon" aria-hidden="true">↗</span></a>
+            or email me at
+            <button type="button" class="site-footer-copy" data-copy="${escapeHtml(CONTACT_EMAIL)}"><span class="site-footer-copy-value">${escapeHtml(CONTACT_EMAIL)}</span><span class="site-footer-copy-hint">Copy</span></button><span class="site-footer-copy-status" role="status"></span>
+          </p>
           <div class="site-footer-bar">
             ${footerBodyHtml()}
           </div>
