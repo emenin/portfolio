@@ -465,14 +465,11 @@ img {
   text-decoration-style: solid;
 }
 
-/* Long story short: row 1 = 2 cells, row 2 = 1 full-width cell */
+/* Long story short: three quiet columns, no cards. */
 #about .about-tiles-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-10);
-}
-#about .about-tiles-grid .tile:nth-child(3) {
-  grid-column: 1 / -1;
 }
 #about .about-tiles-grid .tile .tiletitle {
   margin-bottom: 0;
@@ -1051,16 +1048,6 @@ img {
   line-height: 100%;
 }
 
-/* .tabsmenu (the "Product teams" / "Collaboration" labels) sits 36px right
-   of the heading above it even after correcting .tabs' own offset — the
-   gap comes from how .tabs distributes its negative margin across the
-   tabsmenu/tabcontent flex pair, not from tabsmenu's own box model, so
-   it's corrected directly here rather than by fighting that value. */
-#how-i-can-help .tabsmenu {
-  position: relative;
-  left: -36px;
-}
-
 /* By default the label and content columns are both width:100% and shrink to
    equal halves, so the bullet column stops well short of the heading's right
    edge. On wide screens (where the tabs sit side by side) pin each column so
@@ -1069,16 +1056,6 @@ img {
    the -36px menu shift sum to the heading's own width, so the alignment holds
    as the container recentres. Below 1200px the tabs stack, and these fixed
    widths would overflow, so the base width:100% is left to apply there. */
-@media screen and (min-width: 1200px) {
-  #how-i-can-help .tabsmenu {
-    width: 398px;
-    flex-shrink: 0;
-  }
-  #how-i-can-help .tabcontent {
-    width: 478px;
-    flex-shrink: 0;
-  }
-}
 
 /* Load-in reveal for the Unfiltered section, triggered by
    js/section-reveal.js (an independent IntersectionObserver — the site's
@@ -1590,10 +1567,6 @@ img {
   padding-top: var(--space-4);
 }
 
-.marginbottom_24px {
-  margin-bottom: var(--space-6);
-}
-
 .slider {
   width: 100%;
   height: 100%;
@@ -1643,79 +1616,6 @@ img {
 .quickstack.text_light {
   grid-row-gap: var(--space-20);
   margin-bottom: var(--space-12);
-}
-
-.tabsmenu {
-  width: 100%;
-  grid-column-gap: var(--space-6);
-  grid-row-gap: var(--space-6);
-  flex-direction: column;
-  display: flex;
-}
-
-.tabs {
-  width: 100%;
-  grid-column-gap: var(--space-18);
-  grid-row-gap: var(--space-18);
-  margin-left: -72px;
-  display: flex;
-}
-
-.tabcontent {
-  width: 100%;
-  display: flex;
-}
-
-.tablink {
-  color: rgba(34, 32, 32, 0.5);
-  background-color: rgba(0, 0, 0, 0);
-  background-image: url('../images/star-primary.svg');
-  background-position: 1%;
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-attachment: scroll;
-  padding: var(--space-3) var(--space-3) var(--space-3) 44px;
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: 700;
-}
-
-.tablink.w--current {
-  grid-column-gap: var(--space-6);
-  grid-row-gap: var(--space-6);
-  color: var(--ink-900);
-  background-color: rgba(0, 0, 0, 0);
-  background-image: url('../images/star-primary.svg');
-  background-position: 0%;
-  background-size: 32px;
-  border-radius: 9px;
-  padding-left: 44px;
-  font-size: var(--text-2xl);
-  display: flex;
-}
-
-.tablink._2 {
-  width: auto;
-  color: rgba(34, 32, 32, 0.6);
-  background-image: url('../images/Vectors-Wrapper.svg');
-  background-position: 0%;
-  background-repeat: no-repeat;
-  background-size: 32px 32px;
-  background-attachment: scroll;
-  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-10);
-  font-size: var(--text-lg);
-}
-
-.tablink._2.w--current {
-  color: var(--ink-900);
-  background-color: var(--white);
-  background-image: url('../images/Vectors-Wrapper.svg');
-  background-position: 0%;
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-attachment: scroll;
-  padding-left: var(--space-10);
-  font-size: var(--text-xl);
 }
 
 .text_large {
@@ -2119,36 +2019,6 @@ img {
     margin-right: -32px;
   }
 
-  .tabsmenu {
-    grid-column-gap: var(--space-4);
-    grid-row-gap: var(--space-4);
-  }
-
-  .tabs {
-    width: 100%;
-    grid-column-gap: var(--space-10);
-    grid-row-gap: var(--space-10);
-    margin-left: -40px;
-    padding-right: 0;
-  }
-
-  .tablink {
-    background-image: none;
-    background-repeat: repeat;
-    background-size: auto;
-    background-attachment: scroll;
-    padding-left: 0;
-  }
-
-  .tablink.w--current {
-    background-image: none;
-    background-repeat: repeat;
-    background-size: auto;
-    background-attachment: scroll;
-    padding-left: 0;
-    font-size: var(--text-xl);
-  }
-
   .brand.w--current {
     padding-left: 0;
   }
@@ -2291,10 +2161,7 @@ img {
 
   #about .about-tiles-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-  #about .about-tiles-grid .tile:nth-child(3) {
-    grid-column: auto;
+    gap: var(--space-8);
   }
   #about .container.vertical,
   #about .containermedium.vertical {
@@ -2411,36 +2278,6 @@ img {
     grid-column-gap: var(--space-10);
     grid-row-gap: var(--space-10);
     padding: 0;
-  }
-
-  .tabsmenu {
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    margin-top: -32px;
-  }
-
-  .tabs {
-    flex-direction: column;
-    margin-left: var(--space-1);
-  }
-
-  .tablink {
-    background-image: url('../images/star-primary.svg');
-    background-position: 1%;
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-attachment: scroll;
-    padding-left: var(--space-10);
-  }
-
-  .tablink.w--current {
-    background-image: url('../images/star-primary.svg');
-    background-position: 0%;
-    background-repeat: no-repeat;
-    background-size: 32px;
-    background-attachment: scroll;
-    padding-left: var(--space-10);
-    font-size: var(--text-lg);
   }
 
   .brand {
@@ -2759,16 +2596,6 @@ img {
 
   .quickstack.text_light {
     margin-bottom: 0;
-  }
-
-  .tabsmenu {
-    margin-top: -16px;
-    margin-bottom: -8px;
-  }
-
-  .tabs {
-    grid-column-gap: var(--space-10);
-    grid-row-gap: var(--space-10);
   }
 
   .navbutton {

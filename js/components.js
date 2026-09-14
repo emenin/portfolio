@@ -7,9 +7,10 @@
   'use strict';
 
   const NAV_LINKS = [
+    { href: '#ai-design-systems', label: 'AI + Design Systems' },
+    { href: '#work', label: 'Work' },
+    { href: '#unfiltered', label: 'Unfiltered' },
     { href: '#what-i-do', label: 'What I do' },
-    { href: '#work', label: 'My work' },
-    { href: '#how-i-can-help', label: 'How I can help' },
     { href: '#beliefs', label: 'Beliefs' },
     { href: '#about', label: 'About' },
   ];
