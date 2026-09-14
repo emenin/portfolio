@@ -1254,18 +1254,46 @@ site-footer {
 }
 
 /* ---- Section headings (homepage) -------------------------------------------
-   Quieter at rest: sentence case at roughly 60% of the old 100px uppercase.
-   Webflow's scroll interactions write inline transforms (one scaled a heading
-   to 1.8x); !important is the only way to beat an inline style from CSS. */
+   Syne's wide capitals are the site's voice, so headings stay uppercase, just
+   at about half the old 100px, with a touch of tracking. Webflow's scroll
+   interactions write inline transforms (one scaled a heading to 1.8x);
+   !important is the only way to beat an inline style from CSS. */
 .is-home .section h2 {
   padding-bottom: var(--space-6);
-  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
-  font-weight: 600;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.03em;
-  text-transform: none;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
   -webkit-text-stroke-width: 0;
   transform: none !important;
+}
+
+/* About photo reveal. Webflow's hover slid the photo up 324px (the height of
+   the old wrapped 100px heading) inside a clipped wrapper; a one-line heading
+   leaves no room for that. The photo now appears beside the heading like a
+   sticker, and only its opacity animates. */
+#about .textcontainer.hideoverflow {
+  overflow: visible;
+}
+
+#about .float.image {
+  z-index: 2;
+  top: 50%;
+  right: auto;
+  left: 100%;
+  margin: -100px 0 0 var(--space-6);
+  transform: rotate(8deg) !important;
+  transition: opacity 0.25s ease;
+}
+
+@media screen and (max-width: 991px) {
+  #about .float.image {
+    top: 100%;
+    right: 0;
+    left: auto;
+    margin: var(--space-4) 0 0;
+  }
 }
 
 /* ---- Letter roll --------------------------------------------------------------
