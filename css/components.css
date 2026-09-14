@@ -1086,7 +1086,6 @@ site-footer {
   color: var(--white);
 }
 
-.site-footer-link,
 .site-footer-copy {
   -webkit-appearance: none;
   appearance: none;
@@ -1098,22 +1097,11 @@ site-footer {
   color: var(--white);
   font: inherit;
   letter-spacing: inherit;
-  text-decoration: underline;
-  text-decoration-color: rgba(246, 176, 255, 0.5);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
   cursor: pointer;
-  transition:
-    color 0.2s ease,
-    text-decoration-color 0.2s ease;
 }
 
-.site-footer-link:hover,
-.site-footer-link:focus-visible,
-.site-footer-copy:hover,
-.site-footer-copy:focus-visible {
-  color: var(--pink-400);
-  text-decoration-color: var(--pink-400);
+.site-footer-link {
+  color: var(--white);
 }
 
 .site-footer-link:focus-visible,
@@ -1566,4 +1554,147 @@ site-footer {
   [data-roll] .roll-char::after {
     transition: none;
   }
+}
+
+/* ---- Links -------------------------------------------------------------------
+   One treatment for inline links: a thin solid rule at rest, and on hover a
+   pink marker stroke drawn in behind the words from the left. Backgrounds
+   rather than text-decoration so the marker can animate and wrap across
+   lines. */
+.link,
+.site-footer-link,
+.site-footer-copy-value {
+  --link-rule: color-mix(in srgb, currentColor 40%, transparent);
+  --link-mark: rgba(246, 176, 255, 0.3);
+
+  color: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  background-image:
+    linear-gradient(var(--link-mark), var(--link-mark)),
+    linear-gradient(var(--link-rule), var(--link-rule));
+  background-repeat: no-repeat;
+  background-position:
+    0 82%,
+    0 100%;
+  background-size:
+    0% 0.32em,
+    100% 1px;
+  padding-bottom: 0.06em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link:hover,
+.link:focus-visible,
+.site-footer-link:hover,
+.site-footer-link:focus-visible,
+.site-footer-copy:hover .site-footer-copy-value,
+.site-footer-copy:focus-visible .site-footer-copy-value {
+  color: inherit;
+  background-size:
+    100% 0.32em,
+    100% 1px;
+}
+
+/* On pale pink and white, the marker needs full strength to read. */
+.section.light .link,
+.section.project .link {
+  --link-mark: var(--pink-400);
+}
+
+/* "Read more on Substack →": no rule at rest, marker on hover. */
+.link.link-plain {
+  font-weight: inherit;
+  background-size:
+    0% 0.32em,
+    0% 1px;
+}
+
+.link.link-plain:hover,
+.link.link-plain:focus-visible {
+  background-size:
+    100% 0.32em,
+    0% 1px;
+}
+
+/* ---- Hero motion -------------------------------------------------------------
+   Entrance, the decoding phrase, and the pointer glow (js/hero.js). */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-masthead,
+  .hero-headline,
+  .hero-standfirst,
+  .hero-meta {
+    animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero-masthead {
+    animation-delay: 0.05s;
+  }
+
+  .hero-headline {
+    animation-delay: 0.15s;
+  }
+
+  .hero-standfirst {
+    animation-delay: 0.35s;
+  }
+
+  .hero-meta {
+    animation-delay: 0.5s;
+  }
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Each letter reserves its width with an invisible copy of its final glyph
+   (::before), and the visible glyph sits on top of it, so the line never
+   shifts while letters flicker, whichever font is loaded. */
+.hero-char {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-char::before {
+  content: attr(data-char);
+  visibility: hidden;
+}
+
+.hero-glyph {
+  position: absolute;
+  inset: 0;
+  text-align: center;
+}
+
+.hero-char.is-decoding .hero-glyph {
+  opacity: 0.55;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    460px circle at var(--hero-px, 70%) var(--hero-py, 40%),
+    rgba(246, 176, 255, 0.08),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.hero.is-glowing::after {
+  opacity: 1;
 }

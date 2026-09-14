@@ -106,7 +106,7 @@
   font: inherit;
   cursor: pointer;
   text-decoration: underline;
-  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
   text-decoration-color: var(--ft-line);
   text-underline-offset: 3px;
 }
