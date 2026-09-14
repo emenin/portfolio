@@ -391,14 +391,14 @@
       const nextTitle = this.getAttribute('next-title') || 'Next';
 
       const prevBlock = prevHref
-        ? `<a href="${escapeHtml(prevHref)}" class="linkblock aligncenter w-inline-block">
+        ? `<a href="${escapeHtml(prevHref)}" class="linkblock linkblock--prev aligncenter w-inline-block">
              <div class="text_allcaps">Previous</div>
              <h3>${escapeHtml(prevTitle)}</h3>
              <div class="hovercover backgroundinvert"></div>
            </a>`
         : '';
       const nextBlock = nextHref
-        ? `<a href="${escapeHtml(nextHref)}" class="linkblock aligncenter w-inline-block">
+        ? `<a href="${escapeHtml(nextHref)}" class="linkblock linkblock--next aligncenter w-inline-block">
              <div class="text_allcaps">Next</div>
              <h3>${escapeHtml(nextTitle)}</h3>
              <div class="hovercover backgroundinvert"></div>
