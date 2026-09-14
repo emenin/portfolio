@@ -33,7 +33,7 @@
 
 body {
   max-width: 100%;
-  color: var(--purple-800);
+  color: var(--ink-900);
   letter-spacing: 0.02em;
   background-color: var(--white);
   background-image: none;
@@ -54,7 +54,7 @@ h1 {
 }
 
 h2 {
-  color: var(--purple-800);
+  color: var(--ink-900);
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 0;
@@ -85,22 +85,22 @@ h4 {
 }
 
 p {
-  color: var(--purple-800);
+  color: var(--ink-900);
   letter-spacing: 0.025em;
-  -webkit-text-stroke-color: var(--purple-800);
+  -webkit-text-stroke-color: var(--ink-900);
   margin-bottom: var(--space-3);
   font-weight: 300;
   line-height: 175%;
 }
 
 a {
-  color: var(--purple-800);
+  color: var(--ink-900);
   letter-spacing: 0.03em;
   font-weight: 500;
 }
 
 a:hover {
-  color: var(--purple-700);
+  color: var(--ink-700);
 }
 
 ul {
@@ -127,9 +127,12 @@ img {
 }
 
 .body {
-  background-image: url('../images/bg-gradient.svg');
-  background-position: 0 0;
-  background-size: auto;
+  background-color: var(--ink-950);
+  background-image: radial-gradient(
+    110% 90% at 95% 100%,
+    rgba(246, 176, 255, 0.07),
+    transparent 60%
+  );
   background-attachment: fixed;
   align-items: center;
   margin-left: auto;
@@ -139,10 +142,6 @@ img {
 }
 
 .body.vertical {
-  background-image: url('../images/bg-gradient.svg');
-  background-position: 0 0;
-  background-size: cover;
-  background-attachment: fixed;
   flex-direction: column;
 }
 
@@ -194,18 +193,181 @@ img {
 }
 
 .hero {
+  --hero-glow: 246, 176, 255;
+
   width: 100%;
-  height: 100vh;
+  min-height: 100svh;
   max-width: 100%;
-  grid-column-gap: 5em;
-  grid-row-gap: 5em;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var(--space-24) var(--space-20) var(--space-10);
+  /* Top padding clears the fixed .navbar, which is out of flow. */
+  padding: clamp(140px, 18vh, 200px) var(--space-20) var(--space-20);
   display: flex;
   position: relative;
-  overflow: hidden;
+}
+
+/* The glow bleeds 60vh past the hero and fades out there, so it never cuts
+   off at the section edge. z-index -1 keeps it under the next section's text;
+   it sits on the body ground, which is the same ink. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 -60vh 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      120% 60% at 6% 69%,
+      rgba(var(--hero-glow), 0.26),
+      transparent 62%
+    ),
+    radial-gradient(
+      85% 41% at 92% -8%,
+      rgba(var(--hero-glow), 0.1),
+      transparent 58%
+    );
+  -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+}
+
+.hero-inner {
+  width: 100%;
+  max-width: 1140px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Eyebrow: name and role, kept quiet so the nav wordmark leads. */
+.hero-masthead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: 0 0 clamp(var(--space-8), 5vh, var(--space-14));
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero-masthead-name {
+  color: rgba(250, 250, 250, 0.85);
+  font-weight: 500;
+}
+
+.hero-masthead-role {
+  color: rgba(250, 250, 250, 0.55);
+}
+
+.hero-headline {
+  max-width: 14ch;
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.75rem);
+  font-weight: 700;
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  -webkit-text-stroke-width: 0;
+  text-wrap: balance;
+}
+
+.hero-headline-em {
+  color: var(--pink-400);
+  font-style: normal;
+}
+
+.hero-standfirst {
+  max-width: 58ch;
+  margin: clamp(var(--space-6), 3.5vh, var(--space-10)) 0 0;
+  color: rgba(250, 250, 250, 0.72);
+  font-size: clamp(var(--text-base), 1.25vw, var(--text-lg));
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Dateline: availability and location. */
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-10);
+  width: 100%;
+  /* Absolute, not ch: this row's own font-size is 12px, so ch is far too small. */
+  max-width: 36rem;
+  margin-top: clamp(var(--space-8), 4.5vh, var(--space-14));
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(var(--hero-glow), 0);
+  padding-bottom: 2px;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.hero-cta::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-round);
+  background: var(--pink-400);
+  animation: hero-pulse 2.4s ease-out infinite;
+}
+
+.hero-cta:hover,
+.hero-cta:focus-visible {
+  color: var(--pink-400);
+  border-bottom-color: rgba(var(--hero-glow), 0.6);
+}
+
+.hero-meta-item {
+  color: rgba(250, 250, 250, 0.45);
+}
+
+@keyframes hero-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--hero-glow), 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 9px rgba(var(--hero-glow), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--hero-glow), 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta::before {
+    animation: none;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .hero-headline {
+    max-width: 16ch;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hero {
+    padding-top: clamp(120px, 16vh, 160px);
+    padding-bottom: var(--space-16);
+  }
+
+  .hero-headline {
+    max-width: 100%;
+  }
 }
 
 .container {
@@ -362,9 +524,9 @@ img {
 .cursorcontainer {
   width: auto;
   height: 100%;
-  color: var(--purple-800);
+  color: var(--ink-900);
   background-color: var(--accent, var(--pink-400));
-  border: 2px solid var(--purple-800);
+  border: 2px solid var(--ink-900);
   border-radius: var(--radius-md);
   flex: none;
   justify-content: center;
@@ -390,7 +552,7 @@ img {
 }
 
 .textblock {
-  color: var(--purple-800);
+  color: var(--ink-900);
   flex: none;
   font-family: var(--font-display);
   font-weight: 500;
@@ -438,12 +600,12 @@ img {
 }
 
 .is-home .section.light {
-  --accent: var(--purple-800);
+  --accent: var(--ink-900);
 }
 
 /* The fixed nav overlaps both section types, so it can't inherit --accent.
    nav-accent.js toggles .nav-on-light when a pink section sits behind the nav;
-   the wordmark and links use pink on the dark sections, purple on the pink ones.
+   the wordmark and links use pink on the dark sections, near-black on the pink ones.
    !important overrides the lime colour Webflow sets on the wordmark inline. */
 .is-home .navbar {
   --nav-accent: var(--pink-400);
@@ -451,8 +613,8 @@ img {
 }
 
 .is-home .navbar.nav-on-light {
-  --nav-accent: var(--purple-700);
-  --nav-link-accent: var(--purple-700);
+  --nav-accent: var(--ink-700);
+  --nav-link-accent: var(--ink-700);
 }
 
 .navbar .logo {
@@ -461,8 +623,8 @@ img {
 }
 
 .is-home .navbar .logointeraction {
-  color: var(--purple-800) !important;
-  -webkit-text-fill-color: var(--purple-800) !important;
+  color: var(--ink-900) !important;
+  -webkit-text-fill-color: var(--ink-900) !important;
 }
 
 .navbar .navlink {
@@ -478,7 +640,7 @@ img {
 .section.project {
   grid-column-gap: var(--space-18);
   grid-row-gap: var(--space-18);
-  color: var(--purple-800);
+  color: var(--ink-900);
   background-color: var(--white-pure);
   padding-top: var(--space-20);
 }
@@ -582,7 +744,7 @@ img {
   -webkit-backdrop-filter: blur(35px);
   backdrop-filter: blur(35px);
   background-color: rgba(255, 255, 255, 0.16);
-  border: 0.5px solid var(--purple-800);
+  border: 0.5px solid var(--ink-900);
   border-radius: var(--radius-sm);
   flex-direction: column;
   justify-content: center;
@@ -1030,7 +1192,7 @@ img {
 }
 
 .tiletitle {
-  color: var(--purple-800);
+  color: var(--ink-900);
   letter-spacing: 0.03em;
   font-family: var(--font-display);
   font-size: var(--text-base);
@@ -1044,7 +1206,7 @@ img {
 }
 
 .tiletitle.deconone:hover {
-  color: var(--purple-800);
+  color: var(--ink-900);
   text-decoration: underline;
 }
 
@@ -1058,7 +1220,7 @@ img {
 }
 
 .containerfull.background_dark {
-  background-color: var(--purple-800);
+  background-color: var(--ink-900);
 }
 
 .linkblock {
@@ -1106,7 +1268,7 @@ img {
 }
 
 .footer.dark {
-  background-color: var(--purple-800);
+  background-color: var(--ink-900);
   align-items: flex-start;
 }
 
@@ -1123,7 +1285,7 @@ img {
   z-index: -10;
   width: 100%;
   height: 100%;
-  background-color: var(--purple-800);
+  background-color: var(--ink-900);
   position: absolute;
   top: 100%;
   bottom: auto;
@@ -1131,15 +1293,15 @@ img {
   right: auto;
 }
 
-/* Darkest-purple hover reveal on the homepage contact links (LinkedIn/
+/* Darkest-ink hover reveal on the homepage contact links (LinkedIn/
    Email); case-study page footers keep the original dark grey. */
 .is-home #contact .hovercover {
-  background-color: var(--purple-700);
+  background-color: var(--ink-700);
 }
 
 .hovercover.backgroundinvert {
   height: 340%;
-  background-color: var(--purple-800);
+  background-color: var(--ink-900);
 }
 
 .texthover {
@@ -1222,7 +1384,7 @@ img {
 }
 
 .logo.dark {
-  color: var(--purple-900);
+  color: var(--ink-950);
 }
 
 .h3_hoverhidden {
@@ -1258,13 +1420,13 @@ img {
 }
 
 .item_dark {
-  color: var(--purple-800);
+  color: var(--ink-900);
   background-image: url('../images/check-dark.svg');
   line-height: 170%;
 }
 
 .is-home .item_dark {
-  color: var(--purple-800);
+  color: var(--ink-900);
 }
 
 .item_dark.bulletnone {
@@ -1337,7 +1499,7 @@ img {
   grid-row-gap: 5em;
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
-  color: var(--purple-800);
+  color: var(--ink-900);
   flex-direction: row;
   justify-content: center;
   align-self: center;
@@ -1419,7 +1581,7 @@ img {
 
 .caption {
   opacity: 0.89;
-  color: var(--purple-800);
+  color: var(--ink-900);
   padding-top: var(--space-3);
   font-size: var(--text-xs);
   font-weight: 300;
@@ -1454,7 +1616,7 @@ img {
 }
 
 .galleryarrow {
-  color: var(--purple-900);
+  color: var(--ink-950);
   font-size: var(--text-xs);
 }
 
@@ -1527,7 +1689,7 @@ img {
 .tablink.w--current {
   grid-column-gap: var(--space-6);
   grid-row-gap: var(--space-6);
-  color: var(--purple-800);
+  color: var(--ink-900);
   background-color: rgba(0, 0, 0, 0);
   background-image: url('../images/star-primary.svg');
   background-position: 0%;
@@ -1551,7 +1713,7 @@ img {
 }
 
 .tablink._2.w--current {
-  color: var(--purple-800);
+  color: var(--ink-900);
   background-color: var(--white);
   background-image: url('../images/Vectors-Wrapper.svg');
   background-position: 0%;
@@ -1591,24 +1753,24 @@ img {
 
 .navbutton:focus-visible {
   outline-offset: 0px;
-  color: var(--purple-800);
-  -webkit-text-stroke-color: var(--purple-800);
+  color: var(--ink-900);
+  -webkit-text-stroke-color: var(--ink-900);
   background-color: var(--accent, var(--pink-400));
   border-radius: var(--radius-sm);
-  outline: 2px solid var(--purple-800);
+  outline: 2px solid var(--ink-900);
 }
 
 .navbutton[data-wf-focus-visible] {
   outline-offset: 0px;
-  color: var(--purple-800);
-  -webkit-text-stroke-color: var(--purple-800);
+  color: var(--ink-900);
+  -webkit-text-stroke-color: var(--ink-900);
   background-color: var(--accent, var(--pink-400));
   border-radius: var(--radius-sm);
-  outline: 2px solid var(--purple-800);
+  outline: 2px solid var(--ink-900);
 }
 
 .navbutton.light {
-  color: var(--purple-800);
+  color: var(--ink-900);
   border-radius: var(--radius-sm);
   transition: all 0.2s;
 }
@@ -1734,7 +1896,7 @@ img {
 .cursor-wrapper.cursor-hover-tile .tooltiplabel {
   display: flex;
   opacity: 1;
-  color: var(--purple-700);
+  color: var(--ink-700);
   font-size: var(--text-2xs);
 }
 
@@ -1796,7 +1958,7 @@ img {
 .logointeraction {
   width: 240px;
   opacity: 0;
-  color: var(--purple-800);
+  color: var(--ink-900);
   letter-spacing: 0.05em;
   background-color: var(--accent, var(--pink-100));
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -2330,7 +2492,7 @@ img {
   }
 
   .body.vertical {
-    background-color: var(--purple-800);
+    background-color: var(--ink-900);
     background-image: none;
     background-position: 0 0;
     background-size: auto;

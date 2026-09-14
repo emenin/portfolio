@@ -11,10 +11,10 @@
  * site, change a value here rather than hunting through the stylesheets.
  */
 :root {
-  /* ---- Palette: brand purples ---- */
-  --purple-900: #0b0b35; /* deepest */
-  --purple-800: #170636; /* primary ink */
-  --purple-700: #24104f; /* saturated mid (merged former 750/700) */
+  /* ---- Palette: inks (near-black, faint cool tint) ---- */
+  --ink-950: #14161f; /* deepest: page ground (dark navy-grey) */
+  --ink-900: #1b1e29; /* primary ink: text on light, dark surfaces */
+  --ink-700: #2e3240; /* raised / hover */
 
   /* ---- Palette: pinks ---- */
   --pink-400: #f6b0ff; /* accent */
@@ -46,20 +46,20 @@
   --yellow-400: #ffd43b;
 
   /* ---- Semantic aliases ---- */
-  --color-ink: var(--purple-800); /* body text */
-  /* Secondary text. Derived from the ink so muted copy keeps the
-     brand hue — the neutral greys below read as a different colour
-     family next to purple ink. ~5.5:1 on white, passes AA. */
+  --color-ink: var(--ink-900); /* body text */
+  /* Secondary text. Derived from the ink so muted copy keeps its faint cool
+     tint; the neutral greys below read as a different colour family next
+     to it. */
   --color-ink-muted: color-mix(
     in srgb,
-    var(--purple-800) 62%,
+    var(--ink-900) 62%,
     var(--white-pure)
   );
   --color-surface: var(--white); /* default page background */
   --color-surface-pink: var(--pink-100); /* light "pink" sections */
   --color-accent: var(--pink-400); /* brand accent */
-  --color-on-dark: var(--white); /* text/marks over dark purple */
-  --color-on-accent: var(--purple-800); /* text/marks over pink */
+  --color-on-dark: var(--white); /* text/marks over dark ink */
+  --color-on-accent: var(--ink-900); /* text/marks over pink */
   --color-border: var(--gray-300);
   --color-border-muted: var(--gray-100);
 

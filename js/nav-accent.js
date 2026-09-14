@@ -1,6 +1,6 @@
 // The nav is position:fixed and transparent, so it floats over both the dark
-// purple sections and the pale pink ones. This flips its accent to stay legible:
-// pink text over dark sections, deep purple text over pink sections. It sets a
+// ink sections and the pale pink ones. This flips its accent to stay legible:
+// pink text over dark sections, near-black text over pink sections. It sets a
 // class the CSS reads (see .navbar.nav-on-light in emenin-main.css).
 (function () {
   'use strict';

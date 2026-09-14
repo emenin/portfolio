@@ -6,15 +6,15 @@
 
 /* ----- Component library page ----- */
 .library-demo {
-  background: rgba(11, 11, 53, 0.03);
-  border: 1px solid rgba(11, 11, 53, 0.08);
+  background: rgba(20, 22, 31, 0.03);
+  border: 1px solid rgba(20, 22, 31, 0.08);
   border-radius: var(--radius-md);
   padding: var(--space-6);
   margin: var(--space-4) 0;
 }
 
 .library-code {
-  background: var(--purple-800);
+  background: var(--ink-900);
   color: var(--gray-100);
   padding: var(--space-5);
   border-radius: var(--radius-md);
@@ -77,7 +77,7 @@
   border: 1px solid var(--color-border, var(--gray-300));
   font-size: var(--text-sm);
   line-height: 150%;
-  color: var(--purple-800);
+  color: var(--ink-900);
 }
 
 .table-scroll th {
@@ -126,12 +126,8 @@ body.case-study {
      ("…React and Flutter,") rather than on "while". */
   --cs-deck: 580px;
 
-  /* Two ink levels, one hue. Secondary text used to be muted three
-     unrelated ways — opacity 0.8 / 0.7 / 0.65 on the purple ink,
-     plus --gray-600 (#595858) which is a neutral grey with no
-     purple in it, so labels clashed with everything around them.
-     One muted ink derived from the same purple fixes both the
-     count and the hue mismatch. */
+  /* Two ink levels, one hue: muted text is derived from the ink rather
+     than a separate neutral grey, so labels stay in the same colour family. */
   --cs-ink: var(--color-ink);
   --cs-ink-muted: var(--color-ink-muted);
 }
@@ -598,7 +594,7 @@ body.case-study .table-scroll tr:last-child td {
 .article-end {
   margin-bottom: 0;
   width: 100%;
-  background-color: var(--purple-800);
+  background-color: var(--ink-900);
 }
 
 .article-end-nav {
@@ -606,7 +602,7 @@ body.case-study .table-scroll tr:last-child td {
   border-bottom: 0.5px solid var(--white);
 }
 
-/* Prev/next tiles: hover effect (purple cover slides up), same as Soniq Design System page */
+/* Prev/next tiles: hover effect (dark cover slides up), same as Soniq Design System page */
 .article-end-nav .linkblock {
   position: relative;
   overflow: hidden;
@@ -647,7 +643,7 @@ body.case-study .table-scroll tr:last-child td {
 .article-end-nav .linkblock .hovercover.backgroundinvert {
   top: 100%;
   transform: none;
-  background-color: var(--purple-700);
+  background-color: var(--ink-700);
   z-index: 0;
   transition: top 0.35s ease;
 }
@@ -697,7 +693,7 @@ body.case-study .table-scroll tr:last-child td {
   max-width: min(90vw, calc(100vw - 2 * var(--page-gutter)));
   opacity: 0;
   visibility: hidden;
-  color: var(--purple-900);
+  color: var(--ink-950);
   letter-spacing: 0.05em;
   background-color: var(--pink-100);
   border: 1px solid rgba(246, 176, 255, 0.55);
@@ -742,6 +738,12 @@ body.case-study .table-scroll tr:last-child td {
 .footer .footer-tagline-wrap:hover .footer-tooltip {
   opacity: 1;
   visibility: visible;
+}
+
+/* No rules above the homepage footer: on the dark ground they read as stray lines. */
+.is-home #contact,
+.is-home #contact .container.full.borderbottom {
+  border-bottom: 0;
 }
 
 /* Homepage contact cards should align to the same content width as the nav. */

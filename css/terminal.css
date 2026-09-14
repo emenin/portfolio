@@ -8,7 +8,7 @@
  */
 
 .ft-section {
-  --ft-bg: var(--purple-900);
+  --ft-bg: var(--ink-950);
   --ft-ink: var(--white);
   --ft-accent: var(--pink-400);
   --ft-muted: rgba(250, 250, 250, 0.55);
@@ -36,7 +36,7 @@
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: 700;
-  color: var(--purple-800);
+  color: var(--ink-900);
   margin: 0 0 var(--space-5);
   letter-spacing: -0.01em;
 }
@@ -44,9 +44,9 @@
   font-family: var(--ft-mono);
   font-size: var(--text-sm);
   font-weight: 500;
-  color: var(--purple-700);
+  color: var(--ink-700);
   background: var(--white);
-  border: 1px solid var(--purple-700);
+  border: 1px solid var(--ink-700);
   border-radius: var(--radius-sm);
   padding: 2px var(--space-2);
   vertical-align: middle;
@@ -57,7 +57,7 @@
 .ft-window {
   background: var(--ft-bg);
   border-radius: var(--radius-lg);
-  box-shadow: 0 24px 60px rgba(11, 11, 53, 0.28);
+  box-shadow: 0 24px 60px rgba(20, 22, 31, 0.28);
   overflow: hidden;
   font-family: var(--ft-mono);
 }
@@ -162,22 +162,22 @@
   font-size: var(--text-base);
   font-weight: 700;
   color: var(--white);
-  background: var(--purple-900);
+  background: var(--ink-950);
   border: 1.5px solid var(--pink-400);
   border-radius: var(--radius-md);
   padding: var(--space-2) var(--space-3);
   cursor: pointer;
-  box-shadow: 0 10px 26px rgba(11, 11, 53, 0.3);
+  box-shadow: 0 10px 26px rgba(20, 22, 31, 0.3);
 }
 .ft-fab:hover,
-.ft-fab:focus-visible { background: var(--pink-400); color: var(--purple-900); }
+.ft-fab:focus-visible { background: var(--pink-400); color: var(--ink-950); }
 
 /* ---- interactive command palette ---- */
 .ft-overlay {
   position: fixed;
   inset: 0;
   z-index: 85;
-  background: rgba(11, 11, 53, 0.5);
+  background: rgba(20, 22, 31, 0.5);
   display: none;
   align-items: flex-start;
   justify-content: center;
@@ -187,11 +187,11 @@
 .ft-modal {
   width: 100%;
   max-width: 540px;
-  background: var(--purple-900);
+  background: var(--ink-950);
   color: var(--white);
   border: 1px solid var(--ft-line, rgba(246, 176, 255, 0.22));
   border-radius: var(--radius-lg);
-  box-shadow: 0 30px 80px rgba(11, 11, 53, 0.55);
+  box-shadow: 0 30px 80px rgba(20, 22, 31, 0.55);
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   font-size: var(--text-sm);
   overflow: hidden;
