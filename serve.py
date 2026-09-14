@@ -21,6 +21,12 @@ class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=ROOT, **kwargs)
 
+    def end_headers(self):
+        # Dev server only: without this, browsers heuristically cache JS/CSS and
+        # mix stale scripts with fresh HTML after an edit.
+        self.send_header("Cache-Control", "no-cache")
+        super().end_headers()
+
     def translate_path(self, path):
         local = super().translate_path(path)
         # Clean-URL routing: if the path has no extension and isn't a real file,
