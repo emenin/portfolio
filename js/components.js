@@ -447,17 +447,17 @@
         <article-nav></article-nav>
         <section class="section project">
           ${contentHtml}
-          ${
-            noEnd
-              ? ''
-              : `<article-end
-                   prev-href="${escapeHtml(prevHref)}"
-                   prev-title="${escapeHtml(prevTitle)}"
-                   next-href="${escapeHtml(nextHref)}"
-                   next-title="${escapeHtml(nextTitle)}"
-                 ></article-end>`
-          }
         </section>
+        ${
+          noEnd
+            ? ''
+            : `<article-end
+                 prev-href="${escapeHtml(prevHref)}"
+                 prev-title="${escapeHtml(prevTitle)}"
+                 next-href="${escapeHtml(nextHref)}"
+                 next-title="${escapeHtml(nextTitle)}"
+               ></article-end>`
+        }
         ${
           noCursor
             ? ''
