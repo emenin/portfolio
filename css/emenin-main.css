@@ -1970,18 +1970,28 @@ img {
 }
 
 @media screen and (max-width: 991px) {
-  html,
-  body {
-    overflow-x: hidden;
-  }
-
   h1 {
     font-size: var(--text-4xl);
   }
 
+  /* One fluid size for every width below the desktop layout, instead of
+     stepping 80 → 48 → 40px at each breakpoint. The steps were set per
+     breakpoint, not per width, so each overflowed somewhere inside its range:
+     an 80px uppercase heading with a 12-letter word ("(UNFILTERED)", ~8.1em in
+     Syne 700) pushed its container to 776px on a 768px screen. 8vw + 4px keeps
+     a word that long inside the column, with ~5% to spare, from 320 to 991px.
+     (Homepage section headings are sized separately by `.is-home .section h2`
+     in components.css; this is the default for every other bare h2.)
+
+     `overflow-wrap: anywhere` is the fallback for a heading with an even
+     longer word: it breaks the word rather than widening the layout.
+     `break-word` would not be enough, because it leaves min-content at the
+     full word width, and min-content is what sizes a flex container like the
+     one above. */
   h2 {
     padding-bottom: 0;
-    font-size: var(--text-6xl);
+    font-size: clamp(var(--text-2xl), 8vw + 4px, var(--text-6xl));
+    overflow-wrap: anywhere;
   }
 
   .column {
@@ -2178,13 +2188,6 @@ img {
 }
 
 @media screen and (max-width: 767px) {
-  /* One notch down the scale: at 480px the content column is only 432px, and
-     a 64px heading's longest word ("(UNFILTERED)") is 519px, so it overflowed
-     and was clipped. 48px keeps the longest word inside the column. */
-  h2 {
-    font-size: var(--text-4xl);
-  }
-
   .column {
     grid-column-gap: var(--space-6);
     grid-row-gap: var(--space-6);
@@ -2460,24 +2463,13 @@ img {
 }
 
 @media screen and (max-width: 479px) {
-  html,
-  body {
-    overflow-x: hidden;
-  }
-
   h1 {
     font-size: var(--text-2xl);
     line-height: 130%;
   }
 
-  /* Same reason as the 767px step, but a flat step to 32px would drop h2 to
-     the same size as h1 and h3 here. Capping against the viewport keeps the
-     40px step on normal phones (375px+, where the longest word is 326px in a
-     327px column) and only shrinks it on very narrow screens: at 320px the
-     column is 272px, so the heading eases down to ~33px to fit. */
+  /* Size comes from the fluid clamp in the 991px block. */
   h2 {
-    padding-bottom: 0;
-    font-size: min(var(--text-3xl), 10.2vw);
     line-height: 120%;
   }
 
@@ -2732,8 +2724,14 @@ img {
     grid-row-gap: var(--space-4);
   }
 
+  /* The 767px step's 40px fits every title from ~364px up. Below that, the
+     longest words ("Experiments", "components", "applications" — up to 7em)
+     no longer fit the 272px column at 320px, and the h2 `overflow-wrap:
+     anywhere` fallback would split them mid-word. 11vw eases the size down
+     to ~35px at 320px instead. */
   .projecttitle {
     padding-top: 0;
+    font-size: clamp(var(--text-2xl), 11vw, var(--text-3xl));
   }
 
   .navbar {
