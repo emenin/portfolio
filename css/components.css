@@ -348,9 +348,9 @@ body.case-study .caption {
    a title one word too wide breaks far earlier than it needs to
    ("Getting a design / system back in sync"). */
 body.case-study .projecttitle {
-  max-width: 17ch;
-  padding-top: var(--space-5);
-  font-size: clamp(2.5rem, 5.2vw, 4.5rem);
+  max-width: 20ch;
+  padding-top: var(--space-4);
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
   font-weight: 700;
   line-height: 1.03;
   letter-spacing: -0.03em;
@@ -402,8 +402,8 @@ body.case-study article-header {
 /* A 1120px line is far too long for an 18px deck. --cs-deck is
    tuned to the break point, not to the column. */
 body.case-study article-header .textcontainer > div {
-  margin-top: var(--space-3);
-  font-size: clamp(var(--text-md), 1.5vw, var(--text-xl));
+  margin-top: var(--space-2);
+  font-size: clamp(var(--text-base), 1.3vw, var(--text-lg));
   font-weight: 300;
   line-height: 1.5;
   color: var(--cs-ink-muted);
@@ -439,7 +439,7 @@ body.case-study .case-meta {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   column-gap: var(--space-10);
   row-gap: var(--space-6);
-  margin-top: clamp(var(--space-12), 6vw, var(--space-20));
+  margin-top: var(--space-10);
   padding: 0;
 }
 
@@ -1325,41 +1325,39 @@ site-footer {
 }
 
 /* ---- AI + Design Systems: essay ----------------------------------------------
-   A lede, then body copy set in the right-hand columns with two pull lines
-   breaking out across the page. The second pull sits right-aligned so the
-   pulls zig-zag rather than stack. */
+   Two columns: the lede holds its place on the left while the body reads down
+   the right, with the two key lines set larger inside that same column. */
 #ai-design-systems .essay {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: clamp(var(--space-12), 7vw, var(--space-30));
+  align-items: start;
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
 }
 
 #ai-design-systems .essay .heading-stretch {
+  grid-column: 1 / -1;
   margin-bottom: var(--space-12);
 }
 
 #ai-design-systems .essay-lede {
-  max-width: 24ch;
-  margin: 0 0 clamp(var(--space-12), 7vw, var(--space-24));
+  position: sticky;
+  top: 140px;
+  margin: 0;
   color: var(--white);
   font-family: var(--font-display);
-  font-size: clamp(1.625rem, 3vw, 2.625rem);
+  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
   font-weight: 500;
-  line-height: 1.18;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
-#ai-design-systems .essay-body {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--space-6);
-  row-gap: var(--space-5);
-}
-
 #ai-design-systems .essay-body > p {
-  grid-column: 6 / 12;
-  margin: 0;
+  max-width: 36rem;
+  margin: 0 0 var(--space-5);
   color: rgba(250, 250, 250, 0.72);
   font-size: clamp(var(--text-base), 1.2vw, var(--text-md));
   font-weight: 300;
@@ -1367,20 +1365,14 @@ site-footer {
 }
 
 #ai-design-systems .essay-body > .essay-pull {
-  grid-column: 1 / 10;
-  margin: clamp(var(--space-8), 5vw, var(--space-16)) 0;
+  margin: var(--space-10) 0;
   color: var(--white);
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4.4vw, 3.75rem);
+  font-size: clamp(1.75rem, 2.8vw, 2.5rem);
   font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   text-wrap: balance;
-}
-
-#ai-design-systems .essay-body > .essay-pull ~ p ~ .essay-pull {
-  grid-column: 4 / 13;
-  text-align: right;
 }
 
 #ai-design-systems .essay-pull em {
@@ -1389,127 +1381,25 @@ site-footer {
 }
 
 #ai-design-systems .essay-body > .essay-close {
-  margin-top: var(--space-6);
+  margin-top: var(--space-8);
+  margin-bottom: 0;
   color: var(--white);
   font-weight: 400;
 }
 
 @media screen and (max-width: 767px) {
+  #ai-design-systems .essay {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   #ai-design-systems .essay .heading-stretch {
     margin-bottom: var(--space-6);
   }
 
-  #ai-design-systems .essay-body > p,
-  #ai-design-systems .essay-body > .essay-pull,
-  #ai-design-systems .essay-body > .essay-pull ~ p ~ .essay-pull {
-    grid-column: 1 / -1;
-    text-align: left;
+  #ai-design-systems .essay-lede {
+    position: static;
+    margin-bottom: var(--space-10);
   }
-}
-
-/* ---- What I do -------------------------------------------------------------
-   An intro on the left and a numbered index on the right. */
-#what-i-do .services {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  column-gap: clamp(var(--space-12), 7vw, var(--space-30));
-  align-items: start;
-  width: 100%;
-}
-
-#what-i-do .services-intro {
-  max-width: 20ch;
-  margin: 0;
-  color: var(--ink-900);
-  font-family: var(--font-display);
-  font-size: clamp(1.375rem, 2.2vw, 1.875rem);
-  font-weight: 500;
-  line-height: 1.28;
-  letter-spacing: -0.015em;
-}
-
-#what-i-do .services-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: service;
-}
-
-#what-i-do .services-list li {
-  counter-increment: service;
-  display: grid;
-  grid-template-columns: 3rem minmax(0, 1fr);
-  align-items: baseline;
-  margin: 0;
-  padding: var(--space-3) 0;
-  background: none;
-  color: var(--ink-900);
-  font-size: clamp(var(--text-base), 1.4vw, var(--text-lg));
-  font-weight: 400;
-  line-height: 1.45;
-  letter-spacing: 0;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-#what-i-do .services-list li::before {
-  content: counter(service, decimal-leading-zero);
-  color: var(--color-ink-muted);
-  font-family: var(--font-display);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  transition: color 0.2s ease;
-}
-
-@media (hover: hover) {
-  #what-i-do .services-list li:hover {
-    transform: translateX(6px);
-  }
-
-  #what-i-do .services-list li:hover::before {
-    color: var(--ink-900);
-  }
-}
-
-@media screen and (max-width: 767px) {
-  #what-i-do .services {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: var(--space-8);
-  }
-
-  #what-i-do .services-intro {
-    max-width: none;
-  }
-}
-
-/* ---- About -----------------------------------------------------------------
-   Bio set a step larger; "Long story short" as quiet columns, not cards. */
-#about .about-bio p {
-  font-size: clamp(var(--text-base), 1.3vw, var(--text-lg));
-  line-height: 1.6;
-}
-
-#about .about-tiles-grid .tile {
-  padding: 0;
-  background: none;
-  border: 0;
-  border-radius: 0;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
-
-#about .about-tiles-grid .tile .tiletitle {
-  color: var(--color-ink-muted);
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-#about .about-tiles-grid .tile ul li {
-  padding-left: 0;
-  background-image: none;
 }
 
 /* About photo: the cutout of Érica and Joey pops up from the heading's baseline
@@ -1586,11 +1476,10 @@ site-footer {
   --roll-twin: var(--pink-400);
 }
 
-/* Pink on pale pink is invisible, and a darker pink reads as purple. On light
-   sections the twin is the same ink, outlined instead of filled. */
-.section.light [data-roll] .roll-char::after {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--ink-900);
+/* Pink on pale pink is invisible: on light sections the twin keeps the ink and
+   only the motion remains. */
+.section.light [data-roll] {
+  --roll-twin: currentColor;
 }
 
 [data-roll] .roll-word {
@@ -1601,7 +1490,9 @@ site-footer {
 [data-roll] .roll-char {
   position: relative;
   display: inline-block;
-  overflow: hidden;
+  /* Clip top and bottom only: wide capitals (W, Y, S) overhang their box, and
+     overflow: hidden shaved their edges. */
+  clip-path: inset(0 -0.3em);
   vertical-align: bottom;
   /* Room for descenders inside the clip, without changing the line box. */
   padding-bottom: 0.16em;
@@ -1645,30 +1536,19 @@ site-footer {
 }
 
 /* ---- Links -------------------------------------------------------------------
-   One treatment for inline links: a thin solid rule at rest, and on hover a
-   pink marker stroke drawn in behind the words from the left. Backgrounds
-   rather than text-decoration so the marker can animate and wrap across
-   lines. */
+   Inline links read as links by weight alone; on hover a pink marker stroke is
+   drawn in behind the lower half of the words, from the left. A background
+   rather than text-decoration, so it can animate and wrap across lines. */
 .link,
 .site-footer-link,
 .site-footer-copy-value {
-  --link-rule: color-mix(in srgb, currentColor 40%, transparent);
-  --link-mark: rgba(246, 176, 255, 0.3);
-
   color: inherit;
   font-weight: 500;
   text-decoration: none;
-  background-image:
-    linear-gradient(var(--link-mark), var(--link-mark)),
-    linear-gradient(var(--link-rule), var(--link-rule));
+  background-image: linear-gradient(var(--pink-400), var(--pink-400));
   background-repeat: no-repeat;
-  background-position:
-    0 82%,
-    0 100%;
-  background-size:
-    0% 0.32em,
-    100% 1px;
-  padding-bottom: 0.06em;
+  background-position: 0 88%;
+  background-size: 0% 0.36em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1681,30 +1561,11 @@ site-footer {
 .site-footer-copy:hover .site-footer-copy-value,
 .site-footer-copy:focus-visible .site-footer-copy-value {
   color: inherit;
-  background-size:
-    100% 0.32em,
-    100% 1px;
+  background-size: 100% 0.36em;
 }
 
-/* On pale pink and white, the marker needs full strength to read. */
-.section.light .link,
-.section.project .link {
-  --link-mark: var(--pink-400);
-}
-
-/* "Read more on Substack →": no rule at rest, marker on hover. */
 .link.link-plain {
   font-weight: inherit;
-  background-size:
-    0% 0.32em,
-    0% 1px;
-}
-
-.link.link-plain:hover,
-.link.link-plain:focus-visible {
-  background-size:
-    100% 0.32em,
-    0% 1px;
 }
 
 /* ---- Hero motion -------------------------------------------------------------
@@ -1785,4 +1646,38 @@ site-footer {
 
 .hero.is-glowing::after {
   opacity: 1;
+}
+
+/* ---- Cursor -----------------------------------------------------------------
+   The custom cursor already marks the pointer, so text shows the regular arrow
+   rather than the I-beam; interactive elements keep the hand. */
+body,
+body * {
+  cursor: default;
+}
+
+a,
+a *,
+button,
+button *,
+summary,
+label,
+select,
+[role='button'],
+[role='button'] * {
+  cursor: pointer;
+}
+
+input,
+textarea,
+[contenteditable='true'] {
+  cursor: text;
+}
+
+/* ---- Article end: no 100vw ------------------------------------------------------
+   .containerfull is 100vw, which includes a classic scrollbar's width and made
+   article pages scroll sideways by that much. */
+.article-end-nav.containerfull {
+  width: 100%;
+  max-width: 100%;
 }

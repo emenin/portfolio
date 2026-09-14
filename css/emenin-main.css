@@ -451,11 +451,14 @@ img {
   margin-bottom: 0;
 }
 
-/* Long story short: three quiet columns, no cards. */
+/* Long story short: row 1 = 2 cells, row 2 = 1 full-width cell */
 #about .about-tiles-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-10);
+}
+#about .about-tiles-grid .tile:nth-child(3) {
+  grid-column: 1 / -1;
 }
 #about .about-tiles-grid .tile .tiletitle {
   margin-bottom: 0;
@@ -736,19 +739,31 @@ img {
     rotateZ(180deg) skew(0deg, 0deg);
 }
 
-/* The work and Unfiltered intros are full sentences, so let them wrap on all
-   widths instead of inheriting the global nowrap. */
-#work .work-intro,
+/* Unfiltered section intro carries a longer line than the work intro, so let
+   it wrap on all widths instead of inheriting the global nowrap. */
 #unfiltered .work-intro {
   max-width: 100%;
   flex-wrap: wrap;
 }
 
-#work .work-intro .horizontal__text,
 #unfiltered .work-intro .horizontal__text {
-  max-width: 62ch;
+  white-space: normal;
+}
+
+/* The work intro is two sentences: it wraps across the full column, and the
+   star sits on the first line instead of the middle of the block. */
+#work .work-intro {
+  max-width: 100%;
+  align-items: flex-start;
+}
+
+#work .work-intro .horizontal__text {
   white-space: normal;
   text-align: left;
+}
+
+#work .work-intro .icon {
+  margin-top: calc((1lh - 32px) / 2);
 }
 
 #unfiltered .horizontal__text,
@@ -1600,31 +1615,30 @@ img {
     height 0.2s ease-out;
 }
 
+/* Blog rows use the exact Work-card "View" cursor (Webflow's "Project Hover":
+   160px, 0.9 opacity, outQuint 200ms). !important because that interaction
+   writes inline sizes onto the cursor and leaves them after a card is hovered. */
 .cursor-wrapper.cursor-hover-tile .innerdot {
-  width: 96px;
-  height: 96px;
-  opacity: 1;
+  width: 160px !important;
+  height: 160px !important;
+  opacity: 0.9 !important;
   transition:
-    width 0.25s ease-out,
-    height 0.25s ease-out,
-    opacity 0.2s ease-out;
+    width 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .cursor-wrapper.cursor-hover-tile .outercircle {
-  width: 96px;
-  height: 96px;
-  opacity: 0;
+  width: 160px !important;
+  height: 160px !important;
   transition:
-    width 0.25s ease-out,
-    height 0.25s ease-out,
-    opacity 0.2s ease-out;
+    width 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .cursor-wrapper.cursor-hover-tile .tooltiplabel {
-  display: flex;
-  opacity: 1;
-  color: var(--ink-700);
-  font-size: var(--text-2xs);
+  display: block !important;
+  opacity: 1 !important;
 }
 
 .cardwrapper_unpublished {
@@ -1920,7 +1934,10 @@ img {
 
   #about .about-tiles-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-8);
+    gap: var(--space-6);
+  }
+  #about .about-tiles-grid .tile:nth-child(3) {
+    grid-column: auto;
   }
   #about .container.vertical,
   #about .containermedium.vertical {
@@ -2376,5 +2393,104 @@ img {
   #w-node-_8e79c093-2a7f-ada9-41a4-37c33d58f739-24a28250,
   #w-node-_8e79c093-2a7f-ada9-41a4-37c33d58f742-24a28250 {
     grid-area: span 1 / span 1 / span 1 / span 1;
+  }
+}
+
+/* ---- What I do: two columns ----------------------------------------------------
+   The former tab layout, kept for its proportions: the intro sits where the tab
+   labels were, the list where the tab content was. */
+/* The container used to be as wide as the 100px heading; with the smaller
+   heading it shrank and re-centred. Hold it at full width. */
+#what-i-do > .container {
+  width: 100%;
+}
+
+.marginbottom_24px {
+  margin-bottom: var(--space-6);
+}
+
+.tabs {
+  width: 100%;
+  grid-column-gap: var(--space-18);
+  grid-row-gap: var(--space-18);
+  margin-left: -72px;
+  display: flex;
+}
+
+.tabsmenu {
+  width: 100%;
+  grid-column-gap: var(--space-6);
+  grid-row-gap: var(--space-6);
+  flex-direction: column;
+  display: flex;
+}
+
+.tabcontent {
+  width: 100%;
+  display: flex;
+}
+
+/* The negative offsets on .tabs/.tabsmenu compensated for the tab labels'
+   star icons. The intro paragraph has no icon, so it lines up with the heading
+   directly. */
+#what-i-do .tabs {
+  margin-left: 0;
+}
+
+#what-i-do .tabsmenu {
+  position: relative;
+  left: 0;
+  margin-top: 0;
+}
+
+@media screen and (min-width: 1200px) {
+  #what-i-do .tabsmenu {
+    width: 398px;
+    flex-shrink: 0;
+  }
+
+  #what-i-do .tabcontent {
+    width: 478px;
+    flex-shrink: 0;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .tabsmenu {
+    grid-column-gap: var(--space-4);
+    grid-row-gap: var(--space-4);
+  }
+
+  .tabs {
+    width: 100%;
+    grid-column-gap: var(--space-10);
+    grid-row-gap: var(--space-10);
+    margin-left: -40px;
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .tabsmenu {
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    margin-top: -32px;
+  }
+
+  .tabs {
+    flex-direction: column;
+    margin-left: var(--space-1);
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .tabsmenu {
+    margin-top: -16px;
+    margin-bottom: -8px;
+  }
+
+  .tabs {
+    grid-column-gap: var(--space-10);
+    grid-row-gap: var(--space-10);
   }
 }
