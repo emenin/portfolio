@@ -18,6 +18,7 @@
 
   /* ---- Palette: pinks ---- */
   --pink-400: #f6b0ff; /* accent */
+  --pink-600: #9b3aa6; /* accent on pale pink / white (4.95:1 on pink-100) */
   --pink-100: #fce3ff; /* light surface */
   --rose-100: #ffdede; /* warm pink tint */
 

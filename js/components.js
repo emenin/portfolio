@@ -51,6 +51,41 @@
     }
   }
 
+  // ----- Letter roll -----
+  // Splits a [data-roll] heading into letters so each can roll up to a twin
+  // on hover (styles in components.css). Each letter stays a single real
+  // character, so the heading's text is unchanged for search and copy; the
+  // twin is a pseudo-element. Words are wrapped so lines only break between
+  // them, and the heading keeps its full text as its accessible name.
+  function splitRoll(heading) {
+    if (heading.dataset.rollReady === 'true') return;
+    const text = heading.textContent.replace(/\s+/g, ' ').trim();
+    heading.setAttribute('aria-label', text);
+    heading.textContent = '';
+
+    let index = 0;
+    text.split(' ').forEach(function (word, wordIndex) {
+      if (wordIndex > 0) heading.appendChild(document.createTextNode(' '));
+      const wordEl = document.createElement('span');
+      wordEl.className = 'roll-word';
+      wordEl.setAttribute('aria-hidden', 'true');
+      Array.from(word).forEach(function (char) {
+        const charEl = document.createElement('span');
+        charEl.className = 'roll-char';
+        charEl.dataset.char = char;
+        charEl.style.setProperty('--i', index++);
+        const face = document.createElement('span');
+        face.className = 'roll-face';
+        face.textContent = char;
+        charEl.appendChild(face);
+        wordEl.appendChild(charEl);
+      });
+      heading.appendChild(wordEl);
+    });
+
+    heading.dataset.rollReady = 'true';
+  }
+
   // ----- Site Footer -----
   const FOOTER_COPYRIGHT = '©2023 Érica Menin. All Rights Reserved.';
   const FOOTER_TAGLINE = 'Designed and built by me <3';
@@ -85,17 +120,13 @@
     return `
       <footer${id} class="site-footer">
         <div class="site-footer-inner">
-          <p class="site-footer-eyebrow">
-            <span class="site-footer-eyebrow-name">Érica Menin</span>
-            <span>Let&#x27;s talk</span>
-          </p>
-          <h2 class="site-footer-statement">
-            Design systems &amp; workflows <em>for humans and AI</em>.
-          </h2>
-          <p class="site-footer-standfirst">
-            Let&#x27;s have a chat! I&#x27;m available for consulting, contract
-            work, and design systems leadership opportunities.
-          </p>
+          <div class="site-footer-lead">
+            <h2 class="site-footer-title" data-roll>Let&#x27;s have a chat!</h2>
+            <p class="site-footer-standfirst">
+              I&#x27;m available for consulting, contract work, and design
+              systems leadership opportunities.
+            </p>
+          </div>
           <dl class="site-footer-contacts">
             <div class="site-footer-contact">
               <dt>LinkedIn</dt>
@@ -169,6 +200,7 @@
   class SiteFooter extends HTMLElement {
     connectedCallback() {
       this.innerHTML = siteFooterHtml();
+      this.querySelectorAll('[data-roll]').forEach(splitRoll);
     }
   }
 
@@ -406,6 +438,7 @@
           ${siteFooterHtml()}
         </div>
       `;
+      this.querySelectorAll('[data-roll]').forEach(splitRoll);
     }
   }
 
@@ -465,6 +498,16 @@
 
       this.dataset.rendered = 'true';
     }
+  }
+
+  function splitPageRolls() {
+    document.querySelectorAll('[data-roll]').forEach(splitRoll);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', splitPageRolls);
+  } else {
+    splitPageRolls();
   }
 
   function escapeHtml(str) {

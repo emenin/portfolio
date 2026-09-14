@@ -1024,8 +1024,8 @@ body.custom-cursor-active [role='button'] {
 }
 
 /* ---- Site footer ----------------------------------------------------------
-   One footer for every page, echoing the hero: eyebrow, statement, standfirst,
-   then contacts set like a dateline. No rules; spacing does the separating. */
+   One footer for every page: an invitation on the left, contacts on the
+   right, colophon underneath. No rules; spacing does the separating. */
 /* Custom elements are inline by default; as a flex child of body it would
    shrink to its content and centre instead of spanning the page. */
 site-footer {
@@ -1064,46 +1064,35 @@ site-footer {
 }
 
 .site-footer-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-areas:
+    'lead contacts'
+    'bar bar';
+  align-items: end;
+  column-gap: clamp(var(--space-12), 8vw, var(--space-30));
   max-width: 1140px;
   margin: 0 auto;
 }
 
-.site-footer-eyebrow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  margin: 0 0 var(--space-6);
-  color: rgba(250, 250, 250, 0.55);
-  font-size: var(--text-xs);
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+.site-footer-lead {
+  grid-area: lead;
 }
 
-.site-footer-eyebrow-name {
-  color: rgba(250, 250, 250, 0.85);
-  font-weight: 500;
-}
 
-.site-footer-statement {
-  max-width: 21ch;
+.site-footer-title {
   margin: 0;
   padding: 0;
   color: var(--white);
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4.2vw, 3.5rem);
-  font-weight: 700;
+  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
+  font-weight: 600;
   line-height: 1.05;
   letter-spacing: -0.03em;
   text-transform: none;
   -webkit-text-stroke-width: 0;
-  text-wrap: balance;
 }
 
-.site-footer-statement em {
-  color: var(--pink-400);
-  font-style: normal;
-}
 
 .site-footer-standfirst {
   max-width: 52ch;
@@ -1115,10 +1104,11 @@ site-footer {
 }
 
 .site-footer-contacts {
+  grid-area: contacts;
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-8) clamp(var(--space-12), 8vw, var(--space-30));
-  margin: clamp(var(--space-12), 7vh, var(--space-20)) 0 0;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin: 0;
 }
 
 .site-footer-contact dt {
@@ -1228,6 +1218,7 @@ site-footer {
   justify-content: space-between;
   align-items: center;
   gap: var(--space-3) var(--space-6);
+  grid-area: bar;
   margin-top: clamp(var(--space-16), 11vh, var(--space-25));
   color: rgba(250, 250, 250, 0.45);
   font-size: var(--text-xs);
@@ -1244,16 +1235,98 @@ site-footer {
 }
 
 @media screen and (max-width: 767px) {
-  .site-footer-statement {
-    max-width: 100%;
+  .site-footer-inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'lead'
+      'contacts'
+      'bar';
   }
 
   .site-footer-contacts {
-    flex-direction: column;
+    margin-top: var(--space-12);
   }
 
   .site-footer-bar {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+/* ---- Section headings (homepage) -------------------------------------------
+   Quieter at rest: sentence case at roughly 60% of the old 100px uppercase.
+   Webflow's scroll interactions write inline transforms (one scaled a heading
+   to 1.8x); !important is the only way to beat an inline style from CSS. */
+.is-home .section h2 {
+  padding-bottom: var(--space-6);
+  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-transform: none;
+  -webkit-text-stroke-width: 0;
+  transform: none !important;
+}
+
+/* ---- Letter roll --------------------------------------------------------------
+   See splitRoll() in components.js. Each letter clips its own box; on hover
+   the face slides up and out while a pink twin (::after) slides in, staggered
+   by the letter's index. */
+[data-roll] {
+  --roll-twin: var(--pink-400);
+}
+
+.section.light [data-roll] {
+  --roll-twin: var(--pink-600);
+}
+
+[data-roll] .roll-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+[data-roll] .roll-char {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  /* Room for descenders inside the clip, without changing the line box. */
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+
+[data-roll] .roll-face {
+  display: inline-block;
+}
+
+[data-roll] .roll-char::after {
+  content: attr(data-char);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--roll-twin);
+  transform: translateY(115%);
+}
+
+@media (hover: hover) {
+  [data-roll] .roll-face,
+  [data-roll] .roll-char::after {
+    transition: transform 0.55s cubic-bezier(0.65, 0, 0.2, 1);
+    transition-delay: calc(var(--i) * 16ms);
+  }
+
+  [data-roll]:hover .roll-face {
+    transform: translateY(-115%);
+  }
+
+  [data-roll]:hover .roll-char::after {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-roll] .roll-face,
+  [data-roll] .roll-char::after {
+    transition: none;
   }
 }
