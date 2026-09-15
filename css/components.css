@@ -657,14 +657,25 @@ body.case-study .column._50.spacesmall.sticky {
   letter-spacing: 0;
 }
 
+.article-end-nav .linkblock--prev h3::before,
+.article-end-nav .linkblock--next h3::after {
+  content: '';
+  display: inline-block;
+  width: 0.72em;
+  height: 0.72em;
+  background-color: var(--pink-400);
+  -webkit-mask: var(--arrow-icon) center / contain no-repeat;
+  mask: var(--arrow-icon) center / contain no-repeat;
+  vertical-align: -0.02em;
+}
+
 .article-end-nav .linkblock--prev h3::before {
-  content: '← ';
-  color: var(--pink-400);
+  margin-right: 0.35em;
+  rotate: 180deg;
 }
 
 .article-end-nav .linkblock--next h3::after {
-  content: ' →';
-  color: var(--pink-400);
+  margin-left: 0.35em;
 }
 
 .article-end-nav .linkblock .hovercover.backgroundinvert {
@@ -1145,18 +1156,15 @@ site-footer {
   border-radius: var(--radius-xs);
 }
 
-.site-footer-link-icon {
-  display: inline-block;
-  margin-left: 0.1em;
-  color: var(--pink-400);
-  font-size: 0.7em;
-  text-decoration: none;
-  vertical-align: 0.35em;
-  transition: transform 0.25s ease;
+.arrow.site-footer-link-icon {
+  margin-left: 0.15em;
+  background-color: var(--pink-400);
+  vertical-align: 0.1em;
+  transition: translate 0.25s ease;
 }
 
 .site-footer-link:hover .site-footer-link-icon {
-  transform: translate(2px, -2px);
+  translate: 2px -2px;
 }
 
 /* The address stays selectable so the keyboard-copy fallback works. */
@@ -1869,4 +1877,41 @@ textarea,
 .navbar .navbutton:hover,
 .navbar .navbutton:focus-visible {
   background-size: 100% 0.34em;
+}
+
+/* ---- Arrow ------------------------------------------------------------------------
+   One arrow everywhere (links, the footer, prev/next), drawn as a mask so it
+   takes the text colour and the same stroke in any font; rotate for direction. */
+:root {
+  --arrow-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 8h11M9 3.5 13.5 8 9 12.5'/%3E%3C/svg%3E");
+}
+
+.arrow {
+  display: inline-block;
+  width: 0.72em;
+  height: 0.72em;
+  background-color: currentColor;
+  -webkit-mask: var(--arrow-icon) center / contain no-repeat;
+  mask: var(--arrow-icon) center / contain no-repeat;
+  vertical-align: -0.02em;
+}
+
+.arrow--up-right {
+  rotate: -45deg;
+}
+
+/* ---- Footer links: a drawn line, not a marker ------------------------------------
+   At the footer's display size a 0.36em marker becomes a heavy block; a thin
+   line drawn in from the left reads better. */
+.site-footer-link,
+.site-footer-copy-value {
+  background-position: 0 100%;
+  background-size: 0% 2px;
+}
+
+.site-footer-link:hover,
+.site-footer-link:focus-visible,
+.site-footer-copy:hover .site-footer-copy-value,
+.site-footer-copy:focus-visible .site-footer-copy-value {
+  background-size: 100% 2px;
 }
