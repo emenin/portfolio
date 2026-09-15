@@ -1320,8 +1320,9 @@ site-footer {
   text-wrap: balance;
 }
 
-/* Syne has no italic: the replacement in the claim stays upright. */
-.ai-essay .spec-lede .crossout-replacement {
+/* Syne has no italic: the pink phrase in the claim stays upright. */
+.ai-essay .spec-lede-em {
+  color: var(--pink-400);
   font-style: normal;
 }
 
@@ -1599,8 +1600,9 @@ site-footer {
   text-wrap: pretty;
 }
 
+/* Wide enough to read a whole column through. */
 .ai-essay .spec-read.is-lens {
-  --lr: 150px;
+  --lr: 230px;
 }
 
 .ai-essay .spec-read > .spec-body:not(.spec-body--machine) {
