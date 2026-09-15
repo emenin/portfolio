@@ -1384,7 +1384,8 @@ site-footer {
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3) var(--space-6);
-  margin-bottom: calc(var(--space-12) * -1 + var(--space-6));
+  /* A clear step between the controls and the text they change. */
+  margin-bottom: calc(var(--space-12) * -1 + var(--space-10));
 }
 
 /* The story / Rewritten for AI: a two-way switch, set at the right of the columns, so it

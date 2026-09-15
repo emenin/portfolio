@@ -158,7 +158,7 @@
     <link href="../images/webclip.png" rel="apple-touch-icon" />
   
     <style>
-      /* ---- Lab only: hero loading state + inspect lens ------------------------- */
+      /* ---- Lab only: hero loading state + tokens on hover ------------------------ */
       .hero .hero-masthead, .hero .hero-headline, .hero .hero-standfirst, .hero .hero-meta { animation: none; }
       .hero-inner { position: relative; }
 
@@ -195,26 +195,18 @@
       @media (hover: none) { .inspect-switch { display: none; } }
       .hero .hero-meta { max-width: none; }
 
-      /* Inspect lens: the hero's spec, token names, under the pointer. */
-      @property --lr { syntax: '<length>'; inherits: true; initial-value: 0px; }
-      .hero-spec {
-        position: absolute; inset: -80px; pointer-events: none; --lx: 50%; --ly: 50%; --lr: 0px;
-        -webkit-mask-image: radial-gradient(circle at var(--lx) var(--ly), #000 calc(var(--lr) - 24px), transparent var(--lr));
-        mask-image: radial-gradient(circle at var(--lx) var(--ly), #000 calc(var(--lr) - 24px), transparent var(--lr));
-        transition: --lr .45s cubic-bezier(.22,1,.36,1);
-      }
-      .hero-spec.is-on { --lr: 180px; }
-      .hero-spec::before { content: ''; position: absolute; inset: 0; background: rgba(20,22,31,.4); }
-      .spec-item { position: absolute; }
+      /* Inspect: hovering a piece of the hero shows its tokens. */
+      .hero-spec { position: absolute; inset: 0; pointer-events: none; }
+      .spec-item { position: absolute; opacity: 0; transition: opacity .2s ease; }
+      .spec-item.is-on { opacity: 1; }
       .spec-box { position: absolute; inset: -6px; outline: 1px dashed rgba(246,176,255,.8); background: rgba(246,176,255,.05); }
       .spec-tags { position: absolute; left: -6px; bottom: calc(100% + 10px); display: flex; gap: 4px; width: max-content; }
       .spec-tag { white-space: nowrap; padding: 2px 6px; background: var(--pink-400); color: var(--ink-950); font: 500 11px/1.4 ui-monospace, 'SF Mono', Menlo, monospace; }
       .spec-tag.is-warn { background: var(--ink-950); color: var(--pink-400); outline: 1px dashed var(--pink-400); }
-      .hero-lens-ring { position: absolute; left: var(--lx); top: var(--ly); width: calc(var(--lr) * 2 - 24px); height: calc(var(--lr) * 2 - 24px); translate: -50% -50%; border: 1px solid rgba(246,176,255,.35); border-radius: 50%; }
 
       .lab-bar { position: fixed; left: 16px; bottom: 16px; z-index: 200; font: 500 12px var(--font-body); }
       .lab-bar button { padding: 6px 10px; border: 1px solid rgba(246,176,255,.45); border-radius: 999px; background: rgba(20,22,31,.8); color: var(--pink-400); cursor: pointer; }
-      @media (prefers-reduced-motion: reduce) { .hero-src .caret { animation: none; } .hero-spec { transition: none; } }
+      @media (prefers-reduced-motion: reduce) { .hero-src .caret { animation: none; } }
     </style>
   </head>
   <body class="body vertical is-home">
@@ -294,9 +286,9 @@
             /><span class="hero-cta-label">Available for new work</span></a
           >
           <span class="hero-meta-item">Remote · based in Germany</span>
-          <button type="button" class="inspect-switch" role="switch" aria-checked="true" aria-label="Inspect on hover">
+          <button type="button" class="inspect-switch" role="switch" aria-checked="true" aria-label="Show tokens on hover">
             <span class="inspect-switch-track" aria-hidden="true"><span class="inspect-switch-knob"></span></span>
-            <span class="inspect-switch-label">Inspect</span>
+            <span class="inspect-switch-label">Tokens</span>
           </button>
         </div>
               </div>
@@ -353,8 +345,10 @@
           ['.hero-meta', ['label/caps', 'status']]
         ];
 
+        var items = [];
         function build() {
-          spec.innerHTML = '<div class="hero-lens-ring"></div>';
+          spec.innerHTML = '';
+          items = [];
           var base = spec.getBoundingClientRect();
           SPECS.forEach(function (row) {
             var el = document.querySelector(row[0]);
@@ -377,24 +371,31 @@
               return '<span class="spec-tag' + (warn ? ' is-warn' : '') + '">' + (warn ? '⚠ ' + t.slice(1) : t) + '</span>';
             }).join('') + '</div>';
             spec.appendChild(item);
+            items.push({ el: el, item: item });
           });
         }
 
         function enabled() { return sw.getAttribute('aria-checked') === 'true' && !inner.classList.contains('is-loading'); }
 
+        function show(hit) {
+          items.forEach(function (it) { it.item.classList.toggle('is-on', it === hit); });
+        }
+
         built.addEventListener('pointermove', function (e) {
-          if (!enabled() || e.target.closest('.inspect-switch')) { spec.classList.remove('is-on'); return; }
-          var r = spec.getBoundingClientRect();
-          spec.style.setProperty('--lx', (e.clientX - r.left) + 'px');
-          spec.style.setProperty('--ly', (e.clientY - r.top) + 'px');
-          spec.classList.add('is-on');
+          if (!enabled()) { show(null); return; }
+          // The innermost piece under the pointer wins (the pink phrase over the headline).
+          var hit = null;
+          items.forEach(function (it) {
+            if (it.el.contains(e.target) && !e.target.closest('.inspect-switch') && (!hit || hit.el.contains(it.el))) hit = it;
+          });
+          show(hit);
         });
-        built.addEventListener('pointerleave', function () { spec.classList.remove('is-on'); });
+        built.addEventListener('pointerleave', function () { show(null); });
 
         sw.addEventListener('click', function () {
           var on = sw.getAttribute('aria-checked') !== 'true';
           sw.setAttribute('aria-checked', String(on));
-          if (!on) spec.classList.remove('is-on');
+          if (!on) show(null);
         });
 
         document.querySelector('[data-lab="load"]').addEventListener('click', load);
