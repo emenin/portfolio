@@ -1607,9 +1607,9 @@ site-footer {
   text-wrap: pretty;
 }
 
-/* Wide enough to read a whole column through. */
+/* Wide enough to read a column's line through, not the whole section. */
 .ai-essay .spec-read.is-lens {
-  --lr: 230px;
+  --lr: 185px;
 }
 
 .ai-essay .spec-read > .spec-body:not(.spec-body--machine) {
@@ -2296,7 +2296,7 @@ site-footer {
   white-space: nowrap;
 }
 
-.hero-spec-tag.is-warn {
+.hero-spec-tag.is-note {
   outline: 1px dashed var(--pink-400);
   background: var(--ink-950);
   color: var(--pink-400);
