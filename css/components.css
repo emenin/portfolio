@@ -1697,6 +1697,8 @@ site-footer {
 
 #about .about-tiles-grid .tile ul li:not(:only-child) {
   flex: none;
+  /* On a phone a long item wraps inside itself instead of widening the page. */
+  max-width: 100%;
 }
 
 /* The dot trails its item, so a wrapped line never starts with one. */
