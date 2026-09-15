@@ -47,47 +47,10 @@
 
   var LABEL_OFF = 'Rewrite it for AI';
   var LABEL_ON = 'Back to the story';
-  var GLYPHS = 'abcdefghijklmnopqrstuvwxyz{}[]<>/_#*+=';
-
-  // The label scrambles and resolves left to right, like the hero's "a new
-  // reader". The button holds the width of its longer label, so nothing jumps.
-  function scramble(label, text) {
-    if (reducedMotion.matches) {
-      label.textContent = text;
-      return;
-    }
-    clearInterval(label._scramble);
-    var start = performance.now();
-    label._scramble = setInterval(function () {
-      var done = Math.floor((performance.now() - start) / 28);
-      var out = '';
-      for (var i = 0; i < text.length; i++) {
-        if (i < done || text[i] === ' ') out += text[i];
-        else out += GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-      }
-      label.textContent = out;
-      if (done >= text.length) {
-        clearInterval(label._scramble);
-        label.textContent = text;
-      }
-    }, 40);
-  }
-
-  function holdWidth(toggle) {
-    var label = toggle.querySelector('.spec-toggle-label');
-    var current = label.textContent;
-    toggle.style.minWidth = '';
-    label.textContent = LABEL_ON;
-    var a = toggle.offsetWidth;
-    label.textContent = LABEL_OFF;
-    var b = toggle.offsetWidth;
-    label.textContent = current;
-    toggle.style.minWidth = Math.ceil(Math.max(a, b)) + 'px';
-  }
 
   function setLabel(toggle, on) {
     toggle.setAttribute('aria-pressed', String(on));
-    scramble(toggle.querySelector('.spec-toggle-label'), on ? LABEL_ON : LABEL_OFF);
+    toggle.querySelector('.spec-toggle-label').textContent = on ? LABEL_ON : LABEL_OFF;
   }
 
   function initLens(section, read, toggle) {
@@ -135,13 +98,6 @@
 
     read.addEventListener('pointerleave', function () {
       read.classList.remove('is-lens');
-    });
-
-    var label = toggle.querySelector('.spec-toggle-label');
-    holdWidth(toggle);
-    if (document.fonts) document.fonts.ready.then(function () { holdWidth(toggle); });
-    toggle.addEventListener('pointerenter', function () {
-      scramble(label, toggle.getAttribute('aria-pressed') === 'true' ? LABEL_ON : LABEL_OFF);
     });
 
     toggle.addEventListener('click', function () {
