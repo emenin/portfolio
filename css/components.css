@@ -1352,8 +1352,7 @@ site-footer {
 
 .ai-essay .spec-close {
   max-width: 48ch;
-  /* Closer to the columns than the section's gap: it wraps them up. */
-  margin: calc(var(--space-12) * -1 + var(--space-8)) 0 0;
+  margin: 0;
   color: var(--white);
   font-family: var(--font-display);
   font-size: clamp(1.125rem, 1.6vw, 1.375rem);
@@ -1491,50 +1490,42 @@ site-footer {
 }
 
 .ai-essay .spec-read.is-direct > .spec-body {
-  opacity: 0;
-  filter: blur(6px);
-  translate: 0 -10px;
+  display: none;
 }
 
+/* Only the version on show takes up room, so the sign-off sits right under
+   whichever one it is. */
 .ai-essay .spec-direct {
-  display: grid;
+  display: none;
   align-content: start;
   gap: var(--space-4);
   margin: 0;
-  visibility: hidden;
-  transition: visibility 0s linear 0.4s;
 }
 
 .ai-essay .spec-read.is-direct .spec-direct {
-  visibility: visible;
-  transition-delay: 0s;
+  display: grid;
 }
 
 .ai-essay .spec-direct > div {
   display: grid;
   grid-template-columns: 4rem minmax(0, 1fr);
   align-items: baseline;
-  opacity: 0;
-  translate: 0 12px;
-  transition:
-    opacity 0.3s ease,
-    translate 0.3s ease;
+  animation: spec-line-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.ai-essay .spec-read.is-direct .spec-direct > div {
-  opacity: 1;
-  translate: 0 0;
-  transition:
-    opacity 0.5s ease,
-    translate 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+.ai-essay .spec-direct > div:nth-child(2) {
+  animation-delay: 0.08s;
 }
 
-.ai-essay .spec-read.is-direct .spec-direct > div:nth-child(2) {
-  transition-delay: 0.1s;
+.ai-essay .spec-direct > div:nth-child(3) {
+  animation-delay: 0.16s;
 }
 
-.ai-essay .spec-read.is-direct .spec-direct > div:nth-child(3) {
-  transition-delay: 0.2s;
+@keyframes spec-line-in {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
 }
 
 .ai-essay .spec-direct dt {
@@ -1639,7 +1630,7 @@ site-footer {
   .ai-essay .spec-read > .spec-body,
   .ai-essay .spec-direct,
   .ai-essay .spec-direct > div {
-    transition: none !important;
+    animation: none !important;
   }
 
 }
