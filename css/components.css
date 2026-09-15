@@ -1282,8 +1282,9 @@ site-footer {
 }
 
 /* ---- AI + Design Systems (.ai-essay) ----------------------------------------------------
-   Two versions on the page while they are compared: #ai-design-systems reads the
-   text through the lens, #ai-design-systems-adapt rewrites it (js/ai-read.js).
+   Two options on the page while they are compared (js/ai-read.js):
+   #ai-design-systems rewrites the story for AI; #ai-design-systems-both adds the
+   lens that shows how AI reads it first.
    Set like a magazine opener: the claim large across the frame with its
    pen-stroke edit, the three paragraphs of reasoning side by side as columns
    (the middle one, the longest, a little wider so the three end close together),
@@ -1390,48 +1391,37 @@ site-footer {
 .ai-essay .spec-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 0.6em;
+  gap: var(--space-3);
   margin: 0;
-  padding: 0.55em 0.95em 0.5em 0.8em;
-  border: 1px solid rgba(246, 176, 255, 0.45);
-  border-radius: var(--radius-round);
-  background: transparent;
-  color: var(--pink-400);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--white);
   font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.4;
   cursor: pointer;
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease;
 }
 
-.ai-essay .spec-toggle:hover,
-.ai-essay .spec-toggle[aria-pressed='true'] {
-  background-color: var(--pink-400);
-  color: var(--ink-900);
+/* Érica's star, turning half a spin on hover like the section intros. */
+.ai-essay .spec-toggle-icon {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  transition: rotate 0.4s ease;
+}
+
+.ai-essay .spec-toggle:hover .spec-toggle-icon,
+.ai-essay .spec-toggle:focus-visible .spec-toggle-icon,
+.ai-essay .spec-toggle[aria-pressed='true'] .spec-toggle-icon {
+  rotate: 180deg;
 }
 
 .ai-essay .spec-toggle:focus-visible {
   outline: 2px solid var(--pink-400);
-  outline-offset: 3px;
-}
-
-.ai-essay .spec-toggle-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  animation: spec-blink 1.6s steps(2, jump-none) infinite;
-}
-
-@keyframes spec-blink {
-  50% {
-    opacity: 0.25;
-  }
+  outline-offset: 4px;
+  border-radius: var(--radius-xs);
 }
 
 .ai-essay .spec-legend {
@@ -1641,9 +1631,6 @@ site-footer {
     transition: none !important;
   }
 
-  .ai-essay .spec-toggle-dot {
-    animation: none;
-  }
 }
 
 /* Below the desktop layout the columns get too narrow: one reading column. */
@@ -1661,40 +1648,6 @@ site-footer {
   .ai-essay .spec-close {
     margin-top: 0;
   }
-}
-
-/* ---- Work cards: tags as an eyebrow --------------------------------------------
-   The same small-caps line as the case-study header ("Design system · Case
-   study"), instead of the bordered Webflow boxes. */
-#work .cardwrapper .taggroup {
-  display: block;
-  align-self: stretch;
-  text-align: left;
-}
-
-#work .cardwrapper .tag {
-  display: inline;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  color: var(--color-ink-muted);
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-#work .cardwrapper .tag > div {
-  display: inline;
-}
-
-#work .cardwrapper .tag + .tag::before {
-  content: '·';
-  margin: 0 0.7em;
 }
 
 /* ---- About: Long story short -----------------------------------------------------
@@ -1943,6 +1896,7 @@ site-footer {
    padding/negative margin pair lets the band overhang the text without moving
    it; clone repeats both on each line of a wrapped link. */
 .link,
+.hero-cta-label,
 .site-footer-link,
 .site-footer-copy-value {
   margin: 0 -0.12em;
@@ -1963,6 +1917,10 @@ site-footer {
 
 .link:hover,
 .link:focus-visible,
+#unfiltered .link:hover,
+#unfiltered .link:focus-visible,
+.hero-cta:hover .hero-cta-label,
+.hero-cta:focus-visible .hero-cta-label,
 .site-footer-link:hover,
 .site-footer-link:focus-visible,
 .site-footer-copy:hover .site-footer-copy-value,

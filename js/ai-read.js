@@ -1,16 +1,14 @@
-// AI + Design Systems (.ai-essay), three versions while they are compared.
+// AI + Design Systems (.ai-essay), two options while they are compared.
 //
-// data-ai-mode="read": a copy of the essay's columns, marked up the way a model
-// reads them (vague phrases underlined as ambiguous, concrete sources
-// highlighted as explicit), sits exactly on top of the text. Hovering shows it
-// through a lens around the pointer; the toggle opens the lens over the whole
-// text. The marked copy is decorative (aria-hidden).
+// data-ai-mode="adapt": "Rewrite it for AI" swaps the story for the direct
+// version (the .spec-direct lines in the markup), the way AI needs it.
 //
-// data-ai-mode="adapt": the toggle swaps the prose for the direct version (the
-// .spec-direct lines in the markup), the way AI needs it.
-//
-// data-ai-mode="both": the lens on hover, and the toggle opens the lens over the
-// whole text (the ambiguity gets marked), then adapts the prose.
+// data-ai-mode="both": adds a lens. A copy of the essay's columns, marked up the
+// way a model reads them (vague phrases underlined as ambiguous, concrete
+// sources highlighted as explicit), sits exactly on top of the text and shows
+// through a lens around the pointer. The toggle opens the lens over the whole
+// text (the ambiguity gets marked), then swaps in the direct version. The
+// marked copy is decorative (aria-hidden).
 //
 // Runs before crossout.js so the copy's pen strokes animate with the original.
 (function () {
@@ -49,14 +47,14 @@
     });
   }
 
-  function setLabel(toggle, on, offText) {
+  function setLabel(toggle, on) {
     toggle.setAttribute('aria-pressed', String(on));
     toggle.querySelector('.spec-toggle-label').textContent = on
-      ? 'Back to human'
-      : offText;
+      ? 'Back to the story'
+      : 'Rewrite it for AI';
   }
 
-  function initRead(section, read, toggle, adapt) {
+  function initLens(section, read, toggle) {
     var body = read.querySelector('.spec-body');
     var machine = body.cloneNode(true);
     machine.classList.add('spec-body--machine');
@@ -102,18 +100,16 @@
         read.classList.remove('is-lens');
       }
       read.classList.toggle('is-machine', on);
-      if (adapt) {
-        clearTimeout(rewrite);
-        if (on) {
-          // Let the ambiguity get marked first, then adapt.
-          rewrite = setTimeout(function () {
-            read.classList.add('is-direct');
-          }, reducedMotion.matches ? 0 : 900);
-        } else {
-          read.classList.remove('is-direct');
-        }
+      clearTimeout(rewrite);
+      if (on) {
+        // Let the ambiguity get marked first, then rewrite.
+        rewrite = setTimeout(function () {
+          read.classList.add('is-direct');
+        }, reducedMotion.matches ? 0 : 900);
+      } else {
+        read.classList.remove('is-direct');
       }
-      setLabel(toggle, on, adapt ? 'Adapt it for AI' : 'Read it like an AI');
+      setLabel(toggle, on);
     });
   }
 
@@ -121,7 +117,7 @@
     toggle.addEventListener('click', function () {
       var on = !read.classList.contains('is-direct');
       read.classList.toggle('is-direct', on);
-      setLabel(toggle, on, 'Adapt it for AI');
+      setLabel(toggle, on);
     });
   }
 
@@ -129,8 +125,7 @@
     var read = section.querySelector('.spec-read');
     var toggle = section.querySelector('.spec-toggle');
     if (!read || !toggle) return;
-    var mode = section.dataset.aiMode;
-    if (mode === 'adapt') initAdapt(section, read, toggle);
-    else initRead(section, read, toggle, mode === 'both');
+    if (section.dataset.aiMode === 'both') initLens(section, read, toggle);
+    else initAdapt(section, read, toggle);
   });
 })();

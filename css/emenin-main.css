@@ -245,10 +245,12 @@ img {
   align-items: center;
   gap: var(--space-2) var(--space-4);
   margin: 0 0 clamp(var(--space-8), 5vh, var(--space-14));
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
+  /* The headings' face in caps, light and barely tracked: one voice with the
+     section titles instead of a separate small-caps label style. */
+  font-family: var(--font-display);
+  font-size: 13px;
   font-weight: 400;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -300,11 +302,11 @@ img {
   /* Absolute, not ch: this row's own font-size is 12px, so ch is far too small. */
   max-width: 36rem;
   margin-top: clamp(var(--space-8), 4.5vh, var(--space-14));
-  /* Same small caps as the masthead above: one family, size, and tracking. */
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
+  /* Same caps as the masthead above: one family, size, and tracking. */
+  font-family: var(--font-display);
+  font-size: 13px;
   font-weight: 400;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -313,51 +315,26 @@ img {
   align-items: center;
   gap: var(--space-3);
   color: var(--white);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: inherit;
   text-decoration: none;
-  border-bottom: 1px solid rgba(var(--hero-glow), 0);
-  padding-bottom: 2px;
-  transition:
-    color 0.2s ease,
-    border-color 0.2s ease;
 }
 
-.hero-cta::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: var(--radius-round);
-  background: var(--pink-400);
-  animation: hero-pulse 2.4s ease-out infinite;
+/* Érica's star from the section intros, turning half a spin on hover. */
+.hero-cta-icon {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  transition: rotate 0.4s ease;
 }
 
-.hero-cta:hover,
-.hero-cta:focus-visible {
-  color: var(--pink-400);
-  border-bottom-color: rgba(var(--hero-glow), 0.6);
+.hero-cta:hover .hero-cta-icon,
+.hero-cta:focus-visible .hero-cta-icon {
+  rotate: 180deg;
 }
 
 .hero-meta-item {
   color: rgba(250, 250, 250, 0.45);
-}
-
-@keyframes hero-pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(var(--hero-glow), 0.55);
-  }
-  70% {
-    box-shadow: 0 0 0 9px rgba(var(--hero-glow), 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(var(--hero-glow), 0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-cta::before {
-    animation: none;
-  }
 }
 
 @media screen and (max-width: 991px) {
