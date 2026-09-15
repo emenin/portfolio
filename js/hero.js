@@ -53,7 +53,7 @@
 
   // ---- Tokens on hover -----------------------------------------------------------
   var spec = inner.querySelector('.hero-spec');
-  var toggle = inner.querySelector('.hero-tokens-switch');
+  var toggle = inner.querySelector('.hero-inspect-switch');
   if (!spec || !built || !toggle) return;
 
   var SPECS = [
@@ -108,7 +108,7 @@
   }
 
   built.addEventListener('pointermove', function (event) {
-    if (!enabled() || event.target.closest('.hero-tokens-switch')) {
+    if (!enabled() || event.target.closest('.hero-inspect-switch')) {
       show(null);
       return;
     }

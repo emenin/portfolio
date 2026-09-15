@@ -2189,12 +2189,12 @@ site-footer {
 }
 
 /* Tokens on hover: each piece of the hero shows the tokens it is built from.
-   A small switch at the end of the status line turns it off. */
+   A small Inspect switch at the end of the status line turns it off. */
 .hero .hero-meta {
   max-width: none;
 }
 
-.hero-tokens-switch {
+.hero-inspect-switch {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -2209,7 +2209,7 @@ site-footer {
   cursor: pointer;
 }
 
-.hero-tokens-track {
+.hero-inspect-track {
   position: relative;
   width: 30px;
   height: 17px;
@@ -2218,7 +2218,7 @@ site-footer {
   transition: background-color 0.2s ease;
 }
 
-.hero-tokens-knob {
+.hero-inspect-knob {
   position: absolute;
   top: 2px;
   left: 2px;
@@ -2231,27 +2231,27 @@ site-footer {
     background-color 0.2s ease;
 }
 
-.hero-tokens-switch[aria-checked='true'] .hero-tokens-track {
+.hero-inspect-switch[aria-checked='true'] .hero-inspect-track {
   background: var(--pink-400);
 }
 
-.hero-tokens-switch[aria-checked='true'] .hero-tokens-knob {
+.hero-inspect-switch[aria-checked='true'] .hero-inspect-knob {
   translate: 13px 0;
   background: var(--ink-950);
 }
 
-.hero-tokens-switch:hover {
+.hero-inspect-switch:hover {
   color: var(--pink-400);
 }
 
-.hero-tokens-switch:focus-visible {
+.hero-inspect-switch:focus-visible {
   outline: 2px solid var(--pink-400);
   outline-offset: 4px;
   border-radius: var(--radius-xs);
 }
 
 @media (hover: none) {
-  .hero-tokens-switch {
+  .hero-inspect-switch {
     display: none;
   }
 }
