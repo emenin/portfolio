@@ -212,7 +212,9 @@
         <div class="hero-built">
           <p class="hero-masthead">
             <span class="hero-masthead-name">Érica Menin</span>
-            <span class="hero-masthead-role">Design Systems + AI Workflows</span>
+            <span class="hero-masthead-role"
+              >Design Systems + AI Workflows</span
+            >
           </p>
           <h1 class="hero-headline">
             Your design system has
@@ -222,9 +224,8 @@
               >yeahhh, AI!
               <svg class="hero-note-arrow" viewBox="0 0 68 52">
                 <path d="M62 4 C 44 8, 20 20, 8 44" />
-                <path d="M4 32 L 8 45 L 20 40" />
-              </svg></span
-            >
+                <path d="M4 32 L 8 45 L 20 40" /></svg
+            ></span>
           </h1>
           <p class="hero-standfirst">
             It doesn't read between the lines. It reads your tokens, your rules,
@@ -255,11 +256,14 @@
               ><span class="hero-tokens-label">Tokens</span>
             </button>
           </div>
-  </div>
+        </div>
         <!-- Loading state: the hero's own source, before it resolves (js/hero.js).
              The code is decorative; screen readers hear the status line instead. -->
         <p class="hero-src-status" role="status"></p>
-        <pre class="hero-src" aria-hidden="true"><code><span class="hero-src-load">&gt; compiling tokens <span class="hero-src-count">0/48</span><span class="hero-src-caret">▍</span></span>
+        <pre
+          class="hero-src"
+          aria-hidden="true"
+        ><code><span class="hero-src-load">&gt; compiling tokens <span class="hero-src-count">0/48</span><span class="hero-src-caret">▍</span></span>
 
 <span class="t">&lt;section</span> <span class="a">hero</span> <span class="a">ground</span>=<span class="v">"ink-950"</span><span class="t">&gt;</span>
   <span class="t">&lt;p</span> <span class="a">role</span>=<span class="v">"label/caps"</span><span class="t">&gt;</span>Érica Menin · Design Systems + AI Workflows<span class="t">&lt;/p&gt;</span>
@@ -283,7 +287,16 @@
         <div class="spec">
           <p class="spec-lede">
             A design system built only for people is easy for AI to
-            <span class="crossout-wrap"><span class="crossout-word">interpret</span><svg class="crossout-svg" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path class="crossout-path" d="M2,12 Q 50,15 98,10" /></svg></span>
+            <span class="crossout-wrap"
+              ><span class="crossout-word">interpret</span
+              ><svg
+                class="crossout-svg"
+                viewBox="0 0 100 24"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path class="crossout-path" d="M2,12 Q 50,15 98,10" /></svg
+            ></span>
             <em class="crossout-replacement">get wrong</em>.
           </p>
           <div class="spec-tools">
@@ -293,27 +306,51 @@
               <span class="spec-legend-ok">explicit</span>
             </p>
             <div class="spec-switch" role="group" aria-label="Show this text">
-              <button type="button" class="spec-switch-opt" aria-pressed="true" data-mode="story">The story</button>
-              <button type="button" class="spec-switch-opt" aria-pressed="false" data-mode="ai">Rewritten for AI</button>
+              <button
+                type="button"
+                class="spec-switch-opt"
+                aria-pressed="true"
+                data-mode="story"
+              >
+                The story
+              </button>
+              <button
+                type="button"
+                class="spec-switch-opt"
+                aria-pressed="false"
+                data-mode="ai"
+              >
+                Rewritten for AI
+              </button>
             </div>
           </div>
           <div class="spec-read">
             <div class="spec-body">
               <p>
-                Beautiful storytelling, visual examples, and decisions left between
-                the lines all leave space for guesses. And
+                Beautiful storytelling, visual examples, and decisions left
+                between the lines all leave space for guesses. And
                 <strong class="spec-em">guesses make messes</strong>.
               </p>
               <p>
-                We don’t have all the answers yet. But one thing is clear: we have
-                to be more intentional. Straightforward rules,
-                <code class="spec-term">README</code> files, component guidance in
-                code, design contracts, you name it.
+                We don’t have all the answers yet. But one thing is clear: we
+                have to be more intentional. Straightforward rules,
+                <code class="spec-term">README</code> files, component guidance
+                in code, design contracts, you name it.
               </p>
               <p>
-                <strong class="spec-em">The format matters less than the intent</strong>:
-                we can’t ignore how machines read the system and just
-                <span class="crossout-wrap"><span class="crossout-word">hope</span><svg class="crossout-svg" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path class="crossout-path" d="M2,12 Q 50,15 98,10" /></svg></span>
+                <strong class="spec-em"
+                  >The format matters less than the intent</strong
+                >: we can’t ignore how machines read the system and just
+                <span class="crossout-wrap"
+                  ><span class="crossout-word">hope</span
+                  ><svg
+                    class="crossout-svg"
+                    viewBox="0 0 100 24"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                  >
+                    <path class="crossout-path" d="M2,12 Q 50,15 98,10" /></svg
+                ></span>
                 <em class="crossout-replacement">pray</em>
                 they make the right decisions.
               </p>
@@ -325,17 +362,57 @@
               </div>
               <div>
                 <dt>why</dt>
-                <dd>AI can’t read between the lines. When a decision is unwritten or unclear, it guesses.</dd>
+                <dd>
+                  AI can’t read between the lines. When a decision is unwritten
+                  or unclear, it guesses.
+                </dd>
               </div>
               <div>
                 <dt>how</dt>
-                <dd>There’s no single format. Pick one or more (rules, READMEs, guidance in code, design contracts) and keep each one straightforward.</dd>
+                <dd>
+                  There’s no single format. Pick one or more (rules, READMEs,
+                  guidance in code, design contracts) and keep each one
+                  straightforward.
+                </dd>
               </div>
             </dl>
           </div>
           <p class="spec-close">
             That’s where my work is now: making design system decisions easier
             for people and AI to find, apply, and trust.
+          </p>
+          <p class="spec-proof">
+            <img
+              src="images/Vectors-Wrapper.svg"
+              width="20"
+              height="20"
+              alt=""
+              class="spec-proof-icon"
+            />
+            <span
+              >In practice:
+              <a
+                href="https://designsystemsunfiltered.substack.com/p/the-design-system-team-is-gone-the"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link"
+                >turning our documentation checklist into a skill<span
+                  class="arrow arrow--up-right"
+                  aria-hidden="true"
+                ></span
+              ></a>
+              and
+              <a
+                href="https://designsystemsunfiltered.substack.com/p/how-a-project-that-haunted-me-led"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link"
+                >my first Cursor command<span
+                  class="arrow arrow--up-right"
+                  aria-hidden="true"
+                ></span></a
+              >.</span
+            >
           </p>
         </div>
       </div>
@@ -367,8 +444,8 @@
           <span class="horizontal__text">
             A few examples from my design system work: aligning Figma and code,
             modernising foundations, documenting decisions, and helping product
-            teams move without breaking everything.
-            For more details, feel free to
+            teams move without breaking everything. For more details, feel free
+            to
             <a href="#contact" class="link">contact me</a>.
           </span>
         </div>
@@ -456,7 +533,9 @@
         <div class="textcontainer horizontal work-intro earlier-work">
           <span class="horizontal__text">
             Earlier work:
-            <a href="soniq-design-system.html" class="link">Soniq Design System</a>
+            <a href="soniq-design-system.html" class="link"
+              >Soniq Design System</a
+            >
           </span>
         </div>
       </div>
@@ -580,8 +659,9 @@
               target="_blank"
               rel="noopener noreferrer"
               class="link link-plain"
-              >Read more on Substack <span class="arrow arrow--up-right" aria-hidden="true"></span></a
-            >
+              >Read more on Substack
+              <span class="arrow arrow--up-right" aria-hidden="true"></span
+            ></a>
           </span>
         </div>
       </div>
@@ -605,7 +685,8 @@
         <div class="tabs">
           <div class="tabsmenu">
             <p class="marginbottom_24px">
-              I work best when a design system has outgrown its first version. If you looked over my shoulder, you’d probably find me working on:
+              I work best when a design system has outgrown its first version.
+              If you looked over my shoulder, you’d probably find me working on:
             </p>
           </div>
           <div
@@ -615,13 +696,22 @@
           >
             <div class="tabpane">
               <ul role="list">
-                <li class="item_dark">Audits that turn inconsistency into decisions</li>
-                <li class="item_dark">Rules, examples, and component guidance people and AI tools can use</li>
-                <li class="item_dark">Figma foundations, tokens, variables, and code-facing component logic</li>
+                <li class="item_dark">
+                  Audits that turn inconsistency into decisions
+                </li>
+                <li class="item_dark">
+                  Rules and guidance people and AI tools can use
+                </li>
+                <li class="item_dark">
+                  Foundations, tokens, component logic and patterns
+                </li>
                 <li class="item_dark">Building components in code</li>
-                <li class="item_dark">Migration and education paths that help teams adopt changes</li>
-                <li class="item_dark">Improving the system so AI can read and use it better</li>
-                <li class="item_dark">Helping teams use AI to build with the system, not around it</li>
+                <li class="item_dark">
+                  Migration and education paths that help teams adopt changes
+                </li>
+                <li class="item_dark">
+                  Helping teams use AI to build with the system, not around it
+                </li>
               </ul>
             </div>
           </div>
@@ -656,12 +746,10 @@
             <p class="text_large">👻</p>
             <div class="textcontainer">
               <div class="textcontainer hideoverflow">
-                <h3 class="label belief-title" data-roll>
-                  Invisible is good.
-                </h3>
+                <h3 class="label belief-title" data-roll>Invisible is good.</h3>
               </div>
               <p class="text_light">
-                Good design system work often disappears into the product: fewer
+                Good design system work often is not noticeable at...: fewer
                 repeated questions, clearer decisions, and less time fighting
                 the system.
               </p>
@@ -674,7 +762,7 @@
             class="w-layout-cell"
             data-roll-trigger
           >
-            <p class="text_large">🤖</p>
+            <p class="text_large">🪄</p>
             <div class="textcontainer">
               <div class="textcontainer hideoverflow">
                 <h3 class="label belief-title" data-roll>
@@ -695,7 +783,7 @@
             class="w-layout-cell"
             data-roll-trigger
           >
-            <p class="text_large">📡</p>
+            <p class="text_large">📓</p>
             <div
               data-w-id="8e79c093-2a7f-ada9-41a4-37c33d58f731"
               class="textcontainer"
@@ -719,7 +807,7 @@
             class="w-layout-cell"
             data-roll-trigger
           >
-            <p class="text_large">🔗</p>
+            <p class="text_large">🤖</p>
             <div
               data-w-id="8e79c093-2a7f-ada9-41a4-37c33d58f73a"
               class="textcontainer"
@@ -800,7 +888,9 @@
               <div class="tiletitle">I design</div>
               <ul role="list">
                 <li class="item_dark">Design systems</li>
-                <li class="item_dark">Component libraries, tokens, and documentation</li>
+                <li class="item_dark">
+                  Component libraries, tokens, and documentation
+                </li>
                 <li class="item_dark">Patterns and foundations</li>
               </ul>
             </div>
@@ -808,14 +898,26 @@
               <div class="tiletitle">I enable</div>
               <ul role="list">
                 <li class="item_dark">Systems thinking</li>
-                <li class="item_dark">Workflows, tooling, and design operations</li>
+                <li class="item_dark">
+                  Workflows, tooling, and design operations
+                </li>
                 <li class="item_dark">Practices that help teams scale</li>
               </ul>
             </div>
             <div class="tile">
               <div class="tiletitle">I experiment</div>
               <ul role="list">
-                <li class="item_dark bulletnone">Testing AI agents, building tools that track progress and reduce friction, and <a href="https://designsystemsunfiltered.substack.com/" target="_blank" rel="noopener noreferrer" class="link">sharing my insights</a>.</li>
+                <li class="item_dark bulletnone">
+                  Testing AI agents, building tools that track progress and
+                  reduce friction, and
+                  <a
+                    href="https://designsystemsunfiltered.substack.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="link"
+                    >sharing my insights</a
+                  >.
+                </li>
               </ul>
             </div>
           </div>
@@ -868,13 +970,13 @@
                   systems
                 </button>
                 <span class="ft-q"
-                  ># What do you mean by “design systems for people and AI”?</span
+                  ># What do you mean by “design systems for people and
+                  AI”?</span
                 >
               </dt>
               <dd class="ft-answer">
-                Design systems aren’t read only by people anymore. AI reads
-                them too, and wherever a decision isn’t written down, it
-                guesses.<br /><br />
+                Design systems aren’t read only by people anymore. AI reads them
+                too, and wherever a decision isn’t written down, it guesses.<br /><br />
                 So I make the intent explicit: rules, examples, component
                 guidance in code, and documentation that both people and AI can
                 use.<br /><br />
