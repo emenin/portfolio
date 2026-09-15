@@ -30,6 +30,9 @@
   function update() {
     raf = null;
     nav.classList.toggle('nav-on-light', onLightSection());
+    // Once the page has scrolled, the bar gets a ground so content passing
+    // underneath doesn't show through the links.
+    nav.classList.toggle('nav-scrolled', window.scrollY > 24);
   }
   function schedule() {
     if (raf === null) raf = requestAnimationFrame(update);
