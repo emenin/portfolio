@@ -1328,9 +1328,9 @@ site-footer {
 }
 
 /* ---- AI + Design Systems: the essay as a spec -----------------------------------
-   One light reading column, indented like the About bio. The two key lines get
-   the link marker, drawn in as they scroll into view; a README chip and two
-   linter-style margin notes nod to the machine reading along. */
+   One light reading column, indented like the About bio. The two key lines are
+   scanned (lit up) as they scroll into view; a README chip and two linter-style
+   margin notes nod to the machine reading along. */
 #ai-design-systems .spec {
   width: 100%;
   max-width: 1140px;
@@ -1372,25 +1372,8 @@ site-footer {
   font-weight: 400;
 }
 
-#ai-design-systems .spec-mark {
-  padding: 0;
-  color: var(--white);
+#ai-design-systems .spec-em {
   font-weight: 500;
-  background-color: transparent;
-  background-image: linear-gradient(var(--pink-400), var(--pink-400));
-  background-repeat: no-repeat;
-  /* Lower and thinner than the link marker: white letters over pink lose
-     contrast, so on the dark ground the stroke sits under them. */
-  background-position: 0 100%;
-  background-size: 0% 0.26em;
-  padding-bottom: 0.06em;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  transition: background-size 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
-}
-
-#ai-design-systems .spec-mark.is-visible {
-  background-size: 100% 0.26em;
 }
 
 #ai-design-systems .spec-term {
@@ -1427,14 +1410,55 @@ site-footer {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  #ai-design-systems .spec-mark {
-    transition: none;
-  }
+/* ---- About: Long story short -----------------------------------------------------
+   A colophon rather than a grid: one row per group, the small-caps title on the
+   left and its items running inline, separated by middots. */
+#about .about-tiles-grid {
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--space-6);
 }
 
-/* ---- About: Long story short -----------------------------------------------------
-   The 2 + 1 grid without the cards: small-caps titles over plain lists. */
+#about .about-tiles-grid .tile:nth-child(3) {
+  grid-column: auto;
+}
+
+#about .about-tiles-grid .tile {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  column-gap: var(--space-6);
+  align-items: baseline;
+}
+
+/* Flex rather than inline items: it ignores the markup's whitespace, so the
+   middot spacing is exact, and lines break between items, never inside one. */
+#about .about-tiles-grid .tile ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin: 0;
+}
+
+#about .about-tiles-grid .tile ul li {
+  margin: 0;
+}
+
+#about .about-tiles-grid .tile ul li:not(:only-child) {
+  flex: none;
+}
+
+/* The dot trails its item, so a wrapped line never starts with one. */
+#about .about-tiles-grid .tile ul li:not(:last-child)::after {
+  content: '·';
+  margin: 0 0.6em;
+  color: var(--color-ink-muted);
+}
+
+@media screen and (max-width: 767px) {
+  #about .about-tiles-grid .tile {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--space-2);
+  }
+}
 /* The containers shrink to their content and re-centre; without the cards'
    padding that shifted the whole section right. Hold the 860px column. */
 #about > .container,
@@ -1535,6 +1559,12 @@ site-footer {
   }
 }
 
+/* Belief headings roll like the section headings. They no longer carry
+   .text_light, which a Webflow hover used to slide out of view. */
+#beliefs .belief-title {
+  color: var(--white);
+}
+
 /* ---- Letter roll --------------------------------------------------------------
    See splitRoll() in components.js. Each letter clips its own box; on hover
    the face slides up and out while a pink twin (::after) slides in, staggered
@@ -1586,11 +1616,13 @@ site-footer {
     transition-delay: calc(var(--i) * 16ms);
   }
 
-  [data-roll]:hover .roll-face {
+  [data-roll]:hover .roll-face,
+  [data-roll-trigger]:hover [data-roll] .roll-face {
     transform: translateY(-115%);
   }
 
-  [data-roll]:hover .roll-char::after {
+  [data-roll]:hover .roll-char::after,
+  [data-roll-trigger]:hover [data-roll] .roll-char::after {
     transform: translateY(0);
   }
 }
@@ -1673,29 +1705,6 @@ site-footer {
   }
 }
 
-/* Each letter reserves its width with an invisible copy of its final glyph
-   (::before), and the visible glyph sits on top of it, so the line never
-   shifts while letters flicker, whichever font is loaded. */
-.hero-char {
-  position: relative;
-  display: inline-block;
-}
-
-.hero-char::before {
-  content: attr(data-char);
-  visibility: hidden;
-}
-
-.hero-glyph {
-  position: absolute;
-  inset: 0;
-  text-align: center;
-}
-
-.hero-char.is-decoding .hero-glyph {
-  opacity: 0.55;
-}
-
 .hero::after {
   content: '';
   position: absolute;
@@ -1747,4 +1756,104 @@ textarea,
 .article-end-nav.containerfull {
   width: 100%;
   max-width: 100%;
+}
+
+/* ---- Scan -------------------------------------------------------------------------
+   Text lit by a sweep, as if read by a machine: the lit part is pink, the rest
+   faint, split at --scan. .scan--beam adds the moving light (hero). Scroll-in
+   emphasis ([data-reveal]) starts faint and lights up once visible. */
+@property --scan {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}
+
+.scan {
+  --scan: 100%;
+  color: transparent;
+  background-image: linear-gradient(
+    90deg,
+    var(--pink-400) 0 var(--scan),
+    rgba(246, 176, 255, 0.24) var(--scan) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.scan::selection {
+  color: var(--ink-950);
+  background-color: var(--pink-400);
+}
+
+.scan.is-scanning {
+  animation: scan 1.4s cubic-bezier(0.45, 0, 0.25, 1) both;
+}
+
+.scan--beam {
+  position: relative;
+  display: inline-block;
+}
+
+.scan--beam::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  bottom: 6%;
+  left: var(--scan);
+  width: 2px;
+  margin-left: -1px;
+  background: var(--pink-400);
+  box-shadow:
+    0 0 12px 2px rgba(246, 176, 255, 0.7),
+    0 0 40px 6px rgba(246, 176, 255, 0.25);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scan--beam.is-scanning::after {
+  animation:
+    scan 1.4s cubic-bezier(0.45, 0, 0.25, 1) both,
+    scan-beam 1.4s linear both;
+}
+
+.w-mod-js .scan[data-reveal]:not(.is-visible) {
+  --scan: 0%;
+}
+
+.scan[data-reveal].is-visible {
+  animation: scan 1.6s cubic-bezier(0.45, 0, 0.25, 1) 0.15s both;
+}
+
+@keyframes scan {
+  from {
+    --scan: 0%;
+  }
+  to {
+    --scan: 100%;
+  }
+}
+
+@keyframes scan-beam {
+  0% {
+    opacity: 0;
+  }
+  8%,
+  88% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan,
+  .w-mod-js .scan[data-reveal]:not(.is-visible) {
+    --scan: 100%;
+    animation: none;
+  }
+
+  .scan--beam::after {
+    display: none;
+  }
 }
