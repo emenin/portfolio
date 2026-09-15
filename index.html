@@ -251,30 +251,42 @@
             <span class="crossout-wrap"><span class="crossout-word">interpret</span><svg class="crossout-svg" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path class="crossout-path" d="M2,12 Q 50,15 98,10" /></svg></span>
             <em class="crossout-replacement">get wrong</em>.
           </p>
-          <div class="spec-body">
-            <p>
-              Beautiful storytelling, visual examples, and decisions left between
-              the lines all leave space for guesses. And
-              <strong class="spec-em">guesses make messes</strong>.
-            </p>
-            <p>
-              We don’t have all the answers yet. But one thing is clear: we have
-              to be more intentional. Straightforward rules,
-              <code class="spec-term">README</code> files, component guidance in
-              code, design contracts, you name it.
-            </p>
-            <p>
-              <strong class="spec-em">The format matters less than the intent</strong>:
-              we can’t ignore how machines read the system and just
-              <span class="crossout-wrap"><span class="crossout-word">hope</span><svg class="crossout-svg" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path class="crossout-path" d="M2,12 Q 50,15 98,10" /></svg></span>
-              <em class="crossout-replacement">pray</em>
-              they make the right decisions.
-            </p>
-            <p class="spec-close">
-              That’s where my work is now: making design system decisions easier
-              for people and AI to find, apply, and trust.
+          <div class="spec-tools">
+            <button class="spec-toggle" type="button" aria-pressed="false">
+              <span class="spec-toggle-dot" aria-hidden="true"></span>
+              <span class="spec-toggle-label">Read it like an AI</span>
+            </button>
+            <p class="spec-legend" aria-hidden="true">
+              <span class="spec-legend-warn">ambiguous</span>
+              <span class="spec-legend-ok">explicit</span>
             </p>
           </div>
+          <div class="spec-read">
+            <div class="spec-body">
+              <p>
+                Beautiful storytelling, visual examples, and decisions left between
+                the lines all leave space for guesses. And
+                <strong class="spec-em">guesses make messes</strong>.
+              </p>
+              <p>
+                We don’t have all the answers yet. But one thing is clear: we have
+                to be more intentional. Straightforward rules,
+                <code class="spec-term">README</code> files, component guidance in
+                code, design contracts, you name it.
+              </p>
+              <p>
+                <strong class="spec-em">The format matters less than the intent</strong>:
+                we can’t ignore how machines read the system and just
+                <span class="crossout-wrap"><span class="crossout-word">hope</span><svg class="crossout-svg" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path class="crossout-path" d="M2,12 Q 50,15 98,10" /></svg></span>
+                <em class="crossout-replacement">pray</em>
+                they make the right decisions.
+              </p>
+            </div>
+          </div>
+          <p class="spec-close">
+            That’s where my work is now: making design system decisions easier
+            for people and AI to find, apply, and trust.
+          </p>
         </div>
       </div>
     </section>
@@ -949,6 +961,7 @@
       })();
     </script>
     <script src="js/nav-accent.js" type="text/javascript"></script>
+    <script src="js/ai-read.js" type="text/javascript"></script>
     <script src="js/crossout.js" type="text/javascript"></script>
     <script src="js/about-hover.js" type="text/javascript"></script>
     <script src="js/section-reveal.js" type="text/javascript"></script>
