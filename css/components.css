@@ -1281,17 +1281,19 @@ site-footer {
   }
 }
 
-/* ---- AI + Design Systems ---------------------------------------------------------------
+/* ---- AI + Design Systems (.ai-essay) ----------------------------------------------------
+   Two versions on the page while they are compared: #ai-design-systems reads the
+   text through the lens, #ai-design-systems-adapt rewrites it (js/ai-read.js).
    Set like a magazine opener: the claim large across the frame with its
    pen-stroke edit, the three paragraphs of reasoning side by side as columns
    (the middle one, the longest, a little wider so the three end close together),
    and the closing line as a sign-off in the display face. Body text is the size
    of the section intros, with the two key lines in pink and README as a code chip. */
-#ai-design-systems > .container {
+.ai-essay > .container {
   width: 100%;
 }
 
-#ai-design-systems .spec {
+.ai-essay .spec {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1299,7 +1301,7 @@ site-footer {
 }
 
 /* Two balanced lines across the frame on desktop. */
-#ai-design-systems .spec-lede {
+.ai-essay .spec-lede {
   max-width: none;
   margin: 0;
   color: var(--white);
@@ -1312,18 +1314,18 @@ site-footer {
 }
 
 /* Syne has no italic: the replacement in the claim stays upright. */
-#ai-design-systems .spec-lede .crossout-replacement {
+.ai-essay .spec-lede .crossout-replacement {
   font-style: normal;
 }
 
-#ai-design-systems .spec-body {
+.ai-essay .spec-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1fr);
   column-gap: var(--space-12);
   width: 100%;
 }
 
-#ai-design-systems .spec-body p {
+.ai-essay .spec-body p {
   margin: 0;
   color: rgba(250, 250, 250, 0.78);
   font-size: var(--text-sm);
@@ -1332,12 +1334,12 @@ site-footer {
   text-wrap: pretty;
 }
 
-#ai-design-systems .spec-em {
+.ai-essay .spec-em {
   color: var(--pink-400);
   font-weight: 500;
 }
 
-#ai-design-systems .spec-term {
+.ai-essay .spec-term {
   padding: 0.08em 0.4em 0.12em;
   border-radius: var(--radius-sm);
   background: rgba(246, 176, 255, 0.08);
@@ -1348,7 +1350,7 @@ site-footer {
   white-space: nowrap;
 }
 
-#ai-design-systems .spec-close {
+.ai-essay .spec-close {
   max-width: 48ch;
   margin: var(--space-4) 0 0;
   color: var(--white);
@@ -1373,11 +1375,11 @@ site-footer {
   initial-value: 0px;
 }
 
-#ai-design-systems {
+.ai-essay {
   overflow-x: clip;
 }
 
-#ai-design-systems .spec-tools {
+.ai-essay .spec-tools {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1385,7 +1387,7 @@ site-footer {
   margin-bottom: calc(var(--space-12) * -1 + var(--space-6));
 }
 
-#ai-design-systems .spec-toggle {
+.ai-essay .spec-toggle {
   display: inline-flex;
   align-items: center;
   gap: 0.6em;
@@ -1407,18 +1409,18 @@ site-footer {
     color 0.25s ease;
 }
 
-#ai-design-systems .spec-toggle:hover,
-#ai-design-systems .spec-toggle[aria-pressed='true'] {
+.ai-essay .spec-toggle:hover,
+.ai-essay .spec-toggle[aria-pressed='true'] {
   background-color: var(--pink-400);
   color: var(--ink-900);
 }
 
-#ai-design-systems .spec-toggle:focus-visible {
+.ai-essay .spec-toggle:focus-visible {
   outline: 2px solid var(--pink-400);
   outline-offset: 3px;
 }
 
-#ai-design-systems .spec-toggle-dot {
+.ai-essay .spec-toggle-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -1432,7 +1434,7 @@ site-footer {
   }
 }
 
-#ai-design-systems .spec-legend {
+.ai-essay .spec-legend {
   display: flex;
   gap: var(--space-5);
   margin: 0;
@@ -1446,23 +1448,23 @@ site-footer {
     translate 0.3s ease;
 }
 
-#ai-design-systems .spec:has(.is-lens, .is-machine:not(.is-direct)) .spec-legend {
+.ai-essay .spec:has(.is-lens, .is-machine:not(.is-direct)) .spec-legend {
   opacity: 1;
   translate: 0 0;
 }
 
-#ai-design-systems .spec-legend-warn {
+.ai-essay .spec-legend-warn {
   text-decoration: underline wavy rgba(246, 176, 255, 0.85) 1px;
   text-underline-offset: 4px;
 }
 
-#ai-design-systems .spec-legend-ok {
+.ai-essay .spec-legend-ok {
   padding: 0 0.3em;
   background: var(--pink-400);
   color: var(--ink-900);
 }
 
-#ai-design-systems .spec-read {
+.ai-essay .spec-read {
   --lx: 50%;
   --ly: 50%;
   position: relative;
@@ -1470,25 +1472,25 @@ site-footer {
   transition: --lr 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-#ai-design-systems .spec-read > .spec-body,
-#ai-design-systems .spec-read > .spec-direct {
+.ai-essay .spec-read > .spec-body,
+.ai-essay .spec-read > .spec-direct {
   grid-area: 1 / 1;
 }
 
-#ai-design-systems .spec-read > .spec-body {
+.ai-essay .spec-read > .spec-body {
   transition:
     opacity 0.35s ease,
     filter 0.35s ease,
     translate 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-#ai-design-systems .spec-read.is-direct > .spec-body {
+.ai-essay .spec-read.is-direct > .spec-body {
   opacity: 0;
   filter: blur(6px);
   translate: 0 -10px;
 }
 
-#ai-design-systems .spec-direct {
+.ai-essay .spec-direct {
   display: grid;
   align-content: start;
   gap: var(--space-4);
@@ -1497,12 +1499,12 @@ site-footer {
   transition: visibility 0s linear 0.4s;
 }
 
-#ai-design-systems .spec-read.is-direct .spec-direct {
+.ai-essay .spec-read.is-direct .spec-direct {
   visibility: visible;
   transition-delay: 0s;
 }
 
-#ai-design-systems .spec-direct > div {
+.ai-essay .spec-direct > div {
   display: grid;
   grid-template-columns: 4rem minmax(0, 1fr);
   align-items: baseline;
@@ -1513,7 +1515,7 @@ site-footer {
     translate 0.3s ease;
 }
 
-#ai-design-systems .spec-read.is-direct .spec-direct > div {
+.ai-essay .spec-read.is-direct .spec-direct > div {
   opacity: 1;
   translate: 0 0;
   transition:
@@ -1521,21 +1523,21 @@ site-footer {
     translate 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-#ai-design-systems .spec-read.is-direct .spec-direct > div:nth-child(2) {
+.ai-essay .spec-read.is-direct .spec-direct > div:nth-child(2) {
   transition-delay: 0.1s;
 }
 
-#ai-design-systems .spec-read.is-direct .spec-direct > div:nth-child(3) {
+.ai-essay .spec-read.is-direct .spec-direct > div:nth-child(3) {
   transition-delay: 0.2s;
 }
 
-#ai-design-systems .spec-direct dt {
+.ai-essay .spec-direct dt {
   color: var(--pink-400);
   font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   font-size: var(--text-sm);
 }
 
-#ai-design-systems .spec-direct dd {
+.ai-essay .spec-direct dd {
   margin: 0;
   color: var(--white);
   font-family: var(--font-display);
@@ -1546,16 +1548,16 @@ site-footer {
   text-wrap: pretty;
 }
 
-#ai-design-systems .spec-read.is-lens {
+.ai-essay .spec-read.is-lens {
   --lr: 150px;
 }
 
-#ai-design-systems .spec-read.is-machine {
+.ai-essay .spec-read.is-machine {
   --lr: 1800px;
   transition-duration: 1.1s;
 }
 
-#ai-design-systems .spec-read > .spec-body:not(.spec-body--machine) {
+.ai-essay .spec-read > .spec-body:not(.spec-body--machine) {
   -webkit-mask-image: radial-gradient(
     circle at var(--lx) var(--ly),
     transparent calc(var(--lr) - 28px),
@@ -1568,7 +1570,7 @@ site-footer {
   );
 }
 
-#ai-design-systems .spec-body--machine {
+.ai-essay .spec-body--machine {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -1584,24 +1586,24 @@ site-footer {
   );
 }
 
-#ai-design-systems .spec-body--machine p,
-#ai-design-systems .spec-body--machine .spec-em,
-#ai-design-systems .spec-body--machine .crossout-replacement {
+.ai-essay .spec-body--machine p,
+.ai-essay .spec-body--machine .spec-em,
+.ai-essay .spec-body--machine .crossout-replacement {
   color: rgba(250, 250, 250, 0.38);
 }
 
-#ai-design-systems .spec-body--machine .spec-term {
+.ai-essay .spec-body--machine .spec-term {
   background: none;
   box-shadow: none;
 }
 
-#ai-design-systems .spec-body--machine .ai-warn {
+.ai-essay .spec-body--machine .ai-warn {
   color: rgba(250, 250, 250, 0.92);
   text-decoration: underline wavy rgba(246, 176, 255, 0.85) 1px;
   text-underline-offset: 4px;
 }
 
-#ai-design-systems .spec-body--machine .ai-ok {
+.ai-essay .spec-body--machine .ai-ok {
   /* Overhangs the words a hair without moving them, like the link marker. */
   margin: 0 -0.12em;
   padding: 0 0.12em;
@@ -1612,7 +1614,7 @@ site-footer {
 }
 
 /* The lens edge: a faint ring riding the mask's rim. */
-#ai-design-systems .spec-read::after {
+.ai-essay .spec-read::after {
   content: '';
   position: absolute;
   left: var(--lx);
@@ -1627,36 +1629,36 @@ site-footer {
   transition: opacity 0.3s ease;
 }
 
-#ai-design-systems .spec-read.is-lens::after {
+.ai-essay .spec-read.is-lens::after {
   opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #ai-design-systems .spec-read,
-  #ai-design-systems .spec-read > .spec-body,
-  #ai-design-systems .spec-direct,
-  #ai-design-systems .spec-direct > div {
+  .ai-essay .spec-read,
+  .ai-essay .spec-read > .spec-body,
+  .ai-essay .spec-direct,
+  .ai-essay .spec-direct > div {
     transition: none !important;
   }
 
-  #ai-design-systems .spec-toggle-dot {
+  .ai-essay .spec-toggle-dot {
     animation: none;
   }
 }
 
 /* Below the desktop layout the columns get too narrow: one reading column. */
 @media screen and (max-width: 991px) {
-  #ai-design-systems .spec {
+  .ai-essay .spec {
     gap: var(--space-8);
   }
 
-  #ai-design-systems .spec-body {
+  .ai-essay .spec-body {
     grid-template-columns: minmax(0, 1fr);
     row-gap: var(--space-4);
     max-width: 36rem;
   }
 
-  #ai-design-systems .spec-close {
+  .ai-essay .spec-close {
     margin-top: 0;
   }
 }
