@@ -1,4 +1,4 @@
-// AI + Design Systems (.ai-essay), two versions while they are compared.
+// AI + Design Systems (.ai-essay), three versions while they are compared.
 //
 // data-ai-mode="read": a copy of the essay's columns, marked up the way a model
 // reads them (vague phrases underlined as ambiguous, concrete sources
@@ -8,6 +8,9 @@
 //
 // data-ai-mode="adapt": the toggle swaps the prose for the direct version (the
 // .spec-direct lines in the markup), the way AI needs it.
+//
+// data-ai-mode="both": the lens on hover, and the toggle opens the lens over the
+// whole text (the ambiguity gets marked), then adapts the prose.
 //
 // Runs before crossout.js so the copy's pen strokes animate with the original.
 (function () {
@@ -25,6 +28,7 @@
   ];
 
   var hover = window.matchMedia('(hover: hover)');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   // Wraps the first match of each pattern, wherever it sits in a text node.
   function mark(root, patterns, className) {
@@ -52,7 +56,7 @@
       : offText;
   }
 
-  function initRead(section, read, toggle) {
+  function initRead(section, read, toggle, adapt) {
     var body = read.querySelector('.spec-body');
     var machine = body.cloneNode(true);
     machine.classList.add('spec-body--machine');
@@ -69,6 +73,8 @@
       el.classList.add(i === 0 ? 'ai-warn' : 'ai-ok');
     });
     read.appendChild(machine);
+
+    var rewrite = null;
 
     function place(x, y) {
       read.style.setProperty('--lx', x + 'px');
@@ -96,7 +102,18 @@
         read.classList.remove('is-lens');
       }
       read.classList.toggle('is-machine', on);
-      setLabel(toggle, on, 'Read it like an AI');
+      if (adapt) {
+        clearTimeout(rewrite);
+        if (on) {
+          // Let the ambiguity get marked first, then adapt.
+          rewrite = setTimeout(function () {
+            read.classList.add('is-direct');
+          }, reducedMotion.matches ? 0 : 900);
+        } else {
+          read.classList.remove('is-direct');
+        }
+      }
+      setLabel(toggle, on, adapt ? 'Adapt it for AI' : 'Read it like an AI');
     });
   }
 
@@ -112,7 +129,8 @@
     var read = section.querySelector('.spec-read');
     var toggle = section.querySelector('.spec-toggle');
     if (!read || !toggle) return;
-    if (section.dataset.aiMode === 'adapt') initAdapt(section, read, toggle);
-    else initRead(section, read, toggle);
+    var mode = section.dataset.aiMode;
+    if (mode === 'adapt') initAdapt(section, read, toggle);
+    else initRead(section, read, toggle, mode === 'both');
   });
 })();

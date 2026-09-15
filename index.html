@@ -291,7 +291,7 @@
       </div>
     </section>
     <!-- DRAFT, plan B for comparison: the same section, but the toggle adapts
-         the prose into the direct version. Keep one of the two after review. -->
+         the prose into the direct version. Keep one of the three after review. -->
     <section id="ai-design-systems-adapt" class="section ai-essay" data-ai-mode="adapt">
       <div class="w-layout-vflex container align-center-clean">
         <div class="textcontainer alignleft heading-stretch">
@@ -308,6 +308,72 @@
               <span class="spec-toggle-dot" aria-hidden="true"></span>
               <span class="spec-toggle-label">Adapt it for AI</span>
             </button>
+          </div>
+          <div class="spec-read">
+            <div class="spec-body">
+              <p>
+                Beautiful storytelling, visual examples, and decisions left between
+                the lines all leave space for guesses. And
+                <strong class="spec-em">guesses make messes</strong>.
+              </p>
+              <p>
+                We don’t have all the answers yet. But one thing is clear: we have
+                to be more intentional. Straightforward rules,
+                <code class="spec-term">README</code> files, component guidance in
+                code, design contracts, you name it.
+              </p>
+              <p>
+                <strong class="spec-em">The format matters less than the intent</strong>:
+                we can’t ignore how machines read the system and just
+                <span class="crossout-wrap"><span class="crossout-word">hope</span><svg class="crossout-svg" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path class="crossout-path" d="M2,12 Q 50,15 98,10" /></svg></span>
+                <em class="crossout-replacement">pray</em>
+                they make the right decisions.
+              </p>
+            </div>
+            <dl class="spec-direct">
+              <div>
+                <dt>rule</dt>
+                <dd>Make design system decisions explicit.</dd>
+              </div>
+              <div>
+                <dt>why</dt>
+                <dd>AI fills the gaps with guesses, and <strong class="spec-em">guesses make messes</strong>.</dd>
+              </div>
+              <div>
+                <dt>how</dt>
+                <dd>Rules, README files, guidance in code: the format matters less than the intent.</dd>
+              </div>
+            </dl>
+          </div>
+          <p class="spec-close">
+            That’s where my work is now: making design system decisions easier
+            for people and AI to find, apply, and trust.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- DRAFT, version C for comparison: the lens on hover, and the toggle marks
+         the ambiguity then adapts the prose. Keep one of the three after review. -->
+    <section id="ai-design-systems-both" class="section ai-essay" data-ai-mode="both">
+      <div class="w-layout-vflex container align-center-clean">
+        <div class="textcontainer alignleft heading-stretch">
+          <h2 class="text_light" data-roll>AI + Design Systems</h2>
+        </div>
+        <div class="spec">
+          <p class="spec-lede">
+            A design system built only for people is easy for AI to
+            <span class="crossout-wrap"><span class="crossout-word">interpret</span><svg class="crossout-svg" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path class="crossout-path" d="M2,12 Q 50,15 98,10" /></svg></span>
+            <em class="crossout-replacement">get wrong</em>.
+          </p>
+          <div class="spec-tools">
+            <button class="spec-toggle" type="button" aria-pressed="false">
+              <span class="spec-toggle-dot" aria-hidden="true"></span>
+              <span class="spec-toggle-label">Adapt it for AI</span>
+            </button>
+            <p class="spec-legend" aria-hidden="true">
+              <span class="spec-legend-warn">ambiguous</span>
+              <span class="spec-legend-ok">explicit</span>
+            </p>
           </div>
           <div class="spec-read">
             <div class="spec-body">
@@ -696,7 +762,7 @@
               <p class="text_light">
                 If AI can’t find a clear rule, the right component, or the
                 judgment behind a decision, it won’t politely wait. It will
-                guess.
+                make something up.
               </p>
             </div>
           </div>
@@ -720,7 +786,7 @@
               <p class="text_light">
                 Cover the basics. Then add depth where the system is already
                 showing you the need: repeated questions, recurring mistakes,
-                and places where people or AI keep guessing.
+                and places where people or AI keep getting stuck.
               </p>
             </div>
           </div>
@@ -886,7 +952,7 @@
               <dd class="ft-answer">
                 Design systems aren’t read only by people anymore. AI reads
                 them too, and wherever a decision isn’t written down, it
-                guesses.<br /><br />
+                fills the gap on its own.<br /><br />
                 So I make the intent explicit: rules, examples, component
                 guidance in code, and documentation that both people and AI can
                 use.<br /><br />
@@ -1100,7 +1166,7 @@
             "name": "What do you mean by “design systems for people and AI”?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Design systems aren’t read only by people anymore. AI reads them too, and wherever a decision isn’t written down, it guesses. So I make the intent explicit: rules, examples, component guidance in code, and documentation that both people and AI can use. It doesn’t start with a rebuild. Fix the foundations first, then close the gaps."
+              "text": "Design systems aren’t read only by people anymore. AI reads them too, and wherever a decision isn’t written down, it fills the gap on its own. So I make the intent explicit: rules, examples, component guidance in code, and documentation that both people and AI can use. It doesn’t start with a rebuild. Fix the foundations first, then close the gaps."
             }
           },
           {
