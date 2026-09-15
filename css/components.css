@@ -1508,7 +1508,7 @@ site-footer {
 
 .ai-essay .spec-direct > div {
   display: grid;
-  grid-template-columns: 4rem minmax(0, 1fr);
+  grid-template-columns: 5rem minmax(0, 1fr);
   align-items: baseline;
   animation: spec-line-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -1529,9 +1529,7 @@ site-footer {
 }
 
 .ai-essay .spec-direct dt {
-  color: rgba(246, 176, 255, 0.7);
-  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-size: var(--text-xs);
+  justify-self: start;
 }
 
 .ai-essay .spec-direct dd {
@@ -1540,7 +1538,7 @@ site-footer {
   font-family: var(--font-display);
   font-size: clamp(1.125rem, 1.6vw, 1.375rem);
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.35;
   letter-spacing: -0.01em;
   text-wrap: pretty;
 }
@@ -1732,7 +1730,8 @@ site-footer {
 }
 
 #work .cardwrapper .tag,
-#about .about-tiles-grid .tile .tiletitle {
+#about .about-tiles-grid .tile .tiletitle,
+.ai-essay .spec-direct dt {
   display: inline-flex;
   align-items: center;
   padding: 3px 6px 2px;
@@ -1750,18 +1749,13 @@ site-footer {
   text-transform: lowercase;
 }
 
-/* On the cards the tag is the footer's Copy chip, in ink for the light ground. */
+/* On the cards, above busy images, the tag is outlined instead of filled. */
 #work .cardwrapper .tag {
-  padding: 5px 9px 4px;
-  border: 1px solid rgba(27, 30, 41, 0.55);
+  padding: 3px 10px 2px;
+  border: 1px solid var(--ink-900);
   border-radius: var(--radius-pill);
   background: none;
-  font-family: var(--font-body);
-  font-size: var(--text-2xs);
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-weight: 500;
 }
 
 #about .about-tiles-grid .tile .tiletitle {
