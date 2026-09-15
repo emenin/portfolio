@@ -51,7 +51,7 @@
   var SPECS = [
     ['.hero-masthead', ['label/caps', '--white-85']],
     ['.hero-headline', ['heading/display', 'font-display 700']],
-    ['.hero-headline-em', ['--pink-400', '!reader: "AI"']],
+    ['.hero-headline-em', ['--pink-400']],
     ['.hero-standfirst', ['body/lg', '--white-72']],
     ['.hero-meta', ['label/caps', 'status']]
   ];
@@ -81,10 +81,7 @@
       item.innerHTML =
         '<div class="hero-spec-box"></div><div class="hero-spec-tags">' +
         row[1].map(function (tag) {
-          // "!" marks the one that isn't a token: who the reader is.
-          var note = tag.charAt(0) === '!';
-          return '<span class="hero-spec-tag' + (note ? ' is-note' : '') + '">' +
-            (note ? tag.slice(1) : tag) + '</span>';
+          return '<span class="hero-spec-tag">' + tag + '</span>';
         }).join('') +
         '</div>';
       spec.appendChild(item);

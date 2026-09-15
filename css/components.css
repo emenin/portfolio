@@ -2296,12 +2296,6 @@ site-footer {
   white-space: nowrap;
 }
 
-.hero-spec-tag.is-note {
-  outline: 1px dashed var(--pink-400);
-  background: var(--ink-950);
-  color: var(--pink-400);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-src-caret {
     animation: none;
