@@ -1400,7 +1400,8 @@ site-footer {
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
-  margin: calc(var(--space-12) * -1 + var(--space-8)) 0 0;
+  /* The same step as between the text and the sign-off. */
+  margin: var(--space-3) 0 0;
   color: rgba(250, 250, 250, 0.72);
   font-size: var(--text-sm);
   font-weight: 300;
@@ -1705,7 +1706,7 @@ site-footer {
   }
 
   .ai-essay .spec-proof {
-    margin-top: calc(var(--space-8) * -1 + var(--space-6));
+    margin-top: 0;
   }
 }
 
