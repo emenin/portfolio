@@ -118,7 +118,7 @@
     const id = document.getElementById('contact') ? '' : ' id="contact"';
 
     return `
-      <footer${id} class="site-footer">
+      <footer${id} class="site-footer" data-glow>
         <div class="site-footer-inner">
           <p class="site-footer-note">
             <span class="site-footer-note-lead">Let&#x27;s have a chat!</span>
@@ -352,10 +352,12 @@
         ? `<div class="article-date">${escapeHtml(date)}</div>`
         : '';
 
-      // Titles are escaped, but allow a literal <br> through so a
-      // specific line break can be set per page. Only <br> survives
-      // the escape — everything else stays inert text.
-      const titleHtml = escapeHtml(title).replace(/&lt;br\s*\/?&gt;/gi, '<br>');
+      // Titles are escaped, but allow a literal <br> (a line break set per
+      // page) and <em> (the accented phrase) through. Everything else stays
+      // inert text.
+      const titleHtml = escapeHtml(title)
+        .replace(/&lt;br\s*\/?&gt;/gi, '<br>')
+        .replace(/&lt;(\/?)em&gt;/gi, '<$1em>');
 
       this.innerHTML = `
         <div class="projectheader">
@@ -390,9 +392,12 @@
       const nextHref = this.getAttribute('next-href') || '';
       const nextTitle = this.getAttribute('next-title') || 'Next';
 
+      // A lone link back to the homepage is a way out, not a "previous"
+      // article, so it goes unlabelled.
+      const isBackLink = !nextHref && /^index\.html/.test(prevHref);
       const prevBlock = prevHref
-        ? `<a href="${escapeHtml(prevHref)}" class="linkblock linkblock--prev aligncenter w-inline-block">
-             <div class="text_allcaps">Previous</div>
+        ? `<a href="${escapeHtml(prevHref)}" class="linkblock linkblock--prev aligncenter w-inline-block${isBackLink ? ' linkblock--back' : ''}">
+             ${isBackLink ? '' : '<div class="text_allcaps">Previous</div>'}
              <h3>${escapeHtml(prevTitle)}</h3>
              <div class="hovercover backgroundinvert"></div>
            </a>`
@@ -519,11 +524,49 @@
     sections.forEach(function (item, section) {
       observer.observe(section);
     });
+
+    // Step aside once the article ends, so the index never sits over the
+    // prev/next band and footer.
+    const index = items[0].parentElement;
+    const end = document.querySelector('.article-end');
+    if (end) {
+      new IntersectionObserver(function (entries) {
+        index.classList.toggle('is-away', entries[0].isIntersecting);
+      }).observe(end);
+    }
+  }
+
+  // Pointer glow: a faint pink light follows the pointer across any [data-glow]
+  // element (the hero and the footer). Needs a real pointer; off under
+  // prefers-reduced-motion.
+  function initGlow() {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    document.querySelectorAll('[data-glow]').forEach(function (el) {
+      let pending = null;
+      el.addEventListener('pointermove', function (event) {
+        if (reducedMotion.matches) return;
+        const rect = el.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        if (pending) cancelAnimationFrame(pending);
+        pending = requestAnimationFrame(function () {
+          el.style.setProperty('--glow-x', x + 'px');
+          el.style.setProperty('--glow-y', y + 'px');
+          el.classList.add('is-glowing');
+        });
+      });
+      el.addEventListener('pointerleave', function () {
+        el.classList.remove('is-glowing');
+      });
+    });
   }
 
   function onReady() {
     splitPageRolls();
     trackContents();
+    initGlow();
   }
 
   if (document.readyState === 'loading') {
