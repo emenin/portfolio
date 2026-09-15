@@ -1317,7 +1317,7 @@ site-footer {
   font-weight: 500;
   line-height: 1.16;
   letter-spacing: -0.02em;
-  text-wrap: balance;
+  text-wrap: pretty;
 }
 
 /* Syne has no italic: the pink phrase in the claim stays upright. */
