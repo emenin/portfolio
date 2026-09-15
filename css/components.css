@@ -1320,6 +1320,13 @@ site-footer {
   text-wrap: pretty;
 }
 
+/* Two lines on wider screens, breaking where the sentence turns. */
+@media screen and (min-width: 768px) {
+  .ai-essay .spec-lede-line {
+    display: block;
+  }
+}
+
 /* Syne has no italic: the pink phrase in the claim stays upright. */
 .ai-essay .spec-lede-em {
   color: var(--pink-400);
