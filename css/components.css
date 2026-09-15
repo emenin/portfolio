@@ -1902,6 +1902,8 @@ site-footer {
    .text_light, which a Webflow hover used to slide out of view. */
 #beliefs .belief-title {
   color: var(--white);
+  /* Some beliefs run to two lines. */
+  line-height: 1.2;
 }
 
 /* ---- Letter roll --------------------------------------------------------------
