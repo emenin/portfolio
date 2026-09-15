@@ -1425,8 +1425,8 @@ site-footer {
   outline-offset: 3px;
 }
 
-/* A quiet hint, only where there is a pointer to hover with; it gives way to
-   the legend once the lens is in use. */
+/* A quiet hint, only where there is a pointer to hover with. It stays while the
+   lens is in use, with the legend beside it. */
 .ai-essay .spec-hint {
   display: none;
   margin: 0;
@@ -1440,10 +1440,6 @@ site-footer {
   .ai-essay .spec-hint {
     display: block;
   }
-}
-
-.ai-essay .spec:has(.is-lens, .is-machine) .spec-hint {
-  display: none;
 }
 
 .ai-essay .spec-legend {
@@ -1743,10 +1739,10 @@ site-footer {
   backdrop-filter: none;
 }
 
-/* ---- Chips ---------------------------------------------------------------------
-   One family with the footer's Copy and the essay's Rewrite it for AI: a round,
-   outlined chip in lowercase. Ink on the light sections (card tags, Long story
-   short labels); the dark-section chips keep their pink. */
+/* ---- Tags ----------------------------------------------------------------------
+   Labels that aren't interactive (card tags, Long story short) are a fixed pink
+   marker in the headings' face. Buttons keep the outlined chip (Copy, Rewrite it
+   for AI), and links only show their marker on hover, so the three don't blur. */
 #work .cardwrapper .taggroup {
   grid-column-gap: var(--space-2);
   grid-row-gap: var(--space-2);
@@ -1756,18 +1752,18 @@ site-footer {
 #about .about-tiles-grid .tile .tiletitle {
   display: inline-flex;
   align-items: center;
-  padding: 5px 10px 4px;
-  border: 1px solid var(--ink-900);
-  border-radius: var(--radius-pill);
-  background: none;
+  padding: 3px 6px 2px;
+  border: 0;
+  border-radius: 0;
+  background: var(--pink-400);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   color: var(--ink-900);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.02em;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
   text-transform: lowercase;
 }
 
