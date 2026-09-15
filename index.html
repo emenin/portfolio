@@ -299,83 +299,85 @@
             ></span>
             <em class="crossout-replacement">get wrong</em>.
           </p>
-          <div class="spec-tools">
-            <p class="spec-hint" aria-hidden="true">
-              Hover the text to see what AI reads as
-              <span class="spec-legend-warn">ambiguous</span> or
-              <span class="spec-legend-ok">explicit</span>
-            </p>
-            <div class="spec-switch" role="group" aria-label="Show this text">
-              <button
-                type="button"
-                class="spec-switch-opt"
-                aria-pressed="true"
-                data-mode="story"
-              >
-                The story
-              </button>
-              <button
-                type="button"
-                class="spec-switch-opt"
-                aria-pressed="false"
-                data-mode="ai"
-              >
-                Rewritten for AI
-              </button>
+          <div class="spec-doc">
+            <div class="spec-tools">
+              <p class="spec-hint" aria-hidden="true">
+                Hover the text to see what AI reads as
+                <span class="spec-legend-warn">ambiguous</span> or
+                <span class="spec-legend-ok">explicit</span>
+              </p>
+              <div class="spec-switch" role="group" aria-label="Show this text">
+                <button
+                  type="button"
+                  class="spec-switch-opt"
+                  aria-pressed="true"
+                  data-mode="story"
+                >
+                  The story
+                </button>
+                <button
+                  type="button"
+                  class="spec-switch-opt"
+                  aria-pressed="false"
+                  data-mode="ai"
+                >
+                  Rewritten for AI
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="spec-read">
-            <div class="spec-body">
-              <p>
-                Beautiful storytelling, visual examples, and decisions left
-                between the lines all leave space for guesses. And
-                <strong class="spec-em">guesses make messes</strong>.
-              </p>
-              <p>
-                We don’t have all the answers yet. But one thing is clear: we
-                have to be more intentional. Straightforward rules,
-                <code class="spec-term">README</code> files, component guidance
-                in code, design contracts, you name it.
-              </p>
-              <p>
-                <strong class="spec-em"
-                  >The format matters less than the intent</strong
-                >: we can’t ignore how machines read the system and just
-                <span class="crossout-wrap"
-                  ><span class="crossout-word">hope</span
-                  ><svg
-                    class="crossout-svg"
-                    viewBox="0 0 100 24"
-                    preserveAspectRatio="none"
-                    aria-hidden="true"
-                  >
-                    <path class="crossout-path" d="M2,12 Q 50,15 98,10" /></svg
-                ></span>
-                <em class="crossout-replacement">pray</em>
-                they make the right decisions.
-              </p>
+            <div class="spec-read">
+              <div class="spec-body">
+                <p>
+                  Beautiful storytelling, visual examples, and decisions left
+                  between the lines all leave space for guesses. And
+                  <strong class="spec-em">guesses make messes</strong>.
+                </p>
+                <p>
+                  We don’t have all the answers yet. But one thing is clear: we
+                  have to be more intentional. Straightforward rules,
+                  <code class="spec-term">README</code> files, component guidance
+                  in code, design contracts, you name it.
+                </p>
+                <p>
+                  <strong class="spec-em"
+                    >The format matters less than the intent</strong
+                  >: we can’t ignore how machines read the system and just
+                  <span class="crossout-wrap"
+                    ><span class="crossout-word">hope</span
+                    ><svg
+                      class="crossout-svg"
+                      viewBox="0 0 100 24"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                    >
+                      <path class="crossout-path" d="M2,12 Q 50,15 98,10" /></svg
+                  ></span>
+                  <em class="crossout-replacement">pray</em>
+                  they make the right decisions.
+                </p>
+              </div>
+              <dl class="spec-direct">
+                <div>
+                  <dt>rule</dt>
+                  <dd>Make design system decisions explicit.</dd>
+                </div>
+                <div>
+                  <dt>why</dt>
+                  <dd>
+                    AI can’t read between the lines. When a decision is unwritten
+                    or unclear, it guesses.
+                  </dd>
+                </div>
+                <div>
+                  <dt>how</dt>
+                  <dd>
+                    There’s no single format. Pick one or more (rules, READMEs,
+                    guidance in code, design contracts) and keep each one
+                    straightforward.
+                  </dd>
+                </div>
+              </dl>
             </div>
-            <dl class="spec-direct">
-              <div>
-                <dt>rule</dt>
-                <dd>Make design system decisions explicit.</dd>
-              </div>
-              <div>
-                <dt>why</dt>
-                <dd>
-                  AI can’t read between the lines. When a decision is unwritten
-                  or unclear, it guesses.
-                </dd>
-              </div>
-              <div>
-                <dt>how</dt>
-                <dd>
-                  There’s no single format. Pick one or more (rules, READMEs,
-                  guidance in code, design contracts) and keep each one
-                  straightforward.
-                </dd>
-              </div>
-            </dl>
           </div>
           <p class="spec-close">
             That’s where my work is now: making design system decisions easier
@@ -390,7 +392,7 @@
               class="spec-proof-icon"
             />
             <span
-              >I wrote about trying this:
+              >How I’ve applied this:
               <a
                 href="https://designsystemsunfiltered.substack.com/p/the-design-system-team-is-gone-the"
                 target="_blank"
@@ -765,7 +767,7 @@
             <div class="textcontainer">
               <div class="textcontainer hideoverflow">
                 <h3 class="label belief-title" data-roll>
-                  AI makes it valid. Humans make it good.
+                  AI won’t replace the human. It needs one.
                 </h3>
               </div>
               <p class="text_light">

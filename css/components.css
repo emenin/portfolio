@@ -1300,6 +1300,13 @@ site-footer {
   gap: var(--space-12);
 }
 
+/* The part the switch and the lens act on. */
+.ai-essay .spec-doc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
 /* Two balanced lines across the frame on desktop. */
 .ai-essay .spec-lede {
   max-width: none;
