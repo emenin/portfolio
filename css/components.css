@@ -2037,35 +2037,154 @@ site-footer {
 }
 
 /* ---- Hero motion -------------------------------------------------------------
-   A quick entrance, tokens on hover (js/hero.js); the pointer glow lives in
-   components.js. The entrance starts at once and is over in under a second:
-   each line rises into place a beat after the one above. */
+   Loading state and tokens on hover (js/hero.js); the pointer glow lives in
+   components.js.
+
+   Loading: the hero opens on its own source with a token counter, then the
+   source blurs out and the pieces rise in, once per visit (hero-seen skips it). Hidden only when JS runs (w-mod-js,
+   set in the head), and a failsafe shows the hero after 4s whatever happens. */
 .hero-inner {
   position: relative;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .hero-built > * {
-    animation: hero-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
+.hero-src {
+  position: absolute;
+  inset: 0 0 auto 0;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: none;
+  color: rgba(250, 250, 250, 0.62);
+  font: 400 clamp(11px, 1.15vw, 16px) / 1.9 ui-monospace, 'SF Mono', Menlo,
+    Consolas, monospace;
+  white-space: pre;
+  pointer-events: none;
+  opacity: 0;
+  filter: blur(8px);
+  visibility: hidden;
+  transition:
+    opacity 0.45s ease,
+    filter 0.45s ease,
+    visibility 0s linear 0.45s;
+}
 
-  .hero-built > :nth-child(2) {
-    animation-delay: 0.08s;
-  }
+/* Announced to screen readers only; emptied once the hero is ready. */
+.hero-src-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 
-  .hero-built > :nth-child(3) {
-    animation-delay: 0.18s;
-  }
+.hero-src .t,
+.hero-src-load {
+  color: rgba(246, 176, 255, 0.9);
+}
 
-  .hero-built > :nth-child(4) {
-    animation-delay: 0.28s;
+.hero-src .a {
+  color: rgba(250, 250, 250, 0.45);
+}
+
+.hero-src .v {
+  color: var(--white);
+}
+
+.hero-src-caret {
+  margin-left: 2px;
+  animation: hero-caret 1s steps(2, jump-none) infinite;
+}
+
+@keyframes hero-caret {
+  50% {
+    opacity: 0;
   }
 }
 
-@keyframes hero-in {
-  from {
+.hero-built > * {
+  transition:
+    opacity 0.6s ease,
+    translate 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-built > :nth-child(2) {
+  transition-delay: 0.08s;
+}
+
+.hero-built > :nth-child(3) {
+  transition-delay: 0.18s;
+}
+
+.hero-built > :nth-child(4) {
+  transition-delay: 0.28s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .w-mod-js:not(.hero-seen) .hero-inner.is-loading .hero-src {
+    opacity: 1;
+    filter: none;
+    visibility: visible;
+    transition: none;
+  }
+
+  .w-mod-js:not(.hero-seen) .hero-inner.is-loading .hero-built > * {
     opacity: 0;
     translate: 0 14px;
+    transition: none;
+    animation: hero-failsafe 0s 4s forwards;
+  }
+}
+
+@keyframes hero-failsafe {
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* A note in the margin, by hand: an arrow drawn to "a new reader". Decorative;
+   hidden where the headline takes the full width. */
+.hero-headline {
+  position: relative;
+}
+
+.hero-note {
+  position: absolute;
+  left: calc(100% + var(--space-2));
+  top: 0.1em;
+  width: 11rem;
+  color: var(--pink-400);
+  font-family: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+  font-size: 1.625rem;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0;
+  rotate: -4deg;
+  pointer-events: none;
+}
+
+.hero-note-arrow {
+  position: absolute;
+  top: 1.45em;
+  left: -3.2em;
+  width: 3.4em;
+  height: 2.6em;
+  overflow: visible;
+}
+
+.hero-note-arrow path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media screen and (max-width: 1199px) {
+  .hero-note {
+    display: none;
   }
 }
 
@@ -2177,6 +2296,11 @@ site-footer {
   white-space: nowrap;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .hero-src-caret {
+    animation: none;
+  }
+}
 
 /* Pointer glow ([data-glow], components.js). The hero paints it above its
    ground layer; the footer behind its content. */
