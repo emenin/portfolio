@@ -19,16 +19,14 @@
   the reading column, the type scale and the two ink levels.
   Without it the page falls back to the older Webflow defaults.
 
-  LAYOUT — everything sits on one frame that matches the header:
-    ┌─ emenin ───────────────────── Let's talk! ─┐   ← site header
-    │  Title + subtitle + meta (full frame)      │
-    │  Contents (rail)      Article (column)     │
-    └────────────────────────────────────────────┘
-  --cs-rail + the gap + --cs-col always total the frame, so the gap
-  and the reading column trade off against each other directly.
-  --cs-deck sets the standfirst width independently.
+  LAYOUT — reading mode: one centred column (--cs-col).
+    Eyebrow, title, standfirst, one line of meta
+    Article column; figures break out wider (--cs-wide)
+    Contents become a small fixed index on the left (≥1280px), with
+    the current section's name shown; hidden on smaller screens.
+  Put a <ul class="case-stats"> after the intro for the key numbers.
 
-  PROJECT/CASE STUDY: Option A — sidebar TOC + `column studycase`
+  PROJECT/CASE STUDY: Option A — contents index + `column studycase`
   with id="…" `flexblock` sections
   BLOG POST: Option B — single `article-body` column, no sidebar
 -->
@@ -178,11 +176,10 @@
         </article-header>
 
         <!--
-          Metadata. 2x2 of stacked label/value pairs, framed by a
-          hairline above and below; the second column lines up with
-          the article text below. Keep the two short fields first so
-          they land on the top row. Delete the whole <dl> for a blog
-          post.
+          Metadata: one quiet line of label/value pairs under the
+          standfirst. Keep it short; scope numbers go in the
+          <ul class="case-stats"> after the intro instead. Delete the
+          whole <dl> for a blog post.
         -->
         <dl class="case-meta">
           <div class="case-meta__item">
@@ -192,10 +189,6 @@
           <div class="case-meta__item">
             <dt>Timeline</dt>
             <dd>Year</dd>
-          </div>
-          <div class="case-meta__item">
-            <dt>Scope</dt>
-            <dd>What the work covered · separated by middots</dd>
           </div>
           <div class="case-meta__item">
             <dt>My focus</dt>
@@ -222,6 +215,12 @@
 
         <div class="column studycase">
           <!-- One `flexblock` per section, with an id matching its TOC link. -->
+          <!-- Optional, after the intro section: the key numbers.
+          <ul class="case-stats" role="list" aria-label="Scope">
+            <li><strong>62</strong> <span>components audited</span></li>
+            <li><strong>3</strong> <span>platforms</span></li>
+          </ul>
+          -->
           <div id="section-1" class="w-layout-vflex flexblock">
             <h3>Section one</h3>
             <p>

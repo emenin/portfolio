@@ -485,10 +485,51 @@
     document.querySelectorAll('[data-roll]').forEach(splitRoll);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', splitPageRolls);
-  } else {
+  // Case-study contents index: mark the section currently being read, i.e. the
+  // first one crossing a band a little above the middle of the viewport.
+  function trackContents() {
+    const items = Array.from(document.querySelectorAll('body.case-study .item_summary'));
+    if (!items.length || !('IntersectionObserver' in window)) return;
+
+    const sections = new Map();
+    items.forEach(function (item) {
+      const link = item.querySelector('a[href^="#"]');
+      const section = link && document.getElementById(link.getAttribute('href').slice(1));
+      if (section) sections.set(section, item);
+    });
+
+    const inBand = new Set();
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) inBand.add(entry.target);
+          else inBand.delete(entry.target);
+        });
+        let current = null;
+        sections.forEach(function (item, section) {
+          if (!current && inBand.has(section)) current = item;
+        });
+        if (!current) return;
+        items.forEach(function (item) {
+          item.classList.toggle('is-current', item === current);
+        });
+      },
+      { rootMargin: '-35% 0px -55% 0px' }
+    );
+    sections.forEach(function (item, section) {
+      observer.observe(section);
+    });
+  }
+
+  function onReady() {
     splitPageRolls();
+    trackContents();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', onReady);
+  } else {
+    onReady();
   }
 
   function escapeHtml(str) {
