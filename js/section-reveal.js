@@ -1,11 +1,11 @@
-// Fades/slides in elements marked .reveal-on-scroll the first time they
-// scroll into view. Independent of the site's own Webflow scroll-reveal
+// Adds .is-visible to .reveal-on-scroll and [data-reveal] elements the first
+// time they scroll into view (.reveal-on-scroll also fades/slides in). Independent of the site's own Webflow scroll-reveal
 // system, which doesn't reliably fire (see the About section's stuck
 // opacity:0 elements) — this one just uses a plain IntersectionObserver.
 (function () {
   'use strict';
 
-  var targets = document.querySelectorAll('.reveal-on-scroll');
+  var targets = document.querySelectorAll('.reveal-on-scroll, [data-reveal]');
   if (!targets.length) return;
 
   if (!('IntersectionObserver' in window)) {
