@@ -89,4 +89,7 @@
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(build);
   window.addEventListener('load', build);
   window.addEventListener('resize', build);
+  built.addEventListener('animationend', function (event) {
+    if (event.target.parentNode === built) build();
+  });
 })();

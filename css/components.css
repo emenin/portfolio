@@ -2037,9 +2037,36 @@ site-footer {
 }
 
 /* ---- Hero motion -------------------------------------------------------------
-   Tokens on hover (js/hero.js); the pointer glow lives in components.js. */
+   A quick entrance, tokens on hover (js/hero.js); the pointer glow lives in
+   components.js. The entrance starts at once and is over in under a second:
+   each line rises into place a beat after the one above. */
 .hero-inner {
   position: relative;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-built > * {
+    animation: hero-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero-built > :nth-child(2) {
+    animation-delay: 0.08s;
+  }
+
+  .hero-built > :nth-child(3) {
+    animation-delay: 0.18s;
+  }
+
+  .hero-built > :nth-child(4) {
+    animation-delay: 0.28s;
+  }
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
 }
 
 /* Tokens on hover: each piece of the hero shows the tokens it is built from.
