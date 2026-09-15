@@ -1282,9 +1282,8 @@ site-footer {
 }
 
 /* ---- AI + Design Systems (.ai-essay) ----------------------------------------------------
-   Two options on the page while they are compared (js/ai-read.js):
-   #ai-design-systems rewrites the story for AI; #ai-design-systems-both adds the
-   lens that shows how AI reads it first.
+   The lens on hover shows how AI reads the story; Rewrite it for AI marks the
+   ambiguity, then swaps in the direct version (js/ai-read.js).
    Set like a magazine opener: the claim large across the frame with its
    pen-stroke edit, the three paragraphs of reasoning side by side as columns
    (the middle one, the longest, a little wider so the three end close together),
@@ -1388,40 +1387,42 @@ site-footer {
   margin-bottom: calc(var(--space-12) * -1 + var(--space-6));
 }
 
+/* The same chip as the footer's Copy button. */
 .ai-essay .spec-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
+  display: inline-block;
   margin: 0;
-  padding: 0;
-  border: 0;
+  padding: 5px 9px 4px;
+  border: 1px solid rgba(246, 176, 255, 0.45);
+  border-radius: var(--radius-pill);
   background: none;
-  color: var(--white);
+  color: var(--pink-400);
   font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  line-height: 1.4;
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
-/* Érica's star, turning half a spin on hover like the section intros. */
-.ai-essay .spec-toggle-icon {
-  flex: none;
-  width: 24px;
-  height: 24px;
-  transition: rotate 0.4s ease;
+.ai-essay .spec-toggle:hover,
+.ai-essay .spec-toggle:focus-visible {
+  border-color: var(--pink-400);
 }
 
-.ai-essay .spec-toggle:hover .spec-toggle-icon,
-.ai-essay .spec-toggle:focus-visible .spec-toggle-icon,
-.ai-essay .spec-toggle[aria-pressed='true'] .spec-toggle-icon {
-  rotate: 180deg;
+.ai-essay .spec-toggle[aria-pressed='true'] {
+  background-color: var(--pink-400);
+  border-color: var(--pink-400);
+  color: var(--ink-950);
 }
 
 .ai-essay .spec-toggle:focus-visible {
   outline: 2px solid var(--pink-400);
-  outline-offset: 4px;
-  border-radius: var(--radius-xs);
+  outline-offset: 3px;
 }
 
 .ai-essay .spec-legend {

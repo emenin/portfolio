@@ -1,16 +1,14 @@
-// AI + Design Systems (.ai-essay), two options while they are compared.
+// AI + Design Systems (.ai-essay): how AI reads the story, then the story
+// rewritten for AI.
 //
-// data-ai-mode="adapt": "Rewrite it for AI" swaps the story for the direct
-// version (the .spec-direct lines in the markup), the way AI needs it.
+// A copy of the essay's columns, marked up the way a model reads them (vague
+// phrases underlined as ambiguous, concrete sources highlighted as explicit),
+// sits exactly on top of the text and shows through a lens around the pointer.
+// "Rewrite it for AI" opens the lens over the whole text (the ambiguity gets
+// marked), then swaps in the direct version (the .spec-direct lines in the
+// markup). The marked copy is decorative (aria-hidden).
 //
-// data-ai-mode="both": adds a lens. A copy of the essay's columns, marked up the
-// way a model reads them (vague phrases underlined as ambiguous, concrete
-// sources highlighted as explicit), sits exactly on top of the text and shows
-// through a lens around the pointer. The toggle opens the lens over the whole
-// text (the ambiguity gets marked), then swaps in the direct version. The
-// marked copy is decorative (aria-hidden).
-//
-// Runs before crossout.js so the copy's pen strokes animate with the original.
+// Runs before crossout.js, which only animates the original's pen strokes.
 (function () {
   'use strict';
 
@@ -70,6 +68,17 @@
       // less than the intent" is the rule.
       el.classList.add(i === 0 ? 'ai-warn' : 'ai-ok');
     });
+    // A pen stroke means nothing to a model: it reads "hope pray". The stroke
+    // goes, and both words are marked as ambiguous.
+    machine.querySelectorAll('.crossout-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('.crossout-svg');
+      if (svg) svg.remove();
+      wrap.classList.add('ai-warn');
+      var next = wrap.nextElementSibling;
+      if (next && next.classList.contains('crossout-replacement')) {
+        next.classList.add('ai-warn');
+      }
+    });
     read.appendChild(machine);
 
     var rewrite = null;
@@ -113,19 +122,11 @@
     });
   }
 
-  function initAdapt(section, read, toggle) {
-    toggle.addEventListener('click', function () {
-      var on = !read.classList.contains('is-direct');
-      read.classList.toggle('is-direct', on);
-      setLabel(toggle, on);
-    });
-  }
 
   document.querySelectorAll('.ai-essay').forEach(function (section) {
     var read = section.querySelector('.spec-read');
     var toggle = section.querySelector('.spec-toggle');
     if (!read || !toggle) return;
-    if (section.dataset.aiMode === 'both') initLens(section, read, toggle);
-    else initAdapt(section, read, toggle);
+    initLens(section, read, toggle);
   });
 })();
