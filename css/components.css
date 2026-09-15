@@ -2144,6 +2144,17 @@ textarea,
   rotate: -45deg;
 }
 
+/* A card that opens an article elsewhere says so after its title. */
+.card-title-arrow {
+  margin-left: 0.3em;
+  vertical-align: 0.06em;
+  transition: translate 0.25s ease;
+}
+
+.card:hover .card-title-arrow {
+  translate: 2px -2px;
+}
+
 
 /* ---- Easter-egg asides -----------------------------------------------------------
    No boxes. The logo's aside is a small line of text that wipes in beside the
