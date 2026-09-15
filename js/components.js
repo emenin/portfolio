@@ -34,7 +34,7 @@
         <div class="navbar">
           <div class="container _100">
             <a href="${escapeHtml(BRAND_HREF)}" aria-current="page" class="brand w-nav-brand w--current">
-              <div data-w-id="f48a2ca4-7775-e79e-1709-0f9c0e85b6f7" class="logo">${escapeHtml(BRAND_LABEL)}</div>
+              <div class="logo">${escapeHtml(BRAND_LABEL)}</div>
               <div class="logointeraction">
                 <div>${escapeHtml(BRAND_TOOLTIP)}</div>
               </div>
@@ -100,7 +100,7 @@
     return `
       <div>${escapeHtml(copyright)}<br></div>
       <div class="footer-tagline-wrap">
-        <span>${escapeHtml(FOOTER_TAGLINE)}</span>
+        <span class="footer-tagline">${escapeHtml(FOOTER_TAGLINE)}</span>
         <span class="footer-tooltip">${escapeHtml(FOOTER_TOOLTIP)}</span>
       </div>
     `;

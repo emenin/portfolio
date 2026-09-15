@@ -726,74 +726,11 @@ body.case-study .column._50.spacesmall.sticky {
   top: 0;
 }
 
-/* Footer tagline easter egg (mouse-follow tooltip) in the site footer bar. */
+/* Footer tagline easter egg: see "Easter-egg asides" at the end of this file. */
 .site-footer-bar .footer-tagline-wrap {
   position: relative;
-  display: inline-block;
   cursor: default;
   user-select: none;
-}
-
-.site-footer-bar .footer-tooltip {
-  width: max-content;
-  /* Never wider than the page content column. `width: max-content` keeps the
-     tooltip on one line while it fits; the clamp lets it wrap rather than
-     overflow, which is why there is no `white-space: nowrap` here. */
-  max-width: min(90vw, calc(100vw - 2 * var(--page-gutter)));
-  opacity: 0;
-  visibility: hidden;
-  color: var(--ink-950);
-  letter-spacing: 0.05em;
-  background-color: var(--pink-100);
-  border: 1px solid rgba(246, 176, 255, 0.55);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4) var(--space-2);
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 160%;
-  position: absolute;
-  /* Centred on the tagline. Below 992px the footer column is centred, so a
-     centred tooltip keeps an equal margin on both sides; anchoring it with
-     `left: 0` made it hang ~57px past the tagline's right edge and pushed
-     document.body.scrollWidth past the viewport. The centring lives in
-     `translate` rather than `transform` because js/footer-tagline.js owns
-     `transform` for the mouse-follow offset. */
-  left: 50%;
-  right: auto;
-  translate: -50% 0;
-  bottom: 100%;
-  margin-bottom: var(--space-2);
-  z-index: 100;
-  transition:
-    opacity 0.2s ease,
-    visibility 0.2s ease;
-  text-align: center;
-  box-shadow: var(--shadow-lg);
-  will-change: transform;
-  transform-style: preserve-3d;
-}
-
-/* From 992px up the footer column is right-aligned against the page gutter,
-   so anchor the tooltip's right edge to the tagline instead of centring it —
-   that keeps the whole box inside the gutter. */
-@media screen and (min-width: 768px) {
-  .site-footer-bar .footer-tooltip {
-    left: auto;
-    right: 0;
-    translate: none;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .site-footer-bar .footer-tooltip {
-    left: 0;
-    translate: none;
-  }
-}
-
-.site-footer-bar .footer-tagline-wrap:hover .footer-tooltip {
-  opacity: 1;
-  visibility: visible;
 }
 
 /* Shared horizontal gutters for nav and footer bars. */
@@ -1300,15 +1237,6 @@ site-footer {
   letter-spacing: 0.04em;
 }
 
-.site-footer-bar .footer-tagline-wrap > span:first-child {
-  color: rgba(250, 250, 250, 0.45);
-  transition: color 0.2s ease;
-}
-
-.site-footer-bar .footer-tagline-wrap:hover > span:first-child {
-  color: var(--pink-400);
-}
-
 @media screen and (max-width: 767px) {
   .site-footer-bar {
     flex-direction: column;
@@ -1354,27 +1282,45 @@ site-footer {
 }
 
 /* ---- AI + Design Systems ---------------------------------------------------------------
-   Easy reading first: one column, indented like the About bio, body text the
-   size of the section intros. The two key lines are pink; two pen-stroke
-   crossouts (the Unfiltered intro's gesture) edit the text as it scrolls into
-   view, and linter-style notes sit in the margin. */
-#ai-design-systems .spec {
+   The What I do grid: the claim on the left where the intro sits there, the
+   reasoning on the right where the list sits. The claim is set large in the
+   display face with its pen-stroke edit; the body is the size of the section
+   intros, with the two key lines in pink and README as a code chip. */
+#ai-design-systems > .container {
   width: 100%;
-  max-width: 1140px;
-  margin: 0 auto;
 }
 
-#ai-design-systems .spec .heading-stretch {
-  margin-bottom: var(--space-12);
+#ai-design-systems .spec {
+  display: flex;
+  width: 100%;
+  gap: var(--space-18);
+  align-items: flex-start;
+}
+
+#ai-design-systems .spec-lede {
+  width: 100%;
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, 2.3vw, 2.125rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+
+/* Syne has no italic: the replacement in the claim stays upright. */
+#ai-design-systems .spec-lede .crossout-replacement {
+  font-style: normal;
 }
 
 #ai-design-systems .spec-body {
-  max-width: 42rem;
-  margin-left: var(--space-30);
+  width: 100%;
+  /* Sits on the claim's first line rather than its top edge. */
+  padding-top: 0.45rem;
 }
 
 #ai-design-systems .spec-body p {
-  position: relative;
   margin: 0 0 var(--space-4);
   color: rgba(250, 250, 250, 0.78);
   font-size: var(--text-sm);
@@ -1382,30 +1328,9 @@ site-footer {
   line-height: 1.75;
 }
 
-#ai-design-systems .spec-body .spec-lede {
-  margin-bottom: var(--space-10);
-  color: var(--white);
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.3vw, 2rem);
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
-}
-
-/* Syne has no italic: the replacement in the lede stays upright. */
-#ai-design-systems .spec-lede .crossout-replacement {
-  font-style: normal;
-}
-
 #ai-design-systems .spec-em {
   color: var(--pink-400);
   font-weight: 500;
-}
-
-#ai-design-systems .spec-body .spec-close {
-  margin: var(--space-8) 0 0;
-  color: var(--white);
-  font-weight: 400;
 }
 
 #ai-design-systems .spec-term {
@@ -1419,26 +1344,38 @@ site-footer {
   white-space: nowrap;
 }
 
-#ai-design-systems .spec-note {
-  position: absolute;
-  top: 0.3em;
-  right: calc(100% + var(--space-8));
-  width: max-content;
-  max-width: 11rem;
-  color: rgba(246, 176, 255, 0.55);
-  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-size: var(--text-xs);
-  line-height: 1.5;
-  text-align: right;
+#ai-design-systems .spec-body .spec-close {
+  margin: var(--space-8) 0 0;
+  color: var(--white);
+  font-weight: 400;
+}
+
+@media screen and (min-width: 1200px) {
+  #ai-design-systems .spec-lede {
+    width: 398px;
+    flex-shrink: 0;
+  }
+
+  #ai-design-systems .spec-body {
+    width: 478px;
+    flex-shrink: 0;
+  }
 }
 
 @media screen and (max-width: 991px) {
-  #ai-design-systems .spec-body {
-    margin-left: 0;
+  #ai-design-systems .spec {
+    gap: var(--space-10);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #ai-design-systems .spec {
+    flex-direction: column;
+    gap: var(--space-8);
   }
 
-  #ai-design-systems .spec-note {
-    display: none;
+  #ai-design-systems .spec-body {
+    padding-top: 0;
   }
 }
 
@@ -1922,30 +1859,105 @@ textarea,
 }
 
 
-/* ---- Easter-egg tags -------------------------------------------------------------
-   The logo and footer-tagline tooltips: small dark tags with a faint pink edge,
-   instead of loud pink boxes. */
+/* ---- Easter-egg asides -----------------------------------------------------------
+   No boxes. The logo's aside is a small line of text that wipes in beside the
+   wordmark (below it where the nav leaves no room); the footer tagline rolls up
+   and the aside takes its place on the same line. */
+.navbar .brand {
+  position: relative;
+}
+
 .navbar .logointeraction,
-.site-footer-bar .footer-tooltip {
-  width: max-content;
-  max-width: min(260px, calc(100vw - 2 * var(--page-gutter)));
-  padding: 7px 11px 6px;
-  border: 1px solid rgba(246, 176, 255, 0.24);
-  border-radius: 8px;
-  background-color: rgba(27, 30, 41, 0.94);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 10px 30px rgba(20, 22, 31, 0.28);
+.is-home .navbar .logointeraction {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + var(--space-5));
+  width: 15rem;
+  max-width: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  color: var(--nav-link-accent) !important;
+  -webkit-text-fill-color: var(--nav-link-accent) !important;
   font-size: 12px;
   font-weight: 400;
   line-height: 1.45;
   letter-spacing: 0.01em;
   text-align: left;
+  opacity: 0 !important;
+  clip-path: inset(0 100% 0 0);
+  transform: translateY(-50%) !important;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    clip-path 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.navbar .logointeraction,
-.is-home .navbar .logointeraction,
+.navbar .brand:hover .logointeraction,
+.navbar .brand:focus-visible .logointeraction {
+  opacity: 0.8 !important;
+  clip-path: inset(0 0 0 0);
+}
+
+@media screen and (max-width: 1199px) {
+  .navbar .logointeraction,
+  .is-home .navbar .logointeraction {
+    top: calc(100% + var(--space-2));
+    left: 0;
+    transform: none !important;
+  }
+}
+
+.site-footer-bar .footer-tagline-wrap {
+  display: inline-grid;
+  overflow: hidden;
+  justify-items: end;
+  vertical-align: bottom;
+}
+
+.site-footer-bar .footer-tagline,
 .site-footer-bar .footer-tooltip {
-  color: rgba(250, 250, 250, 0.88) !important;
-  -webkit-text-fill-color: rgba(250, 250, 250, 0.88) !important;
+  grid-area: 1 / 1;
+  transform: none !important;
+  transition: translate 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-footer-bar .footer-tooltip {
+  position: static;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  color: var(--pink-400) !important;
+  -webkit-text-fill-color: var(--pink-400) !important;
+  font: inherit;
+  letter-spacing: inherit;
+  white-space: nowrap;
+  opacity: 1;
+  visibility: visible;
+  translate: 0 110%;
+}
+
+.site-footer-bar .footer-tagline-wrap:hover .footer-tagline {
+  translate: 0 -110%;
+}
+
+.site-footer-bar .footer-tagline-wrap:hover .footer-tooltip {
+  translate: 0 0;
+}
+
+@media screen and (max-width: 767px) {
+  .site-footer-bar .footer-tagline-wrap {
+    justify-items: start;
+  }
 }
