@@ -426,6 +426,11 @@
           ${siteFooterHtml()}
         </div>
       `;
+      // One glow for the tiles and the footer together (css/components.css).
+      const end = this.querySelector('.article-end');
+      const footer = end.querySelector('.site-footer');
+      if (footer) footer.removeAttribute('data-glow');
+      end.setAttribute('data-glow', '');
       this.querySelectorAll('[data-roll]').forEach(splitRoll);
     }
   }

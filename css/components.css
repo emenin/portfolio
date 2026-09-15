@@ -102,10 +102,10 @@ body.case-study {
   --cs-wide: min(920px, max(var(--cs-col), 100vw - 600px));
   /* Theme: the whole template reads these, so the ground can change in one
      place. */
-  --cs-ground: var(--white-pure);
+  --cs-ground: #fdf4ff;
   --cs-ink: var(--color-ink);
   --cs-ink-muted: var(--color-ink-muted);
-  --cs-hairline: var(--color-border-muted);
+  --cs-hairline: rgba(27, 30, 41, 0.08);
   --cs-dot: var(--color-border);
   /* The accented phrase in the title (<em>); ink on light grounds, where the
      pink would disappear. */
@@ -130,6 +130,12 @@ body.case-study .section.project {
   padding-top: clamp(128px, 17vh, 176px);
   padding-left: 0;
   padding-right: 0;
+}
+
+/* Room to finish reading before the dark end block (beats the shared
+   article-end spacing further down). */
+body.case-study.has-article-end .section.project {
+  padding-bottom: clamp(var(--space-16), 9vw, 120px);
 }
 
 body.case-study .section.project > .w-layout-vflex.container:empty {
@@ -211,13 +217,23 @@ body.case-study .projecttitle em {
   font-style: normal;
 }
 
-body.case-study article-header .textcontainer > div {
+body.case-study .projectheader .textcontainer > div {
   margin-top: var(--space-5);
   color: var(--cs-ink-muted);
   font-size: clamp(var(--text-md), 1.5vw, var(--text-lg));
   font-weight: 300;
   line-height: 1.55;
   text-wrap: pretty;
+}
+
+/* A cover image under the meta line gets air above it. */
+body.case-study
+  .section.project
+  > .container.vertical.spacemedium
+  > .case-meta
+  + .w-layout-vflex
+  > .imagewrap {
+  margin-top: var(--space-12);
 }
 
 /* One quiet line of label/value pairs. */
@@ -588,6 +604,26 @@ body.case-study .column._50.spacesmall.sticky {
   background-color: var(--ink-950);
 }
 
+/* On articles the prev/next tiles and the footer share one dark block, so the
+   footer's glow (static and pointer) is painted across the whole block and the
+   two parts sit transparent on it (js/components.js moves [data-glow]). */
+.article-end {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--ink-950);
+}
+
+.article-end > .article-end-nav.background_dark,
+.article-end > .site-footer {
+  background-color: transparent;
+}
+
+.article-end > .site-footer {
+  position: static;
+  isolation: auto;
+}
+
 /* Prev/next tiles: hover effect (dark cover slides up), same as Soniq Design System page */
 .article-end-nav .linkblock {
   position: relative;
@@ -648,7 +684,7 @@ body.case-study .column._50.spacesmall.sticky {
 /* A lone "Back to work": a quiet link, not a headline. */
 .article-end-nav .linkblock--back.aligncenter {
   padding-top: clamp(var(--space-10), 5vw, var(--space-16));
-  padding-bottom: 0;
+  padding-bottom: clamp(var(--space-10), 5vw, var(--space-16));
 }
 
 .article-end-nav .linkblock--back h3 {
@@ -865,7 +901,8 @@ body.has-article-end article-header {
   display: block;
 }
 
-body.has-article-end article-header .projectheader {
+body.has-article-end article-header .projectheader,
+body.case-study .projectheader {
   grid-column-gap: var(--space-4);
   grid-row-gap: var(--space-4);
 }
@@ -1005,6 +1042,21 @@ article-end {
     visibility 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* Case studies: the pink cursor disappears on the blush reading ground, so it
+   turns ink there (a soft ink disc over links, which keeps them legible) and
+   goes back to pink over the dark article end (js/cursor.js). */
+body.case-study #article-cursor:not(.cursor-on-dark) .innerdot {
+  background-color: var(--ink-900);
+}
+
+body.case-study #article-cursor:not(.cursor-on-dark) .outercircle {
+  border-color: rgba(27, 30, 41, 0.3);
+}
+
+body.case-study #article-cursor.cursor-hover:not(.cursor-on-dark) .innerdot {
+  background-color: rgba(27, 30, 41, 0.1);
+}
+
 /* Tooltip label – same as emenin .tooltiplabel */
 #article-cursor .tooltiplabel {
   opacity: 0;
@@ -1092,7 +1144,8 @@ site-footer {
   color: var(--white);
 }
 
-.site-footer::before {
+.site-footer::before,
+.article-end::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -1131,7 +1184,12 @@ site-footer {
   color: var(--white);
 }
 
+/* The three kinds of work light up pink only when pointed at. */
 .site-footer-em {
+  transition: color 0.25s ease;
+}
+
+.site-footer-em:hover {
   color: var(--pink-400);
 }
 
@@ -1139,6 +1197,11 @@ site-footer {
    would otherwise inherit the note's grey. */
 .site-footer-note .site-footer-link {
   color: var(--white);
+}
+
+.site-footer-note .site-footer-link:hover,
+.site-footer-note .site-footer-link:focus-visible {
+  color: var(--ink-900);
 }
 
 .site-footer-copy {
@@ -1173,7 +1236,9 @@ site-footer {
   transition: translate 0.25s ease;
 }
 
-.site-footer-link:hover .site-footer-link-icon {
+.site-footer-link:hover .site-footer-link-icon,
+.site-footer-link:focus-visible .site-footer-link-icon {
+  background-color: currentColor;
   translate: 2px -2px;
 }
 
@@ -1289,9 +1354,10 @@ site-footer {
 }
 
 /* ---- AI + Design Systems ---------------------------------------------------------------
-   Easy reading first: one column, indented like the About bio. The two key lines
-   are pink; two pen-stroke crossouts (the Unfiltered intro's gesture) edit the
-   text as it scrolls into view. */
+   Easy reading first: one column, indented like the About bio, body text the
+   size of the section intros. The two key lines are pink; two pen-stroke
+   crossouts (the Unfiltered intro's gesture) edit the text as it scrolls into
+   view, and linter-style notes sit in the margin. */
 #ai-design-systems .spec {
   width: 100%;
   max-width: 1140px;
@@ -1308,9 +1374,10 @@ site-footer {
 }
 
 #ai-design-systems .spec-body p {
-  margin: 0 0 var(--space-6);
+  position: relative;
+  margin: 0 0 var(--space-4);
   color: rgba(250, 250, 250, 0.78);
-  font-size: clamp(var(--text-base), 1.25vw, var(--text-md));
+  font-size: var(--text-sm);
   font-weight: 300;
   line-height: 1.75;
 }
@@ -1336,14 +1403,42 @@ site-footer {
 }
 
 #ai-design-systems .spec-body .spec-close {
-  margin: var(--space-10) 0 0;
+  margin: var(--space-8) 0 0;
   color: var(--white);
   font-weight: 400;
+}
+
+#ai-design-systems .spec-term {
+  padding: 0.08em 0.4em 0.12em;
+  border-radius: var(--radius-sm);
+  background: rgba(246, 176, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(246, 176, 255, 0.22);
+  color: var(--pink-400);
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.86em;
+  white-space: nowrap;
+}
+
+#ai-design-systems .spec-note {
+  position: absolute;
+  top: 0.3em;
+  right: calc(100% + var(--space-8));
+  width: max-content;
+  max-width: 11rem;
+  color: rgba(246, 176, 255, 0.55);
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  text-align: right;
 }
 
 @media screen and (max-width: 991px) {
   #ai-design-systems .spec-body {
     margin-left: 0;
+  }
+
+  #ai-design-systems .spec-note {
+    display: none;
   }
 }
 
@@ -1585,22 +1680,28 @@ site-footer {
 }
 
 /* ---- Links -------------------------------------------------------------------
-   Inline links read as links by weight alone; on hover a pink marker stroke is
-   drawn in behind the lower half of the words, from the left. A background
-   rather than text-decoration, so it can animate and wrap across lines. */
+   One highlighter for every link (the nav uses the same, below): links read as
+   links by weight alone; on hover a pink band sweeps in behind the words from
+   the left and the words turn ink, so they stay legible on any ground. The
+   padding/negative margin pair lets the band overhang the text without moving
+   it; clone repeats both on each line of a wrapped link. */
 .link,
 .site-footer-link,
 .site-footer-copy-value {
+  margin: 0 -0.12em;
+  padding: 0 0.12em;
   color: inherit;
   font-weight: 500;
   text-decoration: none;
   background-image: linear-gradient(var(--pink-400), var(--pink-400));
   background-repeat: no-repeat;
-  background-position: 0 88%;
-  background-size: 0% 0.36em;
+  background-position: 0 50%;
+  background-size: 0% 100%;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-  transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s ease 0.05s;
 }
 
 .link:hover,
@@ -1609,8 +1710,8 @@ site-footer {
 .site-footer-link:focus-visible,
 .site-footer-copy:hover .site-footer-copy-value,
 .site-footer-copy:focus-visible .site-footer-copy-value {
-  color: inherit;
-  background-size: 100% 0.36em;
+  color: var(--ink-900);
+  background-size: 100% 100%;
 }
 
 .link.link-plain {
@@ -1655,10 +1756,34 @@ site-footer {
   }
 }
 
+/* Decode: each letter reserves its width with an invisible copy of its final
+   glyph (::before), and the visible glyph sits on top of it, so the line never
+   shifts while letters flicker, whichever font is loaded. */
+.hero-char {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-char::before {
+  content: attr(data-char);
+  visibility: hidden;
+}
+
+.hero-glyph {
+  position: absolute;
+  inset: 0;
+  text-align: center;
+}
+
+.hero-char.is-decoding .hero-glyph {
+  opacity: 0.55;
+}
+
 /* Pointer glow ([data-glow], components.js). The hero paints it above its
    ground layer; the footer behind its content. */
 .hero::after,
-.site-footer::after {
+.site-footer::after,
+.article-end::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -1676,12 +1801,20 @@ site-footer {
   z-index: 0;
 }
 
-.site-footer::after {
+.site-footer::after,
+.article-end::after {
   z-index: -1;
 }
 
+/* Inside the article end the block paints the glow, not the footer. */
+.article-end > .site-footer::before,
+.article-end > .site-footer::after {
+  content: none;
+}
+
 .hero.is-glowing::after,
-.site-footer.is-glowing::after {
+.site-footer.is-glowing::after,
+.article-end.is-glowing::after {
   opacity: 1;
 }
 
@@ -1719,106 +1852,6 @@ textarea,
   max-width: 100%;
 }
 
-/* ---- Scan -------------------------------------------------------------------------
-   Text lit by a sweep, as if read by a machine: the lit part is pink, the rest
-   faint, split at --scan. .scan--beam adds the moving light (hero). Scroll-in
-   emphasis ([data-reveal]) starts faint and lights up once visible. */
-@property --scan {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 100%;
-}
-
-.scan {
-  --scan: 100%;
-  color: transparent;
-  background-image: linear-gradient(
-    90deg,
-    var(--pink-400) 0 var(--scan),
-    rgba(246, 176, 255, 0.24) var(--scan) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-.scan::selection {
-  color: var(--ink-950);
-  background-color: var(--pink-400);
-}
-
-.scan.is-scanning {
-  animation: scan 1.4s cubic-bezier(0.45, 0, 0.25, 1) both;
-}
-
-.scan--beam {
-  position: relative;
-  display: inline-block;
-}
-
-.scan--beam::after {
-  content: '';
-  position: absolute;
-  top: 10%;
-  bottom: 6%;
-  left: var(--scan);
-  width: 2px;
-  margin-left: -1px;
-  background: var(--pink-400);
-  box-shadow:
-    0 0 12px 2px rgba(246, 176, 255, 0.7),
-    0 0 40px 6px rgba(246, 176, 255, 0.25);
-  opacity: 0;
-  pointer-events: none;
-}
-
-.scan--beam.is-scanning::after {
-  animation:
-    scan 1.4s cubic-bezier(0.45, 0, 0.25, 1) both,
-    scan-beam 1.4s linear both;
-}
-
-.w-mod-js .scan[data-reveal]:not(.is-visible) {
-  --scan: 0%;
-}
-
-.scan[data-reveal].is-visible {
-  animation: scan 1.6s cubic-bezier(0.45, 0, 0.25, 1) 0.15s both;
-}
-
-@keyframes scan {
-  from {
-    --scan: 0%;
-  }
-  to {
-    --scan: 100%;
-  }
-}
-
-@keyframes scan-beam {
-  0% {
-    opacity: 0;
-  }
-  8%,
-  88% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scan,
-  .w-mod-js .scan[data-reveal]:not(.is-visible) {
-    --scan: 100%;
-    animation: none;
-  }
-
-  .scan--beam::after {
-    display: none;
-  }
-}
-
 /* ---- Navbar ground ---------------------------------------------------------------
    The homepage bar was transparent with a 2px blur, so text scrolling under it
    showed through the links. Once scrolled it takes the ground of the section
@@ -1841,28 +1874,30 @@ textarea,
 }
 
 /* ---- Nav links ----------------------------------------------------------------------
-   The same marker as inline links, drawn under the label's text box (content-box,
-   so the link's padding doesn't widen it). "Let's talk!" keeps its weight and
-   loses the underline. */
+   The link marker as a highlighter: the pink band sweeps in behind the whole label
+   and the label turns ink, so it stays legible on the dark navbar and the pink
+   one alike. The band overhangs the text by a hair on each side. */
 .navbar .navlink,
 .navbar .navbutton {
   text-decoration: none;
   background-image: linear-gradient(var(--pink-400), var(--pink-400));
   background-repeat: no-repeat;
   background-origin: content-box;
-  background-clip: content-box;
-  background-position: 0 92%;
-  background-size: 0% 0.34em;
+  background-clip: border-box;
+  background-position: -0.3em 50%;
+  background-size: 0% 1.6em;
   transition:
-    background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    color 0.2s ease;
+    background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s ease 0.05s;
 }
 
 .navbar .navlink:hover,
 .navbar .navlink:focus-visible,
 .navbar .navbutton:hover,
 .navbar .navbutton:focus-visible {
-  background-size: 100% 0.34em;
+  --nav-link-accent: var(--ink-900);
+  --nav-accent: var(--ink-900);
+  background-size: calc(100% + 0.6em) 1.6em;
 }
 
 /* ---- Arrow ------------------------------------------------------------------------
@@ -1886,18 +1921,31 @@ textarea,
   rotate: -45deg;
 }
 
-/* ---- Footer links: a drawn line, not a marker ------------------------------------
-   At the footer's display size a 0.36em marker becomes a heavy block; a thin
-   line drawn in from the left reads better. */
-.site-footer-link,
-.site-footer-copy-value {
-  background-position: 0 100%;
-  background-size: 0% 2px;
+
+/* ---- Easter-egg tags -------------------------------------------------------------
+   The logo and footer-tagline tooltips: small dark tags with a faint pink edge,
+   instead of loud pink boxes. */
+.navbar .logointeraction,
+.site-footer-bar .footer-tooltip {
+  width: max-content;
+  max-width: min(260px, calc(100vw - 2 * var(--page-gutter)));
+  padding: 7px 11px 6px;
+  border: 1px solid rgba(246, 176, 255, 0.24);
+  border-radius: 8px;
+  background-color: rgba(27, 30, 41, 0.94);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(20, 22, 31, 0.28);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  text-align: left;
 }
 
-.site-footer-link:hover,
-.site-footer-link:focus-visible,
-.site-footer-copy:hover .site-footer-copy-value,
-.site-footer-copy:focus-visible .site-footer-copy-value {
-  background-size: 100% 2px;
+.navbar .logointeraction,
+.is-home .navbar .logointeraction,
+.site-footer-bar .footer-tooltip {
+  color: rgba(250, 250, 250, 0.88) !important;
+  -webkit-text-fill-color: rgba(250, 250, 250, 0.88) !important;
 }

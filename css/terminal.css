@@ -177,7 +177,9 @@
   position: fixed;
   inset: 0;
   z-index: 85;
-  background: rgba(20, 22, 31, 0.5);
+  background: rgba(20, 22, 31, 0.82);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   display: none;
   align-items: flex-start;
   justify-content: center;

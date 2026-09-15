@@ -23,6 +23,11 @@
     function move(e) {
       wrapper.style.left = e.clientX + 'px';
       wrapper.style.top = e.clientY + 'px';
+      // Ink on the light reading ground, pink over the dark article end.
+      wrapper.classList.toggle(
+        'cursor-on-dark',
+        !!(e.target.closest && e.target.closest('.article-end'))
+      );
     }
 
     function enterTile() {
