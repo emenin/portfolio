@@ -1,19 +1,19 @@
 # Érica Menin
 
-> Design Systems Lead with 15+ years of experience building scalable digital products and design systems. Érica specialises in design system strategy, token architecture, component libraries, governance, and AI-assisted workflows that help organisations scale design and engineering collaboration.
+> Design Systems Lead with 15+ years in design. Érica makes design system decisions easier for people and AI to find, apply, and trust: audits, Figma and code alignment, tokens, component guidance, documentation, and AI workflows.
 
-Érica Menin (ericamenin.com) is a design systems strategist and design-ops practitioner based in Germany, working remotely with distributed teams internationally. Her work focuses on evolving design systems beyond component libraries into scalable, governed ecosystems that support product teams, engineering collaboration, and AI-powered experiences.
+Érica Menin (ericamenin.com) is based in Germany and works remotely with distributed teams. Her focus is design systems that are read by two audiences: the people who build products, and the AI tools that now read tokens, rules, and docs and guess where context is missing. She works on making that knowledge explicit, without rebuilding everything first.
 
-With experience leading multi-team design system initiatives at Mews, Érica has worked on the foundations that make design systems successful: design tokens, Figma Variables and Libraries, documentation, adoption, contribution models, and collaboration between design and engineering.
+She has led multi-team design system work at Mews, covering design tokens, Figma Variables and Libraries, documentation, adoption, and collaboration between design and engineering.
 
-Her work explores the intersection of design systems and generative AI: how teams can use AI-assisted workflows, experimentation, and emerging AI tools to create systems that are easier to use, maintain, and evolve.
-
-Contact: [LinkedIn](https://www.linkedin.com/in/ericamenin/)
+Contact: erica@menin.me · [LinkedIn](https://www.linkedin.com/in/ericamenin/)
 
 ## Expertise
 
+- Design system audits and cross-platform alignment (Figma, React, Flutter)
+- Design systems for people and AI: explicit rules, component guidance in code, READMEs
+- AI workflows for design system teams (skills, Cursor commands)
 - Design Systems strategy and maturity
-- AI-assisted design workflows
 - Design tokens and token architecture
 - Figma Variables, Libraries, and scalable workflows
 - Component libraries and governance models
@@ -23,7 +23,7 @@ Contact: [LinkedIn](https://www.linkedin.com/in/ericamenin/)
 
 ## Work (case studies and recent work)
 
-Érica's recent work focuses on evolving design systems from component libraries into mature, scalable systems that support product teams, engineering collaboration, and AI-assisted workflows.
+Érica's recent work focuses on keeping design systems aligned across design and code, and legible to both people and AI.
 
 A summary of her recent design system work, learnings, and experiments is available in:
 

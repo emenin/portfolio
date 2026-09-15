@@ -1,49 +1,13 @@
-// Hero: a loading state on the hero's own source, and the design tokens behind
-// each piece on hover. The pointer glow lives in components.js ([data-glow]).
+// Hero: the design tokens behind each piece, on hover. The pointer glow lives in
+// components.js ([data-glow]).
 (function () {
   'use strict';
 
   var inner = document.querySelector('.hero-inner');
   if (!inner) return;
 
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var built = inner.querySelector('.hero-built');
 
-  // ---- Loading -------------------------------------------------------------------
-  // The counter runs on a timer, not animation frames, so it still finishes in a
-  // background tab. Without motion the hero shows straight away.
-  var count = inner.querySelector('.hero-src-count');
-  var TOTAL = 48;
-  var LOAD_MS = 1300;
-
-  var afterResolve = [];
-
-  function resolve() {
-    inner.classList.remove('is-loading');
-    if (status) status.textContent = '';
-    // Once the pieces have risen into place.
-    setTimeout(function () {
-      afterResolve.forEach(function (fn) { fn(); });
-    }, 1100);
-  }
-
-  var status = inner.querySelector('.hero-src-status');
-  if (status && !reducedMotion.matches) status.textContent = 'Loading the page…';
-
-  if (reducedMotion.matches || !count) {
-    resolve();
-  } else {
-    var start = Date.now();
-    var timer = setInterval(function () {
-      var n = Math.min(TOTAL, Math.round(((Date.now() - start) / LOAD_MS) * TOTAL));
-      count.textContent = n + '/' + TOTAL;
-      if (n < TOTAL) return;
-      clearInterval(timer);
-      setTimeout(resolve, 220);
-    }, 30);
-  }
-
-  // ---- Tokens on hover -----------------------------------------------------------
   var spec = inner.querySelector('.hero-spec');
   var toggle = inner.querySelector('.hero-tokens-switch');
   if (!spec || !built || !toggle) return;
@@ -96,7 +60,7 @@
   }
 
   function enabled() {
-    return toggle.getAttribute('aria-checked') === 'true' && !inner.classList.contains('is-loading');
+    return toggle.getAttribute('aria-checked') === 'true';
   }
 
   built.addEventListener('pointermove', function (event) {
@@ -121,14 +85,8 @@
     if (!on) show(null);
   });
 
-  // Measure once the hero has settled, and again whenever the layout moves.
-  function rebuild() {
-    if (!inner.classList.contains('is-loading')) build();
-  }
-  (document.fonts ? document.fonts.ready : Promise.resolve()).then(rebuild);
-  afterResolve.push(rebuild);
-  built.addEventListener('transitionend', function (event) {
-    if (event.target.parentNode === built && event.propertyName === 'translate') rebuild();
-  });
-  window.addEventListener('resize', rebuild);
+  // Measure once fonts and images have settled, and again whenever the layout moves.
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(build);
+  window.addEventListener('load', build);
+  window.addEventListener('resize', build);
 })();
