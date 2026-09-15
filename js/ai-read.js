@@ -4,7 +4,7 @@
 // A copy of the essay's columns, marked up the way a model reads them (vague
 // phrases underlined as ambiguous, concrete sources highlighted as explicit),
 // sits exactly on top of the text and shows through a lens around the pointer.
-// The For people / For AI switch swaps the story for the direct version (the
+// The story / Rewritten for AI switch swaps the story for the direct version (the
 // .spec-direct lines in the markup), instantly. The marked copy is decorative
 // (aria-hidden).
 //

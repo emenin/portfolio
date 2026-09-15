@@ -1387,7 +1387,7 @@ site-footer {
   margin-bottom: calc(var(--space-12) * -1 + var(--space-6));
 }
 
-/* For people / For AI: a two-way switch, set at the right of the columns, so it
+/* The story / Rewritten for AI: a two-way switch, set at the right of the columns, so it
    reads as a choice rather than a tag or a call to action. Instant. */
 .ai-essay .spec-tools {
   justify-content: space-between;
@@ -1458,8 +1458,7 @@ site-footer {
 }
 
 .ai-essay .spec-legend-warn {
-  color: var(--coral-400);
-  text-decoration: underline wavy var(--coral-400) 1px;
+  text-decoration: underline wavy rgba(246, 176, 255, 0.85) 1px;
   text-underline-offset: 4px;
 }
 
@@ -1598,8 +1597,8 @@ site-footer {
 }
 
 .ai-essay .spec-body--machine .ai-warn {
-  color: var(--coral-400);
-  text-decoration: underline wavy var(--coral-400) 1px;
+  color: rgba(250, 250, 250, 0.92);
+  text-decoration: underline wavy rgba(246, 176, 255, 0.85) 1px;
   text-underline-offset: 4px;
 }
 
