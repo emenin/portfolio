@@ -187,15 +187,30 @@
       @keyframes hero-compile { from { --scan: -2%; } to { --scan: 110%; } }
       @keyframes hero-scanline { 0% { opacity: 0 } 6%, 90% { opacity: 1 } 100% { opacity: 0 } }
 
-      /* Stamp: Érica's old "Made in Brazil. Living in Germany." badge. It only
-         turns as the page scrolls. */
-      .lab-stamp { position: absolute; right: 2%; top: 46%; width: 220px; height: 220px; translate: 0 -50%; display: grid; place-items: center; }
-      .lab-stamp-ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; rotate: var(--stamp-turn, 0deg); }
-      .lab-stamp-ring text { fill: rgba(250,250,250,.85); font-family: var(--font-body); font-size: 13.5px; font-weight: 400; letter-spacing: .12em; }
-      .lab-stamp-star { width: 52px; height: 52px; }
-      .hero-inner.is-compiling .lab-stamp { animation: lab-stamp-in .8s ease 2.1s both; }
-      @keyframes lab-stamp-in { from { opacity: 0; scale: .9; } }
-      @media (max-width: 991px) { .lab-stamp { position: relative; right: auto; top: auto; translate: none; width: 150px; height: 150px; margin-top: 40px; } }
+      /* Inspect switch: where the stamp was. Off by default; on, every piece of
+         the hero shows its outline, and hovering or tabbing to one shows its spec. */
+      .inspect-switch {
+        position: absolute; right: 0; top: 50%; translate: 0 -50%;
+        display: inline-flex; align-items: center; gap: 12px;
+        margin: 0; padding: 0; border: 0; background: none; cursor: pointer;
+        color: rgba(250,250,250,.8); font: 600 15px/1 var(--font-display);
+      }
+      .inspect-switch-track {
+        position: relative; width: 46px; height: 26px; border-radius: 999px;
+        border: 1.5px solid rgba(246,176,255,.55); transition: background-color .2s ease, border-color .2s ease;
+      }
+      .inspect-switch-knob {
+        position: absolute; top: 3px; left: 3px; width: 17px; height: 17px; border-radius: 50%;
+        background: var(--pink-400); transition: translate .25s cubic-bezier(.22,1,.36,1), background-color .2s ease;
+      }
+      .inspect-switch[aria-checked="true"] .inspect-switch-track { background: var(--pink-400); border-color: var(--pink-400); }
+      .inspect-switch[aria-checked="true"] .inspect-switch-knob { translate: 20px 0; background: var(--ink-950); }
+      .inspect-switch:hover { color: var(--pink-400); }
+      .inspect-switch:focus-visible { outline: 2px solid var(--pink-400); outline-offset: 6px; border-radius: 6px; }
+      .hero-inner.is-compiling .inspect-switch { animation: lab-fade .6s ease 2.1s both; }
+      @keyframes lab-fade { from { opacity: 0; } }
+      @media (max-width: 991px) { .inspect-switch { position: static; translate: none; margin-top: 40px; } }
+      .hero.is-inspecting [data-spec]:focus-visible { outline: none; }
 
       .lab-status { cursor: default; }
 
@@ -203,7 +218,11 @@
          does. Token names, not pixels. */
       .hero-spec { position: absolute; inset: 0; pointer-events: none; }
       .spec-item { position: absolute; opacity: 0; transition: opacity .25s ease; }
-      .spec-item.is-on, .hero-spec.is-all .spec-item { opacity: 1; }
+      .spec-item .spec-tags { opacity: 0; transition: opacity .2s ease; }
+      .hero-spec.is-all .spec-item { opacity: 1; }
+      .hero-spec.is-all .spec-item .spec-box { outline-color: rgba(246,176,255,.35); background: none; }
+      .spec-item.is-on .spec-tags { opacity: 1; }
+      .hero-spec.is-all .spec-item.is-on .spec-box { outline-color: rgba(246,176,255,.9); background: rgba(246,176,255,.05); }
       .spec-box { position: absolute; inset: -6px; outline: 1px dashed rgba(246,176,255,.8); background: rgba(246,176,255,.04); }
       .spec-tags { position: absolute; left: -6px; bottom: calc(100% + 10px); display: flex; flex-wrap: wrap; gap: 4px; width: max-content; max-width: 520px; }
       .spec-tag {
@@ -218,7 +237,6 @@
       .lab-bar button { padding: 6px 10px; border: 1px solid rgba(246,176,255,.45); border-radius: 999px; background: rgba(20,22,31,.8); color: var(--pink-400); cursor: pointer; }
       @media (prefers-reduced-motion: reduce) {
         .hero-inner.is-compiling, .hero-inner.is-compiling * { animation: none !important; }
-        .lab-stamp-ring { animation: none; }
       }
     </style>
   </head>
@@ -301,13 +319,10 @@
           <span class="hero-meta-item">Remote · based in Germany</span>
         </div>
       
-        <div class="lab-stamp" aria-hidden="true">
-          <svg viewBox="0 0 200 200" class="lab-stamp-ring">
-            <defs><path id="lab-ring" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0" /></defs>
-            <text><textPath href="#lab-ring" textLength="500">Made in Brazil · Living in Germany · 15+ years in design · </textPath></text>
-          </svg>
-          <img src="../images/Vectors-Wrapper.svg" alt="" class="lab-stamp-star" />
-        </div>
+        <button type="button" class="inspect-switch" role="switch" aria-checked="false">
+          <span class="inspect-switch-track" aria-hidden="true"><span class="inspect-switch-knob"></span></span>
+          <span class="inspect-switch-label">Inspect this hero</span>
+        </button>
         </div>
         <pre class="hero-src" aria-hidden="true"><code><span class="t">&lt;section</span> <span class="a">hero</span> <span class="a">ground</span>=<span class="v">"ink-950"</span><span class="t">&gt;</span>
   <span class="t">&lt;p</span> <span class="a">masthead</span> <span class="a">font</span>=<span class="v">"syne/13 caps"</span><span class="t">&gt;</span>Érica Menin · Design Systems + AI Workflows<span class="t">&lt;/p&gt;</span>
@@ -329,15 +344,15 @@
     <script src="../js/components.js" type="text/javascript"></script>
     <script src="../js/nav-accent.js" type="text/javascript"></script>
 
-    <div style="height:120vh" aria-hidden="true"></div>
-    <div class="lab-bar"><button type="button" data-lab="compile">replay compile</button><button type="button" data-lab="inspect">inspect all</button></div>
+    <div class="lab-bar"><button type="button" data-lab="compile">replay compile</button></div>
     <script>
       (function () {
         'use strict';
         var inner = document.querySelector('.hero-inner');
         var spec = document.querySelector('.hero-spec');
         var src = document.querySelector('.hero-src');
-        var stamp = document.querySelector('.lab-stamp');
+        var hero = document.querySelector('.hero');
+        var sw = document.querySelector('.inspect-switch');
 
         function compile() {
           inner.classList.remove('is-compiling');
@@ -356,8 +371,7 @@
           ['.hero-headline', ['heading/display', 'font-display 700', 'max 14ch']],
           ['.hero-headline-em', ['--pink-400']],
           ['.hero-standfirst', ['body/lg', 'font-body 300', '--white-72', '!"hidden system knowledge": undefined']],
-          ['.hero-meta', ['label/caps', 'space-10', 'status']],
-          ['.lab-stamp', ['badge', 'turns on scroll']]
+          ['.hero-meta', ['label/caps', 'space-10', 'status']]
         ];
 
         var items = [];
@@ -384,33 +398,48 @@
               return '<span class="spec-tag' + (warn ? ' is-warn' : '') + '">' + (warn ? '⚠ ' + t.slice(1) : t) + '</span>';
             }).join('') + '</div>';
             spec.appendChild(item);
-            items.push({ el: el, item: item, nested: row[0] === '.hero-headline-em' });
+            el.setAttribute('data-spec', '');
+            items.push({ el: el, item: item });
           });
         }
 
-        if (window.matchMedia('(hover: hover)').matches) {
-          document.querySelector('.hero-built').addEventListener('pointermove', function (e) {
-            // The innermost piece under the pointer wins (the pink phrase over the headline).
-            var hit = null;
-            items.forEach(function (it) {
-              if (it.el.contains(e.target) && (!hit || hit.el.contains(it.el))) hit = it;
-            });
-            items.forEach(function (it) { it.item.classList.toggle('is-on', it === hit); });
-          });
-          document.querySelector('.hero-built').addEventListener('pointerleave', function () {
-            items.forEach(function (it) { it.item.classList.remove('is-on'); });
-          });
+        function show(hit) {
+          items.forEach(function (it) { it.item.classList.toggle('is-on', it === hit); });
         }
 
-        function turnStamp() {
-          if (stamp) stamp.style.setProperty('--stamp-turn', (window.scrollY * 0.25) + 'deg');
+        var built = document.querySelector('.hero-built');
+        built.addEventListener('pointermove', function (e) {
+          if (!spec.classList.contains('is-all')) return;
+          // The innermost piece under the pointer wins (the pink phrase over the headline).
+          var hit = null;
+          items.forEach(function (it) {
+            if (it.el.contains(e.target) && (!hit || hit.el.contains(it.el))) hit = it;
+          });
+          show(hit);
+        });
+        built.addEventListener('pointerleave', function () { show(null); });
+        built.addEventListener('focusin', function (e) {
+          if (!spec.classList.contains('is-all')) return;
+          show(items.filter(function (it) { return it.el === e.target; })[0] || null);
+        });
+
+        function setInspect(on) {
+          sw.setAttribute('aria-checked', String(on));
+          spec.classList.toggle('is-all', on);
+          hero.classList.toggle('is-inspecting', on);
+          // Keyboard users can step through the pieces while inspecting.
+          items.forEach(function (it) {
+            if (on) it.el.setAttribute('tabindex', '0');
+            else it.el.removeAttribute('tabindex');
+          });
+          if (!on) show(null);
         }
-        window.addEventListener('scroll', turnStamp, { passive: true });
+        sw.addEventListener('click', function () {
+          setInspect(sw.getAttribute('aria-checked') !== 'true');
+        });
 
         document.querySelector('[data-lab="compile"]').addEventListener('click', compile);
-        document.querySelector('[data-lab="inspect"]').addEventListener('click', function () {
-          spec.classList.toggle('is-all');
-        });
+
 
         function ready() { fitSource(); build(); compile(); }
         (document.fonts ? document.fonts.ready : Promise.resolve()).then(ready);

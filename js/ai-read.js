@@ -4,9 +4,9 @@
 // A copy of the essay's columns, marked up the way a model reads them (vague
 // phrases underlined as ambiguous, concrete sources highlighted as explicit),
 // sits exactly on top of the text and shows through a lens around the pointer.
-// "Rewrite it for AI" opens the lens over the whole text (the ambiguity gets
-// marked), then swaps in the direct version (the .spec-direct lines in the
-// markup). The marked copy is decorative (aria-hidden).
+// The For people / For AI switch swaps the story for the direct version (the
+// .spec-direct lines in the markup), instantly. The marked copy is decorative
+// (aria-hidden).
 //
 // Runs before crossout.js, which only animates the original's pen strokes.
 (function () {
@@ -45,15 +45,7 @@
     });
   }
 
-  var LABEL_OFF = 'Rewrite it for AI';
-  var LABEL_ON = 'Back to the story';
-
-  function setLabel(toggle, on) {
-    toggle.setAttribute('aria-pressed', String(on));
-    toggle.querySelector('.spec-toggle-label').textContent = on ? LABEL_ON : LABEL_OFF;
-  }
-
-  function initLens(section, read, toggle) {
+  function initLens(section, read, switchEl) {
     var body = read.querySelector('.spec-body');
     var machine = body.cloneNode(true);
     machine.classList.add('spec-body--machine');
@@ -82,7 +74,6 @@
     });
     read.appendChild(machine);
 
-    var rewrite = null;
 
     function place(x, y) {
       read.style.setProperty('--lx', x + 'px');
@@ -90,7 +81,7 @@
     }
 
     read.addEventListener('pointermove', function (event) {
-      if (!hover.matches || read.classList.contains('is-machine')) return;
+      if (!hover.matches || read.classList.contains('is-direct')) return;
       var rect = read.getBoundingClientRect();
       place(event.clientX - rect.left, event.clientY - rect.top);
       read.classList.add('is-lens');
@@ -100,34 +91,24 @@
       read.classList.remove('is-lens');
     });
 
-    toggle.addEventListener('click', function () {
-      var on = !read.classList.contains('is-machine');
-      if (on) {
-        // The lens opens from the toggle.
-        var rect = read.getBoundingClientRect();
-        var from = toggle.getBoundingClientRect();
-        place(from.left + 8 - rect.left, from.top + from.height / 2 - rect.top);
+    var options = switchEl.querySelectorAll('.spec-switch-opt');
+    options.forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        var ai = opt.dataset.mode === 'ai';
         read.classList.remove('is-lens');
-      }
-      read.classList.toggle('is-machine', on);
-      clearTimeout(rewrite);
-      if (on) {
-        // Let the ambiguity get marked first, then rewrite.
-        rewrite = setTimeout(function () {
-          read.classList.add('is-direct');
-        }, reducedMotion.matches ? 0 : 900);
-      } else {
-        read.classList.remove('is-direct');
-      }
-      setLabel(toggle, on);
+        read.classList.toggle('is-direct', ai);
+        options.forEach(function (o) {
+          o.setAttribute('aria-pressed', String(o === opt));
+        });
+      });
     });
   }
 
 
   document.querySelectorAll('.ai-essay').forEach(function (section) {
     var read = section.querySelector('.spec-read');
-    var toggle = section.querySelector('.spec-toggle');
-    if (!read || !toggle) return;
-    initLens(section, read, toggle);
+    var switchEl = section.querySelector('.spec-switch');
+    if (!read || !switchEl) return;
+    initLens(section, read, switchEl);
   });
 })();

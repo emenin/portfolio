@@ -249,21 +249,15 @@
             <em class="crossout-replacement">get wrong</em>.
           </p>
           <div class="spec-tools">
-            <button class="spec-toggle" type="button" aria-pressed="false">
-              <img
-                src="images/Vectors-Wrapper.svg"
-                width="18"
-                height="18"
-                alt=""
-                class="spec-toggle-icon"
-              />
-              <span class="spec-toggle-label">Rewrite it for AI</span>
-            </button>
             <p class="spec-hint" aria-hidden="true">
               Hover the text to see what AI reads as
               <span class="spec-legend-warn">ambiguous</span> or
               <span class="spec-legend-ok">explicit</span>
             </p>
+            <div class="spec-switch" role="group" aria-label="Show this text">
+              <button type="button" class="spec-switch-opt" aria-pressed="true" data-mode="story">For people</button>
+              <button type="button" class="spec-switch-opt" aria-pressed="false" data-mode="ai">For AI</button>
+            </div>
           </div>
           <div class="spec-read">
             <div class="spec-body">

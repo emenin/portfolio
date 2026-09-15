@@ -1387,55 +1387,49 @@ site-footer {
   margin-bottom: calc(var(--space-12) * -1 + var(--space-6));
 }
 
-/* The essay's button: an outline in the headings' face with Érica's star, which
-   turns on hover. The footer's Copy chip stays quiet on purpose. */
-.ai-essay .spec-toggle {
+/* For people / For AI: a two-way switch, set at the right of the columns, so it
+   reads as a choice rather than a tag or a call to action. Instant. */
+.ai-essay .spec-tools {
+  justify-content: space-between;
+}
+
+.ai-essay .spec-switch {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
+  padding: 3px;
+  border: 1.5px solid rgba(246, 176, 255, 0.5);
+  border-radius: var(--radius-pill);
+}
+
+.ai-essay .spec-switch-opt {
   margin: 0;
-  padding: 11px 20px 10px 14px;
-  border: 1.5px solid var(--pink-400);
+  padding: 8px 14px 7px;
+  border: 0;
   border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--pink-400);
+  color: rgba(250, 250, 250, 0.75);
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1;
-  letter-spacing: 0;
-  white-space: nowrap;
   cursor: pointer;
   transition:
-    background-color 0.25s ease,
-    color 0.25s ease;
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.ai-essay .spec-toggle-icon {
-  flex: none;
-  width: 18px;
-  height: 18px;
-  transition: rotate 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+.ai-essay .spec-switch-opt:hover {
+  color: var(--pink-400);
 }
 
-.ai-essay .spec-toggle:hover .spec-toggle-icon,
-.ai-essay .spec-toggle:focus-visible .spec-toggle-icon {
-  rotate: 180deg;
+.ai-essay .spec-switch-opt[aria-pressed='true'] {
+  background: var(--pink-400);
+  color: var(--ink-950);
+  cursor: default;
 }
 
-.ai-essay .spec-toggle:hover,
-.ai-essay .spec-toggle:focus-visible {
-  background-color: rgba(246, 176, 255, 0.1);
-}
-
-.ai-essay .spec-toggle[aria-pressed='true'] .spec-toggle-icon {
-  rotate: 180deg;
-}
-
-.ai-essay .spec-toggle:focus-visible {
+.ai-essay .spec-switch-opt:focus-visible {
   outline: 2px solid var(--pink-400);
-  outline-offset: 3px;
+  outline-offset: 2px;
 }
 
 /* A quiet hint, only where there is a pointer to hover with. It carries its own
@@ -1464,7 +1458,8 @@ site-footer {
 }
 
 .ai-essay .spec-legend-warn {
-  text-decoration: underline wavy rgba(246, 176, 255, 0.85) 1px;
+  color: var(--coral-400);
+  text-decoration: underline wavy var(--coral-400) 1px;
   text-underline-offset: 4px;
 }
 
@@ -1562,11 +1557,6 @@ site-footer {
   --lr: 150px;
 }
 
-.ai-essay .spec-read.is-machine {
-  --lr: 1800px;
-  transition-duration: 1.1s;
-}
-
 .ai-essay .spec-read > .spec-body:not(.spec-body--machine) {
   -webkit-mask-image: radial-gradient(
     circle at var(--lx) var(--ly),
@@ -1608,8 +1598,8 @@ site-footer {
 }
 
 .ai-essay .spec-body--machine .ai-warn {
-  color: rgba(250, 250, 250, 0.92);
-  text-decoration: underline wavy rgba(246, 176, 255, 0.85) 1px;
+  color: var(--coral-400);
+  text-decoration: underline wavy var(--coral-400) 1px;
   text-underline-offset: 4px;
 }
 
