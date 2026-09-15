@@ -1282,30 +1282,30 @@ site-footer {
 }
 
 /* ---- AI + Design Systems ---------------------------------------------------------------
-   The What I do grid: the claim on the left where the intro sits there, the
-   reasoning on the right where the list sits. The claim is set large in the
-   display face with its pen-stroke edit; the body is the size of the section
-   intros, with the two key lines in pink and README as a code chip. */
+   Editorial: the claim runs large across the frame with its pen-stroke edit, and
+   the reasoning hangs below it in the right column of the What I do grid (the
+   empty left side is deliberate). The body is the size of the section intros,
+   with the two key lines in pink and README as a code chip. */
 #ai-design-systems > .container {
   width: 100%;
 }
 
 #ai-design-systems .spec {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  gap: var(--space-18);
-  align-items: flex-start;
+  gap: var(--space-12);
 }
 
 #ai-design-systems .spec-lede {
-  width: 100%;
+  max-width: 22ch;
   margin: 0;
   color: var(--white);
   font-family: var(--font-display);
-  font-size: clamp(1.625rem, 2.3vw, 2.125rem);
+  font-size: clamp(1.75rem, 2.9vw, 2.625rem);
   font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
   text-wrap: pretty;
 }
 
@@ -1316,8 +1316,6 @@ site-footer {
 
 #ai-design-systems .spec-body {
   width: 100%;
-  /* Sits on the claim's first line rather than its top edge. */
-  padding-top: 0.45rem;
 }
 
 #ai-design-systems .spec-body p {
@@ -1350,32 +1348,25 @@ site-footer {
   font-weight: 400;
 }
 
-@media screen and (min-width: 1200px) {
-  #ai-design-systems .spec-lede {
-    width: 398px;
-    flex-shrink: 0;
-  }
-
+/* The body's left edge matches What I do's list column. */
+@media screen and (min-width: 768px) {
   #ai-design-systems .spec-body {
+    align-self: flex-end;
     width: 478px;
-    flex-shrink: 0;
+    max-width: 55%;
+    margin-right: var(--space-16);
   }
 }
 
-@media screen and (max-width: 991px) {
-  #ai-design-systems .spec {
-    gap: var(--space-10);
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+  #ai-design-systems .spec-body {
+    margin-right: 0;
   }
 }
 
 @media screen and (max-width: 767px) {
   #ai-design-systems .spec {
-    flex-direction: column;
     gap: var(--space-8);
-  }
-
-  #ai-design-systems .spec-body {
-    padding-top: 0;
   }
 }
 
