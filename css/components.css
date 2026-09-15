@@ -1387,37 +1387,39 @@ site-footer {
   margin-bottom: calc(var(--space-12) * -1 + var(--space-6));
 }
 
-/* The same chip as the footer's Copy button. */
+/* The page's one real button: filled, in the headings' face. (The footer's Copy
+   chip stays quiet on purpose.) Pressed, it turns into an outline. */
 .ai-essay .spec-toggle {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin: 0;
-  padding: 5px 9px 4px;
-  border: 1px solid rgba(246, 176, 255, 0.45);
+  padding: 11px 18px 10px;
+  border: 1px solid var(--pink-400);
   border-radius: var(--radius-pill);
-  background: none;
-  color: var(--pink-400);
-  font-family: var(--font-body);
-  font-size: var(--text-2xs);
+  background: var(--pink-400);
+  color: var(--ink-950);
+  font-family: var(--font-display);
+  font-size: 15px;
   font-weight: 600;
   line-height: 1;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   cursor: pointer;
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
-    border-color 0.2s ease;
+    translate 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ai-essay .spec-toggle:hover,
 .ai-essay .spec-toggle:focus-visible {
-  border-color: var(--pink-400);
+  translate: 0 -2px;
+  box-shadow: 0 6px 0 0 rgba(246, 176, 255, 0.28);
 }
 
 .ai-essay .spec-toggle[aria-pressed='true'] {
-  background-color: var(--pink-400);
-  border-color: var(--pink-400);
-  color: var(--ink-950);
+  background-color: transparent;
+  color: var(--pink-400);
 }
 
 .ai-essay .spec-toggle:focus-visible {
@@ -1425,40 +1427,20 @@ site-footer {
   outline-offset: 3px;
 }
 
-/* A quiet hint, only where there is a pointer to hover with. It stays while the
-   lens is in use, with the legend beside it. */
+/* A quiet hint, only where there is a pointer to hover with. It carries its own
+   legend: the two words look the way the lens marks them. */
 .ai-essay .spec-hint {
   display: none;
   margin: 0;
-  color: rgba(250, 250, 250, 0.5);
+  color: rgba(250, 250, 250, 0.55);
   font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   font-size: var(--text-xs);
-  transition: opacity 0.3s ease;
 }
 
 @media (hover: hover) {
   .ai-essay .spec-hint {
     display: block;
   }
-}
-
-.ai-essay .spec-legend {
-  display: flex;
-  gap: var(--space-5);
-  margin: 0;
-  color: rgba(250, 250, 250, 0.55);
-  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-size: var(--text-xs);
-  opacity: 0;
-  translate: -6px 0;
-  transition:
-    opacity 0.3s ease,
-    translate 0.3s ease;
-}
-
-.ai-essay .spec:has(.is-lens, .is-machine:not(.is-direct)) .spec-legend {
-  opacity: 1;
-  translate: 0 0;
 }
 
 .ai-essay .spec-legend-warn {
@@ -1741,8 +1723,8 @@ site-footer {
 
 /* ---- Tags ----------------------------------------------------------------------
    Labels that aren't interactive (card tags, Long story short) are a fixed pink
-   marker in the headings' face. Buttons keep the outlined chip (Copy, Rewrite it
-   for AI), and links only show their marker on hover, so the three don't blur. */
+   marker in the headings' face; on the cards, above busy images, the same label
+   is outlined instead of filled. Links only show their marker on hover. */
 #work .cardwrapper .taggroup {
   grid-column-gap: var(--space-2);
   grid-row-gap: var(--space-2);
@@ -1765,6 +1747,14 @@ site-footer {
   line-height: 1.2;
   letter-spacing: 0;
   text-transform: lowercase;
+}
+
+#work .cardwrapper .tag {
+  padding: 2px 6px 1px;
+  border: 1px solid var(--ink-900);
+  border-radius: var(--radius-xs);
+  background: none;
+  font-weight: 500;
 }
 
 #about .about-tiles-grid .tile .tiletitle {

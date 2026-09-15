@@ -187,46 +187,31 @@
       @keyframes hero-compile { from { --scan: -2%; } to { --scan: 110%; } }
       @keyframes hero-scanline { 0% { opacity: 0 } 6%, 90% { opacity: 1 } 100% { opacity: 0 } }
 
-      /* Stamp: Érica's old "Made in Brazil. Living in Germany." badge, back. */
+      /* Stamp: Érica's old "Made in Brazil. Living in Germany." badge. It only
+         turns as the page scrolls. */
       .lab-stamp { position: absolute; right: 2%; top: 46%; width: 220px; height: 220px; translate: 0 -50%; display: grid; place-items: center; }
-      .lab-stamp-ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; animation: lab-spin 24s linear infinite; }
+      .lab-stamp-ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; rotate: var(--stamp-turn, 0deg); }
       .lab-stamp-ring text { fill: rgba(250,250,250,.85); font-family: var(--font-body); font-size: 13.5px; font-weight: 400; letter-spacing: .12em; }
-      .lab-stamp-star { width: 52px; height: 52px; transition: rotate .6s ease; }
-      .hero:hover .lab-stamp-star { rotate: 180deg; }
-      @keyframes lab-spin { to { rotate: 360deg; } }
-      .hero-inner.is-compiling .lab-stamp { animation: lab-stamp-in 1s cubic-bezier(.34,1.4,.64,1) 2.1s both; }
-      @keyframes lab-stamp-in { from { opacity: 0; scale: .5; rotate: -120deg; } }
+      .lab-stamp-star { width: 52px; height: 52px; }
+      .hero-inner.is-compiling .lab-stamp { animation: lab-stamp-in .8s ease 2.1s both; }
+      @keyframes lab-stamp-in { from { opacity: 0; scale: .9; } }
       @media (max-width: 991px) { .lab-stamp { position: relative; right: auto; top: auto; translate: none; width: 150px; height: 150px; margin-top: 40px; } }
 
-      /* Inspect: a lens of dev mode, the hero's own spec under the pointer. */
-      .hero-spec {
-        position: absolute; inset: -60px; pointer-events: none;
-        --lx: 50%; --ly: 50%; --lr: 0px;
-        -webkit-mask-image: radial-gradient(circle at var(--lx) var(--ly), #000 calc(var(--lr) - 24px), transparent var(--lr));
-        mask-image: radial-gradient(circle at var(--lx) var(--ly), #000 calc(var(--lr) - 24px), transparent var(--lr));
-        transition: --lr .45s cubic-bezier(.22,1,.36,1);
-      }
-      @property --lr { syntax: '<length>'; inherits: true; initial-value: 0px; }
-      .hero-spec.is-on { --lr: 170px; }
-      .hero-spec.is-all { --lr: 2400px; transition-duration: 1s; }
-      .hero-spec::before { content: ''; position: absolute; inset: 0; background: rgba(20,22,31,.35); }
-      .hero-spec.is-all::before { background: none; }
-      .spec-box { position: absolute; outline: 1px dashed rgba(246,176,255,.75); background: rgba(246,176,255,.05); }
+      .lab-status { cursor: default; }
+
+      /* Inspect: hovering a piece of the hero shows its spec, the way dev mode
+         does. Token names, not pixels. */
+      .hero-spec { position: absolute; inset: 0; pointer-events: none; }
+      .spec-item { position: absolute; opacity: 0; transition: opacity .25s ease; }
+      .spec-item.is-on, .hero-spec.is-all .spec-item { opacity: 1; }
+      .spec-box { position: absolute; inset: -6px; outline: 1px dashed rgba(246,176,255,.8); background: rgba(246,176,255,.04); }
+      .spec-tags { position: absolute; left: -6px; bottom: calc(100% + 10px); display: flex; flex-wrap: wrap; gap: 4px; width: max-content; max-width: 520px; }
       .spec-tag {
-        position: absolute; white-space: nowrap; padding: 2px 5px;
+        white-space: nowrap; padding: 2px 6px;
         background: var(--pink-400); color: var(--ink-950);
-        font: 500 11px/1.3 ui-monospace, 'SF Mono', Menlo, monospace;
+        font: 500 11px/1.4 ui-monospace, 'SF Mono', Menlo, monospace;
       }
-      .spec-tag.is-warn { background: none; color: var(--pink-400); outline: 1px dashed var(--pink-400); }
-      .spec-gap { position: absolute; width: 1px; background: var(--pink-400); }
-      .spec-gap::before, .spec-gap::after { content: ''; position: absolute; left: -4px; width: 9px; height: 1px; background: var(--pink-400); }
-      .spec-gap::before { top: 0; } .spec-gap::after { bottom: 0; }
-      .spec-gap b { position: absolute; left: 8px; top: 50%; translate: 0 -50%; color: var(--pink-400); font: 500 11px ui-monospace, Menlo, monospace; white-space: nowrap; }
-      .hero-lens-ring {
-        position: absolute; left: var(--lx); top: var(--ly); width: calc(var(--lr) * 2 - 24px); height: calc(var(--lr) * 2 - 24px);
-        translate: -50% -50%; border: 1px solid rgba(246,176,255,.35); border-radius: 50%; opacity: 0; transition: opacity .3s;
-      }
-      .hero-spec.is-on .hero-lens-ring { opacity: 1; }
+      .spec-tag.is-warn { background: var(--ink-950); color: var(--pink-400); outline: 1px dashed var(--pink-400); }
 
       /* Lab controls, not part of the design. */
       .lab-bar { position: fixed; left: 16px; bottom: 16px; z-index: 200; display: flex; gap: 8px; font: 500 12px var(--font-body); }
@@ -304,14 +289,14 @@
           rules, docs, and workflows.
         </p>
         <div class="hero-meta">
-          <a href="#contact" class="hero-cta"
+          <span class="hero-cta lab-status"
             ><img
               src="../images/Vectors-Wrapper.svg"
               width="24"
               height="24"
               alt=""
               class="hero-cta-icon"
-            /><span class="hero-cta-label">Available for new work</span></a
+            /><span>Available for new work</span></span
           >
           <span class="hero-meta-item">Remote · based in Germany</span>
         </div>
@@ -344,13 +329,15 @@
     <script src="../js/components.js" type="text/javascript"></script>
     <script src="../js/nav-accent.js" type="text/javascript"></script>
 
+    <div style="height:120vh" aria-hidden="true"></div>
     <div class="lab-bar"><button type="button" data-lab="compile">replay compile</button><button type="button" data-lab="inspect">inspect all</button></div>
     <script>
       (function () {
         'use strict';
         var inner = document.querySelector('.hero-inner');
         var spec = document.querySelector('.hero-spec');
-        var hero = document.querySelector('.hero');
+        var src = document.querySelector('.hero-src');
+        var stamp = document.querySelector('.lab-stamp');
 
         function compile() {
           inner.classList.remove('is-compiling');
@@ -358,101 +345,72 @@
           inner.classList.add('is-compiling');
         }
 
-        var TOKENS = {
-          'rgb(250, 250, 250)': 'white',
-          'rgb(246, 176, 255)': 'pink-400',
-          'rgba(250, 250, 250, 0.72)': 'white/72',
-          'rgba(250, 250, 250, 0.85)': 'white/85',
-          'rgba(250, 250, 250, 0.55)': 'white/55'
-        };
-        function fontSpec(el) {
-          var cs = getComputedStyle(el);
-          var fam = cs.fontFamily.split(',')[0].replace(/["']/g, '').toLowerCase();
-          var lh = cs.lineHeight === 'normal' ? '' : '/' + Math.round(parseFloat(cs.lineHeight));
-          return fam + ' ' + cs.fontWeight + ' · ' + Math.round(parseFloat(cs.fontSize)) + lh;
-        }
-        function colorSpec(el) {
-          var c = getComputedStyle(el).color;
-          return '--' + (TOKENS[c] || c);
-        }
-
-        function build() {
-          spec.innerHTML = '<div class="hero-lens-ring"></div>';
-          var base = spec.getBoundingClientRect();
-          function rect(el) {
-            var r = el.getBoundingClientRect();
-            // Flex rows are as wide as the column; measure what's in them.
-            if (el.matches('.hero-masthead, .hero-meta') && el.children.length) {
-              var kids = [].map.call(el.children, function (k) { return k.getBoundingClientRect(); });
-              var right = Math.max.apply(null, kids.map(function (k) { return k.right; }));
-              r = { left: r.left, top: r.top, width: right - r.left, height: r.height, bottom: r.bottom };
-            }
-            return { x: r.left - base.left, y: r.top - base.top, w: r.width, h: r.height, b: r.bottom - base.top };
-          }
-          function add(cls, css, html) {
-            var d = document.createElement('div');
-            d.className = cls;
-            Object.keys(css).forEach(function (k) { d.style[k] = css[k] + 'px'; });
-            if (html) d.innerHTML = html;
-            spec.appendChild(d);
-            return d;
-          }
-          var items = [
-            ['.hero-masthead', function (el) { return fontSpec(el) + ' · caps'; }],
-            ['.hero-headline', function (el) { return fontSpec(el) + ' · max 14ch'; }],
-            ['.hero-headline-em', function (el) { return colorSpec(el); }],
-            ['.hero-standfirst', function (el) { return fontSpec(el) + ' · ' + colorSpec(el); }],
-            ['.hero-meta', function (el) { return 'gap 40px · ' + fontSpec(el); }],
-            ['.lab-stamp', function () { return 'rotate 24s linear ∞'; }]
-          ];
-          var rects = {};
-          items.forEach(function (it) {
-            var el = document.querySelector(it[0]);
-            if (!el) return;
-            var r = rect(el);
-            rects[it[0]] = r;
-            add('spec-box', { left: r.x, top: r.y, width: r.w, height: r.h });
-            var tag = add('spec-tag', { left: r.x, top: Math.max(0, r.y - 20) }, it[1](el));
-          });
-          // Redlines between the stacked blocks.
-          [['.hero-masthead', '.hero-headline'], ['.hero-headline', '.hero-standfirst'], ['.hero-standfirst', '.hero-meta']].forEach(function (pair) {
-            var a = rects[pair[0]], b = rects[pair[1]];
-            if (!a || !b || b.y - a.b < 6) return;
-            add('spec-gap', { left: a.x + Math.min(a.w, b.w) * 0.62, top: a.b, height: b.y - a.b }, '<b>' + Math.round(b.y - a.b) + 'px</b>');
-          });
-          // Where a model would have to guess.
-          var sf = rects['.hero-standfirst'];
-          if (sf) {
-            add('spec-tag is-warn', { left: sf.x + sf.w + 28, top: sf.y + sf.h / 2 - 10 }, '⚠ "hidden system knowledge": undefined');
-          }
-        }
-
-        function place(e) {
-          var r = spec.getBoundingClientRect();
-          spec.style.setProperty('--lx', (e.clientX - r.left) + 'px');
-          spec.style.setProperty('--ly', (e.clientY - r.top) + 'px');
-        }
-
-        if (window.matchMedia('(hover: hover)').matches) {
-          hero.addEventListener('pointermove', function (e) {
-            if (spec.classList.contains('is-all')) return;
-            place(e);
-            spec.classList.add('is-on');
-          });
-          hero.addEventListener('pointerleave', function () { spec.classList.remove('is-on'); });
-        }
-
-        document.querySelector('[data-lab="compile"]').addEventListener('click', compile);
-        document.querySelector('[data-lab="inspect"]').addEventListener('click', function () {
-          spec.classList.remove('is-on');
-          spec.classList.toggle('is-all');
-        });
-
-        var src = document.querySelector('.hero-src');
+        // The source layer spans the built hero's height, line for line.
         function fitSource() {
           var lines = src.textContent.split('\n').length;
           src.style.lineHeight = (document.querySelector('.hero-built').offsetHeight / lines) + 'px';
         }
+
+        var SPECS = [
+          ['.hero-masthead', ['label/caps', 'font-display', '--white-85']],
+          ['.hero-headline', ['heading/display', 'font-display 700', 'max 14ch']],
+          ['.hero-headline-em', ['--pink-400']],
+          ['.hero-standfirst', ['body/lg', 'font-body 300', '--white-72', '!"hidden system knowledge": undefined']],
+          ['.hero-meta', ['label/caps', 'space-10', 'status']],
+          ['.lab-stamp', ['badge', 'turns on scroll']]
+        ];
+
+        var items = [];
+        function build() {
+          spec.innerHTML = '';
+          items = [];
+          var base = inner.getBoundingClientRect();
+          SPECS.forEach(function (row) {
+            var el = document.querySelector(row[0]);
+            if (!el) return;
+            var r = el.getBoundingClientRect();
+            if (el.matches('.hero-masthead, .hero-meta') && el.children.length) {
+              var right = Math.max.apply(null, [].map.call(el.children, function (k) { return k.getBoundingClientRect().right; }));
+              r = { left: r.left, top: r.top, width: right - r.left, height: r.height };
+            }
+            var item = document.createElement('div');
+            item.className = 'spec-item';
+            item.style.left = (r.left - base.left) + 'px';
+            item.style.top = (r.top - base.top) + 'px';
+            item.style.width = r.width + 'px';
+            item.style.height = r.height + 'px';
+            item.innerHTML = '<div class="spec-box"></div><div class="spec-tags">' + row[1].map(function (t) {
+              var warn = t.charAt(0) === '!';
+              return '<span class="spec-tag' + (warn ? ' is-warn' : '') + '">' + (warn ? '⚠ ' + t.slice(1) : t) + '</span>';
+            }).join('') + '</div>';
+            spec.appendChild(item);
+            items.push({ el: el, item: item, nested: row[0] === '.hero-headline-em' });
+          });
+        }
+
+        if (window.matchMedia('(hover: hover)').matches) {
+          document.querySelector('.hero-built').addEventListener('pointermove', function (e) {
+            // The innermost piece under the pointer wins (the pink phrase over the headline).
+            var hit = null;
+            items.forEach(function (it) {
+              if (it.el.contains(e.target) && (!hit || hit.el.contains(it.el))) hit = it;
+            });
+            items.forEach(function (it) { it.item.classList.toggle('is-on', it === hit); });
+          });
+          document.querySelector('.hero-built').addEventListener('pointerleave', function () {
+            items.forEach(function (it) { it.item.classList.remove('is-on'); });
+          });
+        }
+
+        function turnStamp() {
+          if (stamp) stamp.style.setProperty('--stamp-turn', (window.scrollY * 0.25) + 'deg');
+        }
+        window.addEventListener('scroll', turnStamp, { passive: true });
+
+        document.querySelector('[data-lab="compile"]').addEventListener('click', compile);
+        document.querySelector('[data-lab="inspect"]').addEventListener('click', function () {
+          spec.classList.toggle('is-all');
+        });
 
         function ready() { fitSource(); build(); compile(); }
         (document.fonts ? document.fonts.ready : Promise.resolve()).then(ready);
