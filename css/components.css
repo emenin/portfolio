@@ -1400,7 +1400,7 @@ site-footer {
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
-  margin: calc(var(--space-12) * -1 + var(--space-5)) 0 0;
+  margin: calc(var(--space-12) * -1 + var(--space-8)) 0 0;
   color: rgba(250, 250, 250, 0.72);
   font-size: var(--text-sm);
   font-weight: 300;
@@ -1705,7 +1705,7 @@ site-footer {
   }
 
   .ai-essay .spec-proof {
-    margin-top: calc(var(--space-8) * -1 + var(--space-5));
+    margin-top: calc(var(--space-8) * -1 + var(--space-6));
   }
 }
 
