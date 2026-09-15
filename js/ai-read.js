@@ -1,8 +1,9 @@
 // AI + Design Systems: "read it like an AI". A copy of the essay's columns, marked
 // up the way a model reads them (vague phrases underlined as ambiguous, concrete
 // sources highlighted as explicit), sits exactly on top of the text. Hovering
-// shows it through a lens around the pointer; the toggle opens the lens over the
-// whole text. The copy is decorative (aria-hidden); the real text stays below.
+// shows it through a lens around the pointer. The toggle opens the lens over the
+// whole text, then rewrites it: the prose gives way to the direct version (the
+// .spec-direct lines in the markup). The marked copy is decorative (aria-hidden).
 // Runs before crossout.js so the copy's pen strokes animate with the original.
 (function () {
   'use strict';
@@ -64,6 +65,8 @@
   }
 
   var hover = window.matchMedia('(hover: hover)');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var rewrite = null;
 
   read.addEventListener('pointermove', function (event) {
     if (!hover.matches || read.classList.contains('is-machine')) return;
@@ -86,6 +89,15 @@
       read.classList.remove('is-lens');
     }
     read.classList.toggle('is-machine', on);
+    clearTimeout(rewrite);
+    if (on) {
+      // Let the ambiguity get marked first, then rewrite.
+      rewrite = setTimeout(function () {
+        read.classList.add('is-direct');
+      }, reducedMotion.matches ? 0 : 900);
+    } else {
+      read.classList.remove('is-direct');
+    }
     toggle.setAttribute('aria-pressed', String(on));
     toggle.querySelector('.spec-toggle-label').textContent = on
       ? 'Back to human'

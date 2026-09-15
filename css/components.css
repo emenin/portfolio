@@ -1362,8 +1362,10 @@ site-footer {
    The machine copy sits exactly over the columns and is shown through a radial
    mask around --lx/--ly with radius --lr; the original gets the inverse mask, so
    inside the lens you read one, outside the other. Registering --lr lets the
-   lens grow, and the toggle opens it over everything. Same font, size and
-   weight in both copies, so every line and word stays in place. */
+   lens grow. Same font, size and weight in both copies, so every line and word
+   stays in place. The toggle opens the lens over everything (the ambiguity gets
+   marked), then swaps the prose for the direct version: three key/value lines,
+   the way AI needs it (.spec-direct, same grid cell, so nothing jumps). */
 @property --lr {
   syntax: '<length>';
   inherits: true;
@@ -1443,7 +1445,7 @@ site-footer {
     translate 0.3s ease;
 }
 
-#ai-design-systems .spec:has(.is-lens, .is-machine) .spec-legend {
+#ai-design-systems .spec:has(.is-lens, .is-machine:not(.is-direct)) .spec-legend {
   opacity: 1;
   translate: 0 0;
 }
@@ -1463,7 +1465,84 @@ site-footer {
   --lx: 50%;
   --ly: 50%;
   position: relative;
+  display: grid;
   transition: --lr 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#ai-design-systems .spec-read > .spec-body,
+#ai-design-systems .spec-read > .spec-direct {
+  grid-area: 1 / 1;
+}
+
+#ai-design-systems .spec-read > .spec-body {
+  transition:
+    opacity 0.35s ease,
+    filter 0.35s ease,
+    translate 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#ai-design-systems .spec-read.is-direct > .spec-body {
+  opacity: 0;
+  filter: blur(6px);
+  translate: 0 -10px;
+}
+
+#ai-design-systems .spec-direct {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  margin: 0;
+  visibility: hidden;
+  transition: visibility 0s linear 0.4s;
+}
+
+#ai-design-systems .spec-read.is-direct .spec-direct {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+#ai-design-systems .spec-direct > div {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  align-items: baseline;
+  opacity: 0;
+  translate: 0 12px;
+  transition:
+    opacity 0.3s ease,
+    translate 0.3s ease;
+}
+
+#ai-design-systems .spec-read.is-direct .spec-direct > div {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 0.5s ease,
+    translate 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#ai-design-systems .spec-read.is-direct .spec-direct > div:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+#ai-design-systems .spec-read.is-direct .spec-direct > div:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+#ai-design-systems .spec-direct dt {
+  color: var(--pink-400);
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: var(--text-sm);
+}
+
+#ai-design-systems .spec-direct dd {
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.9vw, 1.625rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
 }
 
 #ai-design-systems .spec-read.is-lens {
@@ -1552,8 +1631,11 @@ site-footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #ai-design-systems .spec-read {
-    transition: none;
+  #ai-design-systems .spec-read,
+  #ai-design-systems .spec-read > .spec-body,
+  #ai-design-systems .spec-direct,
+  #ai-design-systems .spec-direct > div {
+    transition: none !important;
   }
 
   #ai-design-systems .spec-toggle-dot {
