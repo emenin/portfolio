@@ -247,7 +247,7 @@ img {
   font-family: var(--font-body);
   font-size: var(--text-xs);
   font-weight: 400;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
@@ -297,8 +297,11 @@ img {
   /* Absolute, not ch: this row's own font-size is 12px, so ch is far too small. */
   max-width: 36rem;
   margin-top: clamp(var(--space-8), 4.5vh, var(--space-14));
+  /* Same small caps as the masthead above: one family, size, and tracking. */
+  font-family: var(--font-body);
   font-size: var(--text-xs);
-  letter-spacing: 0.14em;
+  font-weight: 400;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
@@ -308,6 +311,7 @@ img {
   gap: var(--space-3);
   color: var(--white);
   font-weight: 600;
+  letter-spacing: inherit;
   text-decoration: none;
   border-bottom: 1px solid rgba(var(--hero-glow), 0);
   padding-bottom: 2px;

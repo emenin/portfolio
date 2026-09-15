@@ -1131,6 +1131,16 @@ site-footer {
   color: var(--white);
 }
 
+.site-footer-em {
+  color: var(--pink-400);
+}
+
+/* Both contact links read white, like the email address; the shared link rule
+   would otherwise inherit the note's grey. */
+.site-footer-note .site-footer-link {
+  color: var(--white);
+}
+
 .site-footer-copy {
   -webkit-appearance: none;
   appearance: none;
@@ -1278,10 +1288,10 @@ site-footer {
   }
 }
 
-/* ---- AI + Design Systems: the essay as a spec -----------------------------------
-   One light reading column, indented like the About bio. The two key lines are
-   scanned (lit up) as they scroll into view; a README chip and two linter-style
-   margin notes nod to the machine reading along. */
+/* ---- AI + Design Systems ---------------------------------------------------------------
+   Easy reading first: one column, indented like the About bio. The two key lines
+   are pink; two pen-stroke crossouts (the Unfiltered intro's gesture) edit the
+   text as it scrolls into view. */
 #ai-design-systems .spec {
   width: 100%;
   max-width: 1140px;
@@ -1293,14 +1303,13 @@ site-footer {
 }
 
 #ai-design-systems .spec-body {
-  max-width: 44rem;
-  margin-left: clamp(0px, 14vw, 13rem);
+  max-width: 42rem;
+  margin-left: var(--space-30);
 }
 
 #ai-design-systems .spec-body p {
-  position: relative;
   margin: 0 0 var(--space-6);
-  color: rgba(250, 250, 250, 0.72);
+  color: rgba(250, 250, 250, 0.78);
   font-size: clamp(var(--text-base), 1.25vw, var(--text-md));
   font-weight: 300;
   line-height: 1.75;
@@ -1310,11 +1319,20 @@ site-footer {
   margin-bottom: var(--space-10);
   color: var(--white);
   font-family: var(--font-display);
-  font-size: clamp(1.375rem, 2.1vw, 1.875rem);
-  font-weight: 400;
+  font-size: clamp(1.5rem, 2.3vw, 2rem);
+  font-weight: 500;
   line-height: 1.3;
   letter-spacing: -0.015em;
-  text-wrap: balance;
+}
+
+/* Syne has no italic: the replacement in the lede stays upright. */
+#ai-design-systems .spec-lede .crossout-replacement {
+  font-style: normal;
+}
+
+#ai-design-systems .spec-em {
+  color: var(--pink-400);
+  font-weight: 500;
 }
 
 #ai-design-systems .spec-body .spec-close {
@@ -1323,41 +1341,9 @@ site-footer {
   font-weight: 400;
 }
 
-#ai-design-systems .spec-em {
-  font-weight: 500;
-}
-
-#ai-design-systems .spec-term {
-  padding: 0.08em 0.4em 0.12em;
-  border-radius: var(--radius-sm);
-  background: rgba(246, 176, 255, 0.08);
-  box-shadow: inset 0 0 0 1px rgba(246, 176, 255, 0.22);
-  color: var(--pink-400);
-  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-size: 0.82em;
-  white-space: nowrap;
-}
-
-#ai-design-systems .spec-note {
-  position: absolute;
-  top: 0.35em;
-  right: calc(100% + var(--space-8));
-  width: max-content;
-  max-width: 11rem;
-  color: rgba(246, 176, 255, 0.55);
-  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-size: var(--text-xs);
-  line-height: 1.5;
-  text-align: right;
-}
-
 @media screen and (max-width: 991px) {
   #ai-design-systems .spec-body {
     margin-left: 0;
-  }
-
-  #ai-design-systems .spec-note {
-    display: none;
   }
 }
 

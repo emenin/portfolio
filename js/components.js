@@ -122,8 +122,10 @@
         <div class="site-footer-inner">
           <p class="site-footer-note">
             <span class="site-footer-note-lead">Let&#x27;s have a chat!</span>
-            I&#x27;m available for consulting, contract work, and design
-            systems leadership opportunities. Find me on
+            I&#x27;m available for <span class="site-footer-em">consulting</span>,
+            <span class="site-footer-em">contract work</span>, and
+            <span class="site-footer-em">design systems leadership</span>
+            opportunities. Find me on
             <a class="site-footer-link" href="${escapeHtml(CONTACT_LINKEDIN_URL)}" target="_blank" rel="noopener noreferrer">LinkedIn<span class="arrow arrow--up-right site-footer-link-icon" aria-hidden="true"></span></a>
             or email me at
             <button type="button" class="site-footer-copy" data-copy="${escapeHtml(CONTACT_EMAIL)}"><span class="site-footer-copy-value">${escapeHtml(CONTACT_EMAIL)}</span><span class="site-footer-copy-hint">Copy</span></button><span class="site-footer-copy-status" role="status"></span>
