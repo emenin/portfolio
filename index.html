@@ -208,33 +208,61 @@
           </div>
         </div>
       </div>
-      <div class="hero-inner">
-        <p class="hero-masthead">
-          <span class="hero-masthead-name">Érica Menin</span>
-          <span class="hero-masthead-role">Design Systems + AI Workflows</span>
-        </p>
-        <h1 class="hero-headline">
-          Your design system has
-          <em class="hero-headline-em">a new reader</em>.
-        </h1>
-        <p class="hero-standfirst">
-          It doesn't read between the lines. It reads your tokens, your rules,
-          your docs, and guesses where context is missing. <br />
-          This is where I work: turning hidden system knowledge into clearer
-          rules, docs, and workflows.
-        </p>
-        <div class="hero-meta">
-          <a href="#contact" class="hero-cta"
-            ><img
-              src="images/Vectors-Wrapper.svg"
-              width="24"
-              height="24"
-              alt=""
-              class="hero-cta-icon"
-            /><span class="hero-cta-label">Available for new work</span></a
-          >
-          <span class="hero-meta-item">Remote · based in Germany</span>
-        </div>
+      <div class="hero-inner is-loading">
+        <div class="hero-built">
+          <p class="hero-masthead">
+            <span class="hero-masthead-name">Érica Menin</span>
+            <span class="hero-masthead-role">Design Systems + AI Workflows</span>
+          </p>
+          <h1 class="hero-headline">
+            Your design system has
+            <em class="hero-headline-em">a new reader</em>.
+          </h1>
+          <p class="hero-standfirst">
+            It doesn't read between the lines. It reads your tokens, your rules,
+            your docs, and guesses where context is missing. <br />
+            This is where I work: turning hidden system knowledge into clearer
+            rules, docs, and workflows.
+          </p>
+          <div class="hero-meta">
+            <a href="#contact" class="hero-cta"
+              ><img
+                src="images/Vectors-Wrapper.svg"
+                width="24"
+                height="24"
+                alt=""
+                class="hero-cta-icon"
+              /><span class="hero-cta-label">Available for new work</span></a
+            >
+            <span class="hero-meta-item">Remote · based in Germany</span>
+            <button
+              type="button"
+              class="hero-tokens-switch"
+              role="switch"
+              aria-checked="true"
+              aria-label="Show design tokens on hover"
+            >
+              <span class="hero-tokens-track" aria-hidden="true"
+                ><span class="hero-tokens-knob"></span></span
+              ><span class="hero-tokens-label">Tokens</span>
+            </button>
+          </div>
+  </div>
+        <!-- Loading state: the hero's own source, before it resolves (js/hero.js). -->
+        <pre class="hero-src" aria-hidden="true"><code><span class="hero-src-load">&gt; compiling tokens <span class="hero-src-count">0/48</span><span class="hero-src-caret">▍</span></span>
+
+<span class="t">&lt;section</span> <span class="a">hero</span> <span class="a">ground</span>=<span class="v">"ink-950"</span><span class="t">&gt;</span>
+  <span class="t">&lt;p</span> <span class="a">role</span>=<span class="v">"label/caps"</span><span class="t">&gt;</span>Érica Menin · Design Systems + AI Workflows<span class="t">&lt;/p&gt;</span>
+  <span class="t">&lt;h1</span> <span class="a">role</span>=<span class="v">"heading/display"</span><span class="t">&gt;</span>
+    Your design system has <span class="t">&lt;em</span> <span class="a">color</span>=<span class="v">"pink-400"</span><span class="t">&gt;</span>a new reader<span class="t">&lt;/em&gt;</span>.
+  <span class="t">&lt;/h1&gt;</span>
+  <span class="t">&lt;p</span> <span class="a">role</span>=<span class="v">"body/lg"</span><span class="t">&gt;</span>
+    It doesn't read between the lines. It reads your tokens,
+    your rules, your docs, and guesses where context is missing.
+  <span class="t">&lt;/p&gt;</span>
+  <span class="t">&lt;p</span> <span class="a">role</span>=<span class="v">"status"</span><span class="t">&gt;</span>Available for new work · Remote, based in Germany<span class="t">&lt;/p&gt;</span>
+<span class="t">&lt;/section&gt;</span></code></pre>
+        <div class="hero-spec" aria-hidden="true"></div>
       </div>
     </section>
     <section id="ai-design-systems" class="section ai-essay">

@@ -1975,40 +1975,220 @@ site-footer {
 }
 
 /* ---- Hero motion -------------------------------------------------------------
-   Entrance, the decoding phrase, and the pointer glow (js/hero.js). */
-@media (prefers-reduced-motion: no-preference) {
-  .hero-masthead,
-  .hero-headline,
-  .hero-standfirst,
-  .hero-meta {
-    animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
+   Loading state, tokens on hover, the decoding phrase and the pointer glow
+   (js/hero.js).
 
-  .hero-masthead {
-    animation-delay: 0.05s;
-  }
+   Loading: the hero opens on its own source with a token counter, then the
+   source blurs out and the pieces rise in. Hidden only when JS runs (w-mod-js,
+   set in the head), and a failsafe shows the hero after 4s whatever happens. */
+.hero-inner {
+  position: relative;
+}
 
-  .hero-headline {
-    animation-delay: 0.15s;
-  }
+.hero-src {
+  position: absolute;
+  inset: 0 0 auto 0;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: none;
+  color: rgba(250, 250, 250, 0.62);
+  font: 400 clamp(11px, 1.15vw, 16px) / 1.9 ui-monospace, 'SF Mono', Menlo,
+    Consolas, monospace;
+  white-space: pre;
+  pointer-events: none;
+  opacity: 0;
+  filter: blur(8px);
+  visibility: hidden;
+  transition:
+    opacity 0.45s ease,
+    filter 0.45s ease,
+    visibility 0s linear 0.45s;
+}
 
-  .hero-standfirst {
-    animation-delay: 0.35s;
-  }
+.hero-src .t,
+.hero-src-load {
+  color: rgba(246, 176, 255, 0.9);
+}
 
-  .hero-meta {
-    animation-delay: 0.5s;
+.hero-src .a {
+  color: rgba(250, 250, 250, 0.45);
+}
+
+.hero-src .v {
+  color: var(--white);
+}
+
+.hero-src-caret {
+  margin-left: 2px;
+  animation: hero-caret 1s steps(2, jump-none) infinite;
+}
+
+@keyframes hero-caret {
+  50% {
+    opacity: 0;
   }
 }
 
-@keyframes hero-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
+.hero-built > * {
+  transition:
+    opacity 0.6s ease,
+    translate 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-built > :nth-child(2) {
+  transition-delay: 0.08s;
+}
+
+.hero-built > :nth-child(3) {
+  transition-delay: 0.18s;
+}
+
+.hero-built > :nth-child(4) {
+  transition-delay: 0.28s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .w-mod-js .hero-inner.is-loading .hero-src {
+    opacity: 1;
+    filter: none;
+    visibility: visible;
+    transition: none;
   }
+
+  .w-mod-js .hero-inner.is-loading .hero-built > * {
+    opacity: 0;
+    translate: 0 14px;
+    transition: none;
+    animation: hero-failsafe 0s 4s forwards;
+  }
+}
+
+@keyframes hero-failsafe {
   to {
     opacity: 1;
-    transform: none;
+    translate: 0 0;
+  }
+}
+
+/* Tokens on hover: each piece of the hero shows the tokens it is built from.
+   A small switch at the end of the status line turns it off. */
+.hero .hero-meta {
+  max-width: none;
+}
+
+.hero-tokens-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(250, 250, 250, 0.55);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+.hero-tokens-track {
+  position: relative;
+  width: 30px;
+  height: 17px;
+  border: 1px solid rgba(246, 176, 255, 0.55);
+  border-radius: var(--radius-pill);
+  transition: background-color 0.2s ease;
+}
+
+.hero-tokens-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--pink-400);
+  transition:
+    translate 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.2s ease;
+}
+
+.hero-tokens-switch[aria-checked='true'] .hero-tokens-track {
+  background: var(--pink-400);
+}
+
+.hero-tokens-switch[aria-checked='true'] .hero-tokens-knob {
+  translate: 13px 0;
+  background: var(--ink-950);
+}
+
+.hero-tokens-switch:hover {
+  color: var(--pink-400);
+}
+
+.hero-tokens-switch:focus-visible {
+  outline: 2px solid var(--pink-400);
+  outline-offset: 4px;
+  border-radius: var(--radius-xs);
+}
+
+@media (hover: none) {
+  .hero-tokens-switch {
+    display: none;
+  }
+}
+
+.hero-spec {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-spec-item {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.hero-spec-item.is-on {
+  opacity: 1;
+}
+
+.hero-spec-box {
+  position: absolute;
+  inset: -6px;
+  outline: 1px dashed rgba(246, 176, 255, 0.8);
+  background: rgba(246, 176, 255, 0.05);
+}
+
+.hero-spec-tags {
+  position: absolute;
+  left: -6px;
+  bottom: calc(100% + 10px);
+  display: flex;
+  gap: 4px;
+  width: max-content;
+}
+
+.hero-spec-tag {
+  padding: 2px 6px;
+  background: var(--pink-400);
+  color: var(--ink-950);
+  font: 500 11px / 1.4 ui-monospace, 'SF Mono', Menlo, monospace;
+  white-space: nowrap;
+}
+
+.hero-spec-tag.is-warn {
+  outline: 1px dashed var(--pink-400);
+  background: var(--ink-950);
+  color: var(--pink-400);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-src-caret {
+    animation: none;
   }
 }
 
