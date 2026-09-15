@@ -1298,8 +1298,9 @@ site-footer {
   gap: var(--space-12);
 }
 
+/* Two balanced lines across the frame on desktop. */
 #ai-design-systems .spec-lede {
-  max-width: 24ch;
+  max-width: none;
   margin: 0;
   color: var(--white);
   font-family: var(--font-display);
@@ -1307,7 +1308,7 @@ site-footer {
   font-weight: 500;
   line-height: 1.16;
   letter-spacing: -0.02em;
-  text-wrap: pretty;
+  text-wrap: balance;
 }
 
 /* Syne has no italic: the replacement in the claim stays upright. */

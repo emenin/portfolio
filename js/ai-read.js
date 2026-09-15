@@ -1,4 +1,4 @@
-// AI + Design Systems: "read it like an AI". A copy of the essay's columns, marked
+// AI + Design Systems: read it, then adapt it, like an AI. A copy of the essay's columns, marked
 // up the way a model reads them (vague phrases underlined as ambiguous, concrete
 // sources highlighted as explicit), sits exactly on top of the text. Hovering
 // shows it through a lens around the pointer. The toggle opens the lens over the
@@ -101,6 +101,6 @@
     toggle.setAttribute('aria-pressed', String(on));
     toggle.querySelector('.spec-toggle-label').textContent = on
       ? 'Back to human'
-      : 'Read it like an AI';
+      : 'Adapt it for AI';
   });
 })();
