@@ -2576,3 +2576,83 @@ textarea,
     justify-items: start;
   }
 }
+
+/* ---- Mobile rhythm ------------------------------------------------------------
+   The desktop spacing scale reads as empty room on a phone: a 48px band above and
+   below every section puts 96px of nothing between one idea and the next, the work
+   cards sit 64px apart, and a case study opens 128px below a 70px nav. Everything
+   here is one or two steps down the same scale, so the hierarchy still holds —
+   section bands outrank block gaps, block gaps outrank the air around a figure —
+   on a screen where a step costs a tenth of the viewport. Phones only: the desktop
+   rhythm is untouched. */
+@media screen and (max-width: 767px) {
+  /* Between sections: 96px of combined band becomes 64px. .footer, .project and
+     .padding_none carry their own padding and are more specific, so they keep it. */
+  .section {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+
+  /* A heading and the content it introduces. */
+  .container.aligncenter,
+  .align-center-clean,
+  .container.vertical,
+  .containermedium.vertical,
+  .containermedium.vertical.spacemedium,
+  .tabs {
+    grid-row-gap: var(--space-6);
+    row-gap: var(--space-6);
+  }
+
+  /* Between the work cards. */
+  .containermedium.spacelarge,
+  .column.spacelarge {
+    grid-row-gap: var(--space-10);
+    row-gap: var(--space-10);
+  }
+
+  /* The switch and the text it changes. */
+  .ai-essay .spec-doc {
+    gap: var(--space-8);
+  }
+
+  /* The contact footer opened a screenful below the last section. */
+  .site-footer {
+    padding-top: clamp(var(--space-12), 8vh, var(--space-20));
+  }
+
+  .site-footer-bar {
+    margin-top: var(--space-10);
+  }
+
+  /* ---- Case studies ---- */
+  /* Still clears the nav with room to spare, without a screenful of ground
+     before the title. */
+  body.case-study .section.project {
+    padding-top: clamp(96px, 13vh, 128px);
+  }
+
+  body.case-study.has-article-end .section.project {
+    padding-bottom: var(--space-12);
+  }
+
+  /* Between one block of the story and the next. */
+  body.case-study .column.studycase {
+    grid-row-gap: var(--space-12);
+    row-gap: var(--space-12);
+  }
+
+  body.case-study .column.studycase h4 {
+    margin-top: var(--space-8);
+  }
+
+  /* A figure breaks the column, so it keeps a little more air than a paragraph. */
+  body.case-study .column.studycase .projectimage {
+    margin-top: var(--space-10);
+    margin-bottom: var(--space-10);
+  }
+
+  body.case-study .container.aligntop {
+    margin-top: var(--space-10);
+  }
+}
