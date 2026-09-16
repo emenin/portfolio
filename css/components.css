@@ -2444,6 +2444,41 @@ textarea,
   background-size: calc(100% + 0.6em) 1.6em;
 }
 
+/* ---- Nav tokens on hover ---------------------------------------------------------
+   The same "Inspect" idea as the hero (js/hero.js, .hero-spec-tag): the token
+   behind each item shows on hover. Pure CSS here since nav items don't move
+   around like the hero's do, so there's nothing to measure. Pointer devices
+   only, so it never sits as dead weight on a touch nav. */
+.navbar .navlink,
+.navbar .navbutton {
+  position: relative;
+}
+
+@media (hover: hover) {
+  .navbar .navlink::after,
+  .navbar .navbutton::after {
+    content: attr(data-token);
+    position: absolute;
+    left: 0;
+    top: calc(100% + 8px);
+    padding: 2px 6px;
+    background: var(--pink-400);
+    color: var(--ink-950);
+    font: 500 10px/1.4 ui-monospace, 'SF Mono', Menlo, monospace;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .navbar .navlink:hover::after,
+  .navbar .navlink:focus-visible::after,
+  .navbar .navbutton:hover::after,
+  .navbar .navbutton:focus-visible::after {
+    opacity: 1;
+  }
+}
+
 /* ---- Arrow ------------------------------------------------------------------------
    One arrow everywhere (links, the footer, prev/next), drawn as a mask so it
    takes the text colour and the same stroke in any font; rotate for direction. */
