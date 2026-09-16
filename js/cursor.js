@@ -41,6 +41,13 @@
 
     function enterClickable(e) {
       if (e.target.closest('.article-end-nav')) return;
+      var action = e.currentTarget;
+      var label = wrapper.querySelector('.tooltiplabel');
+      if (action.matches('.site-footer-copy, a[href]:not([href^="#"]):not([href="index.html"])')) {
+        if (label) label.textContent = action.matches('.site-footer-copy') ? 'Copy' : 'View';
+        enterTile();
+        return;
+      }
       wrapper.classList.remove('cursor-hover-tile');
       wrapper.classList.add('cursor-hover');
     }
@@ -48,12 +55,17 @@
     function leaveClickable(e) {
       if (e.target.closest('.article-end-nav')) return;
       wrapper.classList.remove('cursor-hover');
+      wrapper.classList.remove('cursor-hover-tile');
     }
 
     document.addEventListener('mousemove', move, { passive: true });
 
     tileLinks.forEach(function (el) {
-      el.addEventListener('mouseenter', enterTile);
+      el.addEventListener('mouseenter', function () {
+        var label = wrapper.querySelector('.tooltiplabel');
+        if (label) label.textContent = 'View';
+        enterTile();
+      });
       el.addEventListener('mouseleave', leaveTile);
     });
 

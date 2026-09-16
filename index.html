@@ -155,13 +155,6 @@
             (n.className += t + 'touch'));
       })(window, document);
     </script>
-    <script>
-      // The hero's loading state plays once per visit (js/hero.js).
-      try {
-        if (sessionStorage.getItem('hero-loaded'))
-          document.documentElement.classList.add('hero-seen');
-      } catch (e) {}
-    </script>
     <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
     <link href="images/webclip.png" rel="apple-touch-icon" />
   </head>
@@ -204,7 +197,6 @@
             <a href="#work" class="navlink">Work</a>
             <a href="#unfiltered" class="navlink">Unfiltered</a>
             <a href="#what-i-do" class="navlink">What I do</a>
-            <a href="#beliefs" class="navlink">Beliefs</a>
             <a href="#about" class="navlink">About</a>
             <a
               href="#contact"
@@ -215,7 +207,7 @@
           </div>
         </div>
       </div>
-      <div class="hero-inner is-loading">
+      <div class="hero-inner">
         <div class="hero-built">
           <p class="hero-masthead">
             <span class="hero-masthead-name">Érica Menin</span>
@@ -225,7 +217,7 @@
           </p>
           <h1 class="hero-headline">
             Your design system has
-            <em class="hero-headline-em">a new reader</em>.<span
+            <em class="hero-headline-em">a new <span class="hero-reader-discovery" tabindex="0">reader</span></em><span
               class="hero-note"
               aria-hidden="true"
               >yehhh, AI
@@ -264,41 +256,24 @@
             </button>
           </div>
         </div>
-        <!-- Loading state: the hero's own source, before it resolves (js/hero.js).
-             The code is decorative; screen readers hear the status line instead. -->
-        <p class="hero-src-status" role="status"></p>
-        <pre
-          class="hero-src"
-          aria-hidden="true"
-        ><code><span class="hero-src-load">&gt; compiling tokens <span class="hero-src-count">0/48</span><span class="hero-src-caret">▍</span></span>
-
-<span class="t">&lt;section</span> <span class="a">hero</span> <span class="a">ground</span>=<span class="v">"ink-950"</span><span class="t">&gt;</span>
-  <span class="t">&lt;p</span> <span class="a">role</span>=<span class="v">"label/caps"</span><span class="t">&gt;</span>Érica Menin · Design Systems + AI Workflows<span class="t">&lt;/p&gt;</span>
-  <span class="t">&lt;h1</span> <span class="a">role</span>=<span class="v">"heading/display"</span><span class="t">&gt;</span>
-    Your design system has <span class="t">&lt;em</span> <span class="a">color</span>=<span class="v">"pink-400"</span><span class="t">&gt;</span>a new reader<span class="t">&lt;/em&gt;</span>.
-  <span class="t">&lt;/h1&gt;</span>
-  <span class="t">&lt;p</span> <span class="a">role</span>=<span class="v">"body/lg"</span><span class="t">&gt;</span>
-    It doesn't read between the lines. It reads your tokens,
-    your rules, your docs, and guesses where context is missing.
-  <span class="t">&lt;/p&gt;</span>
-  <span class="t">&lt;p</span> <span class="a">role</span>=<span class="v">"status"</span><span class="t">&gt;</span>Available for new work · Remote, based in Germany<span class="t">&lt;/p&gt;</span>
-<span class="t">&lt;/section&gt;</span></code></pre>
+        <pre class="hero-source-intro hero-code-intro" aria-hidden="true"><span>const reader = AI;</span><span>reader.read({</span><span>  tokens, rules, docs</span><span>});</span></pre>
         <div class="hero-spec" aria-hidden="true"></div>
       </div>
     </section>
-    <section id="ai-design-systems" class="section ai-essay">
+    <section id="ai-design-systems" class="section ai-essay ai-essay-concept">
       <div class="w-layout-vflex container align-center-clean">
         <div class="textcontainer alignleft heading-stretch">
-          <h2 class="text_light" data-roll>AI + Design Systems</h2>
+          <h2 class="text_light reveal-on-scroll" data-roll>AI + Design Systems</h2>
         </div>
         <div class="spec">
-          <p class="spec-lede">
-            A design system built only for people
+          <p class="spec-lede reveal-on-scroll spec-reveal-1">
+            <span class="spec-lede-opening">A design system built</span>
+            <span class="spec-lede-line">only for people</span>
             <span class="spec-lede-line"
               >is easy for AI to <em class="spec-lede-em">get wrong</em>.</span
             >
           </p>
-          <div class="spec-doc">
+          <div class="spec-doc reveal-on-scroll spec-reveal-2">
             <div class="spec-tools">
               <div class="spec-switch" role="group" aria-label="Show this text">
                 <span class="spec-switch-label" aria-hidden="true">Read it as</span>
@@ -383,43 +358,45 @@
               </dl>
             </div>
           </div>
-          <p class="spec-close">
-            That’s where my work is now: making design system decisions easier
-            for people and AI to find, apply, and trust.
-          </p>
-          <p class="spec-proof">
-            <img
-              src="images/Vectors-Wrapper.svg"
-              width="20"
-              height="20"
-              alt=""
-              class="spec-proof-icon"
-            />
-            <span
-              >In practice:
-              <a
-                href="https://designsystemsunfiltered.substack.com/p/the-design-system-team-is-gone-the"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="link"
-                >turning our documentation checklist into a skill<span
-                  class="arrow arrow--up-right"
-                  aria-hidden="true"
-                ></span
-              ></a>
-              and
-              <a
-                href="https://designsystemsunfiltered.substack.com/p/how-a-project-that-haunted-me-led"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="link"
-                >my first Cursor command<span
-                  class="arrow arrow--up-right"
-                  aria-hidden="true"
-                ></span></a
-              >.</span
-            >
-          </p>
+          <div class="spec-ending">
+            <p class="spec-close">
+              That’s where my work is now: making design system decisions easier
+              for people and AI to find, apply, and trust.
+            </p>
+            <p class="spec-proof">
+              <img
+                src="images/Vectors-Wrapper.svg"
+                width="20"
+                height="20"
+                alt=""
+                class="spec-proof-icon"
+              />
+              <span
+                >In practice:
+                <a
+                  href="https://designsystemsunfiltered.substack.com/p/the-design-system-team-is-gone-the"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link"
+                  >turning our documentation checklist into a skill<span
+                    class="arrow arrow--up-right"
+                    aria-hidden="true"
+                  ></span
+                ></a>
+                and
+                <a
+                  href="https://designsystemsunfiltered.substack.com/p/how-a-project-that-haunted-me-led"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link"
+                  >my first Cursor command<span
+                    class="arrow arrow--up-right"
+                    aria-hidden="true"
+                  ></span></a
+                >.</span
+              >
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -680,7 +657,7 @@
           <div class="tabsmenu">
             <p class="marginbottom_24px">
               I work best when a design system has outgrown its first version.
-              If you looked over my shoulder, you’d probably find me working on:
+              If you looked over my shoulder, you’d probably find me working&nbsp;on:
             </p>
           </div>
           <div class="tabcontent reveal-on-scroll">
@@ -822,7 +799,7 @@
             class="container _75 vertical spacemedium paddingleft about-bio reveal-on-scroll"
           >
             <p>
-              Hey, I&#x27;m Érica. I&#x27;ve been in design for 15+ years and
+              Hey, I&#x27;m <span class="about-name" tabindex="0">Érica<img src="images/me.webp" alt="" class="about-name-photo" /></span>. I&#x27;ve been in design for 15+ years and
               somewhere along the way became the person who gets excited about
               taking messy, complex things and making them work.
             </p>
@@ -1046,29 +1023,20 @@
       (function () {
         if (!window.matchMedia('(hover: hover)').matches) return;
         function init() {
-          var intro = document.querySelector('#work .work-intro');
           var wrapper = document.querySelector('.cursor-wrapper');
           if (!wrapper) return;
-          if (intro) {
-            intro.addEventListener('mouseenter', function () {
-              wrapper.classList.add('cursor-hover');
-            });
-            intro.addEventListener('mouseleave', function () {
-              wrapper.classList.remove('cursor-hover');
-            });
-          }
           // Article rows are generated at build time, but delegate anyway so
           // the hover cursor survives any future re-render of the list.
           document.addEventListener('mouseover', function (e) {
-            if (e.target.closest('.article-row')) {
+            if (e.target.closest('.article-row, #work .card')) {
               wrapper.classList.add('cursor-hover-tile');
             }
           });
           document.addEventListener('mouseout', function (e) {
-            var leavingRow = e.target.closest('.article-row');
+            var leavingRow = e.target.closest('.article-row, #work .card');
             var enteringRow =
               e.relatedTarget && e.relatedTarget.closest
-                ? e.relatedTarget.closest('.article-row')
+                ? e.relatedTarget.closest('.article-row, #work .card')
                 : null;
             if (leavingRow && !enteringRow) {
               wrapper.classList.remove('cursor-hover-tile');
@@ -1084,6 +1052,7 @@
     </script>
     <script src="js/nav-accent.js" type="text/javascript"></script>
     <script src="js/ai-read.js" type="text/javascript"></script>
+    <script src="js/ai-concept-motion.js" type="text/javascript"></script>
     <script src="js/crossout.js" type="text/javascript"></script>
     <script src="js/about-hover.js" type="text/javascript"></script>
     <script src="js/section-reveal.js" type="text/javascript"></script>
