@@ -189,6 +189,9 @@
 .ft-modal {
   width: 100%;
   max-width: 540px;
+  /* An answer can be longer than the window: the modal stops at the overlay's
+     content box and scrolls inside rather than growing off both ends of it. */
+  max-height: 100%;
   background: var(--ink-950);
   color: var(--white);
   border: 1px solid var(--ft-line, rgba(246, 176, 255, 0.22));
@@ -196,14 +199,20 @@
   box-shadow: 0 30px 80px rgba(20, 22, 31, 0.55);
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   font-size: var(--text-sm);
-  overflow: hidden;
+  overflow: hidden auto;
+  overscroll-behavior: contain;
 }
+/* Whatever is on screen, the prompt is still there to type into. */
 .ft-inputline {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-4);
   border-bottom: 1px solid rgba(246, 176, 255, 0.18);
+  background: var(--ink-950);
 }
 .ft-inputline .ft-prompt { color: var(--pink-400); font-weight: 600; white-space: nowrap; }
 .ft-input {
@@ -265,9 +274,32 @@
 @media (max-width: 600px) {
   .ft-section { padding: var(--space-12) var(--space-4); }
   .ft-fab { right: 14px; bottom: 14px; }
-  .ft-overlay { align-items: flex-end; padding: 0; }
-  .ft-modal { max-width: none; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+
+  /* A sheet on the bottom edge, lifted clear of the on-screen keyboard.
+     The keyboard shrinks the visual viewport but not the layout one, so
+     nothing in CSS knows it is there: faq-terminal.js measures it into
+     --ft-kb. A strip of backdrop stays tappable above the sheet, which is
+     how the terminal is dismissed on touch. */
+  .ft-overlay {
+    align-items: flex-end;
+    padding: 0;
+    bottom: var(--ft-kb, 0px);
+  }
+  .ft-modal {
+    max-width: none;
+    max-height: 88%;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
   .ft-row .ft-k { min-width: 84px; }
+
+  /* Under 16px, iOS Safari zooms the page in when the field takes focus, and a
+     fixed overlay laid out for the old width ends up hanging off the left edge:
+     the prompt and every command lost their first characters. */
+  .ft-input { font-size: 16px; }
+
+  /* The user and host are decoration; on a narrow line they were eating half
+     the room the command needs. */
+  .ft-prompt-host { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
