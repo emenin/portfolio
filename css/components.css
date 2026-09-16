@@ -1121,6 +1121,26 @@ site-footer {
   color: var(--white);
 }
 
+/* Line-by-line load-in: the lead, then the rest of the note, then the
+   copyright bar, each its own .reveal-on-scroll target (js/section-reveal.js)
+   staggered by transition-delay. inline-block so translateY doesn't get
+   dropped the way it can on a plain inline element. */
+.site-footer-note .reveal-on-scroll {
+  display: inline-block;
+}
+
+.footer-reveal-1 {
+  transition-delay: 0.05s;
+}
+
+.footer-reveal-2 {
+  transition-delay: 0.18s;
+}
+
+.footer-reveal-3 {
+  transition-delay: 0.32s;
+}
+
 /* The three kinds of work light up pink only when pointed at. */
 .site-footer-em {
   transition: color 0.25s ease;
@@ -1300,6 +1320,25 @@ site-footer {
   gap: var(--space-12);
 }
 
+/* The heading's own .reveal-on-scroll motion reads as barely-there on a
+   claim this size. Bigger rise + a touch more delay per step, so the
+   heading, the claim and the switch/columns cascade in as a sequence
+   instead of nearly all landing at once. */
+.ai-essay .reveal-on-scroll {
+  transform: translateY(-44px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ai-essay .spec-reveal-1 {
+  transition-delay: 0.08s;
+}
+
+.ai-essay .spec-reveal-2 {
+  transition-delay: 0.16s;
+}
+
 /* The part the switch and the lens act on. Pulled up closer to the claim
    above it (the claim reads as this section's real title) than the space-12
    .spec gap alone would give — space-12 is calibrated for the gaps around
@@ -1307,7 +1346,7 @@ site-footer {
 .ai-essay .spec-doc {
   display: flex;
   flex-direction: column;
-  gap: var(--space-16);
+  gap: var(--space-20);
   margin-top: calc(var(--space-12) * -1 + var(--space-8));
 }
 
@@ -1371,7 +1410,7 @@ site-footer {
 
 .ai-essay .spec-close {
   max-width: 48ch;
-  margin: var(--space-3) 0 0;
+  margin: var(--space-8) 0 0;
   color: var(--white);
   font-family: var(--font-display);
   font-size: clamp(1.125rem, 1.6vw, 1.375rem);
@@ -1414,7 +1453,7 @@ site-footer {
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
-  margin: calc(var(--space-12) * -1 + var(--space-5)) 0 0;
+  margin: calc(var(--space-4) * -1 + var(--space-2)) 0 0;
   color: rgba(250, 250, 250, 0.72);
   font-size: var(--text-sm);
   font-weight: 300;
