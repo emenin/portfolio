@@ -103,6 +103,20 @@
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
+  // The on-screen keyboard shrinks the visual viewport but leaves the layout
+  // viewport alone, so a fixed, bottom-anchored sheet sits underneath the keys
+  // with nothing in CSS aware of it. Measure the covered strip into --ft-kb and
+  // let the overlay end above it.
+  var vv = window.visualViewport;
+  if (vv) {
+    var trackKeyboard = function () {
+      var covered = window.innerHeight - vv.height - vv.offsetTop;
+      overlay.style.setProperty('--ft-kb', Math.max(0, Math.round(covered)) + 'px');
+    };
+    vv.addEventListener('resize', trackKeyboard);
+    vv.addEventListener('scroll', trackKeyboard);
+  }
+
   // --- wiring ---
   fab.addEventListener('click', function () { open(); });
   if (escBtn) escBtn.addEventListener('click', close);

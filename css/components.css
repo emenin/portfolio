@@ -1612,33 +1612,51 @@ site-footer {
   --lr: 185px;
 }
 
-.ai-essay .spec-read > .spec-body:not(.spec-body--machine) {
-  -webkit-mask-image: radial-gradient(
-    circle at var(--lx) var(--ly),
-    transparent calc(var(--lr) - 28px),
-    #000 var(--lr)
-  );
-  mask-image: radial-gradient(
-    circle at var(--lx) var(--ly),
-    transparent calc(var(--lr) - 28px),
-    #000 var(--lr)
-  );
-}
-
 .ai-essay .spec-body--machine {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(
-    circle at var(--lx) var(--ly),
-    #000 calc(var(--lr) - 28px),
-    transparent var(--lr)
-  );
-  mask-image: radial-gradient(
-    circle at var(--lx) var(--ly),
-    #000 calc(var(--lr) - 28px),
-    transparent var(--lr)
-  );
+}
+
+/* The lens belongs to the pointer, so only a device that can hover carries the
+   masks. Its radius is 0 until the pointer arrives, and a radial gradient may
+   not have a negative stop: max() keeps both ends on the legal side of zero, so
+   the resting state is "all of the story, none of the machine copy" in every
+   engine rather than whatever each one makes of an invalid radius. */
+@media (hover: hover) {
+  .ai-essay .spec-read > .spec-body:not(.spec-body--machine) {
+    -webkit-mask-image: radial-gradient(
+      circle at var(--lx) var(--ly),
+      transparent max(0px, var(--lr) - 28px),
+      #000 max(1px, var(--lr))
+    );
+    mask-image: radial-gradient(
+      circle at var(--lx) var(--ly),
+      transparent max(0px, var(--lr) - 28px),
+      #000 max(1px, var(--lr))
+    );
+  }
+
+  .ai-essay .spec-body--machine {
+    -webkit-mask-image: radial-gradient(
+      circle at var(--lx) var(--ly),
+      #000 max(0px, var(--lr) - 28px),
+      transparent max(1px, var(--lr))
+    );
+    mask-image: radial-gradient(
+      circle at var(--lx) var(--ly),
+      #000 max(0px, var(--lr) - 28px),
+      transparent max(1px, var(--lr))
+    );
+  }
+}
+
+/* Nothing to hover with: the machine copy is never built (js/ai-read.js), and
+   would have nothing to hide it if it were. */
+@media (hover: none) {
+  .ai-essay .spec-body--machine {
+    display: none;
+  }
 }
 
 .ai-essay .spec-body--machine p,
@@ -1674,8 +1692,8 @@ site-footer {
   position: absolute;
   left: var(--lx);
   top: var(--ly);
-  width: calc(var(--lr) * 2 - 28px);
-  height: calc(var(--lr) * 2 - 28px);
+  width: max(0px, var(--lr) * 2 - 28px);
+  height: max(0px, var(--lr) * 2 - 28px);
   border: 1px solid rgba(246, 176, 255, 0.3);
   border-radius: 50%;
   translate: -50% -50%;
@@ -2556,5 +2574,85 @@ textarea,
 @media screen and (max-width: 767px) {
   .site-footer-bar .footer-tagline-wrap {
     justify-items: start;
+  }
+}
+
+/* ---- Mobile rhythm ------------------------------------------------------------
+   The desktop spacing scale reads as empty room on a phone: a 48px band above and
+   below every section puts 96px of nothing between one idea and the next, the work
+   cards sit 64px apart, and a case study opens 128px below a 70px nav. Everything
+   here is one or two steps down the same scale, so the hierarchy still holds —
+   section bands outrank block gaps, block gaps outrank the air around a figure —
+   on a screen where a step costs a tenth of the viewport. Phones only: the desktop
+   rhythm is untouched. */
+@media screen and (max-width: 767px) {
+  /* Between sections: 96px of combined band becomes 64px. .footer, .project and
+     .padding_none carry their own padding and are more specific, so they keep it. */
+  .section {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+
+  /* A heading and the content it introduces. */
+  .container.aligncenter,
+  .align-center-clean,
+  .container.vertical,
+  .containermedium.vertical,
+  .containermedium.vertical.spacemedium,
+  .tabs {
+    grid-row-gap: var(--space-6);
+    row-gap: var(--space-6);
+  }
+
+  /* Between the work cards. */
+  .containermedium.spacelarge,
+  .column.spacelarge {
+    grid-row-gap: var(--space-10);
+    row-gap: var(--space-10);
+  }
+
+  /* The switch and the text it changes. */
+  .ai-essay .spec-doc {
+    gap: var(--space-8);
+  }
+
+  /* The contact footer opened a screenful below the last section. */
+  .site-footer {
+    padding-top: clamp(var(--space-12), 8vh, var(--space-20));
+  }
+
+  .site-footer-bar {
+    margin-top: var(--space-10);
+  }
+
+  /* ---- Case studies ---- */
+  /* Still clears the nav with room to spare, without a screenful of ground
+     before the title. */
+  body.case-study .section.project {
+    padding-top: clamp(96px, 13vh, 128px);
+  }
+
+  body.case-study.has-article-end .section.project {
+    padding-bottom: var(--space-12);
+  }
+
+  /* Between one block of the story and the next. */
+  body.case-study .column.studycase {
+    grid-row-gap: var(--space-12);
+    row-gap: var(--space-12);
+  }
+
+  body.case-study .column.studycase h4 {
+    margin-top: var(--space-8);
+  }
+
+  /* A figure breaks the column, so it keeps a little more air than a paragraph. */
+  body.case-study .column.studycase .projectimage {
+    margin-top: var(--space-10);
+    margin-bottom: var(--space-10);
+  }
+
+  body.case-study .container.aligntop {
+    margin-top: var(--space-10);
   }
 }
