@@ -1350,16 +1350,16 @@ site-footer {
 }
 
 .ai-essay .spec-em {
-  color: var(--white);
+  color: var(--pink-400);
   font-weight: 500;
 }
 
 .ai-essay .spec-term {
   padding: 0.08em 0.4em 0.12em;
   border-radius: var(--radius-sm);
-  background: rgba(250, 250, 250, 0.06);
-  box-shadow: inset 0 0 0 1px rgba(250, 250, 250, 0.18);
-  color: var(--white);
+  background: rgba(246, 176, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(246, 176, 255, 0.22);
+  color: var(--pink-400);
   font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   font-size: 0.86em;
   white-space: nowrap;
@@ -1397,10 +1397,10 @@ site-footer {
 .ai-essay .spec-tools {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-2) var(--space-8);
-  /* The controls belong to the text under them, not to the claim above. */
-  margin-bottom: calc(var(--space-12) * -1 + var(--space-6));
+  align-items: center;
+  gap: var(--space-3) var(--space-6);
+  /* A clear step between the controls and the text they change. */
+  margin-bottom: calc(var(--space-12) * -1 + var(--space-10));
 }
 
 /* The proof under the sign-off: where this already happens, in writing. */
@@ -1408,7 +1408,8 @@ site-footer {
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
-  margin: calc(var(--space-12) * -1 + var(--space-5)) 0 0;
+  /* The same step as between the text and the sign-off. */
+  margin: var(--space-3) 0 0;
   color: rgba(250, 250, 250, 0.72);
   font-size: var(--text-sm);
   font-weight: 300;
@@ -1451,54 +1452,49 @@ site-footer {
   rotate: 180deg;
 }
 
-/* Read it as: the story / rewritten for AI. Plain text choices in the body face;
-   the one on show carries the link marker, the other gets it on hover. */
-.ai-essay .spec-switch {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-2);
-  color: rgba(250, 250, 250, 0.55);
-  font-size: var(--text-sm);
+/* The story / Rewritten for AI: a two-way switch, set at the right of the columns, so it
+   reads as a choice rather than a tag or a call to action. Instant. */
+.ai-essay .spec-tools {
+  justify-content: space-between;
 }
 
-.ai-essay .spec-switch-sep {
-  color: rgba(250, 250, 250, 0.35);
+.ai-essay .spec-switch {
+  display: inline-flex;
+  padding: 3px;
+  border: 1.5px solid rgba(246, 176, 255, 0.5);
+  border-radius: var(--radius-pill);
 }
 
 .ai-essay .spec-switch-opt {
-  margin: 0 -0.12em;
-  padding: 0 0.12em;
+  margin: 0;
+  padding: 8px 14px 7px;
   border: 0;
-  border-radius: 0;
-  background-color: transparent;
-  background-image: linear-gradient(var(--pink-400), var(--pink-400));
-  background-repeat: no-repeat;
-  background-position: 0 50%;
-  background-size: 0% 100%;
-  color: var(--white);
-  font: inherit;
-  font-weight: 500;
-  line-height: 1.5;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: rgba(250, 250, 250, 0.75);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
   cursor: pointer;
   transition:
-    background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    color 0.2s ease 0.05s;
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.ai-essay .spec-switch-opt:hover,
-.ai-essay .spec-switch-opt[aria-pressed='true'] {
-  background-size: 100% 100%;
-  color: var(--ink-900);
+.ai-essay .spec-switch-opt:hover {
+  color: var(--pink-400);
 }
 
 .ai-essay .spec-switch-opt[aria-pressed='true'] {
+  background: var(--pink-400);
+  color: var(--ink-950);
   cursor: default;
 }
 
 .ai-essay .spec-switch-opt:focus-visible {
   outline: 2px solid var(--pink-400);
-  outline-offset: 3px;
+  outline-offset: 2px;
 }
 
 /* A quiet hint, only where there is a pointer to hover with. It carries its own
@@ -1506,8 +1502,9 @@ site-footer {
 .ai-essay .spec-hint {
   display: none;
   margin: 0;
-  color: rgba(250, 250, 250, 0.55);
-  font-size: var(--text-sm);
+  color: rgba(250, 250, 250, 0.72);
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 13px;
   transition:
     opacity 0.3s ease,
     visibility 0.3s ease;
@@ -1736,7 +1733,7 @@ site-footer {
   }
 
   .ai-essay .spec-proof {
-    margin-top: calc(var(--space-8) * -1 + var(--space-4));
+    margin-top: 0;
   }
 }
 
