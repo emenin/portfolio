@@ -1297,7 +1297,7 @@ site-footer {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: var(--space-12);
+  gap: var(--space-16);
 }
 
 /* The part the switch and the lens act on. */
@@ -2220,16 +2220,14 @@ site-footer {
   align-items: center;
   gap: var(--space-2);
   margin: 0 0 0 auto;
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid rgba(246, 176, 255, 0.55);
-  border-radius: var(--radius-xs);
+  padding: 0;
+  border: 0;
   background: none;
   color: rgba(250, 250, 250, 0.55);
   font: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .hero-inspect-track {
