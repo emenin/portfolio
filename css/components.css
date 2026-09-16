@@ -1300,11 +1300,15 @@ site-footer {
   gap: var(--space-12);
 }
 
-/* The part the switch and the lens act on. */
+/* The part the switch and the lens act on. Pulled up closer to the claim
+   above it (the claim reads as this section's real title) than the space-12
+   .spec gap alone would give — space-12 is calibrated for the gaps around
+   .spec-close/.spec-proof below and shouldn't change just for this one. */
 .ai-essay .spec-doc {
   display: flex;
   flex-direction: column;
   gap: var(--space-16);
+  margin-top: calc(var(--space-12) * -1 + var(--space-8));
 }
 
 /* Two balanced lines across the frame on desktop. */
@@ -1399,8 +1403,10 @@ site-footer {
   flex-wrap: wrap;
   align-items: baseline;
   gap: var(--space-2) var(--space-8);
-  /* The controls belong to the text under them, not to the claim above. */
-  margin-bottom: calc(var(--space-12) * -1 + var(--space-6));
+  /* Still pulled up a little from the full spec-doc gap, but with clear air
+     before the reading columns — a control row needs to read as its own
+     line, not run into the prose. */
+  margin-bottom: calc(var(--space-8) * -1 + var(--space-6));
 }
 
 /* The proof under the sign-off: where this already happens, in writing. */
