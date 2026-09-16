@@ -1612,33 +1612,51 @@ site-footer {
   --lr: 185px;
 }
 
-.ai-essay .spec-read > .spec-body:not(.spec-body--machine) {
-  -webkit-mask-image: radial-gradient(
-    circle at var(--lx) var(--ly),
-    transparent calc(var(--lr) - 28px),
-    #000 var(--lr)
-  );
-  mask-image: radial-gradient(
-    circle at var(--lx) var(--ly),
-    transparent calc(var(--lr) - 28px),
-    #000 var(--lr)
-  );
-}
-
 .ai-essay .spec-body--machine {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(
-    circle at var(--lx) var(--ly),
-    #000 calc(var(--lr) - 28px),
-    transparent var(--lr)
-  );
-  mask-image: radial-gradient(
-    circle at var(--lx) var(--ly),
-    #000 calc(var(--lr) - 28px),
-    transparent var(--lr)
-  );
+}
+
+/* The lens belongs to the pointer, so only a device that can hover carries the
+   masks. Its radius is 0 until the pointer arrives, and a radial gradient may
+   not have a negative stop: max() keeps both ends on the legal side of zero, so
+   the resting state is "all of the story, none of the machine copy" in every
+   engine rather than whatever each one makes of an invalid radius. */
+@media (hover: hover) {
+  .ai-essay .spec-read > .spec-body:not(.spec-body--machine) {
+    -webkit-mask-image: radial-gradient(
+      circle at var(--lx) var(--ly),
+      transparent max(0px, var(--lr) - 28px),
+      #000 max(1px, var(--lr))
+    );
+    mask-image: radial-gradient(
+      circle at var(--lx) var(--ly),
+      transparent max(0px, var(--lr) - 28px),
+      #000 max(1px, var(--lr))
+    );
+  }
+
+  .ai-essay .spec-body--machine {
+    -webkit-mask-image: radial-gradient(
+      circle at var(--lx) var(--ly),
+      #000 max(0px, var(--lr) - 28px),
+      transparent max(1px, var(--lr))
+    );
+    mask-image: radial-gradient(
+      circle at var(--lx) var(--ly),
+      #000 max(0px, var(--lr) - 28px),
+      transparent max(1px, var(--lr))
+    );
+  }
+}
+
+/* Nothing to hover with: the machine copy is never built (js/ai-read.js), and
+   would have nothing to hide it if it were. */
+@media (hover: none) {
+  .ai-essay .spec-body--machine {
+    display: none;
+  }
 }
 
 .ai-essay .spec-body--machine p,
@@ -1674,8 +1692,8 @@ site-footer {
   position: absolute;
   left: var(--lx);
   top: var(--ly);
-  width: calc(var(--lr) * 2 - 28px);
-  height: calc(var(--lr) * 2 - 28px);
+  width: max(0px, var(--lr) * 2 - 28px);
+  height: max(0px, var(--lr) * 2 - 28px);
   border: 1px solid rgba(246, 176, 255, 0.3);
   border-radius: 50%;
   translate: -50% -50%;

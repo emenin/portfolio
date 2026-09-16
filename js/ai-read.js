@@ -4,9 +4,11 @@
 // A copy of the essay's columns, marked up the way a model reads them (vague
 // phrases underlined as ambiguous, concrete sources highlighted as explicit),
 // sits exactly on top of the text and shows through a lens around the pointer.
+// It is only built where there is a pointer to hover with: on a touch screen the
+// lens can never open, so the copy would only sit invisibly over the story.
 // The story / Rewritten for AI switch swaps the story for the direct version (the
-// .spec-direct lines in the markup), instantly. The marked copy is decorative
-// (aria-hidden).
+// .spec-direct lines in the markup), instantly, everywhere. The marked copy is
+// decorative (aria-hidden).
 //
 // Runs before crossout.js, which only animates the original's pen strokes.
 (function () {
@@ -24,7 +26,6 @@
   ];
 
   var hover = window.matchMedia('(hover: hover)');
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   // Wraps the first match of each pattern, wherever it sits in a text node.
   function mark(root, patterns, className) {
@@ -45,8 +46,9 @@
     });
   }
 
-  function initLens(section, read, switchEl) {
+  function initLens(read) {
     var body = read.querySelector('.spec-body');
+    if (!body || read.querySelector('.spec-body--machine')) return;
     var machine = body.cloneNode(true);
     machine.classList.add('spec-body--machine');
     machine.setAttribute('aria-hidden', 'true');
@@ -90,7 +92,10 @@
     read.addEventListener('pointerleave', function () {
       read.classList.remove('is-lens');
     });
+  }
 
+  // The switch is the part everyone gets, pointer or not.
+  function initSwitch(read, switchEl) {
     var options = switchEl.querySelectorAll('.spec-switch-opt');
     options.forEach(function (opt) {
       opt.addEventListener('click', function () {
@@ -104,11 +109,20 @@
     });
   }
 
-
   document.querySelectorAll('.ai-essay').forEach(function (section) {
     var read = section.querySelector('.spec-read');
     var switchEl = section.querySelector('.spec-switch');
     if (!read || !switchEl) return;
-    initLens(section, read, switchEl);
+    initSwitch(read, switchEl);
+
+    // On a touch screen there is nothing to hover the lens with, so the marked
+    // copy is never built: it can only sit invisibly on top of the story.
+    if (hover.matches) {
+      initLens(read);
+    } else if (hover.addEventListener) {
+      hover.addEventListener('change', function (event) {
+        if (event.matches) initLens(read);
+      });
+    }
   });
 })();
