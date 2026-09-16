@@ -72,8 +72,22 @@
     }).join('');
   }
 
+  function backToCommands() {
+    outEl.classList.remove('ft-on');
+    outEl.innerHTML = '';
+    sug.classList.remove('ft-hidden');
+    input.value = '';
+    sel = -1;
+    renderSug();
+    input.focus();
+  }
+
   function out(html) {
-    outEl.innerHTML = html;
+    // A way back to the command list that doesn't mean closing the whole
+    // terminal — before this, esc (which exits entirely) was the only way
+    // out of an answer.
+    outEl.innerHTML =
+      '<button type="button" class="ft-back-btn">&larr; back to commands</button>' + html;
     outEl.classList.add('ft-on');
     // The suggestion list sat between the input and the answer, pushing it
     // far down the sheet. Hide it while an answer is showing, so the answer
@@ -142,6 +156,10 @@
   if (openBtn) openBtn.addEventListener('click', function () { open(); });
 
   overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+
+  outEl.addEventListener('click', function (e) {
+    if (e.target.closest('.ft-back-btn')) backToCommands();
+  });
 
   sug.addEventListener('click', function (e) {
     var row = e.target.closest('.ft-row');
