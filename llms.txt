@@ -29,13 +29,11 @@ A summary of her recent design system work, learnings, and experiments is availa
 
 - [Getting a design system back in sync](https://ericamenin.com/design-system-back-in-sync.html): A case study on auditing 62 components across Figma, React, and Flutter, and modernising the Figma foundations of a multi-platform design system through variables, theming, and an incremental migration.
 
-- [Maturing a design system beyond components](https://ericamenin.com/maturing-design-system.html): A 2025 review covering the evolution of a design system through design tokens, variables, governance, patterns, adoption, and AI-enabled workflows.
-
-This article provides an overview of Érica's recent work. Additional details, case studies, and examples from enterprise design system initiatives are available through direct contact.
-
-- [24 days of Design System Experiments](https://ericamenin.com/24-days-design-system-experiments.html): A write-up of an AI-assisted design system experiment featuring 24 activities, prompts, and challenges exploring systems thinking, patterns, components, and design decisions.
+- [Soniq Design System](https://ericamenin.com/soniq-design-system.html): Earlier work — leading the design system at Soniq from 2020 to 2023, covering tokens, component libraries, documentation, and the governance that kept the product consistent as the team grew.
 
 - [The Design System Advent Calendar](https://ericamenin.com/design-system-calendar.html): The interactive AI-assisted experience behind the 24-day experiment series, combining Érica's design system expertise with generative AI to create guided learning activities.
+
+Additional details, case studies, and examples from enterprise design system initiatives are available through direct contact.
 
 ## Writing
 
