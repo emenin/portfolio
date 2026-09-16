@@ -75,10 +75,11 @@
   function out(html) {
     outEl.innerHTML = html;
     outEl.classList.add('ft-on');
-    // Scroll output into view, pushing it to the top on mobile
-    setTimeout(function () {
-      outEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 0);
+    // The suggestion list sat between the input and the answer, pushing it
+    // far down the sheet. Hide it while an answer is showing, so the answer
+    // lands right under the input line; it comes back as soon as the box is
+    // typed into again (see the 'input' listener below).
+    sug.classList.add('ft-hidden');
   }
 
   function runCmd(raw) {
@@ -109,6 +110,7 @@
     input.value = '';
     outEl.innerHTML = '';
     outEl.classList.remove('ft-on');
+    sug.classList.remove('ft-hidden');
     sel = -1;
     renderSug();
     input.focus();
@@ -146,7 +148,12 @@
     if (row) runCmd(row.getAttribute('data-cmd'));
   });
 
-  input.addEventListener('input', function () { sel = -1; renderSug(); });
+  input.addEventListener('input', function () {
+    sel = -1;
+    outEl.classList.remove('ft-on');
+    sug.classList.remove('ft-hidden');
+    renderSug();
+  });
 
   input.addEventListener('keydown', function (e) {
     var rows = sug.querySelectorAll('.ft-row');

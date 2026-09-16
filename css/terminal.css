@@ -235,6 +235,12 @@
   flex-shrink: 0;
   overflow-y: auto;
 }
+/* While an answer is showing, the list is dead weight between the input and
+   the answer, pushing it down the sheet. Hidden instead of shown alongside it
+   (js/faq-terminal.js toggles this on run / clears it on input). */
+.ft-sug.ft-hidden {
+  display: none;
+}
 .ft-row {
   display: flex;
   gap: var(--space-3);
