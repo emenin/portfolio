@@ -272,6 +272,21 @@
 .ft-out.ft-on { display: block; }
 .ft-out .ft-ok { color: var(--pink-400); }
 .ft-out a { color: #fff; text-decoration: underline; text-decoration-color: var(--pink-400); text-underline-offset: 3px; }
+.ft-back-btn {
+  display: block;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  background: none;
+  border: none;
+  color: rgba(250, 250, 250, 0.55);
+  font: inherit;
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+.ft-back-btn:hover,
+.ft-back-btn:focus-visible {
+  color: var(--pink-400);
+}
 .ft-hint {
   display: flex;
   gap: var(--space-2);
