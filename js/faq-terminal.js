@@ -18,6 +18,8 @@
   var sug = document.getElementById('ftSug');
   var outEl = document.getElementById('ftOut');
   var escBtn = document.getElementById('ftEsc');
+  var backBtn = document.getElementById('ftBack');
+  var navHint = document.getElementById('ftNavHint');
   var sel = -1;
   var lastFocus = null;
 
@@ -76,6 +78,8 @@
     outEl.classList.remove('ft-on');
     outEl.innerHTML = '';
     sug.classList.remove('ft-hidden');
+    if (backBtn) backBtn.hidden = true;
+    if (navHint) navHint.hidden = false;
     input.value = '';
     sel = -1;
     renderSug();
@@ -83,17 +87,17 @@
   }
 
   function out(html) {
-    // A way back to the command list that doesn't mean closing the whole
-    // terminal — before this, esc (which exits entirely) was the only way
-    // out of an answer.
-    outEl.innerHTML =
-      '<button type="button" class="ft-back-btn">&larr; back to commands</button>' + html;
+    outEl.innerHTML = html;
     outEl.classList.add('ft-on');
     // The suggestion list sat between the input and the answer, pushing it
     // far down the sheet. Hide it while an answer is showing, so the answer
     // lands right under the input line; it comes back as soon as the box is
     // typed into again (see the 'input' listener below).
     sug.classList.add('ft-hidden');
+    // "navigate" means nothing once the list is hidden — swap it for a way
+    // back to the list, which otherwise only esc (closing everything) gave.
+    if (backBtn) backBtn.hidden = false;
+    if (navHint) navHint.hidden = true;
   }
 
   function runCmd(raw) {
@@ -125,6 +129,8 @@
     outEl.innerHTML = '';
     outEl.classList.remove('ft-on');
     sug.classList.remove('ft-hidden');
+    if (backBtn) backBtn.hidden = true;
+    if (navHint) navHint.hidden = false;
     sel = -1;
     renderSug();
     input.focus();
@@ -157,9 +163,7 @@
 
   overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
 
-  outEl.addEventListener('click', function (e) {
-    if (e.target.closest('.ft-back-btn')) backToCommands();
-  });
+  if (backBtn) backBtn.addEventListener('click', backToCommands);
 
   sug.addEventListener('click', function (e) {
     var row = e.target.closest('.ft-row');
@@ -170,6 +174,8 @@
     sel = -1;
     outEl.classList.remove('ft-on');
     sug.classList.remove('ft-hidden');
+    if (backBtn) backBtn.hidden = true;
+    if (navHint) navHint.hidden = false;
     renderSug();
   });
 
