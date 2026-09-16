@@ -17,6 +17,7 @@
   var input = document.getElementById('ftInput');
   var sug = document.getElementById('ftSug');
   var outEl = document.getElementById('ftOut');
+  var escBtn = document.getElementById('ftEsc');
   var sel = -1;
   var lastFocus = null;
 
@@ -55,6 +56,10 @@
   function out(html) {
     outEl.innerHTML = html;
     outEl.classList.add('ft-on');
+    // Scroll output into view if keyboard is present
+    setTimeout(function () {
+      outEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 0);
   }
 
   function runCmd(raw) {
@@ -98,8 +103,23 @@
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
+  // The on-screen keyboard shrinks the visual viewport but leaves the layout
+  // viewport alone, so a fixed, bottom-anchored sheet sits underneath the keys
+  // with nothing in CSS aware of it. Measure the covered strip into --ft-kb and
+  // let the overlay end above it.
+  var vv = window.visualViewport;
+  if (vv) {
+    var trackKeyboard = function () {
+      var covered = window.innerHeight - vv.height - vv.offsetTop;
+      overlay.style.setProperty('--ft-kb', Math.max(0, Math.round(covered)) + 'px');
+    };
+    vv.addEventListener('resize', trackKeyboard);
+    vv.addEventListener('scroll', trackKeyboard);
+  }
+
   // --- wiring ---
   fab.addEventListener('click', function () { open(); });
+  if (escBtn) escBtn.addEventListener('click', close);
 
   // Static command links in the transcript open the terminal and run themselves.
   [].slice.call(document.querySelectorAll('#faq .ft-cmd')).forEach(function (btn) {
@@ -158,4 +178,20 @@
       open();
     }
   });
+
+  // Adjust modal when virtual keyboard appears/disappears on mobile
+  if (typeof window.visualViewport !== 'undefined') {
+    window.visualViewport.addEventListener('resize', function () {
+      if (!overlay.classList.contains('ft-open-modal')) return;
+      // When keyboard appears, ensure focused element stays visible
+      if (document.activeElement === input || document.activeElement === outEl) {
+        setTimeout(function () {
+          var active = document.activeElement;
+          if (active && active.scrollIntoView) {
+            active.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }, 0);
+      }
+    });
+  }
 })();
