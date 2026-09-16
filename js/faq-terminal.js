@@ -89,15 +89,24 @@
   function out(html) {
     outEl.innerHTML = html;
     outEl.classList.add('ft-on');
-    // The suggestion list sat between the input and the answer, pushing it
-    // far down the sheet. Hide it while an answer is showing, so the answer
-    // lands right under the input line; it comes back as soon as the box is
-    // typed into again (see the 'input' listener below).
-    sug.classList.add('ft-hidden');
-    // "navigate" means nothing once the list is hidden — swap it for a way
-    // back to the list, which otherwise only esc (closing everything) gave.
-    if (backBtn) backBtn.hidden = false;
-    if (navHint) navHint.hidden = true;
+    if (window.matchMedia('(max-width: 600px)').matches) {
+      // On the mobile sheet, the suggestion list sat between the input and
+      // the answer, pushing it far down (sometimes off-screen). Hide it
+      // while an answer is showing, so the answer lands right under the
+      // input line; it comes back as soon as the box is typed into again
+      // (see the 'input' listener below).
+      sug.classList.add('ft-hidden');
+      // "navigate" means nothing once the list is hidden — swap it for a way
+      // back to the list, which otherwise only esc (closing everything) gave.
+      if (backBtn) backBtn.hidden = false;
+      if (navHint) navHint.hidden = true;
+    } else {
+      // Desktop has the room to keep the list visible below the input, same
+      // as before — just scroll the answer into view.
+      setTimeout(function () {
+        outEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 0);
+    }
   }
 
   function runCmd(raw) {
