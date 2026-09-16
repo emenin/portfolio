@@ -313,14 +313,14 @@
   .ft-fab { right: 14px; bottom: 14px; }
 
   /* A sheet on the bottom edge, lifted clear of the on-screen keyboard.
-     The keyboard shrinks the visual viewport but not the layout one, so
-     nothing in CSS knows it is there: faq-terminal.js measures it into
-     --ft-kb. A strip of backdrop stays tappable above the sheet, which is
-     how the terminal is dismissed on touch. */
+     The keyboard shrinks the visual viewport but leaves position:fixed
+     elements sized to the layout viewport, so nothing in CSS knows it's
+     there: faq-terminal.js pins the overlay's own top/height to the visual
+     viewport directly (iOS Safari doesn't reflow fixed elements on its own
+     here), which is why inset:0 isn't enough by itself. */
   .ft-overlay {
     align-items: flex-end;
     padding: 0;
-    padding-bottom: var(--ft-kb, 0px);
   }
   .ft-modal {
     max-width: none;
