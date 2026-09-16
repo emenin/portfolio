@@ -17,6 +17,7 @@
   var input = document.getElementById('ftInput');
   var sug = document.getElementById('ftSug');
   var outEl = document.getElementById('ftOut');
+  var escBtn = document.getElementById('ftEsc');
   var sel = -1;
   var lastFocus = null;
 
@@ -55,6 +56,10 @@
   function out(html) {
     outEl.innerHTML = html;
     outEl.classList.add('ft-on');
+    // Scroll output into view if keyboard is present
+    setTimeout(function () {
+      outEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 0);
   }
 
   function runCmd(raw) {
@@ -100,6 +105,7 @@
 
   // --- wiring ---
   fab.addEventListener('click', function () { open(); });
+  if (escBtn) escBtn.addEventListener('click', close);
 
   // Static command links in the transcript open the terminal and run themselves.
   [].slice.call(document.querySelectorAll('#faq .ft-cmd')).forEach(function (btn) {
@@ -158,4 +164,20 @@
       open();
     }
   });
+
+  // Adjust modal when virtual keyboard appears/disappears on mobile
+  if (typeof window.visualViewport !== 'undefined') {
+    window.visualViewport.addEventListener('resize', function () {
+      if (!overlay.classList.contains('ft-open-modal')) return;
+      // When keyboard appears, ensure focused element stays visible
+      if (document.activeElement === input || document.activeElement === outEl) {
+        setTimeout(function () {
+          var active = document.activeElement;
+          if (active && active.scrollIntoView) {
+            active.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }, 0);
+      }
+    });
+  }
 })();
