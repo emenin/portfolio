@@ -21,6 +21,25 @@
   var sel = -1;
   var lastFocus = null;
 
+  // The on-screen keyboard shrinks the visual viewport but leaves the layout
+  // viewport (and any position:fixed element sized with inset:0) alone, so a
+  // fixed, bottom-anchored sheet sits underneath the keys with nothing in CSS
+  // aware of it. iOS Safari in particular won't reflow a fixed element on its
+  // own here, so pin the overlay's own top/height to the visual viewport
+  // directly instead of relying on padding math.
+  var vv = window.visualViewport;
+  function trackKeyboard() {
+    if (!vv) return;
+    overlay.style.top = vv.offsetTop + 'px';
+    overlay.style.height = vv.height + 'px';
+    var covered = window.innerHeight - vv.height - vv.offsetTop;
+    overlay.style.setProperty('--ft-kb', Math.max(0, Math.round(covered)) + 'px');
+  }
+  if (vv) {
+    vv.addEventListener('resize', trackKeyboard);
+    vv.addEventListener('scroll', trackKeyboard);
+  }
+
   // Build the command list from the static FAQ in the DOM.
   var faq = [].slice.call(document.querySelectorAll('#faq .ft-item')).map(function (item) {
     var qEl = item.querySelector('.ft-q');
@@ -93,6 +112,9 @@
     sel = -1;
     renderSug();
     input.focus();
+    // The keyboard animates in after focus lands; re-measure once it settles.
+    trackKeyboard();
+    setTimeout(trackKeyboard, 350);
     if (initialCmd) runCmd(initialCmd);
   }
 
@@ -100,21 +122,10 @@
     if (!overlay.classList.contains('ft-open-modal')) return;
     overlay.classList.remove('ft-open-modal');
     fab.setAttribute('aria-expanded', 'false');
+    overlay.style.top = '';
+    overlay.style.height = '';
+    overlay.style.removeProperty('--ft-kb');
     if (lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-
-  // The on-screen keyboard shrinks the visual viewport but leaves the layout
-  // viewport alone, so a fixed, bottom-anchored sheet sits underneath the keys
-  // with nothing in CSS aware of it. Measure the covered strip into --ft-kb and
-  // let the overlay end above it.
-  var vv = window.visualViewport;
-  if (vv) {
-    var trackKeyboard = function () {
-      var covered = window.innerHeight - vv.height - vv.offsetTop;
-      overlay.style.setProperty('--ft-kb', Math.max(0, Math.round(covered)) + 'px');
-    };
-    vv.addEventListener('resize', trackKeyboard);
-    vv.addEventListener('scroll', trackKeyboard);
   }
 
   // --- wiring ---
