@@ -89,24 +89,14 @@
   function out(html) {
     outEl.innerHTML = html;
     outEl.classList.add('ft-on');
-    if (window.matchMedia('(max-width: 600px)').matches) {
-      // On the mobile sheet, the suggestion list sat between the input and
-      // the answer, pushing it far down (sometimes off-screen). Hide it
-      // while an answer is showing, so the answer lands right under the
-      // input line; it comes back as soon as the box is typed into again
-      // (see the 'input' listener below).
-      sug.classList.add('ft-hidden');
-      // "navigate" means nothing once the list is hidden — swap it for a way
-      // back to the list, which otherwise only esc (closing everything) gave.
-      if (backBtn) backBtn.hidden = false;
-      if (navHint) navHint.hidden = true;
-    } else {
-      // Desktop has the room to keep the list visible below the input, same
-      // as before — just scroll the answer into view.
-      setTimeout(function () {
-        outEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 0);
-    }
+    // Hide the suggestion list while showing an answer — it blocks the answer
+    // visually in the modal. The list comes back when typing resumes, or the
+    // back-button brings it back without closing the terminal entirely.
+    sug.classList.add('ft-hidden');
+    // "navigate" means nothing once the list is hidden — swap it for a way
+    // back to the list, which otherwise only esc (closing everything) gave.
+    if (backBtn) backBtn.hidden = false;
+    if (navHint) navHint.hidden = true;
   }
 
   function runCmd(raw) {
