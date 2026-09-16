@@ -56,9 +56,9 @@
   function out(html) {
     outEl.innerHTML = html;
     outEl.classList.add('ft-on');
-    // Scroll output into view, pushing it to the top on mobile
+    // Scroll output into view if keyboard is present
     setTimeout(function () {
-      outEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      outEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 0);
   }
 
@@ -178,4 +178,20 @@
       open();
     }
   });
+
+  // Adjust modal when virtual keyboard appears/disappears on mobile
+  if (typeof window.visualViewport !== 'undefined') {
+    window.visualViewport.addEventListener('resize', function () {
+      if (!overlay.classList.contains('ft-open-modal')) return;
+      // When keyboard appears, ensure focused element stays visible
+      if (document.activeElement === input || document.activeElement === outEl) {
+        setTimeout(function () {
+          var active = document.activeElement;
+          if (active && active.scrollIntoView) {
+            active.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }, 0);
+      }
+    });
+  }
 })();
