@@ -1,5 +1,5 @@
 'use strict';
-// Homepage experiment: "Rebuild with" another design system, or with none.
+// Homepage experiment: "Rebuild with" another design system.
 // Sets html[data-system]; nothing is stored, so a reload is always the real site.
 (() => {
  const root = document.documentElement;
@@ -27,7 +27,7 @@
   // Every card opens in its first state: the mapping folded.
   document.querySelectorAll('.system-card details[open]').forEach(d => { d.open = false; });
   options.forEach(o => o.setAttribute('aria-pressed', String(o.dataset.systemOption === key)));
-  status.textContent = key === 'mine' ? 'Back to my design system.' : key === 'broken' ? 'Rebuilt with no design system.' : `Rebuilt with ${option(key).dataset.label} tokens.`;
+  status.textContent = key === 'mine' ? 'Back to my design system.' : `Rebuilt with ${option(key).dataset.label} tokens.`;
  }
 
  function apply(key) {
@@ -35,7 +35,7 @@
   loadFont(key);
   if (reduced.matches) { swap(key); return; }
   busy = true;
-  overlay.querySelector('span').textContent = key === 'mine' ? 'Restoring my system…' : key === 'broken' ? 'Rebuilding with no system…' : `Rebuilding with ${option(key).dataset.label}…`;
+  overlay.querySelector('span').textContent = key === 'mine' ? 'Restoring my system…' : `Rebuilding with ${option(key).dataset.label}…`;
   overlay.hidden = false;
   requestAnimationFrame(() => overlay.classList.add('active'));
   setTimeout(() => swap(key), 450);

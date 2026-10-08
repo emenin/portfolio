@@ -49,11 +49,10 @@ Three files, loaded in this order:
 
 One hero control, **Rebuild with**, shows the same site with different
 decisions: Carbon / Material / shadcn (`content/systems.json` →
-`css/systems.css`), or **No system** (the `[data-system="broken"]` block at the
-end of `next.css`, the mistakes from the "AI is shipping UI faster" post). It
-runs from `js/systems.js` and the `system_*` helpers in `build.py`. Each system
-picks one theme approach (`approach` in the JSON); only Carbon mixes themes,
-because it supports inline theme zones.
+`css/systems.css`). It runs from `js/systems.js` and the `system_*` helpers in
+`build.py`. Each system uses one theme approach: only Carbon mixes dark and
+light sections (`sections` in the JSON), because it supports inline theme
+zones.
 
 ## Checking a change
 

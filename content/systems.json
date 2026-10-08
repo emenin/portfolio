@@ -24,15 +24,14 @@
       "licence": "Apache-2.0",
       "docs": "https://carbondesignsystem.com/elements/color/tokens/",
       "font": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap",
-      "approach": "Mixes themes like the original: Gray 100, with White theme zones (Carbon inline theming) for the inverted sections.",
       "tokens": {
         "--font-display": [
           "'IBM Plex Sans', sans-serif",
-          "$font-family-sans (IBM Plex Sans)"
+          "$font-family-sans"
         ],
         "--font-body": [
           "'IBM Plex Sans', sans-serif",
-          "$font-family-sans (IBM Plex Sans)"
+          "$font-family-sans"
         ],
         "--surface": [
           "#161616",
@@ -44,7 +43,7 @@
         ],
         "--surface-light": [
           "#f4f4f4",
-          "$background (g10)"
+          "$background"
         ],
         "--text": [
           "#f4f4f4",
@@ -56,7 +55,7 @@
         ],
         "--text-on-light": [
           "#161616",
-          "$text-primary (white)"
+          "$text-primary"
         ],
         "--text-on-action": [
           "#161616",
@@ -76,33 +75,33 @@
         ],
         "--radius-sm": [
           "0",
-          "no corner radius"
+          "none"
         ],
         "--radius-md": [
           "0",
-          "no corner radius"
+          "none"
         ],
         "--weight-semibold": [
           "400",
-          "productive heading weight"
+          "none"
         ],
         "--tracking-heading": [
           "0",
-          "type tokens use 0 tracking"
+          "none"
         ]
       },
       "sections": {
         "--action": [
           "#0f62fe",
-          "$link-primary (White zone)"
+          "$link-primary"
         ],
         "--text-on-action": [
           "#ffffff",
-          "$text-on-color (White zone)"
+          "$text-on-color"
         ],
         "--focus": [
           "#0f62fe",
-          "$focus (White zone)"
+          "$focus"
         ]
       },
       "components": {
@@ -117,7 +116,6 @@
       "licence": "Apache-2.0",
       "docs": "https://m3.material.io/styles/color/static/baseline",
       "font": "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap",
-      "approach": "One dark scheme. Inverted sections become a tonal surface container instead of a light scheme.",
       "tokens": {
         "--font-display": [
           "Roboto, sans-serif",
@@ -177,11 +175,11 @@
         ],
         "--weight-semibold": [
           "400",
-          "md.sys.typescale.display weight"
+          "md.sys.typescale.display-large.weight"
         ],
         "--tracking-heading": [
           "0",
-          "md.sys.typescale.display tracking"
+          "md.sys.typescale.display-large.tracking"
         ]
       },
       "sections": {},
@@ -196,15 +194,14 @@
       "licence": "MIT",
       "docs": "https://ui.shadcn.com/themes",
       "font": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap",
-      "approach": "One light theme, shadcn's default. Inverted sections use the muted surface.",
       "tokens": {
         "--font-display": [
           "Inter, sans-serif",
-          "font-sans (Inter)"
+          "font-sans"
         ],
         "--font-body": [
           "Inter, sans-serif",
-          "font-sans (Inter)"
+          "font-sans"
         ],
         "--surface": [
           "#ffffff",
@@ -248,7 +245,7 @@
         ],
         "--radius-sm": [
           "6px",
-          "--radius (md)"
+          "--radius-md"
         ],
         "--radius-md": [
           "8px",
