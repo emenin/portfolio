@@ -97,7 +97,6 @@ button { cursor:pointer; }
 .next-footer { padding-block:var(--space-8); background:var(--surface); color:var(--text-muted); border-top:1px solid var(--border); font:12px/1.7 var(--font-body); }
 .next-footer .frame { display:flex; justify-content:space-between; gap:var(--space-6); }
 .next-footer p { margin:0; }
-.next-footer .footer-agents a { margin:0; }
 .next-footer a { margin-left:var(--space-5); }
 .terminal-fab { position:fixed; right:var(--space-6); bottom:var(--space-6); z-index:25; width:48px; height:48px; color:var(--action)!important; border:1px solid var(--action); border-radius:var(--radius-md); background:var(--surface); font:700 18px var(--font-mono); }
 .terminal-dialog { padding:0; width:min(680px,calc(100% - 32px)); max-height:calc(100dvh - 32px); overflow:auto; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); font:14px/1.7 var(--font-mono); }
@@ -187,8 +186,6 @@ button { cursor:pointer; }
  .contact-layout>.terminal-invite { padding:32px 0 0; border-left:0; border-top:1px solid var(--border); }
  .next-footer .frame { flex-direction:column; padding-bottom:56px; gap:12px; }
  .next-footer a { margin:0 20px 0 0; }
- .next-footer .footer-agents { display:block; }
- .next-footer .footer-sep { display:none; }
  .terminal-top,.terminal-form,.terminal-output,.terminal-bottom { padding-inline:16px; }
  .terminal-form { flex-wrap:wrap; }
  .terminal-form label { flex-basis:100%; }
