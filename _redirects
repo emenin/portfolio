@@ -1,1 +1,14 @@
-/design-system-calendar  /design-system-calendar.html  200
+# The repo is published as-is, so keep build inputs and tooling off the web.
+/source/*       /404.html  404!
+/content/*      /404.html  404!
+/.claude/*      /404.html  404!
+/.vscode/*      /404.html  404!
+/build.py       /404.html  404!
+/verify.py      /404.html  404!
+/serve.py       /404.html  404!
+/README.md      /404.html  404!
+/CLAUDE.md      /404.html  404!
+/AGENTS.md      /404.html  404!
+/netlify.toml   /404.html  404!
+/.gitignore     /404.html  404!
+/.prettierrc    /404.html  404!

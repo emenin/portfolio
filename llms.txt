@@ -1,44 +1,34 @@
 # Érica Menin
 
-> Design Systems Lead with 15+ years in design. Érica makes design system decisions easier for people and AI to find, apply, and trust: audits, Figma and code alignment, tokens, component guidance, documentation, and AI workflows.
+> Staff Design Systems Designer with 15+ years in design. Érica works on design systems for people and AI: component audits, Figma and code alignment, tokens, documentation, and the guidance agents need to use a system well. Brazilian, based in Germany, remote-first.
 
-Érica Menin (ericamenin.com) is based in Germany and works remotely with distributed teams. Her focus is design systems that are read by two audiences: the people who build products, and the AI tools that now read tokens, rules, and docs and guess where context is missing. She works on making that knowledge explicit, without rebuilding everything first.
+Érica gets excited about taking messy, complex things and making them work. For a long time that has meant design systems. Now that AI reads them too, she is working through what a system needs so that people and agents can both use it correctly, and writing about the wins, the awkward moments, and the "well, that didn't work" parts at Design Systems Unfiltered.
 
-She has led multi-team design system work at Mews, covering design tokens, Figma Variables and Libraries, documentation, adoption, and collaboration between design and engineering.
+She is open to staff-level design systems roles and freelance projects.
 
 Contact: erica@menin.me · [LinkedIn](https://www.linkedin.com/in/ericamenin/)
 
-## Expertise
+## What she is exploring
 
-- Design system audits and cross-platform alignment (Figma, React, Flutter)
-- Design systems for people and AI: explicit rules, component guidance in code, READMEs
-- AI workflows for design system teams (skills, Cursor commands)
-- Design Systems strategy and maturity
-- Design tokens and token architecture
-- Figma Variables, Libraries, and scalable workflows
-- Component libraries and governance models
-- Design-engineering collaboration
-- Design system documentation and education
-- Design operations and system adoption
+Her current position on design systems and AI. Subject to change… things move SO fast.
 
-## Work (case studies and recent work)
+- What does AI need beyond tokens and components? Tokens give values and component properties give options, but neither explains when to use something or why an exception exists. That lives in documentation and component contracts: expected behavior, allowed combinations, accessibility requirements.
+- How much guidance is enough? Less than you'd think. A short AGENTS.md that points to where everything else lives, rules that grow each time the agent gets something wrong, and lint rules for what really matters.
+- Where do busy teams start? A quick health check, then one problem that keeps coming back. One fix. One check. Then the next.
+- What comes after "AI-ready"? Once a system is in good shape, agents can maintain parts of it: spot what no longer matches after a component changes, fix it, and open a pull request. People define what's "right" and test for it. That is the idea behind an agentic design system.
 
-Érica's recent work focuses on keeping design systems aligned across design and code, and legible to both people and AI.
+## Work
 
-A summary of her recent design system work, learnings, and experiments is available in:
-
-- [Getting a design system back in sync](https://ericamenin.com/design-system-back-in-sync.html): A case study on auditing 62 components across Figma, React, and Flutter, and modernising the Figma foundations of a multi-platform design system through variables, theming, and an incremental migration.
-
-- [Soniq Design System](https://ericamenin.com/soniq-design-system.html): Earlier work — leading the design system at Soniq from 2020 to 2023, covering tokens, component libraries, documentation, and the governance that kept the product consistent as the team grew.
-
-- [The Design System Advent Calendar](https://ericamenin.com/design-system-calendar.html): The interactive AI-assisted experience behind the 24-day experiment series, combining Érica's design system expertise with generative AI to create guided learning activities.
-
-Additional details, case studies, and examples from enterprise design system initiatives are available through direct contact.
+- [Getting a design system back in sync](https://ericamenin.com/design-system-back-in-sync): An audit of 62 components across Figma, React, and Flutter, followed by changes to the Figma libraries, variables, themes, and migration guidance.
+- [Maturing a design system beyond components](https://designsystemsunfiltered.substack.com/p/my-last-year-as-a-design-system-designer): A look back at a year of library changes, pattern documentation, support tracking, and day-to-day work with product designers.
+- [AI + Design Systems](https://ericamenin.com/ai-design-systems): A design system built only for people is easy for AI to get wrong.
+- [The Design System Advent Calendar](https://ericamenin.com/design-system-calendar): A small design system insight for every day until Christmas, hosted on Figma Sites.
+- [soniq Design System](https://ericamenin.com/soniq-design-system) (earlier work, 2020–2023): A shared Figma library for web and mobile, with component documentation, pattern workshops, and regular reviews with developers.
 
 ## Writing
 
-- [Design Systems Unfiltered](https://designsystemsunfiltered.substack.com/): Érica's publication sharing practical insights on building, scaling, and evolving design systems, including strategy, governance, workflows, AI-assisted practices, and lessons learned from real-world design system work.
+[Design Systems Unfiltered](https://designsystemsunfiltered.substack.com/) is Érica's Substack about design systems and AI.
 
-## Current availability
-
-Érica is available for remote design systems consulting, contract engagements, workshops, and design system leadership opportunities worldwide.
+- [Don't make your design system AI-ready yet](https://designsystemsunfiltered.substack.com/p/dont-make-your-design-system-ai-ready): A starting point for improving how AI works with an existing system, without beginning with a complete rebuild.
+- [AI is shipping UI faster than your design system can protect it](https://designsystemsunfiltered.substack.com/p/ai-is-shipping-ui-faster-than-your): Repeated primary buttons, competing colors, and the wrong default background, and the decisions missing from the documentation.
+- [I turned my biggest design system headache into my first Cursor command](https://designsystemsunfiltered.substack.com/p/how-a-project-that-haunted-me-led): Creating a first command and skill, and figuring out where AI could help with day-to-day design systems work.
