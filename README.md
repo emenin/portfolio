@@ -24,6 +24,7 @@ Open http://127.0.0.1:8437/. Python 3 is the only build/server dependency. The p
 - `js/next.js`: navigation, questions, terminal and focus management.
 - `js/motion.js`: contextual cursor, card tilt, email copy, gentle arrival motion.
 - `js/gallery.js`: the Soniq carousel and native image dialog.
+- `js/systems.js`, `content/systems.json`: the homepage experiment ("Break the system" and "Rebuild with" Carbon / Material / shadcn). `build.py` turns the JSON into `css/systems.css`; `verify.py` checks every system defines every role token.
 - `source/`: retrieved published HTML and the approved handoff. These are preservation/reference files, not routes linked by the site. Do not rewrite the locked case studies here.
 - `content/image-sizes.json`: intrinsic dimensions of preserved case-study images.
 - `images/`: one folder per page (`design-system-back-in-sync/`, `soniq-design-system/`, `maturing-a-design-system/`), plus `site/` (favicon, touch icon, share image, portrait) and `icons/`. Numbered files follow their order in the case study; `-500`/`-800`/`-1080`/`-1600` are responsive sizes.

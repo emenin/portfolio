@@ -40,8 +40,18 @@ Three files, loaded in this order:
   literal value.
 - `case-study.css` is the pruned Webflow layout the preserved pages still need.
   Don't add to it; new work goes in `next.css`.
+- `systems.css` is generated from `content/systems.json` (homepage only); see
+  the experiment note below.
 - `next.css` is written one rule per line. Match that by hand rather than
   running a formatter over it.
+
+## Homepage experiment (on trial)
+
+Two hero toggles show the same site with different decisions: **Break the
+system** (the `[data-system="broken"]` block at the end of `next.css`) and
+**Rebuild with** Carbon / Material / shadcn (`content/systems.json` →
+`css/systems.css`). Both run from `js/systems.js` and the `system_*` helpers in
+`build.py`. Only one will stay: delete the other's markup, CSS and JS branch.
 
 ## Checking a change
 
