@@ -11,7 +11,8 @@
   if(e.target.closest('dialog') || getComputedStyle(cursor).display === 'none') { hideCursor(); return; }
   document.body.classList.add('cursor-ready');
   cursor.style.left = `${e.clientX}px`; cursor.style.top = `${e.clientY}px`;
-  const action = e.target.closest('[data-cursor],a[href]');
+  // Labels only where a click opens a page or does something (View, Copy); other links get the filled circle.
+  const action = e.target.closest('[data-cursor]');
   const light = e.target.closest('.light-section,.section.project,.case-back');
   cursor.classList.toggle('on-light',!!light);
   cursor.classList.add('visible'); cursor.classList.toggle('active',!!action);

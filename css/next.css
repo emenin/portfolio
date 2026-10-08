@@ -93,6 +93,8 @@ button { cursor:pointer; }
 .contact-layout { display:grid; grid-template-columns:1.3fr 1fr; gap:var(--space-20); }
 .contact-links { display:flex; flex-wrap:wrap; gap:var(--space-6); color:var(--action); margin-block:var(--space-8); }
 .contact-layout>.terminal-invite { padding-left:var(--space-10); border-left:1px solid var(--border); }
+/* Last section: with the footer it fills the screen, so no strip of About shows at the end of the page. */
+@media(min-width:768px) { #contact { min-height:calc(100svh - 110px); display:flex; flex-direction:column; justify-content:center; } }
 .terminal-invite h2 { font-size:32px; }
 .terminal-symbol { display:block; color:var(--action); font:48px/1.5 var(--font-mono); margin-bottom:var(--space-5); }
 .next-footer { padding-block:var(--space-8); background:var(--surface); color:var(--text-muted); border-top:1px solid var(--border); font:12px/1.7 var(--font-body); }
@@ -266,7 +268,9 @@ button { cursor:pointer; }
 .read-cursor { display:grid; width:36px; height:36px; border:1px solid var(--action); background:transparent; opacity:0; transition:width var(--motion-base) var(--ease-out),height var(--motion-base) var(--ease-out),background var(--motion-base),opacity var(--motion-fast); }
 .read-cursor.visible { opacity:1; }
 .read-cursor::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--action); position:absolute; }
-.read-cursor.clickable { width:52px; height:52px; }
+.read-cursor.clickable { width:52px; height:52px; background:rgb(246 176 255 / .45); border-color:transparent; }
+.read-cursor.clickable::before { opacity:0; }
+.read-cursor.clickable.on-light { background:rgb(27 30 41 / .14); }
 .read-cursor.active { width:120px; height:120px; background:var(--action); opacity:.9; }
 .read-cursor.active::before { opacity:0; }
 .read-cursor span { opacity:0; transition:opacity var(--motion-fast); }
