@@ -36,6 +36,14 @@ home_text=re.sub(r'<[^>]+>','',home)
 for p in d['about']:assert html.escape(p,quote=True) in home_text
 assert 'Reworking this portfolio with AI' not in home
 print('PASS: 4 approved questions, project/writing descriptions, and About paragraphs')
+systems=json.loads((R/'content/systems.json').read_text())
+for key,x in systems['systems'].items():
+ missing=[r for r in systems['roles'] if r not in x['roles']]
+ assert not missing,f'{key} is missing role tokens: {missing}'
+ for r,t in x['roles'].items():
+  assert (isinstance(t,str) and t in x['system']) or (isinstance(t,dict) and t.get('value')),f'{key}: {r} points at an undeclared token'
+ assert all(t in x['system'] for t in x['zone']),f'{key}: zone redeclares a token the system never declares'
+print(f'PASS: {len(systems["systems"])} rebuild systems define all {len(systems["roles"])} role tokens')
 class Links(HTMLParser):
  def __init__(self):super().__init__();self.links=[];self.ids=set()
  def handle_starttag(self,t,attrs):

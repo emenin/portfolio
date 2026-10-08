@@ -1,0 +1,147 @@
+{
+  "roles": ["--font-display", "--font-body", "--surface", "--surface-raised", "--surface-light", "--text", "--text-muted", "--text-on-light", "--text-on-action", "--border", "--action", "--focus", "--radius-sm", "--radius-md", "--weight-semibold", "--tracking-heading"],
+  "systems": {
+    "carbon": {
+      "name": "IBM Carbon",
+      "short": "Carbon",
+      "licence": "Apache-2.0",
+      "docs": "https://carbondesignsystem.com/elements/color/tokens/",
+      "source": "@carbon/themes 11.83.0 (g100, g10 zones) and @carbon/type",
+      "font": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap",
+      "system": {
+        "--cds-background": "#161616",
+        "--cds-layer-01": "#262626",
+        "--cds-text-primary": "#f4f4f4",
+        "--cds-text-secondary": "#c6c6c6",
+        "--cds-text-inverse": "#161616",
+        "--cds-border-subtle-01": "#525252",
+        "--cds-link-primary": "#78a9ff",
+        "--cds-focus": "#ffffff",
+        "--cds-button-primary": "#0f62fe",
+        "--cds-text-on-color": "#ffffff"
+      },
+      "zone": {
+        "--cds-background": "#f4f4f4",
+        "--cds-text-primary": "#161616",
+        "--cds-text-secondary": "#525252",
+        "--cds-text-inverse": "#ffffff",
+        "--cds-border-subtle-01": "#e0e0e0",
+        "--cds-link-primary": "#0f62fe",
+        "--cds-focus": "#0f62fe"
+      },
+      "roles": {
+        "--font-display": {"value": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif", "label": "fontFamilies.sans"},
+        "--font-body": {"value": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif", "label": "fontFamilies.sans"},
+        "--surface": "--cds-background",
+        "--surface-raised": "--cds-layer-01",
+        "--surface-light": "--cds-background",
+        "--text": "--cds-text-primary",
+        "--text-muted": "--cds-text-secondary",
+        "--text-on-light": "--cds-text-primary",
+        "--text-on-action": "--cds-text-inverse",
+        "--border": "--cds-border-subtle-01",
+        "--action": "--cds-link-primary",
+        "--focus": "--cds-focus",
+        "--radius-sm": {"value": "0"},
+        "--radius-md": {"value": "0"},
+        "--weight-semibold": {"value": "400"},
+        "--tracking-heading": {"value": "0"}
+      },
+      "components": {
+        ".button.primary": "background:var(--cds-button-primary); color:var(--cds-text-on-color); border-color:var(--cds-button-primary);",
+        ".button": "min-width:200px;",
+        ".next-hero h1": "font-weight:300;"
+      }
+    },
+    "material": {
+      "name": "Material 3",
+      "short": "Material",
+      "licence": "Apache-2.0",
+      "docs": "https://m3.material.io/styles/color/static/baseline",
+      "source": "@material/web 2.4.1 tokens v0_192 (dark baseline)",
+      "font": "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap",
+      "system": {
+        "--md-ref-typeface-brand": "Roboto",
+        "--md-ref-typeface-plain": "Roboto",
+        "--md-sys-color-surface": "#141218",
+        "--md-sys-color-surface-container": "#211f26",
+        "--md-sys-color-surface-container-low": "#1d1b20",
+        "--md-sys-color-on-surface": "#e6e0e9",
+        "--md-sys-color-on-surface-variant": "#cac4d0",
+        "--md-sys-color-outline-variant": "#49454f",
+        "--md-sys-color-primary": "#d0bcff",
+        "--md-sys-color-on-primary": "#381e72",
+        "--md-sys-color-secondary": "#ccc2dc",
+        "--md-sys-shape-corner-medium": "12px",
+        "--md-sys-shape-corner-large": "16px",
+        "--md-sys-shape-corner-full": "9999px",
+        "--md-sys-typescale-display-large-weight": "400",
+        "--md-sys-typescale-display-large-tracking": "-0.015625rem"
+      },
+      "zone": {},
+      "roles": {
+        "--font-display": "--md-ref-typeface-brand",
+        "--font-body": "--md-ref-typeface-plain",
+        "--surface": "--md-sys-color-surface",
+        "--surface-raised": "--md-sys-color-surface-container",
+        "--surface-light": "--md-sys-color-surface-container-low",
+        "--text": "--md-sys-color-on-surface",
+        "--text-muted": "--md-sys-color-on-surface-variant",
+        "--text-on-light": "--md-sys-color-on-surface",
+        "--text-on-action": "--md-sys-color-on-primary",
+        "--border": "--md-sys-color-outline-variant",
+        "--action": "--md-sys-color-primary",
+        "--focus": "--md-sys-color-secondary",
+        "--radius-sm": "--md-sys-shape-corner-medium",
+        "--radius-md": "--md-sys-shape-corner-large",
+        "--weight-semibold": "--md-sys-typescale-display-large-weight",
+        "--tracking-heading": "--md-sys-typescale-display-large-tracking"
+      },
+      "components": {
+        ".button": "border-radius:var(--md-sys-shape-corner-full); padding-inline:var(--space-6);",
+        ".question-row": "border-radius:var(--radius-sm);"
+      }
+    },
+    "shadcn": {
+      "name": "shadcn/ui",
+      "short": "shadcn",
+      "licence": "MIT",
+      "docs": "https://ui.shadcn.com/themes",
+      "source": "shadcn/ui registry new-york-v4 theme-zinc (light)",
+      "font": "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap",
+      "system": {
+        "--font-sans": "Geist, sans-serif",
+        "--background": "oklch(1 0 0)",
+        "--foreground": "oklch(0.141 0.005 285.823)",
+        "--muted": "oklch(0.967 0.001 286.375)",
+        "--muted-foreground": "oklch(0.552 0.016 285.938)",
+        "--primary": "oklch(0.21 0.006 285.885)",
+        "--primary-foreground": "oklch(0.985 0 0)",
+        "--ring": "oklch(0.705 0.015 286.067)",
+        "--radius": "0.625rem"
+      },
+      "zone": {},
+      "roles": {
+        "--font-display": "--font-sans",
+        "--font-body": "--font-sans",
+        "--surface": "--background",
+        "--surface-raised": "--muted",
+        "--surface-light": "--muted",
+        "--text": "--foreground",
+        "--text-muted": "--muted-foreground",
+        "--text-on-light": "--foreground",
+        "--text-on-action": "--primary-foreground",
+        "--border": {"value": "oklch(0.92 0.004 286.32)", "label": "--border"},
+        "--action": "--primary",
+        "--focus": "--ring",
+        "--radius-sm": {"value": "calc(var(--radius) - 4px)", "label": "--radius-sm"},
+        "--radius-md": {"value": "calc(var(--radius) - 2px)", "label": "--radius-md"},
+        "--weight-semibold": {"value": "600", "label": "font-semibold"},
+        "--tracking-heading": {"value": "-0.025em", "label": "tracking-tight"}
+      },
+      "components": {
+        ".button": "min-height:40px; padding-block:var(--space-2);"
+      }
+    }
+  }
+}

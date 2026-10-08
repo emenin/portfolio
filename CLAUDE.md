@@ -40,8 +40,21 @@ Three files, loaded in this order:
   literal value.
 - `case-study.css` is the pruned Webflow layout the preserved pages still need.
   Don't add to it; new work goes in `next.css`.
+- `systems.css` is generated from `content/systems.json` (homepage only); see
+  the experiment note below.
 - `next.css` is written one rule per line. Match that by hand rather than
   running a formatter over it.
+
+## Homepage experiment (on trial)
+
+One hero control, **Rebuild with**, shows the same site with different
+decisions: Carbon / Material / shadcn (`content/systems.json` →
+`css/systems.css`). It runs from `js/systems.js` and the `system_*` helpers in
+`build.py`. Each system declares its own published tokens (`system`, under its
+real CSS names: `--cds-*`, `--md-sys-*`, shadcn's) and my roles alias them
+(`roles`), so devtools shows the real chain. Values come from the packages named
+in each `source`; re-check them there before changing any. Only Carbon mixes
+dark and light sections (`zone`), because it supports inline theme zones.
 
 ## Checking a change
 
