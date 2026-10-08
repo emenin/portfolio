@@ -333,7 +333,8 @@ body.next-site.case-study .column._50.spacesmall.sticky.is-away:focus-within { o
 
 .keep-together { white-space:nowrap; }
 /* Review refinements: compact work, hidden portrait, and explicit action cursors. */
-#work .project-grid { max-width:800px; margin-inline:auto; gap:var(--space-16); }
+/* Same 960px measure as Earlier work below: columns hug its edges, the extra width goes to the gap. */
+#work .project-grid { max-width:960px; margin-inline:auto; grid-template-columns:repeat(2,minmax(0,380px)); justify-content:space-between; gap:var(--space-16); }
 #work .project-preview { perspective:1100px; }
 #work .project-preview>a { transform-style:preserve-3d; will-change:transform; transition:transform 220ms var(--ease-out); }
 #work .project-preview .project-image { transform:translateZ(18px); }
@@ -359,7 +360,7 @@ body.next-site.case-study .column._50.spacesmall.sticky.is-away:focus-within { o
 .read-cursor.active span { display:block; color:var(--ink-950); opacity:1; font:600 12px/1 var(--font-mono); letter-spacing:.08em; }
 .read-cursor.active.on-light { background:rgb(246 176 255 / .86); color:var(--ink-950); }
 @media(max-width:767px) {
- #work .project-grid { max-width:420px; gap:var(--space-14); }
+ #work .project-grid { max-width:420px; grid-template-columns:1fr; gap:var(--space-14); }
  .earlier-work { max-width:420px; }
  .photo-reveal { top:auto; bottom:calc(100% + var(--space-3)); width:180px; }
  .about-layout { gap:var(--space-4); }
