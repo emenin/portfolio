@@ -21,7 +21,7 @@ Open http://127.0.0.1:8437/. Python 3 is the only build/server dependency. The p
 - `css/tokens.css`: web fonts, palette, semantic and spacing tokens. Loaded on every page.
 - `css/next.css`: typography, layouts, responsive and motion styles. Loaded on every page, last.
 - `css/case-study.css`: the pruned Webflow layout the preserved case-study bodies and the AI essay still need. Loaded only on those three pages, between the other two.
-- `js/next.js`: navigation, questions, Inspect, terminal and focus management.
+- `js/next.js`: navigation, questions, terminal and focus management.
 - `js/motion.js`: contextual cursor, card tilt, email copy, gentle arrival motion.
 - `js/gallery.js`: the Soniq carousel and native image dialog.
 - `source/`: retrieved published HTML and the approved handoff. These are preservation/reference files, not routes linked by the site. Do not rewrite the locked case studies here.
@@ -47,7 +47,7 @@ The original case-study layout CSS and AI essay interaction are retained. `verif
 
 ## Interaction and accessibility
 
-Question rows use real buttons, independent expanded states, and controlled regions. Opening one question closes the others; the first starts open. The terminal supports typed/clicked commands, arrow keys, Enter, Escape, a command list, and focus restoration. `/` and Command/Ctrl+K open it. Native dialogs contain keyboard focus. Inspect reports actual computed heading/body styles.
+Question rows use real buttons, independent expanded states, and controlled regions. Opening one question closes the others; the first starts open. The terminal supports typed/clicked commands, arrow keys, Enter, Escape, a command list, and focus restoration. `/` and Command/Ctrl+K open it. Native dialogs contain keyboard focus.
 
 The original View/Read/Copy cursor vocabulary, staggered work composition, image hover/tilt, link highlighting, drawn crossout, and story/rules switch are retained or adapted. Reduced motion disables movement and the custom cursor; coarse pointers retain ordinary touch interactions. Content never waits behind an entrance animation.
 
@@ -55,4 +55,4 @@ Fonts load from Google Fonts; writing thumbnails retain their original Substack 
 
 ## Validation performed
 
-Browser review at 1440px desktop and 390px mobile; keyboard question toggles; every terminal command, empty and unknown input; arrow/Enter selection; Escape and focus return; menu open/close; Inspect values; AI story/rules; Soniq lightbox and carousel; local destinations and preserved source copy.
+Browser review at 1440px desktop and 390px mobile; keyboard question toggles; every terminal command, empty and unknown input; arrow/Enter selection; Escape and focus return; menu open/close; AI story/rules; Soniq lightbox and carousel; local destinations and preserved source copy.

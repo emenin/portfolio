@@ -41,9 +41,6 @@ button { cursor:pointer; }
 .button:hover { background:var(--surface-raised); color:var(--action); }
 .hero-bottom { margin-top:var(--space-16); display:flex; align-items:center; justify-content:space-between; gap:var(--space-6); }
 .hero-bottom p { margin:0; }
-#inspect-toggle,#inspect-close { background:transparent; border:0; font:400 12px/1.5 var(--font-mono); min-height:44px; color:var(--action); padding:8px; }
-#inspect-toggle::before { content:'○'; margin-right:8px; }
-#inspect-toggle[aria-expanded=true]::before { content:'●'; }
 
 .next-section { padding-block:var(--section-space); scroll-margin-top:0; }
 .light-section { background:var(--surface-light); color:var(--text-on-light); --focus:var(--ink-700); }
@@ -93,6 +90,8 @@ button { cursor:pointer; }
 .contact-layout { display:grid; grid-template-columns:1.3fr 1fr; gap:var(--space-20); }
 .contact-links { display:flex; flex-wrap:wrap; gap:var(--space-6); color:var(--action); margin-block:var(--space-8); }
 .contact-layout>.terminal-invite { padding-left:var(--space-10); border-left:1px solid var(--border); }
+/* Last section: with the footer it fills the screen, so no strip of About shows at the end of the page. */
+@media(min-width:768px) { #contact { min-height:calc(100svh - 110px); display:flex; flex-direction:column; justify-content:center; } }
 .terminal-invite h2 { font-size:32px; }
 .terminal-symbol { display:block; color:var(--action); font:48px/1.5 var(--font-mono); margin-bottom:var(--space-5); }
 .next-footer { padding-block:var(--space-8); background:var(--surface); color:var(--text-muted); border-top:1px solid var(--border); font:12px/1.7 var(--font-body); }
@@ -266,7 +265,9 @@ button { cursor:pointer; }
 .read-cursor { display:grid; width:36px; height:36px; border:1px solid var(--action); background:transparent; opacity:0; transition:width var(--motion-base) var(--ease-out),height var(--motion-base) var(--ease-out),background var(--motion-base),opacity var(--motion-fast); }
 .read-cursor.visible { opacity:1; }
 .read-cursor::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--action); position:absolute; }
-.read-cursor.clickable { width:52px; height:52px; }
+.read-cursor.clickable { width:52px; height:52px; background:rgb(246 176 255 / .45); border-color:transparent; }
+.read-cursor.clickable::before { opacity:0; }
+.read-cursor.clickable.on-light { background:rgb(27 30 41 / .14); }
 .read-cursor.active { width:120px; height:120px; background:var(--action); opacity:.9; }
 .read-cursor.active::before { opacity:0; }
 .read-cursor span { opacity:0; transition:opacity var(--motion-fast); }
@@ -329,11 +330,11 @@ body.next-site.case-study .column._50.spacesmall.sticky.is-away:focus-within { o
 
 .keep-together { white-space:nowrap; }
 /* Review refinements: compact work, hidden portrait, and explicit action cursors. */
-#work .project-grid { max-width:960px; margin-inline:auto; gap:var(--space-20); }
+#work .project-grid { max-width:880px; margin-inline:auto; gap:var(--space-16) var(--space-30); }
 #work .project-preview { perspective:1100px; }
 #work .project-preview>a { transform-style:preserve-3d; will-change:transform; transition:transform 220ms var(--ease-out); }
 #work .project-preview .project-image { transform:translateZ(18px); }
-#work .project-preview h3 { font-size:clamp(26px,2.4vw,32px); }
+#work .project-preview h3 { font-size:clamp(22px,1.8vw,26px); }
 .earlier-work { max-width:960px; margin:var(--space-16) auto 0; border-top:1px solid var(--color-border); padding-top:var(--space-6); }
 .earlier-work .eyebrow { margin-bottom:var(--space-2); }
 .earlier-work>a { font:500 20px/1.4 var(--font-display); text-underline-offset:5px; }
@@ -366,28 +367,7 @@ body.next-site.case-study .column._50.spacesmall.sticky.is-away:focus-within { o
  .photo-reveal { transform:none; }
 }
 
-/* Inspect is a viewport overlay; its measured outline never changes page layout. */
-#inspection { position:fixed; inset:0; z-index:1000; pointer-events:none; }
-.inspect-outline { position:fixed; border:1px solid var(--action); background:rgb(246 176 255 / .08); }
-.inspect-tooltip { position:fixed; padding:var(--space-3); border:1px solid var(--action); border-radius:var(--radius-sm); background:var(--ink-950); color:var(--pink-100); font:11px/1.7 var(--font-mono); white-space:pre-line; overflow-wrap:anywhere; }
-.inspect-toolbar { position:absolute; bottom:var(--space-6); left:50%; transform:translateX(-50%); width:max-content; max-width:calc(100% - 24px); display:flex; align-items:center; gap:var(--space-4); padding:var(--space-2) var(--space-4); background:var(--ink-950); border:1px solid var(--action); border-radius:var(--radius-sm); color:var(--pink-100); font:11px/1.5 var(--font-mono); pointer-events:auto; }
-.inspect-toolbar button { white-space:nowrap; }
-.inspecting .read-cursor { display:none; }
-.inspecting .next-hero,.inspecting .next-hero * { cursor:crosshair; }
-.inspecting #inspect-close,.inspecting #inspect-toggle { cursor:pointer; }
 #work .project-grid { margin-top:var(--space-24); }
-@media(max-width:767px) { #work .project-grid { margin-top:var(--space-14); } .inspect-toolbar { gap:var(--space-2); } }
+@media(max-width:767px) { #work .project-grid { margin-top:var(--space-14); } }
 
-.next-hero h1 { --inspect-tokens: font-display,type-hero,weight-semibold,leading-heading,tracking-heading,text,space-8; }
-.next-hero h1 span { --inspect-tokens: action; }
-.hero-description { font-weight:var(--weight-regular); --inspect-tokens: font-body,type-body-lead,weight-regular,leading-body,text-muted; }
-.hero-identity { --inspect-tokens: font-body,text-xs,weight-medium,leading-label,tracking-label,text,space-5,space-8; }
-.hero-identity span,.hero-bottom p { --inspect-tokens: font-body,text-xs,weight-medium,text-muted; }
-.hero-actions .button { --inspect-tokens: font-body,text-sm,weight-medium,leading-action,space-3,space-5,radius-sm,border-thin,action,text; }
-.hero-actions .button.primary { --inspect-tokens: font-body,text-sm,weight-medium,leading-action,space-3,space-5,radius-sm,action,text-on-action; }
-.hero-actions .button:hover { --inspect-tokens: font-body,text-sm,space-3,space-5,radius-sm,surface-raised,action; }
-.inspect-token { display:block; margin-top:var(--space-1); }
-.inspect-token code { color:var(--action); }
-.inspect-token small { display:block; color:var(--text-muted); font:inherit; padding-left:var(--space-3); }
-.inspect-tooltip strong { display:block; margin-bottom:var(--space-2); font-weight:var(--weight-semibold); }
-.inspect-tooltip { max-height:50vh; overflow:auto; }
+.hero-description { font-weight:var(--weight-regular); }
