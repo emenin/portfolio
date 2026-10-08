@@ -102,9 +102,8 @@ thumbs=re.findall(r'<img\s+loading="lazy"\s+src="(https://substack[^\"]+)"',sour
 writing=''.join(f'<a class="writing-row" data-cursor="View" href="{esc(x["href"])}"><img src="{esc(thumbs[i])}" alt="" width="96" height="96" loading="lazy"><div><h3>{esc(x["title"])}</h3><p>{esc(x["description"])}</p><span class="text-link">Read on Substack <span aria-hidden="true">↗</span></span></div></a>' for i,x in enumerate(D['writing']))
 cross='<span class="crossout-wrap"><span class="crossout-word">polished</span><svg class="crossout-svg" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path class="crossout-path" d="M2,12 Q 50,15 98,10"/></svg></span> <em class="crossout-replacement">unfiltered</em>'
 # --- Homepage experiments: "same site, different decisions" -------------------------
-# A: "Break the system" swaps in the mistakes from the "AI is shipping UI…" post (CSS in next.css).
-# B: "Rebuild with" re-skins the page from another system's public tokens (content/systems.json).
-# Two ideas on trial; delete the one that loses (its markup here, its CSS block, its JS section).
+# "Rebuild with" re-skins the page from another system's public tokens (content/systems.json), and
+# "No system" swaps in the mistakes from the "AI is shipping UI…" post (CSS at the end of next.css).
 S=json.loads((R/'content/systems.json').read_text())
 POST=D['writing'][1]
 
@@ -113,35 +112,34 @@ def systems_css():
  for key,x in S['systems'].items():
   root=f'html[data-system="{key}"]'
   out.append(root+' { '+' '.join(f'{role}:{v[0]};' for role,v in x['tokens'].items())+' }')
-  out.append(f'{root} .light-section {{ '+' '.join(f'{role}:{v[0]};' for role,v in x['light'].items())+' }')
-  out.append(f'{root} .system-note[data-for="{key}"] {{ display:block; }}')
+  if x['sections']: out.append(f'{root} .light-section {{ '+' '.join(f'{role}:{v[0]};' for role,v in x['sections'].items())+' }')
   for sel,decl in x['components'].items(): out.append(f'{root} {sel} {{ {decl} }}')
+  out.append(f'{root} .system-note[data-for="{key}"] {{ display:block; }}')
  return '\n'.join(out)+'\n'
 
 def system_controls():
- pills=''.join(f'<button type="button" class="system-option" data-system-option="{k}" data-font="{esc(x["font"])}" data-label="{esc(x["name"])}" aria-pressed="false">{esc(x["short"])}</button>' for k,x in S['systems'].items())
- return ('<div class="system-controls">'
-  '<button type="button" class="system-break" aria-pressed="false">Break the system</button>'
-  '<div class="system-rebuild" role="group" aria-label="Rebuild this site with another design system"><span class="system-rebuild-label">Rebuild with</span>'
-  '<button type="button" class="system-option" data-system-option="mine" aria-pressed="true">Mine</button>'+pills+'</div></div>')
+ option=lambda key,label,extra='': f'<button type="button" class="system-option" data-system-option="{key}"{extra} aria-pressed="{str(key=="mine").lower()}">{esc(label)}</button>'
+ return ('<div class="system-controls" role="group" aria-label="Rebuild this site with another design system"><span class="system-rebuild-label">Rebuild with</span>'
+  +option('mine','Mine')
+  +''.join(option(k,x['short'],f' data-font="{esc(x["font"])}" data-label="{esc(x["name"])}"') for k,x in S['systems'].items())
+  +option('broken','No system',' data-label="no design system"')+'</div>')
+
+def shown(role,value):
+ # Fonts read as their family name; colours get a swatch.
+ if role.startswith('--font'): return f'<code>{esc(value.split(",")[0].strip(chr(39)))}</code>'
+ swatch=f'<span class="system-swatch" style="--swatch:{esc(value)}"></span>' if value.startswith('#') else ''
+ return f'{swatch}<code>{esc(value)}</code>'
 
 def system_panels():
- legend=('<aside class="system-card system-legend" aria-label="What went wrong"><details class="system-legend-details" open><summary class="eyebrow">Built without the system · 4 mistakes</summary><ol>'
-  '<li>Two primary buttons, so nothing is the main action</li>'
-  '<li>A grey background that isn’t a token</li>'
-  '<li>Colours competing for attention</li>'
-  '<li>A tag louder than the headline</li></ol>'
-  f'<p><a class="text-link" href="{esc(POST["href"])}">Why this happens: {esc(POST["title"])} ↗</a></p></details>'
-  '<button type="button" class="button primary" data-system-reset>Fix it</button></aside>')
- notes=''
+ close='<button type="button" class="system-close" data-system-reset aria-label="Back to my design system">×</button>'
+ cards=f'<aside class="system-card system-legend" aria-label="No system"><div class="system-card-row"><p>Built with no system · <a class="text-link" href="{esc(POST["href"])}">Why this happens ↗</a></p>{close}</div></aside>'
  for k,x in S['systems'].items():
-  rows=''.join(f'<tr><th scope="row"><code>{esc(role)}</code></th><td><code>{esc(v[1])}</code></td><td><span class="system-swatch" style="--swatch:{esc(v[0])}"></span><code>{esc(v[0])}</code></td></tr>' for role,v in x['tokens'].items())
-  notes+=(f'<aside class="system-card system-note" data-for="{k}" aria-label="{esc(x["name"])} rebuild">'
-   f'<p class="eyebrow">Rebuilt by an agent</p><p>From {esc(x["name"])}’s public tokens ({esc(x["theme"])}). Same content, same layout, their decisions. <a class="text-link" href="{esc(x["docs"])}">{esc(x["name"])} tokens ↗</a> · {esc(x["licence"])}</p>'
-   f'<details><summary>See the mapping</summary><div class="system-table"><table><thead><tr><th scope="col">My role</th><th scope="col">{esc(x["short"])} token</th><th scope="col">Value</th></tr></thead><tbody>{rows}</tbody></table></div></details>'
-   '<button type="button" class="button" data-system-reset>Back to mine</button></aside>')
+  row=lambda role,v,where='': f'<tr><th scope="row"><code>{esc(role)}</code>{where}</th><td><code>{esc(v[1])}</code></td><td>{shown(role,v[0])}</td></tr>'
+  rows=''.join(row(r,v) for r,v in x['tokens'].items())+''.join(row(r,v,' <small>inverted sections</small>') for r,v in x['sections'].items())
+  cards+=(f'<aside class="system-card system-note" data-for="{k}" aria-label="{esc(x["name"])} rebuild"><div class="system-card-row"><p>Rebuilt with <a class="text-link" href="{esc(x["docs"])}">{esc(x["name"])} ↗</a></p>{close}</div>'
+   f'<details><summary>See the mapping</summary><p class="system-approach">{esc(x["approach"])}</p><div class="system-table"><table><thead><tr><th scope="col">My role</th><th scope="col">{esc(x["short"])} token</th><th scope="col">Value</th></tr></thead><tbody>{rows}</tbody></table></div></details></aside>')
  return ('<div class="system-generating" aria-hidden="true" hidden><span></span></div>'
-  '<p class="visually-hidden" role="status" id="system-status"></p>'+legend+notes)
+  '<p class="visually-hidden" role="status" id="system-status"></p>'+cards)
 
 home=f'''<main id="main"><section class="next-hero"><div class="frame"><p class="eyebrow hero-identity">Érica Menin <span>Staff Design Systems Designer</span></p><h1>Design systems,<br><span>and what comes next.</span></h1><p class="hero-description">{esc(D['hero']['description'])}</p><div class="hero-actions"><a class="button primary" href="#experiments">What I’m exploring <span aria-hidden="true">↓</span></a><a class="button" href="#contact">Get in touch</a></div><div class="hero-bottom"><p class="eyebrow">Based in Germany · Working remotely</p>{system_controls()}</div></div></section>
 <section id="work" tabindex="-1" class="next-section light-section"><div class="frame"><h2 class="section-label">Selected work</h2><p class="section-intro display-intro">{md(D['workIntro'])}</p><div class="project-grid">{''.join(project(D['work'][i],i) for i in [0,2])}</div><aside class="earlier-work"><p class="eyebrow">Earlier work · 2020–2023</p><a href="/soniq-design-system" data-cursor="View">soniq Design System <span aria-hidden="true">↗</span></a><p>{esc(D['work'][1]['description'])}</p></aside></div></section>

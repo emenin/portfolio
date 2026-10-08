@@ -47,11 +47,13 @@ Three files, loaded in this order:
 
 ## Homepage experiment (on trial)
 
-Two hero toggles show the same site with different decisions: **Break the
-system** (the `[data-system="broken"]` block at the end of `next.css`) and
-**Rebuild with** Carbon / Material / shadcn (`content/systems.json` →
-`css/systems.css`). Both run from `js/systems.js` and the `system_*` helpers in
-`build.py`. Only one will stay: delete the other's markup, CSS and JS branch.
+One hero control, **Rebuild with**, shows the same site with different
+decisions: Carbon / Material / shadcn (`content/systems.json` →
+`css/systems.css`), or **No system** (the `[data-system="broken"]` block at the
+end of `next.css`, the mistakes from the "AI is shipping UI faster" post). It
+runs from `js/systems.js` and the `system_*` helpers in `build.py`. Each system
+picks one theme approach (`approach` in the JSON); only Carbon mixes themes,
+because it supports inline theme zones.
 
 ## Checking a change
 
