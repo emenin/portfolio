@@ -333,11 +333,11 @@ body.next-site.case-study .column._50.spacesmall.sticky.is-away:focus-within { o
 
 .keep-together { white-space:nowrap; }
 /* Review refinements: compact work, hidden portrait, and explicit action cursors. */
-#work .project-grid { max-width:960px; margin-inline:auto; gap:var(--space-20); }
+#work .project-grid { max-width:800px; margin-inline:auto; gap:var(--space-16); }
 #work .project-preview { perspective:1100px; }
 #work .project-preview>a { transform-style:preserve-3d; will-change:transform; transition:transform 220ms var(--ease-out); }
 #work .project-preview .project-image { transform:translateZ(18px); }
-#work .project-preview h3 { font-size:clamp(26px,2.4vw,32px); }
+#work .project-preview h3 { font-size:clamp(22px,1.8vw,26px); }
 .earlier-work { max-width:960px; margin:var(--space-16) auto 0; border-top:1px solid var(--color-border); padding-top:var(--space-6); }
 .earlier-work .eyebrow { margin-bottom:var(--space-2); }
 .earlier-work>a { font:500 20px/1.4 var(--font-display); text-underline-offset:5px; }
