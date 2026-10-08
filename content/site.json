@@ -1,0 +1,155 @@
+{
+  "hero": {
+    "title": "Design systems, and what comes next.",
+    "description": "After years of building and maintaining design systems, I’m exploring what changes when AI starts using them too. Here’s some of the work behind those questions, and what I’m looking into now."
+  },
+  "workIntro": "Examples from my design systems work: aligning component behavior across platforms, updating system foundations, documenting decisions, and guiding teams through library changes.",
+  "work": [
+    {
+      "title": "Getting a design system back in sync",
+      "label": "Case study · 2025",
+      "description": "An audit of 62 components across Figma, React, and Flutter, followed by changes to the Figma libraries, variables, themes, and migration guidance.",
+      "linkLabel": "Read the case study",
+      "href": "/design-system-back-in-sync"
+    },
+    {
+      "title": "soniq Design System",
+      "label": "Case study · 2020–2023",
+      "description": "A shared Figma library for web and mobile, with component documentation, pattern workshops, and regular reviews with developers.",
+      "linkLabel": "Read the case study",
+      "href": "/soniq-design-system"
+    },
+    {
+      "title": "Maturing a design system beyond components: operationally, culturally, and strategically",
+      "label": "Reflection · Published on Substack",
+      "description": "A look back at a year of library changes, pattern documentation, support tracking, and day-to-day work with product designers.",
+      "linkLabel": "Read the reflection",
+      "href": "https://designsystemsunfiltered.substack.com/p/my-last-year-as-a-design-system-designer"
+    }
+  ],
+  "questions": [
+    {
+      "title": "What does AI need beyond tokens and components?",
+      "description": "Tokens give values. Component properties give options. Neither explains when to use something or why an exception exists. That lives in documentation and component contracts: expected behavior, allowed combinations, accessibility requirements. The more explicit those are, the better the agent gets. Then the real question is whether it actually applies them."
+    },
+    {
+      "title": "How much guidance is enough?",
+      "description": "Less than you’d think. One big AGENTS.md is tempting, but agents struggle with vague prose and files that never end. What seems to work better: a short file that points to where everything else lives, so the agent doesn’t read the whole system every run, and rules that grow each time the agent gets something wrong. For the rules that really matter, lint rules. Agents can’t skip those."
+    },
+    {
+      "title": "Where do busy teams start?",
+      "description": "Teams are getting smaller, and “make the design system AI-ready” is one more big task on an already full list. I’d start small: a quick health check, then one problem that keeps coming back. An undocumented decision, a misleading example, a component people struggle with. One fix. One check. Then the next.",
+      "linkLabel": "Don’t make your design system AI-ready yet",
+      "href": "https://designsystemsunfiltered.substack.com/p/dont-make-your-design-system-ai-ready"
+    },
+    {
+      "title": "What comes after “AI-ready”?",
+      "description": "Some teams already let agents maintain parts of their design system. Once a system is in good shape (audited, gaps fixed, agents know where to look), it can start taking care of itself. A component changes, an agent spots what no longer matches, fixes it, and opens a pull request. Audits and health checks could run the same way.\n\nAgents do the work. We define what’s “right,” and test for it. That’s the idea behind an agentic design system, and what I’m exploring now."
+    }
+  ],
+  "experimentsIntro": "A few thoughts I keep coming back to as I read, experiment, and work with design systems and AI. Here’s where I stand so far.",
+  "writing": [
+    {
+      "title": "Don’t make your design system AI-ready yet",
+      "description": "A starting point for improving how AI works with an existing system, without beginning with a complete rebuild.",
+      "linkLabel": "Read on Substack",
+      "href": "https://designsystemsunfiltered.substack.com/p/dont-make-your-design-system-ai-ready",
+      "datePublished": "2026-09-03"
+    },
+    {
+      "title": "AI is shipping UI faster than your design system can protect it",
+      "description": "Repeated primary buttons, competing colors, and the wrong default background. What those examples revealed about decisions missing from the documentation.",
+      "linkLabel": "Read on Substack",
+      "href": "https://designsystemsunfiltered.substack.com/p/ai-is-shipping-ui-faster-than-your",
+      "datePublished": "2026-08-20"
+    },
+    {
+      "title": "I turned my biggest design system headache into my first Cursor command",
+      "description": "The process of creating a first command and skill, and figuring out where AI could help with day-to-day design systems work.",
+      "linkLabel": "Read on Substack",
+      "href": "https://designsystemsunfiltered.substack.com/p/how-a-project-that-haunted-me-led",
+      "datePublished": "2026-07-08"
+    }
+  ],
+  "about": [
+    "Hey, I’m Érica. I’ve been in design for 15+ years and somewhere along the way became the person who gets excited about taking messy, complex things and making them work.",
+    "For a long time, that’s meant design systems, where I found my passion.",
+    "Now that AI is in the picture, there’s a whole new set of questions to work through. I’m exploring them here and writing about the wins, the awkward moments, and the “well, that didn’t work” parts at Design Systems Unfiltered.",
+    "Brazilian, based in Germany, remote-first."
+  ],
+  "terminal": {
+    "whoami": {
+      "body": "Hey, I’m Érica. Brazilian, based in Germany, remote-first, with 15+ years in design.\n\nMost of that time has gone into design systems: component audits, Figma libraries, tokens, documentation, and helping teams through migrations. Now I’m exploring what changes when AI starts using them too.",
+      "link": [
+        "/#about",
+        "More about me"
+      ],
+      "label": "A little about me"
+    },
+    "work": {
+      "body": "Two places to start:\n\n- Getting a design system back in sync: an audit of 62 components across Figma, React, and Flutter, then the library changes and migration guidance that followed.\n- Maturing a design system beyond components: a look back at a year of library changes, pattern documentation, support tracking, and day-to-day work with product designers.",
+      "link": [
+        "/#work",
+        "Explore the work"
+      ],
+      "label": "Selected work"
+    },
+    "systems": {
+      "body": "Components and tokens are part of it. So are the rules for using them, the differences between implementations, and the steps for moving to a new version.\n\nOne example: Disabled and Loading were values of a Figma State property, while the coded component treated them as separate booleans. So the Figma component changed to match.",
+      "link": [
+        "/design-system-back-in-sync#audit-alignment",
+        "See the example"
+      ],
+      "label": "What the work involves"
+    },
+    "experiments": {
+      "body": "What does AI need beyond tokens and components? How much guidance is enough? Where do busy teams start? What comes after “AI-ready”?\n\nHere’s where I stand so far. Subject to change… things move SO fast.",
+      "link": [
+        "/#experiments",
+        "Explore the questions"
+      ],
+      "label": "What I’m exploring"
+    },
+    "unfiltered": {
+      "body": "Design Systems Unfiltered is my Substack about design systems and AI: the wins, the awkward moments, and the “well, that didn’t work” parts.",
+      "link": [
+        "https://designsystemsunfiltered.substack.com/",
+        "Read on Substack"
+      ],
+      "label": "Writing on Substack"
+    },
+    "hire": {
+      "body": "Have a design systems role or project in mind? Email me with some context and what you need help with. I’m based in Germany and work remotely.",
+      "link": [
+        "mailto:erica@menin.me",
+        "Copy my email"
+      ],
+      "label": "Discuss a role or project"
+    },
+    "contact": {
+      "body": "Email: erica@menin.me\n\nLinkedIn: https://www.linkedin.com/in/ericamenin/",
+      "link": null,
+      "label": "Email and LinkedIn"
+    },
+    "help": {
+      "body": "Choose a command or type its name: whoami, work, systems, experiments, unfiltered, hire, contact, help.",
+      "link": null,
+      "label": "Show available commands"
+    }
+  },
+  "metadata": {
+    "Home": {
+      "title": "Érica Menin | Staff Design Systems Designer",
+      "description": "Staff design systems designer working on design systems for people and AI: component audits, Figma and code alignment, documentation, and the guidance agents need to use a system well."
+    },
+    "Alignment case study": {
+      "title": "Getting a design system back in sync | Érica Menin",
+      "description": "A 62-component audit across Figma, React and Flutter, changes to Figma variables and themes, and an incremental migration for product teams."
+    },
+    "soniq case study": {
+      "title": "soniq Design System | Érica Menin",
+      "description": "Building a Figma library for web and mobile, with component documentation, pattern workshops and regular reviews with development teams."
+    }
+  },
+  "experimentsNote": "Subject to change… things move SO fast."
+}

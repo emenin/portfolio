@@ -1,9 +1,7 @@
-# Netlify config for static portfolio
+# Static site. The built HTML is committed, so Netlify publishes the repo as-is.
+# Rebuild locally with `python3 build.py` before committing.
 [build]
   publish = "."
-  # Regenerates the Unfiltered section from the Substack feed, then publishes
-  # the static files as-is. Zero dependencies, and it exits 0 even if the feed
-  # is down, so a deploy can never fail because of it.
-  command = "node scripts/build-unfiltered.mjs"
-[build.environment]
-  NODE_VERSION = "22"
+  # Nothing to compile. Running the checks means a deploy fails instead of
+  # publishing if the preserved copy or any local link is broken.
+  command = "python3 verify.py"

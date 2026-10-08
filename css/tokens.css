@@ -1,7 +1,7 @@
 /**
  * Design tokens — single source of truth for the portfolio.
  *
- * Loaded first in the CSS chain (before base.css) on every page. Two layers:
+ * Loaded first on every page; also carries the two web fonts (Bricolage Grotesque, Epilogue). Two layers:
  *   1. Palette      — raw brand/neutral values, named by hue + lightness.
  *   2. Semantic     — role-based aliases that the rest of the CSS references.
  * Plus scales for spacing, type, radii, shadows, and fonts.
@@ -10,6 +10,105 @@
  * literal for its token is a 1:1 change with no visual effect. To retheme the
  * site, change a value here rather than hunting through the stylesheets.
  */
+
+/* Fonts */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9U6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiaaD30YfKfjZZoLvRviyM0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9U6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiaaD30YfKfjZZoLvSniyM0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9U6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiaaD30YfKfjZZoLvcXlyM0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9U6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiaaD30YfKfjZZoLvfzlyM0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9U6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiaaD30YfKfjZZoLvZvlyM0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Epilogue';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/epilogue/v20/O4ZCFGj5hxF0EhjimlIhqAYaY7EBcUSC-HAKT5_R.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Epilogue';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/epilogue/v20/O4ZCFGj5hxF0EhjimlIhqAYaY7EBcUSC-HA4T5_R.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Epilogue';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/epilogue/v20/O4ZCFGj5hxF0EhjimlIhqAYaY7EBcUSC-HDUSJ_R.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Epilogue';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/epilogue/v20/O4ZCFGj5hxF0EhjimlIhqAYaY7EBcUSC-HDtSJ_R.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/epilogue/v20/O4ZMFGj5hxF0EhjimngomvnCCtqb30OXMDPiDA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/epilogue/v20/O4ZMFGj5hxF0EhjimngomvnCCtqb30OXAjPiDA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/epilogue/v20/O4ZMFGj5hxF0EhjimngomvnCCtqb30OX7jTiDA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/epilogue/v20/O4ZMFGj5hxF0EhjimngomvnCCtqb30OX1zTiDA.ttf) format('truetype');
+}
+
 :root {
   /* ---- Palette: inks (near-black, faint cool tint) ---- */
   --ink-950: #14161f; /* deepest: page ground (dark navy-grey) */
@@ -113,7 +212,51 @@
   --shadow-focus: 0px 0px 0px 2px var(--white-pure);
 
   /* ---- Fonts ---- */
-  --font-display: Syne, sans-serif;
+  --font-display: 'Bricolage Grotesque', sans-serif;
   --font-body: Epilogue, sans-serif;
   --font-icons: 'site-icons';
 }
+
+/* Local portfolio semantic foundation. */
+:root {
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-body: Epilogue, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --surface: var(--ink-950);
+  --surface-raised: var(--ink-900);
+  --pink-50: #fbf4ff;
+  --neutral-300: #c0bec7;
+  --neutral-700: #41424b;
+  --surface-light: var(--pink-50);
+  --text: var(--white);
+  --text-muted: var(--neutral-300);
+  --text-on-light: var(--ink-900);
+  --border: var(--neutral-700);
+  --action: var(--pink-400);
+  --focus: var(--pink-400);
+  --layout-width: 1140px;
+  --reading-width: 720px;
+  --gutter: clamp(24px, 5vw, 80px);
+  --section-space: clamp(72px, 8vw, 120px);
+  --motion-fast: 180ms;
+  --motion-base: 320ms;
+  --ease: cubic-bezier(.2,.8,.2,1);
+}
+
+:root {
+ --weight-regular: 400;
+ --weight-medium: 500;
+ --weight-semibold: 600;
+ --leading-heading: 1.12;
+ --leading-body: 1.7;
+ --leading-label: 1.6;
+ --leading-action: 1.5;
+ --tracking-heading: -.035em;
+ --tracking-label: .065em;
+ --type-hero: clamp(44px,6.4vw,88px);
+ --type-body-lead: var(--text-md);
+ --text-on-action: var(--ink-950);
+ --border-thin: 1px;
+ --control-height: var(--space-12);
+}
+@media(max-width:767px) { :root { --type-body-lead: var(--text-base); } }
